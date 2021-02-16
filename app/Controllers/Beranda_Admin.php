@@ -13,7 +13,7 @@ class Beranda_Admin extends BaseController
     }
     public function add()
     {
-        echo view();
+        echo view('');
     }
 
 
