@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>IDE Productivity</title>
-
+    <!-- New Bootstrap 5-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <!-- Our Custom CSS -->
@@ -51,7 +52,7 @@
                             <a href="#"><i class="fas fa-users"></i> Client</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fas fa-archive"></i> Product</a>
+                            <a href="<?php echo base_url('Product')?>"><i class="fas fa-archive"></i> Product</a>
                         </li>
                         <li>
                             <a href="#"><i class="fas fa-chart-line"></i> Sales Pipeline</a>

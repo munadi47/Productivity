@@ -15,20 +15,19 @@ use App\Models\ProductModel;
 use mysqli;
 use phpDocumentor\Reflection\PseudoTypes\False_;
 
-class Product extends BaseController{
+class Company extends BaseController{
     public function __construct()
     {
         $this->session = \Config\Services::session();
-        $this->productModel = new \App\Models\productModel();
+        $this->companyModel = new \App\Models\companyModel();
       
     }
 
     public function index(){
         $session = session();
-    
-        $data['dataProduct'] = $this->productModel->getCompany();
+        $data['dataCompany'] = $this->companyModel->findAll();
         echo view ('users/header_v');
-        echo view ('users/product_v',$data);
+        echo view ('users/company_v',$data);
         echo view ('users/footer_v');
         
     }
@@ -37,65 +36,61 @@ class Product extends BaseController{
 
     public function add(){
         echo view('users/header_v');
-        echo view('users/product_form_v');
+        echo view('users/company_form_v');
         echo view('users/footer_v');
     }
 
     public function edit($id){
-        $where = ['id_product'=> $id];
-        $data['dataProduct'] = $this->productModel->where($where)->findAll()[0];
+        $where = ['id_company'=> $id];
+        $data['dataCompany'] = $this->companyModel->where($where)->findAll()[0];
         
         echo view('users/header_v');
-        echo view('users/product_form_v',$data);
+        echo view('users/company_form_v',$data);
         echo view ('users/footer_v');
     }
 
     public function save() {
         
-        $id = $this->request->getPost('id_product');
+        $id = $this->request->getPost('id_company');
 
         if (empty($id)) { //Insert
            
             $data = [
-                'product_name'=>$this->request->getPost('product_name'),
-                'std_price'=>$this->request->getPost('std_price'),
-                'id_company'=>$this->request->getPost('id_company'),
-                    
+                'company_name'=>$this->request->getPost('company_name'),
+              
             ];
         
-            $this->productModel->insert($data);
+            $this->companyModel->insert($data);
             
 
             
         } else { // Update
-            $where = ['id_product'=>$id];
+            $where = ['id_company'=>$id];
             $data = [
-                'product_name'=>$this->request->getPost('product_name'),
-                'std_price'=>$this->request->getPost('std_price'),
-                'id_company'=>$this->request->getPost('id_company'),
+                'company_name'=>$this->request->getPost('company_name'),
+             
                     
             ];
          
-            $this->productModel->update($where, $data);
+            $this->companyModel->update($where, $data);
             
             
         }
 
-        return redirect()->to(site_url('Product'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
+        return redirect()->to(site_url('Company'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
     }
 
 
     //delete
     public function delete($id){
-        $where = ['id_product'=>$id];   
-        $where = ['id_product'=>$id]; 
+        $where = ['id_company'=>$id];   
 
-        $this->productModel->delete($where);
+        $this->companyModel->delete($where);
         
         
         
 
-        return redirect()->to(site_url('Product'))->with('Success', '<i class="fas fa-trash-alt"></i> Data Berhasil di Hapus');
+        return redirect()->to(site_url('Company'))->with('Success', '<i class="fas fa-trash-alt"></i> Data Berhasil di Hapus');
     }
 
 
@@ -104,7 +99,7 @@ class Product extends BaseController{
     // Export ke excel
 public function export()
 {
-$dataProduct = $this->productModel->getCompany();
+$dataCompany = $this->companyModel->findAll();
 // Create new Spreadsheet object
 $spreadsheet = new Spreadsheet();
 
@@ -118,34 +113,32 @@ $spreadsheet->getProperties()->setTitle('Office 2007 XLSX Test Document')
 
 // Add some data
 $spreadsheet->setActiveSheetIndex(0)
-->setCellValue('A1', 'ID PRODUCT')
-->setCellValue('B1', 'PRODUCT NAME')
-->setCellValue('C1', 'STANDARD PRICE')
-->setCellValue('D1', 'COMPANY')
+->setCellValue('A1', 'ID COMPANY')
+->setCellValue('B1', 'COMPANY NAME')
+
 
 ;
 
 // Miscellaneous glyphs, UTF-8
-$i=2; foreach($dataProduct as $row) {
+$i=2; foreach($dataCompany as $row) {
 
 $spreadsheet->setActiveSheetIndex(0)
-->setCellValue('A'.$i, $row->id_product)
-->setCellValue('B'.$i, $row->product_name)
-->setCellValue('C'.$i, $row->std_price)
-->setCellValue('D'.$i, $row->company_name)
+->setCellValue('A'.$i, $row->id_company)
+->setCellValue('B'.$i, $row->company_name)
+
 ;
 $i++;
 }
 
 // Rename worksheet
-$spreadsheet->getActiveSheet()->setTitle('Product Data'.date('d-m-Y H'));
+$spreadsheet->getActiveSheet()->setTitle('Company Data'.date('d-m-Y H'));
 
 // Set active sheet index to the first sheet, so Excel opens this as the first sheet
 $spreadsheet->setActiveSheetIndex(0);
 
 // Redirect output to a client’s web browser (Xlsx)
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment;filename="Product Data.xlsx"');
+header('Content-Disposition: attachment;filename="Company Data.xlsx"');
 header('Cache-Control: max-age=0');
 // If you're serving to IE 9, then the following may be needed
 header('Cache-Control: max-age=1');
@@ -174,4 +167,3 @@ exit;
 
 
     
-
