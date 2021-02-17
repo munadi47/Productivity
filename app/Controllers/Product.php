@@ -20,7 +20,8 @@ class Product extends BaseController{
     {
         $this->session = \Config\Services::session();
         $this->productModel = new \App\Models\productModel();
-      
+        $this->companyModel = new \App\Models\companyModel();
+
     }
 
     public function index(){
@@ -36,15 +37,19 @@ class Product extends BaseController{
    
 
     public function add(){
+     
+        $data['dataCompany'] = $this->companyModel->findAll();
+
         echo view('users/header_v');
-        echo view('users/product_form_v');
+        echo view('users/product_form_v',$data);
         echo view('users/footer_v');
     }
 
     public function edit($id){
         $where = ['id_product'=> $id];
         $data['dataProduct'] = $this->productModel->where($where)->findAll()[0];
-        
+        $data['dataCompany'] = $this->companyModel->findAll();
+
         echo view('users/header_v');
         echo view('users/product_form_v',$data);
         echo view ('users/footer_v');
@@ -62,8 +67,13 @@ class Product extends BaseController{
                 'id_company'=>$this->request->getPost('id_company'),
                     
             ];
-        
-            $this->productModel->insert($data);
+            
+            $response = $this->productModel->insert($data);
+            if($response){
+                return redirect()->to(site_url('Product'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
+            }else{
+                return redirect()->to(site_url('Product'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to save');
+            }
             
 
             
@@ -76,12 +86,17 @@ class Product extends BaseController{
                     
             ];
          
-            $this->productModel->update($where, $data);
-            
+           
+            $response = $this->productModel->update($where, $data);
+            if($response){
+                return redirect()->to(site_url('Product'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
+            }else{
+                return redirect()->to(site_url('Product'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to save');
+            }
             
         }
 
-        return redirect()->to(site_url('Product'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
+        
     }
 
 
@@ -90,12 +105,17 @@ class Product extends BaseController{
         $where = ['id_product'=>$id];   
         $where = ['id_product'=>$id]; 
 
-        $this->productModel->delete($where);
+    
         
-        
+        $response = $this->productModel->delete($where);
+        if($response){
+            return redirect()->to(site_url('Product'))->with('Success', '<i class="fas fa-trash"></i> Data has been deleted');
+        }else{
+            return redirect()->to(site_url('Product'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to delete');
+        }
         
 
-        return redirect()->to(site_url('Product'))->with('Success', '<i class="fas fa-trash-alt"></i> Data Berhasil di Hapus');
+     
     }
 
 

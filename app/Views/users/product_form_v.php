@@ -20,7 +20,7 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">STANDARD PRICE</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="std_price" name="std_pricce" required
+                <input type="text" class="form-control" id="std_price" name="std_price" required
                 value="<?php if(!empty($dataProduct)) echo $dataProduct->std_price; ?>">
             </div>
         </div>

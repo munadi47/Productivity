@@ -22,7 +22,7 @@ class clientModel extends Model
     protected $skipValidation     = false;
 
    
-    public function getClient()
+    public function getPIC()
     {
          return $this->db->table('client')
          ->join('employee','employee.nik=client.nik')
