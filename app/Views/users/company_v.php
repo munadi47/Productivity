@@ -1,7 +1,7 @@
 <section>
 
     <div class="container">
-    <h2 style="font-weight:bolder; ">Product Data</h2>
+    <h2 style="font-weight:bolder; ">Company Data</h2>
     <hr>
     <?php if(!empty(session()->getFlashdata('berhasil'))){ ?>
                 <div class="alert alert-success">
@@ -23,7 +23,7 @@
             }
         ?>
         <p>
-            <a href="Product/add" class="btn btn-primary btn-sm">
+            <a href="Company/add" class="btn btn-primary btn-sm">
                <i class="fa fa-plus"></i> Add Data
             </a>
         </p>
@@ -31,7 +31,7 @@
         
 
             <p>
-                <a href="<?php echo site_url('Product/export'); ?>" class="btn btn-success">
+                <a href="<?php echo site_url('Company/export'); ?>" class="btn btn-success">
                 <i class="fas fa-download"></i> &nbsp;<i class="fa fa-file-excel"></i> Download Excel Data
                 </a>
                 
@@ -43,8 +43,7 @@
             <thead class="thead-light">
                 <tr>
                  
-                    <th>PRODUCT NAME</th>
-                    <th>STANDARD PRICE</th>
+                    <th>ID COMPANY</th>
                     <th>COMPANY NAME</th>
                     <th>ACTION</th>
                 
@@ -56,17 +55,16 @@
            <?php
           
            ?> 
-            <?php foreach ($dataProduct as $row) :?>
+            <?php foreach ($dataCompany as $row) :?>
                 <tr>
-                    
-                    <td><?php echo $row->product_name; ?></td>
-                    <td><?php echo $row->std_price; ?></td>
+                <td><?php echo $row->id_company; ?></td>
                     <td><?php echo $row->company_name; ?></td>
+                   
                     <td>
-                        <a href="<?php echo base_url("Product/edit/".$row->id_product); ?>" class="btn btn-warning btn-sm">
+                        <a href="<?php echo base_url("Company/edit/".$row->id_company); ?>" class="btn btn-warning btn-sm">
                            <i class="fa fa-edit"></i> Edit
                         </a>
-                        <a href="<?php echo base_url("Product/delete/".$row->id_product); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah yakin data akan dihapus?');">
+                        <a href="<?php echo base_url("Company/delete/".$row->id_company); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah yakin data akan dihapus?');">
                            <i class="fa fa-trash"></i> Delete
                         </a>
                     </td>
@@ -77,7 +75,7 @@
             endforeach;
             ?>
             <?php
-            if (empty($dataProduct)) {
+            if (empty($dataCompany)) {
             ?>
 
                 <tr>

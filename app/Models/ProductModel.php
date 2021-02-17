@@ -22,7 +22,7 @@ class productModel extends Model
     protected $skipValidation     = false;
 
    
-    public function getProduct()
+    public function getCompany()
     {
          return $this->db->table('product')
          ->join('company', 'company.id_company=product.id_company')
