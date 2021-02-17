@@ -30,7 +30,7 @@
         <nav id="sidebar">
             <div class="sidebar-header">
                 <a class="navbar-brand" href="#">
-                    <img src="img/LOGO IDE.png" width="114" height="66" class="d-inline-block align-top" alt="">
+                    <img src="<?php echo base_url('assets/img/LOGO IDE.png');?>" width="114" height="66" class="d-inline-block align-top" alt="">
                     
                   </a>
             </div>
