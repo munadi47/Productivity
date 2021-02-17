@@ -25,7 +25,7 @@ class clientModel extends Model
     public function getClient()
     {
          return $this->db->table('client')
-         ->join('employee', 'employee.nik=client.nik')
+         ->join('employee','employee.nik=client.nik')
          ->get()->getResultObject(); 
     }
 }

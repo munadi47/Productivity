@@ -10,7 +10,7 @@ class employeeModel extends Model
     protected $returnType     = 'object';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['nik','name','email','password','phone1','phone2','id_eStatus','level'];
+    protected $allowedFields = ['nik','name','email','password','phone1','phone2','id_eStatus','level','photo'];
 
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';
