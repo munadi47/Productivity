@@ -17,7 +17,7 @@
     }
     ?>
 
-    <nav aria-label="breadcrumb shadow-sm p-3 mb-5 bg-white rounded">
+    <nav aria-label="breadcrumb shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-out" data-aos-duration="1000">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i> Home</a></li>
         <li class="breadcrumb-item"><a href="#"><i class="fas fa-donate"></i> Sales CRM</a></li>

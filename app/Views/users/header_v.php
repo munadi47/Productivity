@@ -49,7 +49,7 @@
                             <a href="#"><i class="fas fa-chart-pie"></i> Infographic</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fas fa-users"></i> Client</a>
+                            <a href="<?php echo base_url('Client')?>"><i class="fas fa-users"></i> Client</a>
                         </li>
                         <li>
                             <a href="<?php echo base_url('Product')?>"><i class="fas fa-archive"></i> Product</a>

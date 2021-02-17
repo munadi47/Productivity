@@ -62,8 +62,13 @@ class Client extends BaseController{
                 'nik'=>$this->request->getPost('nik'),
               
             ];
-        
-            $this->clientModel->insert($data);
+            $response = $this->clientModel->insert($data);
+            if($response){
+                return redirect()->to(site_url('Client'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
+            }else{
+                return redirect()->to(site_url('Client'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to save');
+            }
+            
             
 
             
@@ -78,12 +83,18 @@ class Client extends BaseController{
                     
             ];
          
-            $this->clientModel->update($where, $data);
+           
+            $response =  $this->clientModel->update($where, $data);
+            if($response){
+                return redirect()->to(site_url('Client'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
+            }else{
+                return redirect()->to(site_url('Client'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to save');
+            }
             
             
         }
 
-        return redirect()->to(site_url('Client'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
+       
     }
 
 
@@ -91,15 +102,13 @@ class Client extends BaseController{
     public function delete($id){
         $where = ['id_client'=>$id];   
 
-        $session = $this->clientModel->delete($where);
-        
-        
-        
-        if(delete($session)){
-            $this->clientModel->delete($where);
-            return redirect()->to(site_url('Client'))->with('Success', '<i class="fas fa-trash-alt"></i> Data Berhasil di Hapus');
-    
-        }       
+        $response = $this->clientModel->delete($where);
+        if($response){
+            return redirect()->to(site_url('Client'))->with('Success', '<i class="fas fa-save"></i> Data has been deleted');
+        }else{
+            return redirect()->to(site_url('Client'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to delete');
+        }
+       
 
     }
 
@@ -107,7 +116,7 @@ class Client extends BaseController{
     // Export ke excel
 public function export()
 {
-$dataCompany = $this->companyModel->findAll();
+$dataClient = $this->clientModel->getPIC();
 // Create new Spreadsheet object
 $spreadsheet = new Spreadsheet();
 
@@ -121,32 +130,38 @@ $spreadsheet->getProperties()->setTitle('Office 2007 XLSX Test Document')
 
 // Add some data
 $spreadsheet->setActiveSheetIndex(0)
-->setCellValue('A1', 'ID COMPANY')
-->setCellValue('B1', 'COMPANY NAME')
+->setCellValue('A1', 'ID CLIENT')
+->setCellValue('B1', 'CLIENT NAME')
+->setCellValue('C1', 'ADDRESS')
+->setCellValue('D1', 'PHONE')
+->setCellValue('E1', 'PIC')
 
 
 ;
 
 // Miscellaneous glyphs, UTF-8
-$i=2; foreach($dataCompany as $row) {
+$i=2; foreach($dataClient as $row) {
 
 $spreadsheet->setActiveSheetIndex(0)
-->setCellValue('A'.$i, $row->id_company)
-->setCellValue('B'.$i, $row->company_name)
+->setCellValue('A'.$i, $row->id_client)
+->setCellValue('B'.$i, $row->client_name)
+->setCellValue('C'.$i, $row->address)
+->setCellValue('D'.$i, $row->phone)
+->setCellValue('E'.$i, $row->name)
 
 ;
 $i++;
 }
 
 // Rename worksheet
-$spreadsheet->getActiveSheet()->setTitle('Company Data'.date('d-m-Y H'));
+$spreadsheet->getActiveSheet()->setTitle('Client Data'.date('d-m-Y H'));
 
 // Set active sheet index to the first sheet, so Excel opens this as the first sheet
 $spreadsheet->setActiveSheetIndex(0);
 
 // Redirect output to a client’s web browser (Xlsx)
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment;filename="Company Data.xlsx"');
+header('Content-Disposition: attachment;filename="Client Data.xlsx"');
 header('Cache-Control: max-age=0');
 // If you're serving to IE 9, then the following may be needed
 header('Cache-Control: max-age=1');
