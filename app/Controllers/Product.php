@@ -86,7 +86,7 @@ class Product extends BaseController{
 
     //delete
     public function delete($id){
-        $where = ['id_product'=>$id];
+        $where = ['id_product'=>$id];   
 
         $this->productModel->delete($where);
         
