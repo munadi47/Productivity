@@ -25,7 +25,8 @@ class Product extends BaseController{
 
     public function index(){
         $session = session();
-        $data['dataProduct'] = $this->productModel->findAll();
+    
+        $data['dataProduct'] = $this->productModel->getCompany();
         echo view ('users/header_v');
         echo view ('users/product_v',$data);
         echo view ('users/footer_v');
