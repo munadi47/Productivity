@@ -37,17 +37,14 @@
             </div>
 
             <ul class="list-unstyled components">
-               
+              
                 <li>
                     <a href="#"><i class="fas fa-user-clock"></i> Attendance</a>
                 </li>
                 <li class="active">
                     
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-donate"></i>  Sales CRM</a>
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-filter"></i>  Sales Pipeline</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="#"><i class="fas fa-chart-pie"></i> Infographic</a>
-                        </li>
                         <li>
                             <a href="<?php echo base_url('Client')?>"><i class="fas fa-users"></i> Client</a>
                         </li>
@@ -55,8 +52,9 @@
                             <a href="<?php echo base_url('Product')?>"><i class="fas fa-archive"></i> Product</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fas fa-chart-line"></i> Sales Pipeline</a>
+                            <a href="#"><i class="fas fa-chart-line"></i> Pipeline</a>
                         </li>
+                        
                     </ul>
                 </li>
                 

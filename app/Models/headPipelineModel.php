@@ -34,5 +34,15 @@ public function getHeadSales()
          ->get()->getResultObject(); 
     }
 
+    public function nilaijoin($id) {
+		$this->db->select('*');
+		$this->db->from('detail_sales');
+		$this->db->join('head_sales', 'head_sales.id_headPipeline = detail_sales.id_headPipeline', 'left');
+		$this->db->where('detail_sales.id_headPipeline',$id);
+		return $this->db->get()->result();
+	}
+
+
+
 }
 ?>

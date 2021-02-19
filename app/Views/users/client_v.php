@@ -20,14 +20,14 @@
     <nav aria-label="breadcrumb shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-out" data-aos-duration="1000">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i> Home</a></li>
-        <li class="breadcrumb-item"><a href="#"><i class="fas fa-donate"></i> Sales CRM</a></li>
+        <li class="breadcrumb-item"><a href="#"><i class="fas fa-filter"></i> Sales Pipeline</a></li>
         <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-users"></i> Client</li>
     </ol>
     </nav>
     <div class="card shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-out" data-aos-duration="1000" >
            
                 <div class="card-body">
-                <h4> PRODUCT  </h4>
+                <h4> CLIENT  </h4>
                 
                 <a title="Add data"  href="<?php echo base_url("Client/add/"); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
                     <i class="fa fa-plus"></i> 
