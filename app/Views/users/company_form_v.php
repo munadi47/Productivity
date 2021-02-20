@@ -1,6 +1,6 @@
 <section>
     <div class="container">
-    <h2 style="font-weight:bolder; ">Company Form Input </h2>
+    <h2>COMPANY FORM INPUT </h2>
     <hr>
         <form method="POST" action="<?php echo site_url('Company/save'); ?>">
         <div class="form-group row">

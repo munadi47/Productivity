@@ -28,4 +28,12 @@ class clientModel extends Model
          ->join('employee','employee.nik=client.nik')
          ->get()->getResultObject(); 
     }
+    public function getDetail($id)
+    {
+        return $this->db->table('client as c')
+        ->join('sales_pipeline as sp','sp.id_client=c.id_client')
+        ->where('sp.id_client',$id)
+        ->get()->getResultObject(); 
+
+    }
 }

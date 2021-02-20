@@ -19,7 +19,7 @@
 
     <nav aria-label="breadcrumb shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-out" data-aos-duration="1000">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i> Home</a></li>
+    
         <li class="breadcrumb-item"><a href="#"><i class="fas fa-filter"></i> Sales Pipeline</a></li>
         <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-archive"></i> Product</li>
     </ol>
@@ -39,11 +39,11 @@
                
                 <br>
                 <br>
-                <div class="table-responsive">
+                <span class="table-responsive">
                 <table id="myTable" class="table table-hover table-bordered text-center " >
                 <thead class="thead-dark ">
                     <tr>
-                    
+                        <th> # </th>
                         <th>PRODUCT NAME</th>
                         <th>STANDARD PRICE</th>
                         <th>COMPANY NAME</th>
@@ -57,10 +57,11 @@
                 <?php
                
                 ?>
+                <?php $nomor = 1; ?>
                 <?php foreach ($dataProduct as $row) :?>
                     
                     <tr>
-                        
+                        <td><?php echo $nomor++; ?></td>
                         <td><?php echo $row->product_name; ?></td>
                         <td>Rp. <?php echo $row->std_price=number_format($row->std_price,0,",","."); ?></td>
                         <td><?php echo $row->company_name; ?></td>
@@ -93,7 +94,7 @@
                 ?>
                 </tbody>
             </table>
-            </div>
+                </span>
             </div>
         
     

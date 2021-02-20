@@ -1,6 +1,7 @@
+<div class="card shadow-sm p-3 mb-5 bg-white rounded" data-aos="zoom-in" data-aos-duration="1000" >
 <section>
     <div class="container">
-    <h2 style="font-weight:bolder; ">Product Form Input </h2>
+    <h2><i class="fas fa-archive"></i> Product Form Input </h2>
     <hr>
         <form method="POST" action="<?php echo site_url('Product/save'); ?>">
         <div class="form-group row">
@@ -10,7 +11,7 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label">PRODUCT NAME :</label>
+            <label class="col-sm-2 col-form-label">Product </label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="product_name" name="product_name" required
                 value="<?php if(!empty($dataProduct)) echo $dataProduct->product_name; ?>">
@@ -18,7 +19,7 @@
         </div>
         <br>
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label">STANDARD PRICE :</label>
+            <label class="col-sm-2 col-form-label">Standard Price </label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="std_price" name="std_price" required
                 value="<?php if(!empty($dataProduct)) echo $dataProduct->std_price; ?>">
@@ -27,9 +28,9 @@
         <br>
 
         <div class="form-group row">
-                <label class="col-sm-2 col-form-label">COMPANY NAME :</label>
+                <label class="col-sm-2 col-form-label">Company </label>
                 <div class="col-sm-10">
-                    <select name="id_company" class="form-select" aria-label="Default select example">
+                    <select required name="id_company" class="form-select" aria-label="Default select example" >
                         
                         <?php foreach($dataCompany as $row) : ?>
                             <option value="<?php echo $row->id_company; ?>"<?php if(!empty($dataProduct) && $dataProduct->id_company == $row->id_company) echo 'selected'; ?> > <?php echo $row->company_name; ?> </option>
@@ -50,3 +51,4 @@
         </form>
     </div>
 </section>
+</div>

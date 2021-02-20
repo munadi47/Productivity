@@ -25,6 +25,7 @@ class Client extends BaseController{
     public function index(){
         $session = session();
         $data['dataClient'] = $this->clientModel->getPIC();
+        $data['dataClient'] = $this->clientModel->findAll();
         echo view ('users/header_v');
         echo view ('users/client_v',$data);
         echo view ('users/footer_v');
@@ -42,10 +43,18 @@ class Client extends BaseController{
 
     public function edit($id){
         $where = ['id_client'=> $id];
+        $data['dataEmployee']  = $this->employeeModel->findAll();
         $data['dataClient'] = $this->clientModel->where($where)->findAll()[0];
         
         echo view('users/header_v');
         echo view('users/client_form_v',$data);
+        echo view ('users/footer_v');
+    }
+    public function detail($id){
+        
+        $data['dataClient'] = $this->clientModel->getDetail($id);
+        echo view('users/header_v');
+        echo view('users/detail_client_v',$data);
         echo view ('users/footer_v');
     }
 

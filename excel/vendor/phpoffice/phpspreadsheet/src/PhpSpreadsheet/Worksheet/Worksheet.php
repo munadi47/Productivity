@@ -854,8 +854,8 @@ class Worksheet implements IComparable
                 if ($this->parent->sheetNameExists($pValue)) {
                     // Use name, but append with lowest possible integer
 
-                    if (Shared\StringHelper::countCharacters($pValue) > 29) {
-                        $pValue = Shared\StringHelper::substring($pValue, 0, 29);
+                    if (Shared\StringHelper::countCharacters($pValue) > 31) {
+                        $pValue = Shared\StringHelper::substring($pValue, 0, 31);
                     }
                     $i = 1;
                     while ($this->parent->sheetNameExists($pValue . ' ' . $i)) {
