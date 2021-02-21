@@ -1,3 +1,4 @@
+<div class="card shadow-sm p-3 mb-5 bg-white rounded" data-aos="zoom-in" data-aos-duration="700" >
 <section>
     <div class="container">
     <h2>COMPANY FORM INPUT </h2>
@@ -17,12 +18,13 @@
             </div>
         </div>
         <br>
-        <br>
-        <br>
-      
-            <button type="submit" class="btn btn-success">Save</button>
-            <button type="button" onclick="window.history.back();" class="btn btn-outline-secondary">Back</button>
-       
+
+        <div class="float-right">
+        <button type="submit" class="btn btn-success">Save</button>
+        <button type="button" onclick="window.history.back();" class="btn btn-outline-secondary">Back</button>
+        </div>
+
         </form>
     </div>
 </section>
+</div>
