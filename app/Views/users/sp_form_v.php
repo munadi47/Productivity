@@ -58,7 +58,7 @@
                     <option selected><?php if(!empty($dataPipeline)) echo $dataPipeline->category; ?> </option>
                     <option value="video"><span class="badge badge-info"> <i class="fas fa-video"></i> Video </span></option>
                     <option value="digital content"><span class="badge badge-info"><i class="fas fa-desktop"></i> Digital Content</span></option>
-                    <option value="learning"><span class="badge badge-info"><i class="fas fa-graduation-cap"></i> Digital Content</span></option>
+                    <option value="learning"><span class="badge badge-info"><i class="fas fa-graduation-cap"></i> Learning</span></option>
                     <option value="consulting"><span class="badge badge-info"><i class="fas fa-chalkboard-teacher"></i> Consulting </span></option>
             </select>
             </div>

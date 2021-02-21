@@ -4,7 +4,8 @@
         <li class="breadcrumb-item" aria-current="page"><i class="fas fa-users"></i> Client</li>
         <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-eye"></i> Client Detail</li>
     </ol>
-    </nav>
+</nav>
+
 <div class="card shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-out" data-aos-duration="1000" >
 <section>  
                 <div class="card-body">
@@ -14,9 +15,7 @@
                 <i class="fas fa-arrow-left"></i> 
                 </a>
             
-                <a title="Report"  href="<?php echo base_url("Client/export_detail"); ?>" alt="Report" class="btn btn-outline-info btn-md">
-                    <i class="fas fa-print"></i> 
-                </a>
+               
                 
                 <br>
                 <br>

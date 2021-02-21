@@ -68,7 +68,10 @@
                         <td><?php echo $row->nik; ?></td>
                         <td>
                             <a title="View Detail" href="<?php echo base_url("Client/detail/".$row->id_client); ?>" class="btn btn-outline-info btn-sm">
-                            <i class="fa fa-eye" ></i> 
+                            <i class="fa fa-search" ></i> 
+                            </a>
+                            <a title="Download Client Purchase Report " href="<?php echo base_url("Client/export_detail/".$row->id_client); ?>" class="btn btn-outline-info btn-sm">
+                            <i class="fa fa-file-excel"></i>
                             </a>
                             <a title="Edit"  href="<?php echo base_url("Client/edit/".$row->id_client); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
                             <i class="fa fa-edit"></i> 
@@ -100,6 +103,9 @@
             </table>
                 </span>
             </div>
+    </div>
+
+            
         
     
 

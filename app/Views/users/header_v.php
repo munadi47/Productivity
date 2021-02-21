@@ -56,7 +56,7 @@
                             <a href="<?php echo base_url('Client')?>"><i class="fas fa-users"></i> Client</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('Product')?>"><i class="fas fa-archive"></i> Product</a>
+                            <a href="<?php echo base_url('Product')?>"><i class="fas fa-box"></i> Product</a>
                         </li>
                         <li>
                             <a href="<?php echo base_url('SalesPipeline')?>"><i class="fas fa-chart-line"></i> Pipeline</a>
@@ -130,7 +130,7 @@
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item active">
                                 <a class="nav-link" href="#"> 
-                                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                                    <button data-toggle="modal" data-target="#myModal" type="button" id="sidebarCollapse" class="btn btn-info">
                                         <i class="fas fa-user"></i> Profile
                                   
                                     </button>
@@ -147,6 +147,102 @@
                             
                         </ul>
                     </div>
+
+                    <div id="myModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- konten modal-->
+                        <div class="modal-content">
+                            <!-- heading modal -->
+                            <div class="modal-header">
+                                
+                                <h4 class="modal-title">Profile</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <!-- body modal -->
+                            <div class="modal-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+
+                                        <div class="card-body">
+                                            <div class="card-title mb-4">
+                                                <div class="d-flex justify-content-start">
+                                                    <div class="image-container">
+                                                        <img src="http://placehold.it/150x150" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+                                                        <div class="middle">
+                                                            <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change" />
+                                                            <input type="file" style="display: none;" id="profilePicture" name="file" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="userData ml-3">
+                                                        <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><a href="javascript:void(0);">Some Name</a></h2>
+                                                        <h6 class="d-block"><a href="javascript:void(0)"></a> Video Editor</h6>
+                                                    
+                                                    <div class="ml-auto">
+                                                        <input type="button" class="btn btn-primary d-none" id="btnDiscard" value="Discard Changes" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                                                        <li class="nav-item">
+                                                            <a class="nav-link active" id="basicInfo-tab" data-toggle="tab" href="#basicInfo" role="tab" aria-controls="basicInfo" aria-selected="true">Basic Info</a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" id="connectedServices-tab" data-toggle="tab" href="#connectedServices" role="tab" aria-controls="connectedServices" aria-selected="false">Connected Services</a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="tab-content ml-1" id="myTabContent">
+                                                        <div class="tab-pane fade show active" id="basicInfo" role="tabpanel" aria-labelledby="basicInfo-tab">
+                                                            
+
+                                                            <div class="row">
+                                                                <div class="col-sm-3 col-md-2 col-5">
+                                                                    <label style="font-weight:bold;">Address</label>
+                                                                </div>
+                                                                <div class="col-md-8 col-6">
+                                                                    Jakarta Utara
+                                                                </div>
+                                                            </div>
+                                                            <hr />
+
+                                                            <div class="row">
+                                                                <div class="col-sm-3 col-md-2 col-5">
+                                                                    <label style="font-weight:bold;">Birth Date</label>
+                                                                </div>
+                                                                <div class="col-md-8 col-6">
+                                                                    March 22, 1994.
+                                                                </div>
+                                                            </div>
+                                                            <hr />
+                                                            
+                                                            
+                                                            
+
+                                                        </div>
+                                                        <div class="tab-pane fade" id="connectedServices" role="tabpanel" aria-labelledby="ConnectedServices-tab">
+                                                            Facebook, Google, Twitter Account that are connected to this account
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <!-- footer modal -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+                            </div>
+                        </div>
+                    </div>
+	</div>
                 </div>
             </nav>
 

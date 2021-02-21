@@ -187,6 +187,79 @@ exit;
 }
 
 
+  // Export ke excel
+  public function export_detail($id)
+  {
+  $dataClient = $this->clientModel->getDetail($id);
+  // Create new Spreadsheet object
+  $spreadsheet = new Spreadsheet();
+  
+  
+  // Set document properties
+  $spreadsheet->getProperties()->setTitle('Office 2007 XLSX Test Document')
+  ->setSubject('Office 2007 XLSX Test Document')
+  ->setDescription('Test document for Office 2007 XLSX, generated using PHP classes.')
+  ->setKeywords('office 2007 openxml php')
+  ->setCategory('Test result file');
+  
+  // Add some data
+  $spreadsheet->setActiveSheetIndex(0)
+  ->setCellValue('A1', 'NO')
+  ->setCellValue('B1', 'CLIENT NAME')
+  ->setCellValue('C1', 'TITLE PRODUCT')
+  ->setCellValue('D1', 'CATEGORY PRODUCT')
+  ->setCellValue('E1', 'COUNT')
+  ->setCellValue('F1', 'POTENTIAL REVENUE')
+  ->setCellValue('G1', 'TOTAL REVENUE')
+  ->setCellValue('H1', 'STATUS')
+  
+  
+  ;
+  
+  // Miscellaneous glyphs, UTF-8
+  $i=2; foreach($dataClient as $row) {
+  
+  $spreadsheet->setActiveSheetIndex(0)
+  ->setCellValue('A'.$i, $row->id_client)
+  ->setCellValue('B'.$i, $row->client_name)
+  ->setCellValue('C'.$i, $row->title)
+  ->setCellValue('D'.$i, $row->category)
+  ->setCellValue('E'.$i, $row->count)
+  ->setCellValue('F'.$i, $row->potential_revenue)
+  ->setCellValue('G'.$i, $row->total_revenue)
+  ->setCellValue('I'.$i, $row->status)
+  
+  ;
+  $i++;
+  }
+  
+  // Rename worksheet
+  $spreadsheet->getActiveSheet()->setTitle('Detail Purchase'.date('d-m-Y H'));
+  
+  // Set active sheet index to the first sheet, so Excel opens this as the first sheet
+  $spreadsheet->setActiveSheetIndex(0);
+  
+  // Redirect output to a client’s web browser (Xlsx)
+  header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+  header('Content-Disposition: attachment;filename="Detail Purchase.xlsx"');
+  header('Cache-Control: max-age=0');
+  // If you're serving to IE 9, then the following may be needed
+  header('Cache-Control: max-age=1');
+  
+  // If you're serving to IE over SSL, then the following may be needed
+  header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+  header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+  header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+  header('Pragma: public'); // HTTP/1.0
+  
+  $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+  $writer->save('php://output');
+  exit;
+  }
+
 
 }
+
+
+
 
