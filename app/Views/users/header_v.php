@@ -44,9 +44,18 @@
             </div>
 
             <ul class="list-unstyled components">
-              
+                
+                <li>
+                    <a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                </li>
                 <li>
                     <a href="#"><i class="fas fa-user-clock"></i> Attendance</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fas fa-user-tie"></i> Employee </a>
+                </li>
+                <li>
+                    <a href="#"><i class="fas fa-building"></i> Company </a>
                 </li>
                 <li class="active">
                     
@@ -80,6 +89,24 @@
                         <li>
                             <a href="#"><i class="fas fa-chalkboard-teacher"></i> Consulting</a>
                         </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fas fa-money-bill"></i> Finance </a>
+                </li>
+
+                <li class="active">
+                    
+                    <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-file"></i>  Report</a>
+                    <ul class="collapse list-unstyled" id="reportSubmenu">
+                        <li>
+                            <a href="<?php echo base_url('Report_Attendance')?>"><i class="fas fa-user-clock"></i> Report Attendance</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url('Activity Log')?>"><i class="fas fa-file-alt"></i> Activity Log</a>
+                        </li>
+                       
+                        
                     </ul>
                 </li>
                
