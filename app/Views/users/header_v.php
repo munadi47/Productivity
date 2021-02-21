@@ -20,9 +20,11 @@
     <!--AOS -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <!-- Font Awesome JS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     <script  src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script  src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    
     <!--HIGH CHART-->
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/funnel.js"></script>
@@ -57,7 +59,7 @@
                 <li>
                     <a href="#"><i class="fas fa-building"></i> Company </a>
                 </li>
-                <li class="active">
+                <li >
                     
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-filter"></i>  Sales Pipeline</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
@@ -78,10 +80,10 @@
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-truck-loading"></i> Delivery</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li>
-                            <a href="#"><i class="fas fa-video"></i> Video</a>
+                            <a href="<?php echo base_url('Video')?>"><i class="fas fa-video"></i> Video</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fas fa-desktop"></i> Digital Content</a>
+                            <a href="<?php echo base_url('Digital')?>"><i class="fas fa-desktop"></i> Digital Content</a>
                         </li>
                         <li>
                             <a href="#"><i class="fas fa-graduation-cap"></i> Learning</a>
@@ -95,7 +97,7 @@
                     <a href="#"><i class="fas fa-money-bill"></i> Finance </a>
                 </li>
 
-                <li class="active">
+                <li>
                     
                     <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-file"></i>  Report</a>
                     <ul class="collapse list-unstyled" id="reportSubmenu">

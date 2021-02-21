@@ -2,7 +2,7 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#"><i class="fas fa-filter"></i> Sales Pipeline</a></li>
         <li class="breadcrumb-item" aria-current="page"><i class="fas fa-users"></i> Client</li>
-        <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-eye"></i> Client Detail</li>
+        <li class="breadcrumb-item active" aria-current="page"><i class="fa fa-search"></i> Client Detail</li>
     </ol>
 </nav>
 
