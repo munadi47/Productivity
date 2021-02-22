@@ -8,7 +8,7 @@
         <div class="form-group row">
             <label hidden class="col-sm-2 col-form-label">NO</label>
             <div class="col-sm-10">
-            <input type="hidden" id="id_SalesPipeline" name="id_SalesPipeline" value="<?php if(!empty($dataPipeline)) echo $dataProduct->id_product; ?>"> 
+            <input type="hidden" id="id_SalesPipeline" name="id_SalesPipeline" value="<?php if(!empty($dataPipeline)) echo $dataPipeline->id_SalesPipeline; ?>"> 
             </div>
         </div>
         
@@ -117,9 +117,9 @@
             <div class="col-sm-10">
                     <select required name="status" id="status" class="form-select" aria-label="Default select example">
                             <option selected><?php if(!empty($dataPipeline)) echo $dataPipeline->status; ?> </option>
-                            <option value="meeting"><span class="badge badge-primary"> Meeting </span></option>
-                            <option value="proposal"><span class="badge badge-warning"> Proposal </span></option>
-                            <option value="closing"><span class="badge badge-danger"> Closing </span></option>
+                            <option value="meeting"> meeting </option>
+                            <option value="proposal">proposal</option>
+                            <option value="closing">closing </option>
                             
                     </select>
             </div>

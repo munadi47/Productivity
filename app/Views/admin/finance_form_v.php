@@ -1,7 +1,7 @@
 <div class="card shadow-sm p-3 mb-5 bg-white rounded" data-aos="zoom-in" data-aos-duration="1000" >
 <section>
     <div class="container">
-    <h2><i class="fas fa-users"></i> Finance Form Input </h2>
+    <h2><i class="fas fa-money-bill"></i> Finance Form Input </h2>
     <hr>
         <form method="POST" action="<?php echo site_url('Finance/save'); ?>">
         <div class="form-group row">

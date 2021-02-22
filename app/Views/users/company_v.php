@@ -1,8 +1,10 @@
 <section>
-    <div class="container">
+   
     <nav aria-label="breadcrumb shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-out" data-aos-duration="1000">
     <ol class="breadcrumb">
+    <li class="breadcrumb-item" aria-current="page"><i class="fas fa-table"></i> Company Data</li>
         <li class="breadcrumb-item" aria-current="page"><i class="fas fa-users"></i> Company</li>
+       
     </ol>
     </nav>
     <?php if(!empty(session()->getFlashdata('berhasil'))){ ?>
@@ -78,16 +80,17 @@
                     <td class="text-center" colspan="9">No Data</td>
                 </tr>
 
-            <?php
+                <?php
 
-            }
-            
-            ?>
-            </tbody>
-        </table>
-        </div>
+                }
+                
+                ?>
+                </tbody>
+            </table>
+                </span>
+            </div>
         
-    </div>
-    </div>
+    
+
 
 </section>

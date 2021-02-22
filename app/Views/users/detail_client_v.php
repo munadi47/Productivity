@@ -52,7 +52,17 @@
                         <td><?php echo $row->count; ?></td>
                         <td><?php echo $row->potential_revenue; ?></td>
                         <td><?php echo $row->total_revenue; ?></td>
-                        <td><?php echo $row->status ;?></td>
+                        <td><?php if($row->status=='closing'){
+                            ?> <span class="badge badge-danger"><?php
+                           
+                                }  elseif($row->status=='proposal'){
+                                    ?><span class="badge badge-warning"><?php
+
+                                } else{
+                                    ?><span class="badge badge-success"><?php
+                                }
+                                echo $row->status; ?>
+                        </td>
                        
                     </tr>
                     

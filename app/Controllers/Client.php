@@ -25,7 +25,7 @@ class Client extends BaseController{
     public function index(){
         $session = session();
         $data['dataClient'] = $this->clientModel->getPIC();
-        $data['dataClient'] = $this->clientModel->findAll();
+       
         echo view ('users/header_v');
         echo view ('users/client_v',$data);
         echo view ('users/footer_v');
