@@ -22,36 +22,35 @@
 
         <nav aria-label="breadcrumb shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-out" data-aos-duration="1000">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item" aria-current="page"><i class="fas fa-users"></i> Employee</li>
+            <li class="breadcrumb-item" aria-current="page"><i class="fas fa-users"></i> Finance</li>
         </ol>
         </nav>
-
 
     <div class="card shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-out" data-aos-duration="1000" >
 
         <div class="card-body">
-        <h4> Employee  </h4>
+        <h4> FINANCE  </h4>
 
-        <a title="Add data"  href="<?php echo base_url("Employee/add/"); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
+        <a title="Add data"  href="<?php echo base_url("Finance/add/"); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
             <i class="fa fa-plus"></i> 
         </a>
         
-        <a title="Export data to excel" href="<?php echo base_url("Employee/export/"); ?>" class="btn btn-outline-info btn-sm">
+        <a title="Export data to excel" href="<?php echo base_url("Finance/export/"); ?>" class="btn btn-outline-info btn-sm">
             <i class="fas fa-file-excel"></i> 
         </a>
         
         <br><br>
 
+
         <table id="myTable" class="table table-striped table-bordered table-hover" >
             <thead class="thead-light">
                 <tr>
                     <th>NO</th>
-                    <th>NIK</th>
-                    <th>NAME</th> 	 	 	 	 	 
-                    <th>EMAIL</th>
+                    <th>CLIENT</th>
+                    <th>INVOICE CREATE</th> 	 	 	 	 	 
+                    <th>INVOICE DUE DATE</th>
                     <!--th>password</th-->
-                    <th>PHONE</th>
-                    <th>PHONE 2</th>
+                    <th>AMMOUNT</th>
                     <th>STATUS</th>
                     <!--th>level</th-->
                     <th>ACTION</th>
@@ -61,20 +60,19 @@
             
 
             <?php $i = 1; ?>
-            <?php foreach ($dataEmployee as $row) :?>
+            <?php foreach ($dataFinance as $row) :?>
                 <tr>
                 <td><?php echo $i++; ?></td>
-                <td><?php echo $row->nik; ?></td>
-                <td><?php echo $row->name; ?></td>
-                <td><?php echo $row->email; ?></td>
-                <td><a class="btn btn-primary" href="tel:<?php echo $row->phone1; ?>"><i class="fas fa-phone" style="padding-right: 1px;"></i>  <?php echo $row->phone1; ?></a></td>
-                <td><a class="btn btn-primary" href="tel:<?php echo $row->phone2; ?>"><i class="fas fa-phone" style="padding-right: 1px;"></i>  <?php echo $row->phone2; ?></a></td>
-                <td><?php echo $row->status; ?></td>
+                <td><?php echo $row->id_client; ?></td>
+                <td><?php echo $row->invoice_date; ?></td>
+                <td><?php echo $row->invoice_duedate; ?></td>
+                <td>Rp. <?php echo $row->invoice_amount=number_format($row->invoice_amount,0,",","."); ?></td>
+                <td><?php echo $row->id_fStatus; ?></td>
                 <td>
-                    <a title="Edit"  href="<?php echo base_url("Employee/edit/".$row->nik); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
+                    <a title="Edit"  href="<?php echo base_url("Finance/edit/".$row->nik); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
                     <i class="fa fa-edit"></i>
                     </a>
-                    <a title="Delete" href="<?php echo base_url("Employee/delete/".$row->nik); ?>" class="btn btn-outline-info btn-sm" onclick="return confirm('Apakah yakin data akan dihapus?');">
+                    <a title="Delete" href="<?php echo base_url("Finance/delete/".$row->nik); ?>" class="btn btn-outline-info btn-sm" onclick="return confirm('Apakah yakin data akan dihapus?');">
                     <i class="fa fa-trash" ></i>
                     </a>
                 </td>
@@ -85,7 +83,7 @@
             endforeach;
             ?>
             <?php
-            if (empty($dataEmployee)) {
+            if (empty($dataFinance)) {
             ?>
                 <tr>
                     <td class="text-center" colspan="9">No Data</td>

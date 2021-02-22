@@ -49,7 +49,7 @@
                 </tr>
             </thead>
             <tbody>
-            
+    
 
             <?php $i = 1; ?>
             <?php foreach ($dataCompany as $row) :?>
@@ -59,10 +59,10 @@
                    
                     <td>
                         <a title="Edit"  href="<?php echo base_url("Client/edit/".$row->id_company); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
-                        <i class="fa fa-edit"></i> Edit
+                        <i class="fa fa-edit"></i>
                         </a>
                         <a title="Delete" href="<?php echo base_url("Client/delete/".$row->id_company); ?>" class="btn btn-outline-info btn-sm" onclick="return confirm('Apakah yakin data akan dihapus?');">
-                        <i class="fa fa-trash" ></i> Delete
+                        <i class="fa fa-trash" ></i>
                         </a>
                     </td>
                 </tr>

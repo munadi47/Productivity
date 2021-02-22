@@ -13,21 +13,22 @@ use CodeIgniter\HTTP\Files\UploadedFile;
 use mysqli;
 use phpDocumentor\Reflection\PseudoTypes\False_;
 
-class Employee extends BaseController{
+class Finance extends BaseController{
     public function __construct()
     {
         $this->session = \Config\Services::session();
-        $this->employeeModel = new \App\Models\employeeModel();
-        $this->empstatusModel = new \App\Models\empstatusModel();
+        $this->financeModel = new \App\Models\financeModel();
+        $this->financestatusModel = new \App\Models\financestatusModel();
+        $this->clientModel = new \App\Models\clientModel();
 
     }
 
     public function index(){
         $session = session();
-        $data['dataEmployee'] = $this->employeeModel->getEmployee();
+        $data['dataFinance'] = $this->financeModel->getStatusFinance();
 
         echo view ('users/header_v');
-        echo view ('admin/employee_v',$data);
+        echo view ('admin/finance_v',$data);
         echo view ('users/footer_v');
         
     }
@@ -35,61 +36,59 @@ class Employee extends BaseController{
    
 
     public function add(){
-
-        $data['dataEmpstatus'] = $this->empstatusModel->findAll();
+        $data['dataClient'] = $this->clientModel->findAll();
+        $data['datafinancestatus'] = $this->financestatusModel->findAll();
+        
 
         echo view('users/header_v');
-        echo view('admin/employee_form_v',$data);
+        echo view('admin/finance_form_v',$data);
         echo view('users/footer_v');
     }
 
     public function edit($id){
-        $where = ['nik'=> $id];
-        $data['dataEmpstatus'] = $this->empstatusModel->findAll();
-        $data['dataEmployee'] = $this->employeeModel->where($where)->findAll()[0];
-        $data['dataEmpstatus'] = $this->empstatusModel->findAll();
+        $where = ['id_finance'=> $id];
+        $data['datafinancestatus'] = $this->financestatusModel->findAll();
+        $data['dataClient'] = $this->clientModel->findAll();
+        $data['dataFinance'] = $this->financeModel->where($where)->findAll()[0];
         
 
         echo view('users/header_v');
-        echo view('admin/employee_form_v',$data);
+        echo view('admin/finance_form_v',$data);
         echo view ('users/footer_v');
     }
 
     public function save() {
-        $data = [
-            'nik'=>$this->request->getPost('nik'),
-            'name'=>$this->request->getPost('name'),
-            'email'=>$this->request->getPost('email'),
-            'password'=>$this->request->getPost('password'),
-            'phone1'=>$this->request->getPost('phone1'),
-            'phone2'=>$this->request->getPost('phone2'),
-            'id_eStatus'=>$this->request->getPost('id_eStatus'),
-            'level'=>$this->request->getPost('level'),
-          
+        $data = [ 	 	 
+            'id_client'=>$this->request->getPost('id_client'),
+            'invoice_date'=>$this->request->getPost('invoice_date'),
+            'invoice_duedate'=>$this->request->getPost('invoice_duedate'),          
+            'invoice_amount'=>$this->request->getPost('invoice_amount'),
+            'id_fStatus'=>$this->request->getPost('id_fStatus'),
+
         ]; 
         
-        $id = $this->request->getPost('id');
+        $id = $this->request->getPost('id_finance');
 
         if (empty($id)) { //Insert
            
-            $response = $this->employeeModel->insert($data);
+            $response = $this->financeModel->insert($data);
             
             //masih aneh
-            if($response != true){
-                return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
+            if($response){
+                return redirect()->to(site_url('Finance'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
             }else{
-                return redirect()->to(site_url('Employee'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to save');
+                return redirect()->to(site_url('Finance'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to save');
             }
             
             
         } else { // Update
                 $where = ['nik'=>$id];
-                $response =  $this->employeeModel->update($where, $data);
+                $response =  $this->financeModel->update($where, $data);
 
             if($response){
-                return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
+                return redirect()->to(site_url('Finance'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
             }else{
-                return redirect()->to(site_url('Employee'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to save');
+                return redirect()->to(site_url('Finance'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to save');
             }
             
             
