@@ -2,15 +2,15 @@
 
 use CodeIgniter\Model;
 
-class videoModel extends Model
+class learningModel extends Model
 {
-    protected $table      = 'video';
-    protected $primaryKey = 'id_video';
+    protected $table      = 'learning';
+    protected $primaryKey = 'id_learning';
 
     protected $returnType     = 'object';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['id_video','id_SalesPipeline','storyboard_pic','storyboard_date','shooting_pic','shooting_date','editing_pic','editing_date','remark'];
+    protected $allowedFields = ['id_learning','id_SalesPipeline','date_deliver','coach_name','method','certificate','remark'];
 
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';
@@ -22,11 +22,10 @@ class videoModel extends Model
     protected $skipValidation     = false;
 
    
-    public function JoinVideo()
+    public function JoinLearning()
     {
-         return $this->db->table('video')
-         ->join('sales_pipeline', 'sales_pipeline.id_SalesPipeline=video.id_SalesPipeline','inner')
-        
+         return $this->db->table('learning')
+         ->join('sales_pipeline', 'sales_pipeline.id_SalesPipeline=learning.id_SalesPipeline')
          ->get()->getResultObject(); 
     }
 }

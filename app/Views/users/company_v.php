@@ -1,9 +1,13 @@
+<<<<<<< Updated upstream
 <section>
 
     <div class="container">
     <h2 style="font-weight:bolder; ">Company Data</h2>
     <hr>
     <?php if(!empty(session()->getFlashdata('berhasil'))){ ?>
+=======
+<?php if(!empty(session()->getFlashdata('berhasil'))){ ?>
+>>>>>>> Stashed changes
                 <div class="alert alert-success">
                     <?php echo session()->getFlashdata('berhasil');?>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -22,11 +26,32 @@
         <?php
             }
         ?>
+<<<<<<< Updated upstream
         <p>
             <a href="Company/add" class="btn btn-primary btn-sm">
                <i class="fa fa-plus"></i> Add Data
             </a>
         </p>
+=======
+
+<section>
+    
+    <nav aria-label="breadcrumb shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-out" data-aos-duration="1000">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item" aria-current="page"><i class="fas fa-table"></i> Company Data</li>
+        <li class="breadcrumb-item" aria-current="page"><i class="fas fa-building"></i> Company</li>
+    </ol>
+    </nav>
+    
+    <div class="card shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-out" data-aos-duration="1000" >
+
+        <div class="card-body table-responsive ">
+        <h4> COMPANY  </h4>
+
+        <a title="Add data"  href="<?php echo base_url("Company/add/"); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
+            <i class="fa fa-plus"></i> 
+        </a>
+>>>>>>> Stashed changes
         
         
 
@@ -92,5 +117,9 @@
         </div>
         
     </div>
+<<<<<<< Updated upstream
+=======
+    
+>>>>>>> Stashed changes
 
 </section>

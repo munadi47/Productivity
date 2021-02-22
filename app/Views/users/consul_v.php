@@ -21,19 +21,19 @@
     <ol class="breadcrumb">
     
         <li class="breadcrumb-item"><a href="#"><i class="fas fa-truck-loading"></i> Delivery</a></li>
-        <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-video"></i> Video</li>
+        <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-chalkboard-teacher"></i> Consulting</li>
     </ol>
     </nav>
     <div class="card shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-out" data-aos-duration="1000" >
            
                 <div class="card-body">
-                <h4> VIDEO DELIVERY  </h4>
+                <h4> CONSULTING DELIVERY  </h4>
                 
-                <a title="Add data"  href="<?php echo base_url("Video/add/"); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
+                <a title="Add data"  href="<?php echo base_url("Consulting/add/"); ?>" alt="Add" class="btn btn-outline-info btn-sm">
                     <i class="fa fa-plus"></i> 
                 </a>
                 
-                <a title="Export data to excel" href="<?php echo base_url("Video/export/"); ?>" class="btn btn-outline-info btn-sm">
+                <a title="Export data to excel" href="<?php echo base_url("Consulting/export/"); ?>" class="btn btn-outline-info btn-sm">
                 <i class="fas fa-file-excel"></i> 
                 </a>
                
@@ -43,52 +43,39 @@
                 <table id="myTable" class="table table-hover table-bordered text-center " >
                 <thead class="thead-dark ">
                     <tr>
-                        <th rowspan="2"> # </th>
-                        <th rowspan="2" >TITLE</th>
-                        <th rowspan="2" >ID CLIENT</th>
-                        <th colspan="2"><i class="fa fa-clipboard"></i> Storyboard</th>
-                        <th colspan="2"><i class="fa fa-video"></i> Shooting</th>
-                        <th colspan="2"><i class="fa fa-user-edit"></i> Editing</th>
-                        <th rowspan="2">REMARK </th>
-                        <th rowspan="2">ACTION</th>
+                        <th > # </th>
+                        <th >TITLE</th>
+                        <th >CLIENT</th>
+                        <th >PROJECT NAME</th>
+                        <th >PROJECT MANAGER</th>
+                        <th >REMARK </th>
+                        <th >ACTION</th>
                     
                     </tr>
-                    <tr>
-                        
-                        <th>PIC</th>
-                        <th>Due Date</th>
-                        <th>PIC</th>
-                        <th>Due Date</th>
-                        <th>PIC</th>
-                        <th>Due Date</th>
-                        
-                        
-                        
-                    </tr>
+                   
                 </thead>
                 <tbody>
                 
 
                    
                 <?php $nomor = 1; ?>
-                <?php foreach ($dataVideo as $row) :?>
+                <?php foreach ($dataConsul as $row) :?>
                     
                     <tr>
                         <td><?php echo $nomor++; ?></td>
                         <td><?php echo $row->title; ?></td>
                         <td><?php echo $row->id_client; ?></td>
-                        <td><?php echo $row->storyboard_pic; ?></td>
-                        <td><?php echo $row->storyboard_date; ?></td>
-                        <td><?php echo $row->shooting_pic; ?></td>
-                        <td><?php echo $row->shooting_date; ?></td>
-                        <td><?php echo $row->editing_pic; ?></td>
-                        <td><?php echo $row->editing_date; ?></td>
+                        <td><?php echo $row->project_name; ?></td>
+                        <td><?php echo $row->project_manager; ?></td>
                         <td><?php echo $row->remark; ?></td>
                         <td>
-                            <a title="Edit"  href="<?php echo base_url("Video/edit/".$row->id_video); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
+                            <a title="Gantt Chart"  href="<?php echo base_url("Consulting/chart/".$row->id_chart); ?>" alt="Chart" class="btn btn-outline-info btn-sm">
+                            <i class="fa fa-chart-bar"></i> 
+                            </a>
+                            <a title="Edit"  href="<?php echo base_url("Consulting/edit/".$row->id_consulting); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
                             <i class="fa fa-edit"></i> 
                             </a>
-                            <a title="Delete" href="<?php echo base_url("Video/delete/".$row->id_video); ?>" class="btn btn-outline-info btn-sm" onclick="return confirm('Apakah yakin data akan dihapus?');">
+                            <a title="Delete" href="<?php echo base_url("Consulting/delete/".$row->id_consulting); ?>" class="btn btn-outline-info btn-sm" onclick="return confirm('Apakah yakin data akan dihapus?');">
                             <i class="fa fa-trash" ></i> 
                             </a>
                         </td>
@@ -99,11 +86,11 @@
                 endforeach;
                 ?>
                 <?php
-                if (empty($dataVideo)) {
+                if (empty($dataConsul)) {
                 ?>
 
                     <tr>
-                        <td class="text-center" colspan="11">No Data</td>
+                        <td class="text-center" colspan="6">No Data</td>
                     </tr>
 
                 <?php

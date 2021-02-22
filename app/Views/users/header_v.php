@@ -54,7 +54,20 @@
                     <a href="#"><i class="fas fa-user-clock"></i> Attendance</a>
                 </li>
                 <li>
+<<<<<<< Updated upstream
                     <a href="#"><i class="fas fa-user-tie"></i> Employee </a>
+=======
+                    <a href="#masterSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-table"></i> Company Data</a>
+                    <ul class="collapse list-unstyled" id="masterSubmenu">
+                        <li>
+                            <a href="<?php echo base_url('Employee')?>"><i class="fas fa-user-tie"></i> Employee </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url('Company')?>"><i class="fas fa-building"></i> Company </a>
+                        </li>
+                       
+                    </ul>
+>>>>>>> Stashed changes
                 </li>
                 <li>
                     <a href="#"><i class="fas fa-building"></i> Company </a>
@@ -80,16 +93,16 @@
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-truck-loading"></i> Delivery</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li>
-                            <a href="<?php echo base_url('Video')?>"><i class="fas fa-video"></i> Video</a>
+                            <a href="<?php echo base_url('Video');?>"><i class="fas fa-video"></i> Video</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('Digital')?>"><i class="fas fa-desktop"></i> Digital Content</a>
+                            <a href="<?php echo base_url('Digital');?>"><i class="fas fa-desktop"></i> Digital Content</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fas fa-graduation-cap"></i> Learning</a>
+                            <a href="<?php echo base_url('Learning');?>"><i class="fas fa-graduation-cap"></i> Learning</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fas fa-chalkboard-teacher"></i> Consulting</a>
+                            <a href="<?php echo base_url('Consulting');?>"><i class="fas fa-chalkboard-teacher"></i> Consulting</a>
                         </li>
                     </ul>
                 </li>

@@ -42,7 +42,8 @@
                 <table id="myTable" class="table table-hover table-bordered text-center " >
                 <thead class="thead-dark ">
                     <tr>
-                        <th> # </th>
+                      
+                        <th>ID CLIENT</th>
                         <th>CLIENT NAME</th>
                         <th>ADDRESS</th>
                         <th>PHONE</th>
@@ -57,15 +58,15 @@
                 <?php
                
                 ?>
-                <?php $nomor = 1; ?>
+               
                 <?php foreach ($dataClient as $row) :?>
                     
                     <tr>
-                        <td><?php echo $nomor++; ?></td>
+                        <td><?php echo $row->id_client ?></td>
                         <td><?php echo $row->client_name; ?></td>
                         <td><?php echo $row->address; ?></td>
                         <td><a class="btn btn-primary" href="tel:<?php echo $row->phone; ?>"><?php echo $row->phone; ?>&nbsp;<i class="fas fa-phone" style="padding-right: 1px;"></i></a></td>
-                        <td><?php echo $row->nik; ?></td>
+                        <td><?php echo $row->name; ?></td>
                         <td>
                             <a title="View Detail" href="<?php echo base_url("Client/detail/".$row->id_client); ?>" class="btn btn-outline-info btn-sm">
                             <i class="fa fa-search" ></i> 

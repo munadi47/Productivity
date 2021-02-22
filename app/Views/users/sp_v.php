@@ -144,12 +144,34 @@
                         <td><?php echo $row->name; ?></td>
                         <td><?php echo $row->client_name; ?></td>
                         <td><?php echo $row->product_name; ?></td>
-                        <td><?php echo $row->category; ?></td>
+                        <td><?php if($row->category=='video'){
+                            ?> <span class="badge badge-primary"><i class="fas fa-video">&nbsp;</i><?php
+                           
+                                }  elseif($row->category=='digital content'){
+                                    ?><span class="badge badge-primary"><i class="fas fa-desktop"></i><?php
+
+                                } elseif($row->category=='learning'){
+                                    ?><span class="badge badge-primary"><i class="fas fa-graduation-cap">&nbsp;</i><?php
+                                }else{
+                                    ?><span class="badge badge-primary"><i class="fas fa-chalkboard-teacher">&nbsp;</i><?php
+                                }
+                                echo '&nbsp;'.$row->category; ?>
+                        </td>
                         <td><?php echo $row->title; ?></td>
                         <td><?php echo $row->count; ?></td>
                         <td>Rp. <?php echo $row->potential_revenue=number_format($row->potential_revenue,0,",","."); ?></td>
                         <td>Rp. <?php echo $row->total_revenue=number_format($row->total_revenue,0,",","."); ?></td>
-                        <td><?php echo $row->status; ?></td>
+                        <td><?php if($row->status=='closing'){
+                            ?> <span class="badge badge-danger"><?php
+                           
+                                } elseif($row->status=='proposal'){
+                                    ?><span class="badge badge-warning"><?php
+
+                                } else{
+                                    ?><span class="badge badge-success"><?php
+                                }
+                                echo $row->status; ?>
+                        </td>
                         <td>
                             <a title="Edit"  href="<?php echo base_url("SalesPipeline/edit/".$row->id_SalesPipeline); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
                             <i class="fa fa-edit"></i> 

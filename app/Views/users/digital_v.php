@@ -44,8 +44,8 @@
                 <thead class="thead-dark ">
                     <tr>
                         <th rowspan="2"> # </th>
-                        <th rowspan="2">TITLE</th>
-                        <th rowspan="2" >CLIENT</th>
+                        <th rowspan="2" >TITLE</th>
+                        <th rowspan="2" >ID CLIENT</th>
                         <th colspan="2"><i class="fa fa-clipboard"></i> Storyboard</th>
                         <th colspan="2"><i class="fa fa-microphone-alt"></i> Voiceover</th>
                         <th colspan="2"><i class="fa fa-magic"></i> Animate</th>
@@ -79,7 +79,7 @@
                     <tr>
                         <td><?php echo $nomor++; ?></td>
                         <td><?php echo $row->title; ?></td>
-                        <td><?php echo $row->client_name; ?></td>
+                        <td><?php echo $row->id_client; ?></td>
                         <td><?php echo $row->storyboard_pic; ?></td>
                         <td><?php echo $row->storyboard_date; ?></td>
                         <td><?php echo $row->voiceover_pic; ?></td>
