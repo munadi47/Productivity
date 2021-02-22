@@ -101,7 +101,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><i class="fas fa-money-bill"></i> Finance </a>
+                    <a href="<?php echo base_url('Finance');?>"><i class="fas fa-money-bill"></i> Finance </a>
                 </li>
 
                 <li>

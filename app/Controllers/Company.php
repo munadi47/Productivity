@@ -26,27 +26,27 @@ class Company extends BaseController{
     public function index(){
         $session = session();
         $data['dataCompany'] = $this->companyModel->findAll();
-        echo view ('admin/header_v');
-        echo view ('admin/company_v',$data);
-        echo view ('admin/footer_v');
+        echo view ('users/header_v');
+        echo view ('users/company_v',$data);
+        echo view ('users/footer_v');
         
     }
 
    
 
     public function add(){
-        echo view('admin/header_v');
-        echo view('admin/company_form_v');
-        echo view('admin/footer_v');
+        echo view('users/header_v');
+        echo view('users/company_form_v');
+        echo view('users/footer_v');
     }
 
     public function edit($id){
         $where = ['id_company'=> $id];
         $data['dataCompany'] = $this->companyModel->where($where)->findAll()[0];
         
-        echo view('admin/header_v');
-        echo view('admin/company_form_v',$data);
-        echo view ('admin/footer_v');
+        echo view('users/header_v');
+        echo view('users/company_form_v',$data);
+        echo view ('users/footer_v');
     }
 
     public function save() {
