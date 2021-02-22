@@ -116,7 +116,7 @@ class Finance extends BaseController{
     // Export ke excel
 public function export()
 {
-$dataEmployee = $this->employeeModel->getEmployee();
+$dataFinance = $this->financeModel->getStatusFinance();
 // Create new Spreadsheet object
 $spreadsheet = new Spreadsheet(); 
 
@@ -130,35 +130,29 @@ $spreadsheet->getProperties()->setTitle('Office 2007 XLSX Test Document')
 
 // Add some data
 $spreadsheet->setActiveSheetIndex(0)
-->setCellValue('A1', 'NIK')
-->setCellValue('B1', 'NAME')
-->setCellValue('C1', 'EMAIL')
-->setCellValue('D1', 'PASSWORD')
-->setCellValue('E1', 'PHONE1')
-->setCellValue('F1', 'PHONE2')
-->setCellValue('G1', 'STATUS')
-->setCellValue('H1', 'LEVEL')
+->setCellValue('A1', 'ID FINANCE')
+->setCellValue('B1', 'INVOICE DATE')
+->setCellValue('C1', 'INOVICE DUE DATE')
+->setCellValue('D1', 'INVOICE AMOUNT')
+->setCellValue('E1', 'STATUS')
 ;
 
 // Miscellaneous glyphs, UTF-8
-$i=2; foreach($dataEmployee as $row) {
+$i=2; foreach($dataFinance as $row) {
 
 $spreadsheet->setActiveSheetIndex(0)
-->setCellValue('A'.$i, $row->nik)
-->setCellValue('B'.$i, $row->name)
-->setCellValue('C'.$i, $row->email)
-->setCellValue('D'.$i, $row->password)
-->setCellValue('E'.$i, $row->phone1)
-->setCellValue('F'.$i, $row->phone2)
-->setCellValue('G'.$i, $row->id_eStatus)
-->setCellValue('H'.$i, $row->level)
+->setCellValue('A'.$i, $row->id_finance)
+->setCellValue('B'.$i, $row->invoice_date)
+->setCellValue('C'.$i, $row->invoice_duedate)
+->setCellValue('D'.$i, $row->invoice_amount)
+->setCellValue('E'.$i, $row->id_fStatus)
 
 ;
 $i++;
 }
 
 // Rename worksheet
-$spreadsheet->getActiveSheet()->setTitle('Employee Data'.date('d-m-Y H'));
+$spreadsheet->getActiveSheet()->setTitle('Finance Data'.date('d-m-Y H'));
 
 // Set active sheet index to the first sheet, so Excel opens this as the first sheet
 $spreadsheet->setActiveSheetIndex(0);
