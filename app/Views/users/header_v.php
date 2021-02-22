@@ -53,13 +53,22 @@
                 <li>
                     <a href="#"><i class="fas fa-user-clock"></i> Attendance</a>
                 </li>
+
                 <li>
-                    <a href="#"><i class="fas fa-user-tie"></i> Employee </a>
+                    <a href="#masterSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-table"></i>  Data Master</a>
+                    <ul class="collapse list-unstyled" id="masterSubmenu">
+                        <li>
+                            <a href="<?php echo base_url('Employee')?>"><i class="fas fa-user-tie"></i> Employee </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url('Company')?>"><i class="fas fa-building"></i> Company </a>
+                        </li>
+                       
+                    </ul>
                 </li>
-                <li>
-                    <a href="#"><i class="fas fa-building"></i> Company </a>
-                </li>
-                <li >
+
+               
+                <li class="active">
                     
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-filter"></i>  Sales Pipeline</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
@@ -94,7 +103,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><i class="fas fa-money-bill"></i> Finance </a>
+                    <a href="<?php echo base_url('Finance')?>"><i class="fas fa-money-bill"></i> Finance </a>
                 </li>
 
                 <li>
@@ -110,15 +119,7 @@
                        
                         
                     </ul>
-                </li>
-               
-
-              
-               
-                
-
-
-                
+                </li>                
             </ul>
 
             
