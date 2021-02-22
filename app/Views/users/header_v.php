@@ -54,9 +54,6 @@
                     <a href="#"><i class="fas fa-user-clock"></i> Attendance</a>
                 </li>
                 <li>
-<<<<<<< Updated upstream
-                    <a href="#"><i class="fas fa-user-tie"></i> Employee </a>
-=======
                     <a href="#masterSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-table"></i> Company Data</a>
                     <ul class="collapse list-unstyled" id="masterSubmenu">
                         <li>
@@ -67,11 +64,8 @@
                         </li>
                        
                     </ul>
->>>>>>> Stashed changes
                 </li>
-                <li>
-                    <a href="#"><i class="fas fa-building"></i> Company </a>
-                </li>
+               
                 <li >
                     
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-filter"></i>  Sales Pipeline</a>
