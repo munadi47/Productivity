@@ -69,7 +69,7 @@
                 <td>Rp. <?php echo $row->invoice_amount=number_format($row->invoice_amount,0,",","."); ?></td>
 
 
-                <td><?php if($row->status =='Term1' && 'Term2' && 'Term3' && 'Term4'){
+                <td><?php if($row->status == 'Term1' && 'Term2' && 'Term3' && 'Term4'){
                     ?><span class="badge badge-warning"><?php
                 }
                 else{
@@ -78,12 +78,16 @@
                 </td>
 
                 <td>
+                    <a title="Create Invoice" href="<?php echo base_url("Finance/invoice/".$row->id_finance); ?>" class="btn btn-outline-info btn-sm">
+                    <i class="fa fa-file-pdf" ></i>
+                    </a>
                     <a title="Edit"  href="<?php echo base_url("Finance/edit/".$row->id_finance); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
                     <i class="fa fa-edit"></i>
                     </a>
                     <a title="Delete" href="<?php echo base_url("Finance/delete/".$row->id_finance); ?>" class="btn btn-outline-info btn-sm" onclick="return confirm('Apakah yakin data akan dihapus?');">
                     <i class="fa fa-trash" ></i>
                     </a>
+
                 </td>
                 </tr>
                 
