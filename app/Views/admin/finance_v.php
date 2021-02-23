@@ -78,10 +78,10 @@
                 </td>
 
                 <td>
-                    <a title="Edit"  href="<?php echo base_url("Finance/edit/".$row->nik); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
+                    <a title="Edit"  href="<?php echo base_url("Finance/edit/".$row->id_finance); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
                     <i class="fa fa-edit"></i>
                     </a>
-                    <a title="Delete" href="<?php echo base_url("Finance/delete/".$row->nik); ?>" class="btn btn-outline-info btn-sm" onclick="return confirm('Apakah yakin data akan dihapus?');">
+                    <a title="Delete" href="<?php echo base_url("Finance/delete/".$row->id_finance); ?>" class="btn btn-outline-info btn-sm" onclick="return confirm('Apakah yakin data akan dihapus?');">
                     <i class="fa fa-trash" ></i>
                     </a>
                 </td>
