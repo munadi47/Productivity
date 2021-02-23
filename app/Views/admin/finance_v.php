@@ -43,7 +43,7 @@
 
 
         <table id="myTable" class="table table-striped table-bordered table-hover" >
-            <thead class="thead-light">
+            <thead class="thead-dark">
                 <tr>
                     <th>NO</th>
                     <th>CLIENT</th>
@@ -63,11 +63,11 @@
             <?php foreach ($dataFinance as $row) :?>
                 <tr>
                 <td><?php echo $i++; ?></td>
-                <td><?php echo $row->client_name; ?></td>
+                <td><?php echo $row->id_client; ?></td>
                 <td><?php echo $row->invoice_date; ?></td>
                 <td><?php echo $row->invoice_duedate; ?></td>
                 <td>Rp. <?php echo $row->invoice_amount=number_format($row->invoice_amount,0,",","."); ?></td>
-                <td><?php echo $row->status; ?></td>
+                <td><?php echo $row->id_fStatus; ?></td>
                 <td>
                     <a title="Edit"  href="<?php echo base_url("Finance/edit/".$row->nik); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
                     <i class="fa fa-edit"></i>

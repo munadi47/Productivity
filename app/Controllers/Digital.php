@@ -57,7 +57,7 @@ class Digital extends BaseController{
 
     public function save() {
         
-        $id = $this->request->getPost('id_video');
+        $id = $this->request->getPost('id_digital');
 
         if (empty($id)) { //Insert
            
@@ -153,17 +153,16 @@ $spreadsheet->getProperties()->setTitle('Office 2007 XLSX Test Document')
 // Add some data
 $spreadsheet->setActiveSheetIndex(0)
 ->setCellValue('A1', 'ID DIGITAL')
-->setCellValue('B1', 'TITLE')
-->setCellValue('C1', 'CLIENT')
-->setCellValue('D1', 'STORYBOARD PIC')
-->setCellValue('E1', 'STORYBOARD DATE')
-->setCellValue('F1', 'VOICEOVER PIC')
-->setCellValue('G1', 'VOICEOVER DATE')
-->setCellValue('H1', 'ANIMATE PIC')
-->setCellValue('I1', 'ANIMATE DATE')
-->setCellValue('J1', 'COMPILE PIC')
-->setCellValue('K1', 'COMPILE DATE')
-->setCellValue('L1', 'REMARK')
+->setCellValue('B1', 'CLIENT')
+->setCellValue('C1', 'STORYBOARD PIC')
+->setCellValue('D1', 'STORYBOARD DATE')
+->setCellValue('E1', 'VOICEOVER PIC')
+->setCellValue('F1', 'VOICEOVER DATE')
+->setCellValue('G1', 'ANIMATE PIC')
+->setCellValue('H1', 'ANIMATE DATE')
+->setCellValue('I1', 'COMPILE PIC')
+->setCellValue('J1', 'COMPILE DATE')
+->setCellValue('K1', 'REMARK')
 
 ;
 
@@ -172,17 +171,16 @@ $i=2; foreach($dataDigital as $row) {
 
 $spreadsheet->setActiveSheetIndex(0)
 ->setCellValue('A'.$i, $row->id_digital)
-->setCellValue('B'.$i, $row->title)
-->setCellValue('C'.$i, $row->client_name)
-->setCellValue('D'.$i, $row->storyboard_pic)
-->setCellValue('E'.$i, $row->storyboard_date)
-->setCellValue('F'.$i, $row->voiceover_pic)
-->setCellValue('G'.$i, $row->voiceover_date)
-->setCellValue('H'.$i, $row->animate_pic)
-->setCellValue('I'.$i, $row->animate_date)
-->setCellValue('J'.$i, $row->compile_pic)
-->setCellValue('K'.$i, $row->compile_date)
-->setCellValue('L'.$i, $row->remark)
+->setCellValue('B'.$i, $row->client_name)
+->setCellValue('C'.$i, $row->storyboard_pic)
+->setCellValue('D'.$i, $row->storyboard_date)
+->setCellValue('E'.$i, $row->voiceover_pic)
+->setCellValue('F'.$i, $row->voiceover_date)
+->setCellValue('G'.$i, $row->animate_pic)
+->setCellValue('H'.$i, $row->animate_date)
+->setCellValue('I'.$i, $row->compile_pic)
+->setCellValue('J'.$i, $row->compile_date)
+->setCellValue('K'.$i, $row->remark)
 ;
 $i++;
 }
