@@ -40,7 +40,7 @@
         </a>
         
         <br><br>
-
+        
 
         <table id="myTable" class="table table-striped table-bordered table-hover" >
             <thead class="thead-dark">
@@ -92,6 +92,8 @@
                 </tr>
                 
             <?php 
+
+            
 
             endforeach;
             ?>

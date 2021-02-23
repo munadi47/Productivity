@@ -3,10 +3,14 @@ namespace App\Controllers;
 use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 require('../excel/vendor/autoload.php');
+// Include the main TCPDF library (search for installation path).
+
 
 use PhpOffice\PhpSpreadsheet\Helper\Sample;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use TCPDF;
+
 // End load library phpspreadsheet
 
 use CodeIgniter\HTTP\Files\UploadedFile;
@@ -111,6 +115,37 @@ class Finance extends BaseController{
        
 
     }
+    public function invoice($id)
+    {
+        $data['dataFinance'] = $this->financeModel->getInvoice($id);
+
+        $html=  view('admin/invoice',$data);
+        
+        // create new PDF document
+        $pdf = new TCPDF('L', PDF_UNIT, 'A4', true, 'UTF-8', false);
+
+        // set document information
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetAuthor('Nicola Asuni');
+        $pdf->SetTitle('Invoice');
+        $pdf->SetSubject('Invoice');
+        $pdf->SetKeywords('PDF, example, test, invoice');    
+
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+
+        $pdf->addPage();
+
+        // output the HTML content
+        $pdf->writeHTML($html, true, false, true, false, '');
+
+        $this->response->setContentType('application/pdf');
+
+        //Close and output PDF document
+        $pdf->Output('Invoice.pdf', 'I');
+
+    }
+
 
 
     // Export ke excel
