@@ -55,10 +55,20 @@ class Employee extends BaseController{
         echo view ('users/footer_v');
     }
 
+    public function detail($id){
+        $data['dataEmployee'] = $this->financeModel->getDetail($id);
+
+        echo view('users/header_v');
+        echo view('admin/employee_detail_v',$data);
+        echo view ('users/footer_v');
+    }
+
     public function save() {
         $data = [
             'nik'=>$this->request->getPost('nik'),
             'name'=>$this->request->getPost('name'),
+            'address'=>$this->request->getPost('address'),
+            'birthday'=>$this->request->getPost('birthday'),
             'email'=>$this->request->getPost('email'),
             'password'=>$this->request->getPost('password'),
             'phone1'=>$this->request->getPost('phone1'),
@@ -105,7 +115,7 @@ class Employee extends BaseController{
 
         $response = $this->employeeModel->delete($where);
         if($response){
-            return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-save"></i> Data has been deleted');
+            return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-trash"></i> Data has been deleted');
         }else{
             return redirect()->to(site_url('Employee'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to delete');
         }
