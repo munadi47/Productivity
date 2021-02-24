@@ -22,6 +22,20 @@
             </div>
         </div>
         <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Address</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" name="name" required
+                value="<?php if(!empty($dataEmployee)) echo $dataEmployee->address; ?>">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Birthday</label>
+            <div class="col-sm-10">
+                <input type="date" class="form-control" id="name" name="name" required
+                value="<?php if(!empty($dataEmployee)) echo $dataEmployee->birthday; ?>">
+            </div>
+        </div>
+        <div class="form-group row">
             <label class="col-sm-2 col-form-label">Email</label>
             <div class="col-sm-10">
                 <input type="email" class="form-control" id="email" name="email" required
@@ -33,6 +47,7 @@
             <div class="col-sm-10">
                 <input type="password" class="form-control" id="password" name="password" required
                 value="<?php if(!empty($dataEmployee)) echo $dataEmployee->password; ?>">
+                <input type="checkbox" onclick="myFunction()"> Show Password 
             </div>
         </div>
         <div class="form-group row">
@@ -45,7 +60,7 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Phone</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="phone2" name="phone2"
+                <input type="text" placeholder="Optional" class="form-control" id="phone2" name="phone2"
                 value="<?php if(!empty($dataEmployee)) echo $dataEmployee->phone2; ?>">
             </div>
         </div>
@@ -83,5 +98,15 @@
 
         </form>
     </div>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+            } 
+    </script>
 </section>
 </div>

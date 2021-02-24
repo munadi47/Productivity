@@ -55,6 +55,14 @@ class Employee extends BaseController{
         echo view ('users/footer_v');
     }
 
+    public function detail($id){
+        $data['dataEmployee'] = $this->financeModel->getDetail($id);
+
+        echo view('users/header_v');
+        echo view('admin/employee_detail_v',$data);
+        echo view ('users/footer_v');
+    }
+
     public function save() {
         $data = [
             'nik'=>$this->request->getPost('nik'),

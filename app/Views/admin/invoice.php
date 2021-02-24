@@ -34,22 +34,15 @@
            }
        ?>
 
-    <table style="background-color: #222222; color: #fff">
-        <tbody>
-        <tr>
-        <td><h1>INVOICE</h1></td>
-        <td align="right"><img src="<?php echo base_url('assets/img/LOGO IDE.png'); ?>" height="60px"/><br/>
-        <i>IDE GROUP</i><br>
-        123 street, ABC Store<br/>
-        Country, State, 00000
-        <br/>
-        <strong>+62-1234567890</strong> | <strong>ide@ide-group.com</strong>
-        </td>
-        
-        </tr>
-        </tbody>
-    </table>
+		<p align="right">        
+			<img src="../public/assets/img/ide.jpg" height="60px"/><br/>
+			
+			<i>IDE GROUP</i><br>
+			Jakarta, Indonesia<br>
+			021911911
+		</p>
 
+		<hr>
 		<hr>
 		<p></p>
         <?php foreach ($dataFinance as $row) :?>

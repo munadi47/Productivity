@@ -104,13 +104,13 @@ class Finance extends BaseController{
 
     //delete
     public function delete($id){
-        $where = ['nik'=>$id];   
+        $where = ['id_finance'=>$id];   
 
-        $response = $this->employeeModel->delete($where);
+        $response = $this->financeModel->delete($where);
         if($response){
-            return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-save"></i> Data has been deleted');
+            return redirect()->to(site_url('Finance'))->with('Success', '<i class="fas fa-save"></i> Data has been deleted');
         }else{
-            return redirect()->to(site_url('Employee'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to delete');
+            return redirect()->to(site_url('Finance'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to delete');
         }
        
 
@@ -122,7 +122,7 @@ class Finance extends BaseController{
         $html=  view('admin/invoice',$data);
         
         // create new PDF document
-        $pdf = new TCPDF('L', PDF_UNIT, 'A4', true, 'UTF-8', false);
+        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
         // set document information
         $pdf->SetCreator(PDF_CREATOR);
@@ -139,11 +139,11 @@ class Finance extends BaseController{
         // output the HTML content
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $this->response->setContentType('application/pdf');
-
         //Close and output PDF document
         $pdf->Output('Invoice.pdf', 'I');
 
+    
+    
     }
 
 
