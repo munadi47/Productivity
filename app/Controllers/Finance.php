@@ -3,10 +3,14 @@ namespace App\Controllers;
 use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 require('../excel/vendor/autoload.php');
+// Include the main TCPDF library (search for installation path).
+
 
 use PhpOffice\PhpSpreadsheet\Helper\Sample;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use TCPDF;
+
 // End load library phpspreadsheet
 
 use CodeIgniter\HTTP\Files\UploadedFile;
@@ -100,17 +104,48 @@ class Finance extends BaseController{
 
     //delete
     public function delete($id){
-        $where = ['nik'=>$id];   
+        $where = ['id_finance'=>$id];   
 
-        $response = $this->employeeModel->delete($where);
+        $response = $this->financeModel->delete($where);
         if($response){
-            return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-save"></i> Data has been deleted');
+            return redirect()->to(site_url('Finance'))->with('Success', '<i class="fas fa-save"></i> Data has been deleted');
         }else{
-            return redirect()->to(site_url('Employee'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to delete');
+            return redirect()->to(site_url('Finance'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to delete');
         }
        
 
     }
+    public function invoice($id)
+    {
+        $data['dataFinance'] = $this->financeModel->getInvoice($id);
+
+        $html=  view('admin/invoice',$data);
+        
+        // create new PDF document
+        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
+        // set document information
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetAuthor('Nicola Asuni');
+        $pdf->SetTitle('Invoice');
+        $pdf->SetSubject('Invoice');
+        $pdf->SetKeywords('PDF, example, test, invoice');    
+
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+
+        $pdf->addPage();
+
+        // output the HTML content
+        $pdf->writeHTML($html, true, false, true, false, '');
+
+        //Close and output PDF document
+        $pdf->Output('Invoice.pdf', 'I');
+
+    
+    
+    }
+
 
 
     // Export ke excel

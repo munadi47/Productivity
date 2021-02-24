@@ -53,7 +53,6 @@
                 <li>
                     <a href="#"><i class="fas fa-user-clock"></i> Attendance</a>
                 </li>
-
                 <li>
                     <a href="#masterSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-table"></i> Company Data</a>
                     <ul class="collapse list-unstyled" id="masterSubmenu">
@@ -118,7 +117,15 @@
                        
                         
                     </ul>
-                </li>                
+                </li>
+               
+
+              
+               
+                
+
+
+                
             </ul>
 
             

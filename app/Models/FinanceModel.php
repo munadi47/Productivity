@@ -30,4 +30,13 @@ class financeModel extends Model
          ->join('client', 'client.id_client=finance.id_client')
          ->get()->getResultObject(); 
     }
+
+    public function getInvoice($id)
+    {
+         return $this->db->table('finance as f')
+         ->join('finance_status as fs','fs.id_fStatus=f.id_fStatus')
+         ->join('client as c', 'c.id_client=f.id_client')
+         ->where('f.id_finance',$id)
+         ->get()->getResultObject(); 
+    }
 }

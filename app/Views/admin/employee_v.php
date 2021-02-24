@@ -52,7 +52,6 @@
                     <th>EMAIL</th>
                     <!--th>password</th-->
                     <th>PHONE</th>
-                    <th>PHONE 2</th>
                     <th>STATUS</th>
                     <!--th>level</th-->
                     <th>ACTION</th>
@@ -69,8 +68,6 @@
                 <td><?php echo $row->name; ?></td>
                 <td><?php echo $row->email; ?></td>
                 <td><a class="btn btn-primary" href="tel:<?php echo $row->phone1; ?>"><i class="fas fa-phone" style="padding-right: 1px;"></i>  <?php echo $row->phone1; ?></a></td>
-                <td><?php if (!empty($row->phone2)){?>
-                    <a class="btn btn-primary" href="tel:<?php echo $row->phone2; ?>"><i class="fas fa-phone" style="padding-right: 1px;"></i>  <?php echo $row->phone2; ?></a><?php }?></td>
                 <td><?php if($row->status=='aman'){
                     ?><span class="badge badge-success"><?php
                    
@@ -80,12 +77,16 @@
                     ?><span class="badge badge-warning"><?php
                 } echo $row->status; ?></td>
                 <td>
+                    <a title="Detail" href="<?php echo base_url("Employee/detail/".$row->nik); ?>" class="btn btn-outline-info btn-sm">
+                    <i class="fa fa-info-circle" ></i>
+                    </a>
                     <a title="Edit"  href="<?php echo base_url("Employee/edit/".$row->nik); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
                     <i class="fa fa-edit"></i>
                     </a>
                     <a title="Delete" href="<?php echo base_url("Employee/delete/".$row->nik); ?>" class="btn btn-outline-info btn-sm" onclick="return confirm('Apakah yakin data akan dihapus?');">
                     <i class="fa fa-trash" ></i>
                     </a>
+                    
                 </td>
                 </tr>
                 

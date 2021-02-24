@@ -43,7 +43,7 @@
             <label class="col-sm-2 col-form-label">Ammount </label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="invoice_amount" name="invoice_amount" required
-                value="<?php if(!empty($dataFinance)) echo $dataFinance->invoice_amount; ?>">
+                value="<?php if(!empty($dataFinance)) echo $dataFinance->invoice_amount=number_format($dataFinance->invoice_amount,0,",","");; ?>">
             </div>
         </div>
         <br>
