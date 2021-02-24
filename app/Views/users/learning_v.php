@@ -81,6 +81,7 @@
                         <td><?php echo $row->certificate; ?></td>
                         <td><?php echo $row->remark; ?></td>
                         <td>
+                            
                             <a title="Edit"  href="<?php echo base_url("Learning/edit/".$row->id_learning); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
                             <i class="fa fa-edit"></i> 
                             </a>

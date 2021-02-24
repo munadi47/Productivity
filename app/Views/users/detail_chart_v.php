@@ -21,22 +21,59 @@
     <ol class="breadcrumb">
     
         <li class="breadcrumb-item"><a href="#"><i class="fas fa-truck-loading"></i> Delivery</a></li>
-        <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-chalkboard-teacher"></i> Consulting</li>
+        <li class="breadcrumb-item " aria-current="page"><i class="fas fa-chalkboard-teacher"></i> Consulting</li>
+        <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-chart-bar"></i> Gantt Chart</li>
     </ol>
     </nav>
+     <!-- GRAFIK -->
+     <div class="card shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-out" data-aos-duration="1000" >
+        <div id="myChart"></div>
+            <script>
+            // THE CHART
+            Highcharts.ganttChart('myChart', {
+                title: {<?php $counter=1; ?>
+                    text: '<?php foreach ($dataChart as $row) : ?>
+                        <?php if ($counter == 2) 
+                                break; ?>
+                        <?php echo $row->project_name;
+                        $counter++;?>
+                        <?php endforeach; ?>'
+                },
+                xAxis: {
+                    min: Date.UTC(2021, 2, 1),
+                    max: Date.UTC(2021, 12, 30)
+                },
+
+                series: [{
+                    name: 'Project 1',
+                    data: [{
+                        name: '<?php ?>',
+                        start: ,
+                        end: Date.UTC(2014, 10, 25),
+                        completed: 0.25
+                    }]
+                }]
+            });
+
+
+
+
+            </script>
+           
+        
+    </div>
+
+
+
     <div class="card shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-out" data-aos-duration="1000" >
            
                 <div class="card-body">
-                <h4> CONSULTING DELIVERY  </h4>
-                
-                <a title="Add data"  href="<?php echo base_url("Consulting/add/"); ?>" alt="Add" class="btn btn-outline-info btn-sm">
-                    <i class="fa fa-plus"></i> 
+                <h4> GANTT CHART TABLE  </h4>
+              
+                <a title="Add data"  href="<?php echo base_url("Consulting/add_chart/"); ?>" alt="Add" class="btn btn-outline-info btn-sm">
+                    <i class="fa fa-plus"></i> Add Activity
                 </a>
-                
-                <a title="Export data to excel" href="<?php echo base_url("Consulting/export/"); ?>" class="btn btn-outline-info btn-sm">
-                <i class="fas fa-file-excel"></i> 
-                </a>
-               
+              
                 <br>
                 <br>
                 <span class="table-responsive">
@@ -44,12 +81,10 @@
                 <thead class="thead-dark ">
                     <tr>
                         <th > # </th>
-                        <th >TITLE</th>
-                        <th >ID CLIENT</th>
-                        <th >PROJECT NAME</th>
-                        <th >PROJECT MANAGER</th>
-                        <th >GANTT CHART (ATTACH)</th>
-                        <th >REMARK </th>
+                        <th >ACTIVITY</th>
+                        <th >START</th>
+                        <th >END</th>
+                       
                         <th >ACTION</th>
                     
                     </tr>
@@ -60,21 +95,20 @@
 
                    
                 <?php $nomor = 1; ?>
-                <?php foreach ($dataConsul as $row) :?>
+                <?php foreach ($dataChart as $row) :?>
                     
                     <tr>
                         <td><?php echo $nomor++; ?></td>
-                        <td><?php echo $row->title; ?></td>
-                        <td><?php echo $row->id_client; ?></td>
-                        <td><?php echo $row->project_name; ?></td>
-                        <td><?php echo $row->project_manager; ?></td>
-                        <td><a title="View Gantt Chart" class="btn btn-outline-secondary" href="<?php echo base_url("Consulting/view_pdf/".$row->id_consulting); ?>"><i class="fa fa-file-alt"></i> &nbsp;<?php echo $row->gantt_chart; ?></a></td>
-                        <td><?php echo $row->remark; ?></td>
+                        <td><?php echo $row->name; ?></td>
+                        <td><?php echo $row->start; ?></td>
+                        <td><?php echo $row->end; ?></td>
+
                         <td>
-                            <a title="Edit"  href="<?php echo base_url("Consulting/edit/".$row->id_consulting); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
+                          
+                            <a title="Edit"  href="<?php echo base_url("Consulting/edit_chart/".$row->id_chart); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
                             <i class="fa fa-edit"></i> 
                             </a>
-                            <a title="Delete" href="<?php echo base_url("Consulting/delete/".$row->id_consulting); ?>" class="btn btn-outline-info btn-sm" onclick="return confirm('Apakah yakin data akan dihapus?');">
+                            <a title="Delete" href="<?php echo base_url("Consulting/delete_chart/".$row->id_chart); ?>" class="btn btn-outline-info btn-sm" onclick="return confirm('Apakah yakin data akan dihapus?');">
                             <i class="fa fa-trash" ></i> 
                             </a>
                         </td>
@@ -85,11 +119,11 @@
                 endforeach;
                 ?>
                 <?php
-                if (empty($dataConsul)) {
+                if (empty($dataChart)) {
                 ?>
 
                     <tr>
-                        <td class="text-center" colspan="9">No Data</td>
+                        <td class="text-center" colspan="6">No Data</td>
                     </tr>
 
                 <?php
@@ -106,3 +140,13 @@
 
 
 </section>
+
+
+
+
+
+
+
+
+
+

@@ -56,7 +56,7 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Remark</label>
             <div class="col-sm-10">
-            <TEXTAREA NAME="remark" class="form-control" COLS=40 ROWS=6 ><?php if(!empty($dataDigital)) echo htmlspecialchars($dataDigital->remark); ?></TEXTAREA>
+            <TEXTAREA NAME="remark" class="form-control" COLS=40 ROWS=6 ><?php if(!empty($dataDigital)) echo $dataDigital->remark; ?></TEXTAREA>
            
             </div>
         </div>

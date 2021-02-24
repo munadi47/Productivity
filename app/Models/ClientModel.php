@@ -10,7 +10,7 @@ class clientModel extends Model
     protected $returnType     = 'object';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['id_client','client_name','address','phone','nik'];
+    protected $allowedFields = ['id_client','client_name','id_class','address','phone','nik'];
 
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';
@@ -26,6 +26,7 @@ class clientModel extends Model
     {
          return $this->db->table('client')
          ->join('employee','employee.nik=client.nik')
+         ->join('classification','classification.id_class=client.id_class')
          ->get()->getResultObject(); 
     }
     public function getDetail($id)

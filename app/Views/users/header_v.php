@@ -27,10 +27,15 @@
     
     <!--HIGH CHART-->
     <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/gantt.js"></script>
     <script src="https://code.highcharts.com/modules/funnel.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+    <!-- Filepond -->
+     <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+   
 
 </head>
 
@@ -98,6 +103,7 @@
                         <li>
                             <a href="<?php echo base_url('Consulting');?>"><i class="fas fa-chalkboard-teacher"></i> Consulting</a>
                         </li>
+                       
                     </ul>
                 </li>
                 <li>

@@ -21,12 +21,12 @@ class Consulting extends BaseController{
         $this->session = \Config\Services::session();
         $this->consultingModel = new \App\Models\consultingModel();
         $this->sales_pipelineModel = new \App\Models\sales_pipelineModel();
-
+        helper(['form', 'url']);
     }
 
     public function index(){
         $session = session();
-    
+        $data['validation'] = $this->validator;
         $data['dataConsul'] = $this->consultingModel->JoinConsul();
         echo view ('users/header_v');
         echo view ('users/consul_v',$data);
@@ -37,7 +37,6 @@ class Consulting extends BaseController{
    
 
     public function add(){
-     
         $data['dataPipeline'] = $this->sales_pipelineModel->findAll();
 
         echo view('users/header_v');
@@ -54,61 +53,109 @@ class Consulting extends BaseController{
         echo view('users/consul_form_v',$data);
         echo view ('users/footer_v');
     }
+    public function view_pdf($id){
+        $where = ['id_consulting'=> $id];
+        $data['dataConsul'] = $this->consultingModel->where($where)->findAll()[0];
+
+        echo view('users/header_v');
+        echo view('users/pdf_v',$data);
+        echo view ('users/footer_v');
+    }
+
+    
 
     public function save() {
-        
+      
         $id = $this->request->getPost('id_consulting');
 
         if (empty($id)) { //Insert
            
-            $data = [
-                'remark'=>$this->request->getPost('remark'),
-                'project_name'=>$this->request->getPost('project_name'),
-                'project_manager'=>$this->request->getPost('project_manager'),
-                'id_SalesPipeline'=>$this->request->getPost('id_SalesPipeline'),
-                    
-            ];
+            $validation = $this->validate([
+                'gantt_chart' => [
+                    'uploaded[gantt_chart]',
+                    'mime_in[gantt_chart,application/pdf,application/zip,application/msword,application/x-tar]',
+                    'max_size[gantt_chart,5000]',
+                ]
+            ]);
             
-            $response = $this->consultingModel->insert($data);
-            if($response){
-                return redirect()->to(site_url('Consulting'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
+            if (!$validation){
+                return redirect()->to(site_url('Consulting'))->with('Failed', '<i class="fas fa-exclamation"></i> Plese Input Right File or Upload file');
             }else{
-                return redirect()->to(site_url('Consulting'))->with('Failed', '<i class="fas fa-exclamation"></i> Data Failed to save');
+                $gantt_chart = $this->request->getFile('gantt_chart');
+                $gantt_chart->move('assets/uploads/');
+                $data = [
+                    'remark'=>$this->request->getPost('remark'),
+                    'project_name'=>$this->request->getPost('project_name'),
+                    'project_manager'=>$this->request->getPost('project_manager'),
+                    'id_SalesPipeline'=>$this->request->getPost('id_SalesPipeline'),
+                    'gantt_chart'=> $gantt_chart->getName(),
+                ];
+                $this->consultingModel->insert($data);
+                
+                
             }
+           
+          
             
 
             
         } else { // Update
             $where = ['id_consulting'=>$id];
-            $data = [
-               
-                'remark'=>$this->request->getPost('remark'),
-                'project_name'=>$this->request->getPost('project_name'),
-                'project_manager'=>$this->request->getPost('project_manager'),
-                'id_SalesPipeline'=>$this->request->getPost('id_SalesPipeline'),
-                    
-            ];
-         
-           
-            $response = $this->consultingModel->update($where, $data);
-            if($response){
-                return redirect()->to(site_url('Consulting'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
+            $validation= $this->validate([
+                'gantt_chart' => [
+                    'uploaded[gantt_chart]',
+                    'mime_in[gantt_chart,application/pdf,application/zip,application/msword,application/x-tar]',
+                    'max_size[gantt_chart,5000]',
+                ]
+            ]);
+            $gantt_chart = $this->request->getFile('gantt_chart');
+            
+            if (!$validation && !empty($gantt_chart)){
+                return redirect()->to(site_url('Consulting'))->with('Failed', '<i class="fas fa-exclamation"></i> Plese Input Right File or Upload file');
+              
+            
+            
             }else{
-                return redirect()->to(site_url('Consulting'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to save');
+                $dt = $this->consultingModel->getWhere(['id_consulting'=>$id])->getRow();
+                $file1 = $dt->gantt_chart;
+                $path = 'assets/uploads/';
+                @unlink($path.$file1);
+                    $gantt_chart = $this->request->getFile('gantt_chart');
+                    $gantt_chart->move('assets/uploads/');
+               
+                $data = [
+                    'remark'=>$this->request->getPost('remark'),
+                    'project_name'=>$this->request->getPost('project_name'),
+                    'project_manager'=>$this->request->getPost('project_manager'),
+                    'id_SalesPipeline'=>$this->request->getPost('id_SalesPipeline'),
+                    'gantt_chart'=> $this->request->getFile('gantt_chart')->getName()  
+                ];
+                $this->consultingModel->update($where,$data);
+                   
+               
             }
             
+           
+           
+            
         }
+        return redirect()->to(site_url('Consulting'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
 
         
     }
+
+
+   
 
 
     //delete
     public function delete($id){
 
         $where = ['id_consulting'=>$id]; 
-
-    
+        $dt = $this->consultingModel->getWhere(['id_consulting'=>$id])->getRow();
+        $gantt_chart = $dt->gantt_chart;
+        $path = 'assets/uploads/';
+        @unlink($path.$gantt_chart);
         
         $response = $this->consultingModel->delete($where);
         if($response){
@@ -121,6 +168,7 @@ class Consulting extends BaseController{
      
     }
 
+    
 
 
 
@@ -142,10 +190,11 @@ $spreadsheet->getProperties()->setTitle('Office 2007 XLSX Test Document')
 // Add some data
 $spreadsheet->setActiveSheetIndex(0)
 ->setCellValue('A1', 'ID CONSULTING')
-->setCellValue('B1', 'CLIENT NAME')
-->setCellValue('C1', 'PROJECT NAME')
-->setCellValue('D1', 'PROJECT MANAGER')
-->setCellValue('E1', 'REMARK')
+->setCellValue('B1', 'TITLE')
+->setCellValue('C1', 'ID CLIENT')
+->setCellValue('D1', 'PROJECT NAME')
+->setCellValue('E1', 'PROJECT MANAGER')
+->setCellValue('F1', 'REMARK')
 
 
 ;
@@ -155,10 +204,11 @@ $i=2; foreach($dataConsul as $row) {
 
 $spreadsheet->setActiveSheetIndex(0)
 ->setCellValue('A'.$i, $row->id_consulting)
-->setCellValue('B'.$i, $row->client_name)
-->setCellValue('C'.$i, $row->project_name)
-->setCellValue('D'.$i, $row->project_manager)
-->setCellValue('E'.$i, $row->remark)
+->setCellValue('B'.$i, $row->title)
+->setCellValue('C'.$i, $row->id_client)
+->setCellValue('D'.$i, $row->project_name)
+->setCellValue('E'.$i, $row->project_manager)
+->setCellValue('F'.$i, $row->remark)
 
 ;
 $i++;

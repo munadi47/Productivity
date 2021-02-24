@@ -90,12 +90,17 @@
                         <td><?php echo $row->compile_date; ?></td>
                         <td><?php echo $row->remark; ?></td>
                         <td>
-                            <a title="Edit"  href="<?php echo base_url("Digital/edit/".$row->id_digital); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
-                            <i class="fa fa-edit"></i> 
-                            </a>
-                            <a title="Delete" href="<?php echo base_url("Digital/delete/".$row->id_digital); ?>" class="btn btn-outline-info btn-sm" onclick="return confirm('Apakah yakin data akan dihapus?');">
-                            <i class="fa fa-trash" ></i> 
-                            </a>
+                            <span>
+                                <a title="Download Schedule"  href="<?php echo base_url("Digital/schedule/".$row->id_digital); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
+                                <i class="fa fa-file-alt"></i> 
+                                </a>
+                                <a title="Edit"  href="<?php echo base_url("Digital/edit/".$row->id_digital); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
+                                <i class="fa fa-edit"></i> 
+                                </a>
+                                <a title="Delete" href="<?php echo base_url("Digital/delete/".$row->id_digital); ?>" class="btn btn-outline-info btn-sm" onclick="return confirm('Apakah yakin data akan dihapus?');">
+                                <i class="fa fa-trash" ></i> 
+                                </a>
+                            </span>
                         </td>
                     </tr>
                     
