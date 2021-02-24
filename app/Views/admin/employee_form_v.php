@@ -24,14 +24,14 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Address</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="name" name="name" required
+                <input type="text" class="form-control" id="address" name="address" required
                 value="<?php if(!empty($dataEmployee)) echo $dataEmployee->address; ?>">
             </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Birthday</label>
             <div class="col-sm-10">
-                <input type="date" class="form-control" id="name" name="name" required
+                <input type="date" class="form-control" id="birthday" name="birthday" required
                 value="<?php if(!empty($dataEmployee)) echo $dataEmployee->birthday; ?>">
             </div>
         </div>
