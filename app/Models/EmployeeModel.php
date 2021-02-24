@@ -28,4 +28,12 @@ class employeeModel extends Model
          ->join('employee_status', 'employee_status.id_eStatus=employee.id_eStatus')
          ->get()->getResultObject(); 
     }
+
+    public function getDetail($id)
+    {
+         return $this->db->table('employee')
+         ->join('employee_status', 'employee_status.id_eStatus=employee.id_eStatus')
+         ->where('employee.nik',$id)
+         ->get()->getResultObject(); 
+    }
 }

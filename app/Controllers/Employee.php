@@ -56,7 +56,7 @@ class Employee extends BaseController{
     }
 
     public function detail($id){
-        $data['dataEmployee'] = $this->financeModel->getDetail($id);
+        $data['dataEmployee'] = $this->employeeModel->getDetail($id);
 
         echo view('users/header_v');
         echo view('admin/employee_detail_v',$data);

@@ -1,5 +1,4 @@
 <section>
-   
     <?php if(!empty(session()->getFlashdata('Success'))){ ?>
                 <div class="alert alert-success">
                     <?php echo session()->getFlashdata('Success');?>
@@ -33,69 +32,184 @@
         <div class="card-body">
         <h4> Employee  </h4>
 
-        <a title="Add data"  href="<?php echo base_url("Employee/add/"); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
-            <i class="fa fa-plus"></i> 
-        </a>
         
-        <a title="Export data to excel" href="<?php echo base_url("Employee/export/"); ?>" class="btn btn-outline-info btn-sm">
-            <i class="fas fa-file-excel"></i> 
-        </a>
-        
-        <br><br>
+        <br>
+        <?php foreach ($dataEmployee as $row) :?>
 
-        <table id="myTable" class="table table-striped table-bordered table-hover" >
-            <thead class="thead-dark">
-                <tr>
-                    <th>NO</th>
-                    <th>NIK</th>
-                    <th>NAME</th> 	 
-                    <th>ADDRESS</th> 	 
-                    <th>BIRTHDAY</th> 	 	 	 	 
-                    <th>EMAIL</th>
-                    <th>password</th>
-                    <th>PHONE</th>
-                    <th>STATUS</th>
-                    <!--th>level</th-->
-                    <th>ACTION</th>
-                </tr>
-            </thead>
-            <tbody>
-            
+            <form method="post">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-img">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+                            <div class="file btn btn-lg btn-primary">
+                                Change Photo
+                                <input type="file" name="file"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="profile-head">
+                                    <h5>
+                                        <?php echo $row->name; ?>
+                                    </h5>
+                                    <h6>
+                                        
+                                    </h6>
+                                    <p class="proile-rating">NIK :<?php echo $row->nik; ?></p>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Detail</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Pipeline</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <!--div class="profile-work">
+                            <p>SKILLS</p>
+                            <a href="">Web Designer</a><br/>
+                            <a href="">Web Developer</a><br/>
+                            <a href="">WordPress</a><br/>
+                            <a href="">WooCommerce</a><br/>
+                            <a href="">PHP, .Net</a><br/>
+                        </div-->
+                    </div>
+                    <div class="col-md-8">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Birthday</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><?php echo $row->birthday; ?></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Email</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><?php echo $row->email; ?></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Password</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><?php echo $row->password; ?></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Phone 1</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><a class="btn btn-primary" href="tel:<?php echo $row->phone1; ?>"><i class="fas fa-phone" style="padding-right: 1px;"></i>  <?php echo $row->phone1; ?></a></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Phone 2</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><a class="btn btn-primary" href="tel:<?php echo $row->phone2; ?>"><i class="fas fa-phone" style="padding-right: 1px;"></i>  <?php echo $row->phone2; ?></a></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Address</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><?php echo $row->address; ?></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Password</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><?php echo $row->password; ?></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Status</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>
+                                                    <?php if($row->status=='aman'){
+                                                        ?><span class="badge badge-success"><?php
+                                                    
+                                                    } elseif($row->status=='peringatan3'){
+                                                        ?><span class="badge badge-danger"><?php
+                                                    }else{
+                                                        ?><span class="badge badge-warning"><?php
+                                                    } echo $row->status; ?><br>
+                                                </p>
+                                            </div>
+                                        </div>
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Experience</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>Expert</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Hourly Rate</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>10$/hr</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Total Projects</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>230</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>English Level</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>Expert</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Availability</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>6 months</p>
+                                            </div>
+                                        </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label>Your Bio</label><br/>
+                                        <p>Your detail description</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>   
 
-            <?php $i = 1; ?>
-            <?php foreach ($dataEmployee as $row) :?>
-                <tr>
-                <td><?php echo $i++; ?></td>
-                <td><?php echo $row->nik; ?></td>
-                <td><?php echo $row->name; ?></td>
-                <td><?php echo $row->address; ?></td>
-                <td><?php echo $row->birthday; ?></td>
-                <td><?php echo $row->email; ?></td>
-                <td><a class="btn btn-primary" href="tel:<?php echo $row->phone1; ?>"><i class="fas fa-phone" style="padding-right: 1px;"></i>  <?php echo $row->phone1; ?></a></td>
-                <td><?php if($row->status=='aman'){
-                    ?><span class="badge badge-success"><?php
-                   
-                } elseif($row->status=='peringatan3'){
-                    ?><span class="badge badge-danger"><?php
-                }else{
-                    ?><span class="badge badge-warning"><?php
-                } echo $row->status; ?></td>
-                <td>
-                    <a title="Detail" href="<?php echo base_url("Employee/detail/".$row->nik); ?>" class="btn btn-outline-info btn-sm">
-                    <i class="fa fa-info-circle" ></i>
-                    </a>
-                    <a title="Edit"  href="<?php echo base_url("Employee/edit/".$row->nik); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
-                    <i class="fa fa-edit"></i>
-                    </a>
-                    <a title="Delete" href="<?php echo base_url("Employee/delete/".$row->nik); ?>" class="btn btn-outline-info btn-sm" onclick="return confirm('Apakah yakin data akan dihapus?');">
-                    <i class="fa fa-trash" ></i>
-                    </a>
-                    
-                </td>
-                </tr>
-                
             <?php 
-
             endforeach;
             ?>
             <?php
@@ -110,8 +224,6 @@
             }
             
             ?>
-            </tbody>
-        </table>
         </div>
         
     </div>
