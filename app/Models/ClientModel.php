@@ -10,7 +10,7 @@ class clientModel extends Model
     protected $returnType     = 'object';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['id_client','client_name','id_class','address','phone','nik'];
+    protected $allowedFields = ['id_client','id_class','address','phone','nik'];
 
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';

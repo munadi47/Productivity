@@ -3,18 +3,25 @@
     <div class="container">
     <h2><i class="fas fa-users"></i> Client Form Input </h2>
     <hr>
-        <form method="POST" action="<?php echo site_url('Client/save'); ?>">
+        <form method="POST" action="<?php echo base_url('Client/save'); ?>">
         <div class="form-group row">
-            <label hidden class="col-sm-2 col-form-label">NO</label>
+            <label class="col-sm-2 col-form-label">Client Name</label>
             <div class="col-sm-10">
-            <input type="hidden" id="id_client" name="id_client" value="<?php if(!empty($dataClient)) echo $dataClient->id_client; ?>"> 
+                <input type="text" class="form-control" id="id_client" name="id_client" value="<?php if(!empty($dataClient)) echo $dataClient->id_client; ?>"> 
             </div>
         </div>
+       
+        <br>
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Client </label>
+            <label class="col-sm-2 col-form-label">Type of business </label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="client_name" name="client_name" required
-                value="<?php if(!empty($dataClient)) echo $dataClient->client_name; ?>">
+                    <select name="id_class" class="form-select" aria-label="Default select example">
+                        
+                        <?php foreach($dataClass as $row) : ?>
+                            <option value="<?php echo $row->id_class; ?>"<?php if(!empty($dataClient) && $dataClient->id_class == $row->id_class) echo 'selected'; ?> > <?php echo $row->sector; ?> </option>
+                        <?php endforeach;?>
+                        
+                    </select>
             </div>
         </div>
         <br>

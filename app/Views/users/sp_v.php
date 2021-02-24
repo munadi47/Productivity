@@ -142,7 +142,7 @@
                     <tr>
                         <td><?php echo $nomor++; ?></td>
                         <td><?php echo $row->name; ?></td>
-                        <td><?php echo $row->client_name; ?></td>
+                        <td><?php echo $row->id_client; ?></td>
                         <td><?php echo $row->product_name; ?></td>
                         <td><?php if($row->category=='video'){
                             ?> <span class="badge badge-primary"><i class="fas fa-video">&nbsp;</i><?php

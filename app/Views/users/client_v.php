@@ -43,8 +43,7 @@
                 <thead class="thead-dark ">
                     <tr>
                       
-                        <th>ID CLIENT</th>
-                        <th>CLIENT NAME</th>
+                        <th>CLIENT</th>
                         <th>ADDRESS</th>
                         <th>PHONE</th>
                         <th>PIC</th>
@@ -63,7 +62,6 @@
                     
                     <tr>
                         <td><?php echo $row->id_client ?></td>
-                        <td><?php echo $row->client_name; ?></td>
                         <td><?php echo $row->address; ?></td>
                         <td><a class="btn btn-primary" href="tel:<?php echo $row->phone; ?>"><?php echo $row->phone; ?>&nbsp;<i class="fas fa-phone" style="padding-right: 1px;"></i></a></td>
                         <td><?php echo $row->name; ?></td>

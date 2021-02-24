@@ -19,13 +19,14 @@ class Client extends BaseController{
         $this->session = \Config\Services::session();
         $this->clientModel = new \App\Models\clientModel();
         $this->employeeModel = new \App\Models\employeeModel();
+        $this->classModel = new \App\Models\classModel();
       
     }
 
     public function index(){
         $session = session();
         $data['dataClient'] = $this->clientModel->getPIC();
-       
+
         echo view ('users/header_v');
         echo view ('users/client_v',$data);
         echo view ('users/footer_v');
@@ -36,6 +37,7 @@ class Client extends BaseController{
 
     public function add(){
         $data['dataEmployee']  = $this->employeeModel->findAll();
+        $data['dataClass']  = $this->classModel->findAll();
         echo view('users/header_v');
         echo view('users/client_form_v',$data);
         echo view('users/footer_v');
@@ -43,6 +45,7 @@ class Client extends BaseController{
 
     public function edit($id){
         $where = ['id_client'=> $id];
+        $data['dataClass']  = $this->classModel->findAll();
         $data['dataEmployee']  = $this->employeeModel->findAll();
         $data['dataClient'] = $this->clientModel->where($where)->findAll()[0];
         
@@ -65,10 +68,10 @@ class Client extends BaseController{
         if (empty($id)) { //Insert
            
             $data = [
-                'client_name'=>$this->request->getPost('client_name'),
                 'address'=>$this->request->getPost('address'),
                 'phone'=>$this->request->getPost('phone'),
                 'nik'=>$this->request->getPost('nik'),
+                'id_class'=>$this->request->getPost('id_class'),
               
             ];
             $response = $this->clientModel->insert($data);
@@ -84,11 +87,11 @@ class Client extends BaseController{
         } else { // Update
             $where = ['id_client'=>$id];
             $data = [
-                'client_name'=>$this->request->getPost('client_name'),
+                'id_client'=>$this->request->getPost('id_client'),
                 'address'=>$this->request->getPost('address'),
                 'phone'=>$this->request->getPost('phone'),
                 'nik'=>$this->request->getPost('nik'),
-             
+                'id_class'=>$this->request->getPost('id_class'),
                     
             ];
          
@@ -153,7 +156,6 @@ $i=2; foreach($dataClient as $row) {
 
 $spreadsheet->setActiveSheetIndex(0)
 ->setCellValue('A'.$i, $row->id_client)
-->setCellValue('B'.$i, $row->client_name)
 ->setCellValue('C'.$i, $row->address)
 ->setCellValue('D'.$i, $row->phone)
 ->setCellValue('E'.$i, $row->name)
@@ -206,7 +208,6 @@ exit;
   $spreadsheet->setActiveSheetIndex(0)
   ->setCellValue('A1', 'NO')
   ->setCellValue('B1', 'CLIENT NAME')
-  ->setCellValue('C1', 'TITLE PRODUCT')
   ->setCellValue('D1', 'CATEGORY PRODUCT')
   ->setCellValue('E1', 'COUNT')
   ->setCellValue('F1', 'POTENTIAL REVENUE')

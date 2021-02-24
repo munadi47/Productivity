@@ -63,7 +63,7 @@
             <?php foreach ($dataFinance as $row) :?>
                 <tr>
                 <td><?php echo $i++; ?></td>
-                <td><?php echo $row->client_name; ?></td>
+                <td><?php echo $row->id_client; ?></td>
                 <td><?php echo $row->invoice_date; ?></td>
                 <td><?php echo $row->invoice_duedate; ?></td>
                 <td>Rp. <?php echo $row->invoice_amount=number_format($row->invoice_amount,0,",","."); ?></td>
