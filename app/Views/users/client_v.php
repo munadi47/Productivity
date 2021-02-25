@@ -42,7 +42,7 @@
                 <table id="myTable" class="table table-hover table-bordered text-center " >
                 <thead class="thead-dark ">
                     <tr>
-                      
+                        <th>#</th>
                         <th>CLIENT</th>
                         <th>BUSINESS TYPE</th>
                         <th>ADDRESS</th>
@@ -56,12 +56,13 @@
                 
 
                 <?php
-               
+                $nomor=1;
                 ?>
                
                 <?php foreach ($dataClient as $row) :?>
                     
                     <tr>
+                        <td><?php echo $nomor++; ?></td>
                         <td><?php echo $row->id_client ?></td>
                         <td><?php echo $row->sector; ?></td>
                         <td><?php echo $row->address; ?></td>

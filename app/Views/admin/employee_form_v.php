@@ -1,4 +1,4 @@
-<div class="card shadow-sm p-3 mb-5 bg-white rounded" data-aos="zoom-in" data-aos-duration="700" >
+<div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="700" >
 <section>
     <div class="container">
     <h2> <i class="fas fa-user-tie"></i> Employee Form Input </h2>
