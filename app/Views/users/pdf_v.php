@@ -34,10 +34,11 @@ if(!empty(session()->getFlashdata('Success'))){ ?>
                 </a>
                 <br>    
                 <br>
-                <h4> <?php echo $dataConsul->gantt_chart; ?>  </h4>
+                <h4><strong> <?php echo $dataConsul->gantt_chart; ?></strong><br>
+              </h4>
               
-                
-                <iframe src=" <?php echo base_url('/ViewerJS/#../public/assets/uploads/'.$dataConsul->gantt_chart);?>" width='724' height='1024' allowfullscreen webkitallowfullscreen></iframe> 
+                <embed src="<?php echo base_url('assets/uploads/'.$dataConsul->gantt_chart); ?>" type="application/pdf" width="100%" height="600px"></embed>
+               
        
         
    
