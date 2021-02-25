@@ -68,7 +68,7 @@
                         <td><?php echo $row->id_client; ?></td>
                         <td><?php echo $row->project_name; ?></td>
                         <td><?php echo $row->project_manager; ?></td>
-                        <td><a title="View Gantt Chart" class="btn btn-outline-secondary" href="<?php echo base_url("Consulting/view_pdf/".$row->id_consulting); ?>"><i class="fa fa-file-alt"></i> &nbsp;<?php echo $row->gantt_chart; ?></a></td>
+                        <td><a title="View Gantt Chart" class="btn btn-outline-secondary" href="<?php echo base_url('Consulting/view_pdf/'.$row->id_consulting); ?>"><i class="fa fa-file-alt"></i> &nbsp;<?php echo $row->gantt_chart; ?></a></td>
                         <td><?php echo $row->remark; ?></td>
                         <td>
                             <a title="Edit"  href="<?php echo base_url("Consulting/edit/".$row->id_consulting); ?>" alt="Edit" class="btn btn-outline-info btn-sm">

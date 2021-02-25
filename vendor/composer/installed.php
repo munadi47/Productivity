@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'a198d95e11dc137c4deb47965f3c2eb4da7d64c6',
+    'reference' => '940413a443bf4d0377d27bfba73a14cee3bc5dd9',
     'name' => 'codeigniter4/appstarter',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'a198d95e11dc137c4deb47965f3c2eb4da7d64c6',
+      'reference' => '940413a443bf4d0377d27bfba73a14cee3bc5dd9',
     ),
     'codeigniter4/framework' => 
     array (
@@ -374,6 +374,15 @@
       array (
       ),
       'reference' => 'c6c942b1ac76c82448322025e084cadc56048b4e',
+    ),
+    'tecnickcom/tcpdf' => 
+    array (
+      'pretty_version' => '6.3.5',
+      'version' => '6.3.5.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '19a535eaa7fb1c1cac499109deeb1a7a201b4549',
     ),
     'theseer/tokenizer' => 
     array (
