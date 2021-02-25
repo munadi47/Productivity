@@ -47,10 +47,10 @@
 		<p></p>
         <?php foreach ($dataFinance as $row) :?>
 		<p>
-			Pembeli : <?php echo $row->client_name; ?><br>
-			Alamat : <?php echo $row->client_name; ?><br>
-			Transaksi No :<?php echo $row->client_name; ?><br>
-			Tanggal : <?php echo $row->client_name; ?>
+			Pembeli : <?php echo $row->id_client; ?><br>
+			Alamat : <?php echo $row->id_client; ?><br>
+			Transaksi No :<?php echo $row->id_client; ?><br>
+			Tanggal : <?php echo $row->id_client; ?>
             
             <?php echo date('Y-m-d', strtotime($row->invoice_date)) ?>
 		
@@ -62,7 +62,7 @@
 				<th><strong>Total Harga</strong></th>
 			</tr>
 			<tr>
-				<td><?php echo $row->client_name; ?></td>
+				<td><?php echo $row->id_client; ?></td>
 				<td><?php echo number_format($row->invoice_amount,0,",","."); ?></td>
 				<td><?php echo number_format($row->invoice_amount,0,",","."); ?></td>
 			</tr>
