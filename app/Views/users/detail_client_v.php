@@ -1,4 +1,4 @@
-<nav aria-label="breadcrumb shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-out" data-aos-duration="1000">
+<nav aria-label="breadcrumb shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="fade-out" data-aos-duration="1000">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#"><i class="fas fa-filter"></i> Sales Pipeline</a></li>
         <li class="breadcrumb-item" aria-current="page"><i class="fas fa-users"></i> Client</li>
@@ -14,46 +14,19 @@
                 <a title="Back" href="<?php echo base_url("Client"); ?>" class="btn btn-outline-info btn-md">
                 <i class="fas fa-arrow-left"></i> 
                 </a>
-            
-               
                 
                 <br>
                 <br>
-                <span class="table-responsive">
-                <table id="myTable" class="table table-hover table-bordered text-center " >
-                <thead class="thead-dark ">
-                    <tr>
-                        <th> # </th>
-                        <th>CLIENT NAME</th>
-                        <th>TITLE PRODUCT</th>
-                        <th>CATEGORY</th>
-                        <th>COUNT</th>
-                        <th>POTENTIAL REVENUE</th>
-                        <th>TOTAL REVENUE</th>
-                        <th>STATUS</th>
-                       
-                    
-                    </tr>
-                </thead>
-                <tbody>
-                
 
-                <?php
-               
-                ?>
-                <?php $nomor = 1; ?>
                 <?php foreach ($dataClient as $row) :?>
-                    
-                    <tr>
-                        <td><?php echo $nomor++; ?></td>
-                        <td><?php echo $row->client_name; ?></td>
-                        <td><?php echo $row->title; ?></td>
-                        <td><?php echo $row->category; ?></td>
-                        <td><?php echo $row->count; ?></td>
-                        <td><?php echo $row->potential_revenue; ?></td>
-                        <td><?php echo $row->total_revenue; ?></td>
-                        <td><?php if($row->status=='closing'){
-                            ?> <span class="badge badge-danger"><?php
+                    <div class="notice notice-info notice-lg">
+                    <pre>
+    <strong style="font-size: 21px;"> <?php echo $row->title; ?> </strong><br>
+        Category    :&nbsp;   <?php echo $row->category; ?> <br>
+        Count       :&nbsp;   <?php echo $row->count; ?> <br>
+        Total Price :&nbsp;   <?php echo $row->total_revenue; ?> <br>
+        Status      :&nbsp;  <?php if($row->status=='closing'){
+                    ?> <span class="badge badge-danger"><?php
                            
                                 }  elseif($row->status=='proposal'){
                                     ?><span class="badge badge-warning"><?php
@@ -62,21 +35,19 @@
                                     ?><span class="badge badge-success"><?php
                                 }
                                 echo $row->status; ?>
-                        </td>
-                       
-                    </tr>
+                    </pre>
+                    </div>
+                   <br>
+                    <?php endforeach; ?>
                     
-                <?php 
-
-                endforeach;
-                ?>
                 <?php
                 if (empty($dataClient)) {
                 ?>
-
-                    <tr>
-                        <td class="text-center" colspan="9">No Data</td>
-                    </tr>
+                    <div class="card">
+                        <div class="card-body">
+                            No data
+                        </div>
+                    </div>
 
                 <?php
 

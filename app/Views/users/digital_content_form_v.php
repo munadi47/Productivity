@@ -1,4 +1,4 @@
-<div class="card shadow-sm p-3 mb-5 bg-white rounded" data-aos="zoom-in" data-aos-duration="1000" >
+<div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
 <section>
     <div class="container">
     <h2><i class="fas fa-desktop"></i> Digital Form Input </h2>
@@ -56,7 +56,7 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Remark</label>
             <div class="col-sm-10">
-            <TEXTAREA NAME="remark" class="form-control" COLS=40 ROWS=6 ><?php if(!empty($dataDigital)) echo htmlspecialchars($dataDigital->remark); ?></TEXTAREA>
+            <TEXTAREA NAME="remark" class="form-control" COLS=40 ROWS=6 ><?php if(!empty($dataDigital)) echo $dataDigital->remark; ?></TEXTAREA>
            
             </div>
         </div>

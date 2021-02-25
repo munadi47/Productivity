@@ -25,12 +25,20 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     
+    <!--PDF.js-->
+    
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.min.js"></script>
     <!--HIGH CHART-->
     <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/gantt.js"></script>
     <script src="https://code.highcharts.com/modules/funnel.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+    <!-- Filepond -->
+     <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+   
 
 </head>
 
@@ -82,6 +90,7 @@
                         
                     </ul>
                 </li>
+              
                 
                 <li>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-truck-loading"></i> Delivery</a>
@@ -98,6 +107,7 @@
                         <li>
                             <a href="<?php echo base_url('Consulting');?>"><i class="fas fa-chalkboard-teacher"></i> Consulting</a>
                         </li>
+                       
                     </ul>
                 </li>
                 <li>
@@ -150,7 +160,7 @@
         <!-- Page Content  -->
         <div id="content">
             
-            <nav class="navbar navbar-expand-lg navbar-light bg-light" data-aos="fade-down" data-aos-duration="1000"
+            <nav class="navbar navbar-expand-lg navbar-light bg-light " data-aos="fade-down" data-aos-duration="1000"
             data-aos-easing="ease-in-out">
                 <div class="container-fluid">
 

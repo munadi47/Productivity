@@ -26,7 +26,7 @@
     </nav>
 
     <!-- GRAFIK -->
-    <div class="card shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-out" data-aos-duration="1000" >
+    <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="fade-out" data-aos-duration="1000" >
         <div id="myChart">
             <script> 
                     Highcharts.chart('myChart', {
@@ -85,7 +85,7 @@
         </div>
     </div>
 
-    <div class="card shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-out" data-aos-duration="1000" >
+    <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="fade-out" data-aos-duration="1000" >
            
                 <div class="card-body">
                 <h4> SALES PIPELINE  </h4>
@@ -142,7 +142,7 @@
                     <tr>
                         <td><?php echo $nomor++; ?></td>
                         <td><?php echo $row->name; ?></td>
-                        <td><?php echo $row->client_name; ?></td>
+                        <td><?php echo $row->id_client; ?></td>
                         <td><?php echo $row->product_name; ?></td>
                         <td><?php if($row->category=='video'){
                             ?> <span class="badge badge-primary"><i class="fas fa-video">&nbsp;</i><?php

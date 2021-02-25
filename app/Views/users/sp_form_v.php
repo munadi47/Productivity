@@ -1,4 +1,4 @@
-<div class="card shadow-sm p-3 mb-5 bg-white rounded" data-aos="zoom-in" data-aos-duration="1000" >
+<div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
 <section>
     <div class="container">
     <h2><i class="fas fa-chart-line"></i> Pipeline Form Input </h2>
@@ -31,7 +31,7 @@
                     <select required name="id_client" class="form-select" aria-label="Default select example" >
                         
                         <?php foreach($dataClient as $row) : ?>
-                            <option value="<?php echo $row->id_client; ?>"<?php if(!empty($dataPipeline) && $dataPipeline->id_client == $row->id_client) echo 'selected'; ?> > <?php echo $row->client_name; ?> </option>
+                            <option value="<?php echo $row->id_client; ?>"<?php if(!empty($dataPipeline) && $dataPipeline->id_client == $row->id_client) echo 'selected'; ?> > <?php echo $row->id_client; ?> </option>
                         <?php endforeach;?>
                         
                     </select>

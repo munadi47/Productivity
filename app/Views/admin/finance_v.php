@@ -26,7 +26,7 @@
         </ol>
         </nav>
 
-    <div class="card shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-out" data-aos-duration="1000" >
+    <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="fade-out" data-aos-duration="1000" >
 
         <div class="card-body">
         <h4> FINANCE  </h4>
@@ -63,7 +63,7 @@
             <?php foreach ($dataFinance as $row) :?>
                 <tr>
                 <td><?php echo $i++; ?></td>
-                <td><?php echo $row->client_name; ?></td>
+                <td><?php echo $row->id_client; ?></td>
                 <td><?php echo $row->invoice_date; ?></td>
                 <td><?php echo $row->invoice_duedate; ?></td>
                 <td>Rp. <?php echo $row->invoice_amount=number_format($row->invoice_amount,0,",","."); ?></td>

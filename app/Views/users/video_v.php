@@ -24,7 +24,7 @@
         <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-video"></i> Video</li>
     </ol>
     </nav>
-    <div class="card shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-out" data-aos-duration="1000" >
+    <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="fade-out" data-aos-duration="1000" >
            
                 <div class="card-body">
                 <h4> VIDEO DELIVERY  </h4>
@@ -85,6 +85,9 @@
                         <td><?php echo $row->editing_date; ?></td>
                         <td><?php echo $row->remark; ?></td>
                         <td>
+                            <a title="Schedule"  href="<?php echo base_url("Video/schedule/".$row->id_video); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
+                            <i class="fa fa-file-contract"></i> 
+                            </a>
                             <a title="Edit"  href="<?php echo base_url("Video/edit/".$row->id_video); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
                             <i class="fa fa-edit"></i> 
                             </a>

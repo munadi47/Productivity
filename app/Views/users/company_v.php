@@ -24,7 +24,7 @@
         <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-building"></i> Company</li>
     </ol>
     </nav>
-    <div class="card shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-out" data-aos-duration="1000" >
+    <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="fade-out" data-aos-duration="1000" >
            
                 <div class="card-body">
                 <h4> COMPANY  </h4>
@@ -96,5 +96,5 @@
         
     
 
-
+    </div>
 </section>

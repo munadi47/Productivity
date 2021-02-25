@@ -16,7 +16,7 @@
                 <select name="id_client" class="form-select" aria-label="Default select example">
                     
                     <?php foreach($dataClient as $row) : ?>
-                        <option value="<?php echo $row->id_client; ?>"<?php if(!empty($dataFinance) && $dataFinance->id_client == $row->id_client) echo 'selected'; ?> > <?php echo $row->client_name; ?> </option>
+                        <option value="<?php echo $row->id_client; ?>"<?php if(!empty($dataFinance) && $dataFinance->id_client == $row->id_client) echo 'selected'; ?> > <?php echo $row->id_client; ?> </option>
                     <?php endforeach;?>
                     
                 </select>
