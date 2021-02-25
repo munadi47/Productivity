@@ -23,9 +23,9 @@
         <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-users"></i> Client</li>
     </ol>
     </nav>
-    <div class="card shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-out" data-aos-duration="1000" >
+    <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="fade-out" data-aos-duration="1000" >
            
-                <div class="card-body">
+                <div class="card-body ">
                 <h4> CLIENT  </h4>
                 
                 <a title="Add data"  href="<?php echo base_url("Client/add/"); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
@@ -44,6 +44,7 @@
                     <tr>
                       
                         <th>CLIENT</th>
+                        <th>BUSINESS TYPE</th>
                         <th>ADDRESS</th>
                         <th>PHONE</th>
                         <th>PIC</th>
@@ -62,7 +63,9 @@
                     
                     <tr>
                         <td><?php echo $row->id_client ?></td>
+                        <td><?php echo $row->sector; ?></td>
                         <td><?php echo $row->address; ?></td>
+                        
                         <td><a class="btn btn-primary" href="tel:<?php echo $row->phone; ?>"><?php echo $row->phone; ?>&nbsp;<i class="fas fa-phone" style="padding-right: 1px;"></i></a></td>
                         <td><?php echo $row->name; ?></td>
                         <td>

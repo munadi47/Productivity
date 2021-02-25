@@ -50,7 +50,7 @@ class Client extends BaseController{
         $data['dataClient'] = $this->clientModel->where($where)->findAll()[0];
         
         echo view('users/header_v');
-        echo view('users/client_form_v',$data);
+        echo view('users/client_edit_form_v',$data);
         echo view ('users/footer_v');
     }
     public function detail($id){
@@ -60,34 +60,39 @@ class Client extends BaseController{
         echo view('users/detail_client_v',$data);
         echo view ('users/footer_v');
     }
+    public function add_type(){
+        
+        
+        echo view('users/header_v');
+        echo view('users/class_form_v');
+        echo view ('users/footer_v');
+    }
+
+
 
     public function save() {
-        
-        $id = $this->request->getPost('id_client');
-
-        if (empty($id)) { //Insert
-           
+ 
             $data = [
+                'id_client'=>$this->request->getPost('id_client'),
                 'address'=>$this->request->getPost('address'),
                 'phone'=>$this->request->getPost('phone'),
                 'nik'=>$this->request->getPost('nik'),
                 'id_class'=>$this->request->getPost('id_class'),
               
             ];
-            $response = $this->clientModel->insert($data);
-            if($response){
+                $this->clientModel->insert($data);
                 return redirect()->to(site_url('Client'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
-            }else{
-                return redirect()->to(site_url('Client'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to save');
-            }
+                
             
             
+        }      
 
-            
-        } else { // Update
+        /*TADI SAMPAI SINI*/     
+        public function update() { // Update
+            $id =  $this->request->getPost('id_client');
             $where = ['id_client'=>$id];
             $data = [
-                'id_client'=>$this->request->getPost('id_client'),
+               
                 'address'=>$this->request->getPost('address'),
                 'phone'=>$this->request->getPost('phone'),
                 'nik'=>$this->request->getPost('nik'),
@@ -96,18 +101,26 @@ class Client extends BaseController{
             ];
          
            
-            $response =  $this->clientModel->update($where, $data);
-            if($response){
-                return redirect()->to(site_url('Client'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
-            }else{
-                return redirect()->to(site_url('Client'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to save');
-            }
+           $this->clientModel->update($where, $data);
+           return redirect()->to(site_url('Client'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
             
             
         }
 
        
-    }
+        public function save_class() {
+ 
+            $data = [
+                'id_class'=>$this->request->getPost('id_class'),
+                'sector'=>$this->request->getPost('sector'),
+              
+            ];
+                $this->classModel->insert($data);
+                return redirect()->to(site_url('Client/add'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
+                
+            
+            
+        }      
 
 
     //delete
@@ -116,9 +129,9 @@ class Client extends BaseController{
 
         $response = $this->clientModel->delete($where);
         if($response){
-            return redirect()->to(site_url('Client'))->with('Success', '<i class="fas fa-save"></i> Data has been deleted');
+            return redirect()->to(site_url('Client'))->with('Success', '<i class="fas fa-trash"></i> Data has been deleted');
         }else{
-            return redirect()->to(site_url('Client'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to delete');
+            return redirect()->to(site_url('Client'))->with('Failed', '<i class="fas fa-exclamation"></i> Data Failed to delete');
         }
        
 

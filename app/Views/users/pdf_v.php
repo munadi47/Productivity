@@ -1,5 +1,6 @@
-<section>
-    <?php if(!empty(session()->getFlashdata('Success'))){ ?>
+
+    <?php
+if(!empty(session()->getFlashdata('Success'))){ ?>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <?php echo session()->getFlashdata('Success');?>
                         <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -24,16 +25,23 @@
         <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-chalkboard-teacher"></i> Consulting</li>
     </ol>
     </nav>
-    <div class="card shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-out" data-aos-duration="1000" >
-           
-                <div class="card-body">
-                <h4> <?php $dataConsul->gantt_chart; ?>  </h4>
-                <embed src="assets/uploads/<?php echo $dataConsul->gantt_chart; ?>" type='application/pdf' width='100%' height='700px'/>
+   
+    <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="fade-out" data-aos-duration="1000" >
+    <section>  
+             
+                <a title="Back" href="<?php echo base_url("Consulting"); ?>" class="btn btn-outline-info btn-md">
+                <i class="fas fa-arrow-left"></i> 
+                </a>
+                <br>    
+                <br>
+                <h4> <?php echo $dataConsul->gantt_chart; ?>  </h4>
+              
                 
-               
-                </div>
+                <iframe src=" <?php echo base_url('/ViewerJS/#../public/assets/uploads/'.$dataConsul->gantt_chart);?>" width='724' height='1024' allowfullscreen webkitallowfullscreen></iframe> 
+       
         
-    
+   
 
 
-</section>
+    </section>
+    </div>

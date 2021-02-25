@@ -1,4 +1,4 @@
-<div class="card shadow-sm p-3 mb-5 bg-white rounded" data-aos="zoom-in" data-aos-duration="1000" >
+<div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
 <section>
     <div class="container">
     <h2><i class="fas fa-chalkboard-teacher"></i> Consulting Form Input </h2>

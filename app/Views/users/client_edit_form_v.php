@@ -1,26 +1,9 @@
-<?php if(!empty(session()->getFlashdata('Success'))){ ?>
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <?php echo session()->getFlashdata('Success');?>
-                        <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                <?php }elseif(!empty(session()->getFlashdata('Failed'))){ ?>
-                    <div class="alert alert-danger">
-                        <?php 
-                            echo session()->getFlashdata('Failed');
-                        ?>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-    <?php
-    }
-    ?>
 <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
 <section>
     <div class="container">
     <h2><i class="fas fa-users"></i> Client Form Input </h2>
     <hr>
-        <form method="POST" action="<?php echo base_url('Client/save'); ?>">
+        <form method="POST" action="<?php echo base_url('Client/update'); ?>">
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Client Name</label>
             <div class="col-sm-10">
@@ -31,7 +14,7 @@
         <br>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Type of business </label>
-            <div class="col-sm-9">
+            <div class="col-sm-10">
                     <select required name="id_class" class="form-select" aria-label="Default select example">
                         
                         <?php foreach($dataClass as $row) : ?>
@@ -39,18 +22,9 @@
                         <?php endforeach;?>
                         
                     </select>
-                <br>
-            </div>
-            <div class="col-sm-1">
-            
-            <a title="Add company business type" href="<?php echo base_url("Client/add_type"); ?>" class="btn btn-outline-info btn-md">
-                <i class="fas fa-plus"></i> 
-            </a>
-           
-         
             </div>
         </div>
-      
+        <br>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Address </label>
             <div class="col-sm-10">
@@ -79,7 +53,6 @@
                         
                     </select>
                 </div>
-                
         </div>
         <br>
        

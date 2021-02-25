@@ -28,7 +28,7 @@
         </nav>
 
 
-    <div class="card shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-out" data-aos-duration="1000" >
+    <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="fade-out" data-aos-duration="1000" >
 
         <div class="card-body">
         <h4> Employee  </h4>
