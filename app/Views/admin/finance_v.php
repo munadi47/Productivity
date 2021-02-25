@@ -78,7 +78,7 @@
                 </td>
 
                 <td>
-                    <a title="Create Invoice" href="<?php echo base_url("Finance/invoice/".$row->id_finance); ?>" class="btn btn-outline-info btn-sm">
+                    <a title="Create Invoice" href="<?php echo base_url("Finance/invoice/".$row->id_finance); ?>" target="__blank" class="btn btn-outline-info btn-sm">
                     <i class="fa fa-file-alt" ></i>
                     </a>
                     <a title="Edit"  href="<?php echo base_url("Finance/edit/".$row->id_finance); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
