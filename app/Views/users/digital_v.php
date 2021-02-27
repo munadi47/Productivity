@@ -45,7 +45,7 @@
                     <tr>
                         <th rowspan="2"> # </th>
                         <th rowspan="2" >TITLE</th>
-                        <th rowspan="2" >ID CLIENT</th>
+                        <th rowspan="2" >CLIENT</th>
                         <th colspan="2"><i class="fa fa-clipboard"></i> Storyboard</th>
                         <th colspan="2"><i class="fa fa-microphone-alt"></i> Voiceover</th>
                         <th colspan="2"><i class="fa fa-magic"></i> Animate</th>
@@ -89,10 +89,11 @@
                         <td><?php echo $row->compile_pic; ?></td>
                         <td><?php echo $row->compile_date; ?></td>
                         <td><?php echo $row->remark; ?></td>
-                        <td>
+                        <td >
+                          
                             <span>
-                                <a title="Download Schedule"  href="<?php echo base_url("Digital/schedule/".$row->id_digital); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
-                                <i class="fa fa-file-alt"></i> 
+                                <a title="Download Report"  href="<?php echo base_url("Digital/schedule/".$row->id_digital); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
+                                <i class="fa fa-file-excel"></i> 
                                 </a>
                                 <a title="Edit"  href="<?php echo base_url("Digital/edit/".$row->id_digital); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
                                 <i class="fa fa-edit"></i> 
@@ -100,7 +101,9 @@
                                 <a title="Delete" href="<?php echo base_url("Digital/delete/".$row->id_digital); ?>" class="btn btn-outline-info btn-sm" onclick="return confirm('Apakah yakin data akan dihapus?');">
                                 <i class="fa fa-trash" ></i> 
                                 </a>
+                                
                             </span>
+                            
                         </td>
                     </tr>
                     

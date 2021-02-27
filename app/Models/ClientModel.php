@@ -37,4 +37,13 @@ class clientModel extends Model
         ->get()->getResultObject(); 
 
     }
+    public function search($keyword){
+        $builder = $this->table('client');
+        $builder->like('id_client',$keyword)
+        ->orLike('category',$keyword)
+        ->orLike('count',$keyword)
+        ->orLike('total_revenue',$keyword)
+        ->orLike('title',$keyword);
+        return $builder;
+    }
 }

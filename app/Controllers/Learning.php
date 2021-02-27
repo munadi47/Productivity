@@ -159,7 +159,7 @@ $i=2; foreach($dataLearning as $row) {
 
 $spreadsheet->setActiveSheetIndex(0)
 ->setCellValue('A'.$i, $row->id_learning)
-->setCellValue('B'.$i, $row->client_name)
+->setCellValue('B'.$i, $row->id_client)
 ->setCellValue('C'.$i, $row->date_deliver)
 ->setCellValue('D'.$i, $row->coach_name)
 ->setCellValue('E'.$i, $row->method)
@@ -193,6 +193,73 @@ $writer->save('php://output');
 exit;
 }
 
+
+
+    // Export ke excel
+    public function exportLearning($id)
+    {
+    $dataLearning = $this->learningModel->exportLearning($id);
+    // Create new Spreadsheet object
+    $spreadsheet = new Spreadsheet();
+    
+    
+    // Set document properties
+    $spreadsheet->getProperties()->setTitle('Office 2007 XLSX Test Document')
+    ->setSubject('Office 2007 XLSX Test Document')
+    ->setDescription('Test document for Office 2007 XLSX, generated using PHP classes.')
+    ->setKeywords('office 2007 openxml php')
+    ->setCategory('Test result file');
+    
+    // Add some data
+    $spreadsheet->setActiveSheetIndex(0)
+    ->setCellValue('A1', 'CLIENT')
+    ->setCellValue('B1', 'DATE DELIVER')
+    ->setCellValue('C1', 'COACH NAME')
+    ->setCellValue('D1', 'METHOD')
+    ->setCellValue('E1', 'CERTIFICATE')
+    ->setCellValue('F1', 'REMARK')
+    
+    
+    ;
+    
+    // Miscellaneous glyphs, UTF-8
+    $i=2; foreach($dataLearning as $row) {
+    
+    $spreadsheet->setActiveSheetIndex(0)
+    ->setCellValue('A'.$i, $row->id_client)
+    ->setCellValue('B'.$i, $row->date_deliver)
+    ->setCellValue('C'.$i, $row->coach_name)
+    ->setCellValue('D'.$i, $row->method)
+    ->setCellValue('E'.$i, $row->certificate)
+    ->setCellValue('F'.$i, $row->remark)
+    ;
+    $i++;
+    }
+    
+    // Rename worksheet
+    $spreadsheet->getActiveSheet()->setTitle('Client Learning'.date('d-m-Y H'));
+    
+    // Set active sheet index to the first sheet, so Excel opens this as the first sheet
+    $spreadsheet->setActiveSheetIndex(0);
+    
+    // Redirect output to a client’s web browser (Xlsx)
+    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    header('Content-Disposition: attachment;filename="Client Learning.xlsx"');
+    header('Cache-Control: max-age=0');
+    // If you're serving to IE 9, then the following may be needed
+    header('Cache-Control: max-age=1');
+    
+    // If you're serving to IE over SSL, then the following may be needed
+    header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+    header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+    header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+    header('Pragma: public'); // HTTP/1.0
+    
+    $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+    $writer->save('php://output');
+    exit;
+    }
+    
 
 
 }

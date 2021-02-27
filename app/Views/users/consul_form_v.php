@@ -1,3 +1,20 @@
+<?php if(!empty(session()->getFlashdata('Success'))){ ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <?php echo session()->getFlashdata('Success');?>
+                        <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php }elseif(!empty(session()->getFlashdata('Failed'))){ ?>
+                    <div class="alert alert-danger">
+                        <?php 
+                            echo session()->getFlashdata('Failed');
+                        ?>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+    <?php
+    }
+    ?>
 <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
 <section>
     <div class="container">

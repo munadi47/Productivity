@@ -36,10 +36,7 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
-    <!-- Filepond -->
-     <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
-   
-
+  
 </head>
 
 <body>

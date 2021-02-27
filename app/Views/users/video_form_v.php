@@ -1,3 +1,20 @@
+<?php if(!empty(session()->getFlashdata('Success'))){ ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <?php echo session()->getFlashdata('Success');?>
+                        <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php }elseif(!empty(session()->getFlashdata('Failed'))){ ?>
+                    <div class="alert alert-danger">
+                        <?php 
+                            echo session()->getFlashdata('Failed');
+                        ?>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+    <?php
+    }
+    ?>
 <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
 <section>
     <div class="container">
@@ -25,33 +42,30 @@
                 </div>
         </div>
         <div class="form-group row">
-            <label hidden class="col-sm-2 col-form-label">Client</label>
-            <div class="col-sm-10">
-            <?php foreach($dataPipeline as $row) : ?>
-                <input type="hidden" id="id_SalesPipeline" name="id_SalesPipeline" value="<?php echo $row->id_SalesPipeline; ?><?php if(!empty($dataVideo) && $dataVideo->id_SalesPipeline == $row->id_SalesPipeline) echo $row->client_name; ?>"> 
-            <?php endforeach;?>
-            </div>
-        </div>
-        
-        <div class="form-group row">
             <label class="col-sm-2 col-form-label">Storyboard</label>
-            <div class="col-sm-10">
-            <input type="text" placeholder="PIC" id="storyboard_pic" name="storyboard_pic" value="<?php if(!empty($dataVideo)) echo $dataVideo->storyboard_pic; ?>"> 
-            <input type="date" id="storyboard_date" name="storyboard_date" value="<?php if(!empty($dataVideo)) echo $dataVideo->storyboard_date; ?>"> 
+            <div class="col-sm-7">
+            <input class="form-control" type="text" placeholder="PIC" id="storyboard_pic" name="storyboard_pic" value="<?php if(!empty($dataVideo)) echo $dataVideo->storyboard_pic; ?>"> 
+            </div>
+            <div class="col-sm-3">
+            <input  class="form-control"  type="date" id="storyboard_date" name="storyboard_date" value="<?php if(!empty($dataVideo)) echo $dataVideo->storyboard_date; ?>"> 
             </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Shooting</label>
-            <div class="col-sm-10">
-            <input type="text" placeholder="PIC" id="shooting_pic" name="shooting_pic" value="<?php if(!empty($dataVideo)) echo $dataVideo->shooting_pic; ?>"> 
-            <input type="date" id="shooting_date" name="shooting_date" value="<?php if(!empty($dataVideo)) echo $dataVideo->shooting_date; ?>"> 
+            <div class="col-sm-7">
+            <input  class="form-control" type="text" placeholder="PIC" id="shooting_pic" name="shooting_pic" value="<?php if(!empty($dataVideo)) echo $dataVideo->shooting_pic; ?>"> 
+            </div>
+            <div class="col-sm-3">
+            <input  class="form-control" type="date" id="shooting_date" name="shooting_date" value="<?php if(!empty($dataVideo)) echo $dataVideo->shooting_date; ?>"> 
             </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Editing</label>
-            <div class="col-sm-10">
-            <input type="text" placeholder="PIC" id="editing_pic" name="editing_pic" value="<?php if(!empty($dataVideo)) echo $dataVideo->editing_pic; ?>"> 
-            <input type="date" id="editing_date" name="editing_date" value="<?php if(!empty($dataVideo)) echo $dataVideo->editing_date; ?>"> 
+            <div class="col-sm-7">
+            <input  class="form-control" type="text" placeholder="PIC" id="editing_pic" name="editing_pic" value="<?php if(!empty($dataVideo)) echo $dataVideo->editing_pic; ?>"> 
+            </div>
+            <div class="col-sm-3">
+            <input  class="form-control" type="date" id="editing_date" name="editing_date" value="<?php if(!empty($dataVideo)) echo $dataVideo->editing_date; ?>"> 
             </div>
         </div>
         <div class="form-group row">

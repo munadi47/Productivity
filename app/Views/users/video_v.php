@@ -45,7 +45,7 @@
                     <tr>
                         <th rowspan="2"> # </th>
                         <th rowspan="2" >TITLE</th>
-                        <th rowspan="2" >ID CLIENT</th>
+                        <th rowspan="2" >CLIENT</th>
                         <th colspan="2"><i class="fa fa-clipboard"></i> Storyboard</th>
                         <th colspan="2"><i class="fa fa-video"></i> Shooting</th>
                         <th colspan="2"><i class="fa fa-user-edit"></i> Editing</th>
@@ -85,8 +85,8 @@
                         <td><?php echo $row->editing_date; ?></td>
                         <td><?php echo $row->remark; ?></td>
                         <td>
-                            <a title="Schedule"  href="<?php echo base_url("Video/schedule/".$row->id_video); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
-                            <i class="fa fa-file-contract"></i> 
+                            <a title="Download Report"  href="<?php echo base_url("Video/exportSchedule/".$row->id_video); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
+                            <i class="fa fa-file-excel"></i> 
                             </a>
                             <a title="Edit"  href="<?php echo base_url("Video/edit/".$row->id_video); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
                             <i class="fa fa-edit"></i> 

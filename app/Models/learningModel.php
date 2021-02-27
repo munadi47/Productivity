@@ -28,4 +28,12 @@ class learningModel extends Model
          ->join('sales_pipeline', 'sales_pipeline.id_SalesPipeline=learning.id_SalesPipeline')
          ->get()->getResultObject(); 
     }
+    
+    public function exportLearning($id)
+    {
+         return $this->db->table('learning')
+         ->join('sales_pipeline', 'sales_pipeline.id_SalesPipeline=learning.id_SalesPipeline')
+         ->where('learning.id_learning',$id)
+         ->get()->getResultObject(); 
+    }
 }
