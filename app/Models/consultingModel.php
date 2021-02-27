@@ -37,6 +37,8 @@ class consultingModel extends Model
          ->where('consulting.id_consulting',$id)
          ->get()->getResultObject(); 
     }
+
+    
    
     
    

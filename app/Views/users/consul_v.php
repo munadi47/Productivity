@@ -36,6 +36,9 @@
                 <a title="Export data to excel" href="<?php echo base_url("Consulting/export/"); ?>" class="btn btn-outline-info btn-sm">
                 <i class="fas fa-file-excel"></i> 
                 </a>
+                <a title="Make Gantt Chart"  href="<?php echo base_url(""); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
+                <i class="fa fa-chart-bar"></i> 
+                </a>
                
                 <br>
                 <br>
@@ -80,6 +83,7 @@
                             <a title="Delete" href="<?php echo base_url("Consulting/delete/".$row->id_consulting); ?>" class="btn btn-outline-info btn-sm" onclick="return confirm('Apakah yakin data akan dihapus?');">
                             <i class="fa fa-trash" ></i> 
                             </a>
+                      
                         </td>
                     </tr>
                     

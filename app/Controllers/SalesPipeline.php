@@ -34,6 +34,11 @@ class SalesPipeline extends BaseController{
         $session = session();
     
         $data['dataPipeline'] = $this->sales_pipelineModel->JoinPipeline();
+        $status = 'closing';
+        $data['countClosing'] = $this->sales_pipelineModel->closing();
+        $data['countProposal'] = $this->sales_pipelineModel->proposal();
+        $data['countMeeting'] = $this->sales_pipelineModel->meeting();
+      
         echo view ('users/header_v');
         echo view ('users/sp_v',$data);
         echo view ('users/footer_v');
