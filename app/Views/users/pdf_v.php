@@ -34,7 +34,9 @@ if(!empty(session()->getFlashdata('Success'))){ ?>
                 </a>
                 <br>    
                 <br>
-                <h4><strong> <?php echo $dataConsul->gantt_chart; ?></strong><br>
+                <h1><strong> <?php echo $dataConsul->project_name; ?></strong><br>
+              </h1>
+                <h4><?php echo $dataConsul->gantt_chart; ?><br>
               </h4>
               
                 <embed src="<?php echo base_url('assets/uploads/'.$dataConsul->gantt_chart); ?>" type="application/pdf" width="100%" height="800px"></embed>

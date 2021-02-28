@@ -61,7 +61,7 @@ class Consulting extends BaseController{
         echo view('users/pdf_v',$data);
         echo view ('users/footer_v');
     }
-
+    
     
 
     public function save() {
@@ -108,9 +108,9 @@ class Consulting extends BaseController{
                     'max_size[gantt_chart,5000]',
                 ]
             ]);
-            $gantt_chart = $this->request->getFile('gantt_chart');
+          
             
-            if (!$validation && !empty($gantt_chart)){
+            if (!$validation){
                 return redirect()->to(site_url('Consulting'))->with('Failed', '<i class="fas fa-exclamation"></i> Plese Input Right File or Upload file');
               
             
