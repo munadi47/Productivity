@@ -132,14 +132,6 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Password</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo $row->password; ?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
                                                 <label>Status</label>
                                             </div>
                                             <div class="col-md-6">
