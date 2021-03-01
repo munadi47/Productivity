@@ -17,52 +17,70 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="css/style_login.css">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/style_login.css');?>">
     <!------ Include the above in your HEAD tag ---------->
     
     <body>
         <div id="login">
             
-                <img   src="img/LOGO IDE.png" width="114" height="77" class="tengah" alt="">
+                <img src="<?php echo base_url('assets/img/LOGO IDE.png'); ?>" width="114" height="77" class="tengah" alt="">
                 
-              
             <div class="container">
-                <div data-aos="fade-up"
-                data-aos-offset="200"
-                data-aos-delay="50"
-                data-aos-duration="1000"
-                data-aos-easing="ease-in-out"
-                data-aos-mirror="true"
-                data-aos-once="false"
-                data-aos-anchor-placement="top-center"
-                id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-row" class="row justify-content-center align-items-center">
                     <div id="login-column" class="col-md-6">
                         <div id="login-box" class="col-md-12">
-                            <form id="login-form" class="form" action="" method="post">
+                            <form id="login-form" class="form" action="Auth/login" method="post">
+                            <?php if(!empty(session()->getFlashdata('Success'))){ ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <?php echo session()->getFlashdata('Success');?>
+                                    <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                <?php }elseif(!empty(session()->getFlashdata('Failed'))){ ?>
+                                    <div class="alert alert-danger">
+                                        <?php 
+                                            echo session()->getFlashdata('Failed');
+                                        ?>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                <?php
+                                }
+                                ?>                         
+
                                 <h3 class="text-center text-info"><i class="fas fa-sign-in-alt"></i> Login</h3>
                                 <div class="form-group">
                                     <label for="username" class="text-info"><i class="fas fa-envelope"></i> Email:</label><br>
-                                    <input type="text" name="username" id="username" class="form-control" alt="username"  placeholder="user@ide.learning.co.id" required>
+                                    <input type="text" name="email" id="email" class="form-control" alt="email"  placeholder="user@ide.learning.co.id" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="password" class="text-info"><i class="fas fa-key"></i> Password:</label><br>
-                                    <input type="text" name="password" id="password" class="form-control" alt="password"  placeholder="********" required>
+                                    <input type="password" name="password" id="password" class="form-control" alt="password"  placeholder="your password" required>
+                                    <input type="checkbox" onclick="myFunction()"> Show Password    
                                 </div>
                                 <div class="form-group">
                                    
                                     <input type="submit" name="submit" class="btn btn-info btn-md" value="Submit">
                                 </div>
-                               
                             </form>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+        
         <script>
-          AOS.init();
+        function myFunction() {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+            } 
         </script>
+
     </body>
     
     

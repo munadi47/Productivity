@@ -183,7 +183,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="login_v.html"> 
+                                <a class="nav-link" href="<?php echo site_url('Auth/logout'); ?>"> 
                                     <button type="button" id="sidebarCollapse" class="btn btn-danger">
                                         <i class="fas fa-sign-out-alt"></i> Log Out
                                   
@@ -221,9 +221,10 @@
                                                         </div>
                                                     </div>
                                                     <div class="userData ml-3">
-                                                        <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><a href="javascript:void(0);">Some Name</a></h2>
-                                                        <h6 class="d-block"><a href="javascript:void(0)"></a> Video Editor</h6>
-                                                    
+                                                        <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><a href="javascript:void(0);"><?= session()->get('name') ?></a></h2>
+                                                        <h6 class="d-block" style="font-size: 1.5rem; font-weight: "><a href="javascript:void(0);"><?= session()->get('level') ?></a></h6>
+
+                                                      
                                                     <div class="ml-auto">
                                                         <input type="button" class="btn btn-primary d-none" id="btnDiscard" value="Discard Changes" />
                                                     </div>
@@ -236,9 +237,7 @@
                                                         <li class="nav-item">
                                                             <a class="nav-link active" id="basicInfo-tab" data-toggle="tab" href="#basicInfo" role="tab" aria-controls="basicInfo" aria-selected="true">Basic Info</a>
                                                         </li>
-                                                        <li class="nav-item">
-                                                            <a class="nav-link" id="connectedServices-tab" data-toggle="tab" href="#connectedServices" role="tab" aria-controls="connectedServices" aria-selected="false">Connected Services</a>
-                                                        </li>
+                                                        
                                                     </ul>
                                                     <div class="tab-content ml-1" id="myTabContent">
                                                         <div class="tab-pane fade show active" id="basicInfo" role="tabpanel" aria-labelledby="basicInfo-tab">
@@ -249,7 +248,7 @@
                                                                     <label style="font-weight:bold;">Address</label>
                                                                 </div>
                                                                 <div class="col-md-8 col-6">
-                                                                    Jakarta Utara
+                                                                <?= session()->get('address') ?>
                                                                 </div>
                                                             </div>
                                                             <hr />
@@ -259,7 +258,48 @@
                                                                     <label style="font-weight:bold;">Birth Date</label>
                                                                 </div>
                                                                 <div class="col-md-8 col-6">
-                                                                    March 22, 1994.
+                                                                <?= session()->get('birthday') ?>
+                                                                </div>
+                                                            </div>
+                                                            <hr />
+
+                                                            <div class="row">
+                                                                <div class="col-sm-3 col-md-2 col-5">
+                                                                    <label style="font-weight:bold;">Email</label>
+                                                                </div>
+                                                                <div class="col-md-8 col-6">
+                                                                <?= session()->get('email') ?>
+                                                                </div>
+                                                            </div>
+                                                            <hr />
+
+                                                         
+
+                                                            <div class="row">
+                                                                <div class="col-sm-3 col-md-2 col-5">
+                                                                    <label style="font-weight:bold;">Phone</label>
+                                                                </div>
+                                                                <div class="col-md-8 col-6">
+                                                                <?= session()->get('phone1') ?>
+                                                                </div>
+                                                            </div>
+                                                            <hr />
+
+                                                            <div class="row">
+                                                                <div class="col-sm-3 col-md-2 col-5">
+                                                                    <label style="font-weight:bold;">Phone2</label>
+                                                                </div>
+                                                                <div class="col-md-8 col-6">
+                                                                <?= session()->get('phone2') ?>
+                                                                </div>
+                                                            </div>
+                                                            <hr />
+                                                            <div class="row">
+                                                                <div class="col-sm-3 col-md-2 col-5">
+                                                                    <label style="font-weight:bold;">Status</label>
+                                                                </div>
+                                                                <div class="col-md-8 col-6">
+                                                                <?= session()->get('id_eStatus') ?>
                                                                 </div>
                                                             </div>
                                                             <hr />
