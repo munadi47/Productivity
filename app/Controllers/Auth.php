@@ -100,14 +100,14 @@ class Auth extends BaseController{
         );
         $session->set($data);
         //var_dump($data);
-        return redirect()->to('/Client')->with('Failed', '<i class="fas fa-exclamation"></i> Sucsess Login');
+        return redirect()->to('/Client')->with('Success', '<i class="fas fa-exclamation"></i> Sucsess Login');
     }
 
     public function logout()
     {
         $session = session();
         $session->destroy();
-        return redirect()->to('/login')->with('Success', '<i class="fas fa-exclamination"></i> Logout Sucsess');
+        return redirect()->to('/login')->with('Success', '<i class="fas fa-exclamation"></i> Logout Sucsess');
 
     }
 
