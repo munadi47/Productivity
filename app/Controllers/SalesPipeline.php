@@ -27,6 +27,7 @@ class SalesPipeline extends BaseController{
         $this->learningModel   = new \App\Models\learningModel();
         $this->consultingModel = new \App\Models\consultingModel();
         $this->digital_contentModel = new \App\Models\digital_contentModel();
+        $this->db = \Config\Database::connect();
 
     }
 
@@ -90,7 +91,7 @@ class SalesPipeline extends BaseController{
             $this->sales_pipelineModel->insert($data);
             $category = $this->request->getPost('category');
             $status = $this->request->getPost('status');
-            if($status=='closing' && $category=='video'){
+            if($status=='closing' && $category=='video' ){
                
                 return redirect()->to(site_url('Video/add/'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
      
@@ -129,23 +130,56 @@ class SalesPipeline extends BaseController{
                 'status'=>$this->request->getPost('status'), 
             ];
 
+           
+
             $this->sales_pipelineModel->update($where,$data);
             $category = $this->request->getPost('category');
             $status = $this->request->getPost('status');
-            if($status=='closing' && $category=='video'){
-               
-                return redirect()->to(site_url('Video/add/'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
-     
+            
+
+            
+            $statVid = $this->videoModel->where('id_SalesPipeline',$id)->get();
+            $statDigital = $this->digital_contentModel->where('id_SalesPipeline',$id)->get();
+            $statLearn = $this->learningModel->where('id_SalesPipeline',$id)->get();
+            $statConsul = $this->consultingModel->where('id_SalesPipeline',$id)->get();
+
+                       
+                       
+           
+            
+            if($status=='closing' && $category=='video'  ){
+                    if(empty($statVid)){
+                        return redirect()->to(site_url('Video/add/'))->with('Warning', '<i class="fas fa-check"></i>  your pipeline has successfully saved and entered the closing stage, please input this delivery data ');
+                    }else{
+                        return redirect()->to(site_url('SalesPipeline'))->with('Success', '<i class="fas fa-save"></i> Data has been updated');
+                    }
+                   
+          
+                
             }elseif($status=='closing' && $category=='digital content'){
+                if(empty( $statDigital)){
+                    return redirect()->to(site_url('Digital/add/'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
+                }else{
+                    return redirect()->to(site_url('SalesPipeline'))->with('Success', '<i class="fas fa-save"></i> Data has been updated');
+                }
+                   
                
-                return redirect()->to(site_url('Digital/add/'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
+               
 
             }elseif($status=='closing' && $category=='learning'){
-                
-                return redirect()->to(site_url('Learning/add/'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
+                if(empty( $statLearn)){
+                    return redirect()->to(site_url('Digital/add/'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
+                }else{
+                    return redirect()->to(site_url('SalesPipeline'))->with('Success', '<i class="fas fa-save"></i> Data has been updated');
+                }
+        
             }elseif($status=='closing' && $category=='consulting'){
-                
-                return redirect()->to(site_url('Consulting/add/'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
+                if(empty( $statConsul)){
+                    return redirect()->to(site_url('Consulting/add/'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
+                }else{
+                    return redirect()->to(site_url('SalesPipeline'))->with('Success', '<i class="fas fa-save"></i> Data has been updated');
+                }
+               
             }else{
                 return redirect()->to(site_url('SalesPipeline'))->with('Success', '<i class="fas fa-save"></i> Data has been updated');
             }

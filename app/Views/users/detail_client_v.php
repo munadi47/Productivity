@@ -21,14 +21,18 @@
                 <br>
 
                 <?php foreach ($dataClient as $row) :?>
-                    <div class="notice notice-info notice-lg" id="demo">
-                    <pre>
-    <strong style="font-size: 21px;"> <?php echo $row->title; ?> </strong><br>
-        Category    :&nbsp;   <?php echo $row->category; ?> <br>
-        Count       :&nbsp;   <?php echo $row->count; ?> <br>
-        Total Price :&nbsp;   <?php echo $row->total_revenue; ?> <br>
-        Status      :&nbsp;  <?php if($row->status=='closing'){
-                    ?> <span class="badge badge-danger"><?php
+               
+                <!-- Timeline -->
+                <ul class="timeline">
+                    <li class="timeline-item bg-white rounded ml-3 p-4 shadow  ">
+                        <div class="timeline-arrow"></div>
+                        <h2 class="h5 mb-0"><?php echo $row->title; ?></h2><br>
+                        <pre>
+        Category     :&nbsp;   <?php echo $row->category; ?> <br>
+        Count        :&nbsp;   <?php echo $row->count; ?> <br>
+        Total Price  :&nbsp;   Rp. <?php echo $row->potential_revenue=number_format($row->potential_revenue,0,",","."); ?> <br>
+        Status       :&nbsp;  <?php if($row->status=='closing'){
+                                ?> <span class="badge badge-danger"><?php
                            
                                 }  elseif($row->status=='proposal'){
                                     ?><span class="badge badge-warning"><?php
@@ -37,33 +41,35 @@
                                     ?><span class="badge badge-success"><?php
                                 }
                                 echo $row->status; ?>
-                    </pre>
-                    </div>
-                   <br>
-                    <?php endforeach; ?>
+                        </pre>
+                        
+                    </li>
+                  
+                </ul><!-- End -->
+
+            <?php endforeach; ?>
                     
-                <?php
-                if (empty($dataClient)) {
-                ?>
-                    <div class="card">
-                        <div class="card-body">
-                            No data
+                    <?php
+                    if (empty($dataClient)) {
+                    ?>
+                        <div class="card">
+                            <div class="card-body">
+                                No data
+                            </div>
                         </div>
-                    </div>
+    
+                    <?php
+    
+                    }
+                    
+                    ?>
 
-                <?php
-
-                }
-                
-                ?>
-
-                <script>
                     
 
                
 
 
-                            </script>
+                          
                 
                 <!--<div style="float: right">
                 <?php/* echo $pager->links('dataClient', 'bootstrap_pagination'); */?>
