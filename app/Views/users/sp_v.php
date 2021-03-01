@@ -53,11 +53,11 @@
                             enabled: false
                         },
                         series: [{
-                            name: 'Unique users',
+                            name: 'Client',
                             data: [
-                                ['Meeting', 15654],
-                                ['Proposal', 4064],
-                                ['Closing', 1000]
+                                ['Meeting', <?php echo $countMeeting; ?> ],
+                                ['Proposal', <?php echo $countProposal; ?>],
+                                ['Closing',  <?php echo $countClosing; ?>]
                             ]
                         }],
 

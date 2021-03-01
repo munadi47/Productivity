@@ -14,12 +14,14 @@
                 <a title="Back" href="<?php echo base_url("Client"); ?>" class="btn btn-outline-info btn-md">
                 <i class="fas fa-arrow-left"></i> 
                 </a>
+              
+                
                 
                 <br>
                 <br>
 
                 <?php foreach ($dataClient as $row) :?>
-                    <div class="notice notice-info notice-lg">
+                    <div class="notice notice-info notice-lg" id="demo">
                     <pre>
     <strong style="font-size: 21px;"> <?php echo $row->title; ?> </strong><br>
         Category    :&nbsp;   <?php echo $row->category; ?> <br>
@@ -54,9 +56,19 @@
                 }
                 
                 ?>
-                </tbody>
-            </table>
-                </span>
+
+                <script>
+                    
+
+               
+
+
+                            </script>
+                
+                <!--<div style="float: right">
+                <?php/* echo $pager->links('dataClient', 'bootstrap_pagination'); */?>
+                </div>-->
+           
             </div>
             <br>
 

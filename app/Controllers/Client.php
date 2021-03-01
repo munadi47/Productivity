@@ -30,6 +30,8 @@ class Client extends BaseController{
         echo view ('users/header_v');
         echo view ('users/client_v',$data);
         echo view ('users/footer_v');
+
+
         
     }
 
@@ -56,6 +58,8 @@ class Client extends BaseController{
     public function detail($id){
         
         $data['dataClient'] = $this->clientModel->getDetail($id);
+
+
         echo view('users/header_v');
         echo view('users/detail_client_v',$data);
         echo view ('users/footer_v');
@@ -219,13 +223,13 @@ exit;
   
   // Add some data
   $spreadsheet->setActiveSheetIndex(0)
-  ->setCellValue('A1', 'NO')
-  ->setCellValue('B1', 'CLIENT NAME')
-  ->setCellValue('D1', 'CATEGORY PRODUCT')
-  ->setCellValue('E1', 'COUNT')
-  ->setCellValue('F1', 'POTENTIAL REVENUE')
-  ->setCellValue('G1', 'TOTAL REVENUE')
-  ->setCellValue('H1', 'STATUS')
+  ->setCellValue('A1', 'CLIENT')
+  ->setCellValue('B1', 'TITLE')
+  ->setCellValue('C1', 'CATEGORY PRODUCT')
+  ->setCellValue('D1', 'COUNT')
+  ->setCellValue('E1', 'POTENTIAL REVENUE')
+  ->setCellValue('F1', 'TOTAL REVENUE')
+  ->setCellValue('G1', 'STATUS')
   
   
   ;
@@ -235,13 +239,12 @@ exit;
   
   $spreadsheet->setActiveSheetIndex(0)
   ->setCellValue('A'.$i, $row->id_client)
-  ->setCellValue('B'.$i, $row->client_name)
-  ->setCellValue('C'.$i, $row->title)
-  ->setCellValue('D'.$i, $row->category)
-  ->setCellValue('E'.$i, $row->count)
-  ->setCellValue('F'.$i, $row->potential_revenue)
-  ->setCellValue('G'.$i, $row->total_revenue)
-  ->setCellValue('I'.$i, $row->status)
+  ->setCellValue('B'.$i, $row->title)
+  ->setCellValue('C'.$i, $row->category)
+  ->setCellValue('D'.$i, $row->count)
+  ->setCellValue('E'.$i, $row->potential_revenue)
+  ->setCellValue('F'.$i, $row->total_revenue)
+  ->setCellValue('G'.$i, $row->status)
   
   ;
   $i++;

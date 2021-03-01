@@ -45,7 +45,7 @@
                     <tr>
                         <th > # </th>
                         <th >TITLE</th>
-                        <th >ID CLIENT</th>
+                        <th >CLIENT NAME</th>
                         <th >DELIVER DATE</th>
                         <th >COACH NAME</th>
                         <th >METHOD</th>
@@ -81,7 +81,9 @@
                         <td><?php echo $row->certificate; ?></td>
                         <td><?php echo $row->remark; ?></td>
                         <td>
-                            
+                            <a title="Report Client Learning"  href="<?php echo base_url("Learning/exportLearning/".$row->id_learning); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
+                            <i class="fa fa-edit"></i> 
+                            </a>
                             <a title="Edit"  href="<?php echo base_url("Learning/edit/".$row->id_learning); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
                             <i class="fa fa-edit"></i> 
                             </a>

@@ -1,3 +1,20 @@
+<?php if(!empty(session()->getFlashdata('Success'))){ ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <?php echo session()->getFlashdata('Success');?>
+                        <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php }elseif(!empty(session()->getFlashdata('Failed'))){ ?>
+                    <div class="alert alert-danger">
+                        <?php 
+                            echo session()->getFlashdata('Failed');
+                        ?>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+    <?php
+    }
+    ?>
 <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
 <section>
     <div class="container">
@@ -27,30 +44,38 @@
         
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Storyboard</label>
-            <div class="col-sm-10">
-            <input type="text" placeholder="PIC" id="storyboard_pic" name="storyboard_pic" value="<?php if(!empty($dataDigital)) echo $dataDigital->storyboard_pic; ?>"> 
-            <input type="date" id="storyboard_date" name="storyboard_date" value="<?php if(!empty($dataDigital)) echo $dataDigital->storyboard_date; ?>"> 
+            <div class="col-sm-7">
+            <input class="form-control" type="text" placeholder="PIC" id="storyboard_pic" name="storyboard_pic" value="<?php if(!empty($dataDigital)) echo $dataDigital->storyboard_pic; ?>"> 
+            </div>
+            <div class="col-sm-3">
+            <input  class="form-control" type="date" id="storyboard_date" name="storyboard_date" value="<?php if(!empty($dataDigital)) echo $dataDigital->storyboard_date; ?>"> 
             </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Voiceover</label>
-            <div class="col-sm-10">
-            <input type="text" placeholder="PIC" id="voiceover_pic" name="voiceover_pic" value="<?php if(!empty($dataDigital)) echo $dataDigital->voiceover_pic; ?>"> 
-            <input type="date" id="voiceover_date" name="voiceover_date" value="<?php if(!empty($dataDigital)) echo $dataDigital->voiceover_date; ?>"> 
+            <div class="col-sm-7">
+            <input  class="form-control" type="text" placeholder="PIC" id="voiceover_pic" name="voiceover_pic" value="<?php if(!empty($dataDigital)) echo $dataDigital->voiceover_pic; ?>"> 
+            </div>
+            <div class="col-sm-3">
+            <input  class="form-control" type="date" id="voiceover_date" name="voiceover_date" value="<?php if(!empty($dataDigital)) echo $dataDigital->voiceover_date; ?>"> 
             </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Animate</label>
-            <div class="col-sm-10">
-            <input type="text" placeholder="PIC" id="animate_pic" name="animate_pic" value="<?php if(!empty($dataDigital)) echo $dataDigital->animate_pic; ?>"> 
-            <input type="date" id="animate_date" name="animate_date" value="<?php if(!empty($dataDigital)) echo $dataDigital->animate_date; ?>"> 
+            <div class="col-sm-7">
+            <input  class="form-control" type="text" placeholder="PIC" id="animate_pic" name="animate_pic" value="<?php if(!empty($dataDigital)) echo $dataDigital->animate_pic; ?>"> 
+            </div>
+            <div class="col-sm-3">
+            <input  class="form-control" type="date" id="animate_date" name="animate_date" value="<?php if(!empty($dataDigital)) echo $dataDigital->animate_date; ?>"> 
             </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Compile</label>
-            <div class="col-sm-10">
-            <input type="text" placeholder="PIC" id="compile_pic" name="compile_pic" value="<?php if(!empty($dataDigital)) echo $dataDigital->compile_pic; ?>"> 
-            <input type="date" id="compile_date" name="compile_date" value="<?php if(!empty($dataDigital)) echo $dataDigital->compile_date; ?>"> 
+            <div class="col-sm-7">
+            <input  class="form-control" type="text" placeholder="PIC" id="compile_pic" name="compile_pic" value="<?php if(!empty($dataDigital)) echo $dataDigital->compile_pic; ?>"> 
+            </div>
+            <div class="col-sm-3">
+            <input  class="form-control" type="date" id="compile_date" name="compile_date" value="<?php if(!empty($dataDigital)) echo $dataDigital->compile_date; ?>"> 
             </div>
         </div>
         <div class="form-group row">

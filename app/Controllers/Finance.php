@@ -136,7 +136,7 @@ class Finance extends BaseController{
 
         // output the HTML content
         $pdf->writeHTML($html, true, false, true, false, '');
-
+        
         $this->response->setContentType('application/pdf');
         //Close and output PDF document
         $pdf->Output('example_001.pdf', 'I');

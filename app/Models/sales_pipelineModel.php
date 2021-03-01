@@ -30,4 +30,29 @@ class sales_pipelineModel extends Model
          ->join('product', 'product.id_product=sales_pipeline.id_product')
          ->get()->getResultObject(); 
     }
+    public function closing()
+    {
+         return $this->db->table('sales_pipeline')
+         ->where('sales_pipeline.status','closing')
+         ->countAllResults();
+         
+         
+    }
+    public function proposal()
+    {
+         return $this->db->table('sales_pipeline')
+         ->where('sales_pipeline.status','proposal')
+         ->countAllResults();
+         
+         
+    }
+    public function meeting()
+    {
+         return $this->db->table('sales_pipeline')
+         ->where('sales_pipeline.status','meeting')
+         ->countAllResults();
+         
+         
+    }
+
 }

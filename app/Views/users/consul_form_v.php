@@ -1,3 +1,20 @@
+<?php if(!empty(session()->getFlashdata('Success'))){ ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <?php echo session()->getFlashdata('Success');?>
+                        <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php }elseif(!empty(session()->getFlashdata('Failed'))){ ?>
+                    <div class="alert alert-danger">
+                        <?php 
+                            echo session()->getFlashdata('Failed');
+                        ?>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+    <?php
+    }
+    ?>
 <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
 <section>
     <div class="container">
@@ -41,7 +58,7 @@
         <div class="form-group row">
             <label  class="col-sm-2 col-form-label">Gantt chart Attachment </label>
             <div class="col-sm-10">
-            <input required class="form-control" type="file" id="gantt_chart" name="gantt_chart" value="<?php if(!empty($dataConsul)) echo $dataConsul->gantt_chart; ?>">
+            <input required class="form-control" type="file" id="gantt_chart" name="gantt_chart" value="<?php if(!empty($dataConsul)) echo base_url('assets/uploads/'.$dataConsul->gantt_chart); ?>">
             </div>
         </div>
         

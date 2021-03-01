@@ -49,8 +49,8 @@
 		<p>
 			Pembeli : <?php echo $row->id_client; ?><br>
 			Alamat : <?php echo $row->id_client; ?><br>
-			Transaksi No :<?php echo $row->id_client; ?><br>
-			Tanggal : <?php echo $row->id_client; ?>
+			Transaksi No :
+			Tanggal : 
             
             <?php echo date('Y-m-d', strtotime($row->invoice_date)) ?>
 		

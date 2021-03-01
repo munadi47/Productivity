@@ -20,7 +20,7 @@
             }
         ?>
 
-        <nav aria-label="breadcrumb shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-out" data-aos-duration="1000">
+        <nav aria-label="breadcrumb shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="fade-out" data-aos-duration="1000">
         <ol class="breadcrumb">
             <li class="breadcrumb-item" aria-current="page"><i class="fas fa-table"></i> Company Data</li>
             <li class="breadcrumb-item" aria-current="page"><i class="fas fa-users"></i> Employee</li>

@@ -23,7 +23,10 @@ class SalesPipeline extends BaseController{
         $this->employeeModel = new \App\Models\employeeModel();
         $this->clientModel = new \App\Models\clientModel();
         $this->sales_pipelineModel = new \App\Models\sales_pipelineModel();
-
+        $this->videoModel   = new \App\Models\videoModel();
+        $this->learningModel   = new \App\Models\learningModel();
+        $this->consultingModel = new \App\Models\consultingModel();
+        $this->digital_contentModel = new \App\Models\digital_contentModel();
 
     }
 
@@ -31,6 +34,11 @@ class SalesPipeline extends BaseController{
         $session = session();
     
         $data['dataPipeline'] = $this->sales_pipelineModel->JoinPipeline();
+        $status = 'closing';
+        $data['countClosing'] = $this->sales_pipelineModel->closing();
+        $data['countProposal'] = $this->sales_pipelineModel->proposal();
+        $data['countMeeting'] = $this->sales_pipelineModel->meeting();
+      
         echo view ('users/header_v');
         echo view ('users/sp_v',$data);
         echo view ('users/footer_v');
@@ -79,37 +87,30 @@ class SalesPipeline extends BaseController{
                 'total_revenue'=>$this->request->getPost('total_revenue'),
                 'status'=>$this->request->getPost('status'), 
             ];
-            
-            $response = $this->sales_pipelineModel->insert($data);
-            if($response){
-                 /* JIKA CLOSING MAKA DATA TITLE AKAN INSERT KE DELIVERY TABEL
-                $data = [
-                'status'=>$this->request->getPost('status')
-                'category'=>$this->request->getPost('category')
-                ];
-                if ($data['status']=='closing'){
-                    $data = [
-                        'id_SalesPipeline'=>$this->request->getPost('id_SalesPipeline'),
-                    ];
-                    if ($data['category']=='video'){
-                        $this->videoModel->insert($data);
+            $this->sales_pipelineModel->insert($data);
+            $category = $this->request->getPost('category');
+            $status = $this->request->getPost('status');
+            if($status=='closing' && $category=='video'){
+               
+                return redirect()->to(site_url('Video/add/'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
+     
+            }elseif($status=='closing' && $category=='digital content'){
+               
+                return redirect()->to(site_url('Digital/add/'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
 
-                    }elseif($data['category']=='digital content'){
-                         $this->digital_contentModel->insert($data);
-                    
-                    }elseif($data['category']=='learning'){
-                         $this->learningModel->insert($data);
-                    }else{
-                        $this->consultingModel->insert($data);
-                    }
-                }
-                 return redirect()->to(site_url('SalesPipeline'))->with('Warning', '<i class="fas fa-exclamation"></i> Please Check Delivery Menu For Update Data');
-                */
-                return redirect()->to(site_url('SalesPipeline'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
+            }elseif($status=='closing' && $category=='learning'){
                 
+                return redirect()->to(site_url('Learning/add/'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
+            }elseif($status=='closing' && $category=='consulting'){
+                
+                return redirect()->to(site_url('Consulting/add/'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
             }else{
-                return redirect()->to(site_url('SalesPipeline'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to save');
+                return redirect()->to(site_url('SalesPipeline'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
             }
+          
+          
+            
+            
             
 
             
@@ -127,37 +128,28 @@ class SalesPipeline extends BaseController{
                 'total_revenue'=>$this->request->getPost('total_revenue'),
                 'status'=>$this->request->getPost('status'), 
             ];
-           
-            $response = $this->sales_pipelineModel->update($where, $data);
-            if($response){
-                /* JIKA CLOSING MAKA DATA TITLE AKAN INSERT KE DELIVERY TABEL
-                $data = [
-                'status'=>$this->request->getPost('status')
-                'category'=>$this->request->getPost('category')
-                ];
-                if ($data['status']=='closing'){
-                    $data = [
-                        'id_SalesPipeline'=>$this->request->getPost('id_SalesPipeline'),
-                    ];
-                    if ($data['category']=='video'){
-                        $this->videoModel->insert($data);
 
-                    }elseif($data['category']=='digital content'){
-                         $this->digital_contentModel->insert($data);
-                    
-                    }elseif($data['category']=='learning'){
-                         $this->learningModel->insert($data);
-                    }else{
-                        $this->consultingModel->insert($data);
-                    }
-                }
-                 return redirect()->to(site_url('SalesPipeline'))->with('Warning', '<i class="fas fa-exclamation"></i> Please Check Delivery Menu For Update Data');
-                */
-                return redirect()->to(site_url('SalesPipeline'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
+            $this->sales_pipelineModel->update($where,$data);
+            $category = $this->request->getPost('category');
+            $status = $this->request->getPost('status');
+            if($status=='closing' && $category=='video'){
+               
+                return redirect()->to(site_url('Video/add/'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
+     
+            }elseif($status=='closing' && $category=='digital content'){
+               
+                return redirect()->to(site_url('Digital/add/'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
+
+            }elseif($status=='closing' && $category=='learning'){
+                
+                return redirect()->to(site_url('Learning/add/'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
+            }elseif($status=='closing' && $category=='consulting'){
+                
+                return redirect()->to(site_url('Consulting/add/'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
             }else{
-                return redirect()->to(site_url('SalesPipeline'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to save');
+                return redirect()->to(site_url('SalesPipeline'))->with('Success', '<i class="fas fa-save"></i> Data has been updated');
             }
-            
+           
         }
 
         

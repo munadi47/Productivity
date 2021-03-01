@@ -28,6 +28,17 @@ class consultingModel extends Model
          ->join('sales_pipeline', 'sales_pipeline.id_SalesPipeline=consulting.id_SalesPipeline')
          ->get()->getResultObject(); 
     }
+
+    
+    public function exportConsul($id)
+    {
+         return $this->db->table('consulting')
+         ->join('sales_pipeline', 'sales_pipeline.id_SalesPipeline=consulting.id_SalesPipeline')
+         ->where('consulting.id_consulting',$id)
+         ->get()->getResultObject(); 
+    }
+
+    
    
     
    
