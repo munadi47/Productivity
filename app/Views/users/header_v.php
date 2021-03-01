@@ -119,7 +119,7 @@
                             <a href="<?php echo base_url('Report_Attendance')?>"><i class="fas fa-user-clock"></i> Report Attendance</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('Activity Log')?>"><i class="fas fa-file-alt"></i> Activity Log</a>
+                            <a href="<?php echo base_url('Activity')?>"><i class="fas fa-file-alt"></i> Activity Log</a>
                         </li>
                        
                         
