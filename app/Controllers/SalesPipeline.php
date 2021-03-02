@@ -27,6 +27,7 @@ class SalesPipeline extends BaseController{
         $this->learningModel   = new \App\Models\learningModel();
         $this->consultingModel = new \App\Models\consultingModel();
         $this->digital_contentModel = new \App\Models\digital_contentModel();
+        $this->activityModel = new \App\Models\activityModel();
         $this->db = \Config\Database::connect();
 
     }
@@ -53,7 +54,8 @@ class SalesPipeline extends BaseController{
         $data['dataProduct'] = $this->productModel->findAll();
         $data['dataClient'] = $this->clientModel->findAll();
         $data['dataEmployee'] = $this->employeeModel->findAll();
-
+        $act = 'Membuka form tambah pipeline';
+        $this->activityModel->record($act,session()->get('nik'));
         echo view('users/header_v');
         echo view('users/sp_form_v',$data);
         echo view('users/footer_v');
