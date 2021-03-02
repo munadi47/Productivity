@@ -55,7 +55,7 @@ class SalesPipeline extends BaseController{
         $data['dataClient'] = $this->clientModel->findAll();
         $data['dataEmployee'] = $this->employeeModel->findAll();
         $act = 'Membuka form tambah pipeline';
-        $this->activityModel->record($act,session()->get('nik'));
+        $this->record($act,session()->get('nik'));
         echo view('users/header_v');
         echo view('users/sp_form_v',$data);
         echo view('users/footer_v');
@@ -72,6 +72,22 @@ class SalesPipeline extends BaseController{
         echo view('users/sp_form_v',$data);
         echo view ('users/footer_v');
     }
+
+    public function record ($activity_name,$nik) { //method untuk merekam aktivitas
+
+        $toRecord = array();
+        $toRecord['activity_name'] = $activity_name;
+        $toRecord['datetime'] = date("Y-m-d h:i:s");
+        $toRecord['nik'] = $nik;
+  
+        $result = $this->activityModel->insert($toRecord); // simpan data ke tabel
+  
+         if(!$result):
+            return false;
+         endif;
+         return $result;
+  
+     }
 
     public function save() {
         

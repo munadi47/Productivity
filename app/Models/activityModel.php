@@ -26,21 +26,7 @@ class activityModel extends Model
         ->join('employee','employee.nik = activity_log.nik')
         ->get()->getResultObject();
     }
-    public function record ($activity_name,$nik) { //method untuk merekam aktivitas
-
-        $toRecord = array();
-        $toRecord['activity_name'] = $activity_name;
-        $toRecord['datetime'] = date("Y-m-d h:i:s");
-        $toRecord['nik'] = $nik;
-  
-        $result = $this->database->insert('activity_log', $toRecord); // simpan data ke tabel
-  
-         if(!$result):
-            return false;
-         endif;
-         return $result;
-  
-     }
+   
 
    
    
