@@ -131,19 +131,15 @@ class Finance extends BaseController{
         $pdf->SetSubject('Invoice');
         $pdf->SetKeywords('PDF, example, test, invoice');    
 
-        $pdf->setPrintHeader(false);
-        $pdf->setPrintFooter(false);
 
         $pdf->addPage();
 
         // output the HTML content
         $pdf->writeHTML($html, true, false, true, false, '');
+        
         $this->response->setContentType('application/pdf');
         //Close and output PDF document
-        $pdf->Output('Invoice.pdf', 'I');
-
-    
-    
+        $pdf->Output('example_001.pdf', 'I');
     }
 
 
