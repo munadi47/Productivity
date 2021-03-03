@@ -53,7 +53,7 @@
             <ul class="list-unstyled components">
                 
                 <li>
-                    <a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    <a href="<?php echo base_url('Dashboard')?>"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                 </li>
                 <li>
                     <a href="#"><i class="fas fa-user-clock"></i> Attendance</a>
