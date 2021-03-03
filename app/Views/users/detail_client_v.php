@@ -10,21 +10,35 @@
 <section>  
                 <div class="card-body">
                 <h4> CLIENT DETAIL  </h4>
-               
-                <a title="Back" href="<?php echo base_url("Client"); ?>" class="btn btn-outline-info btn-md">
-                <i class="fas fa-arrow-left"></i> 
-                </a>
-              
+                <div class="row">
+                <div class="col-8">    
+                    <a title="Back" href="<?php echo base_url("Client"); ?>" class="btn btn-outline-info btn-md">
+                        <i class="fas fa-arrow-left"></i> 
+                    </a>
+                </div>
+                <!--
+                    <div class="col-4" >
+                    <form method="GET" action="">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Find here.." name="keyword">
+                        <div class="input-group-append">
+                            <button class="btn btn-info" name="submit" type="submit"> <i class="fa fa-search" ></i> </button>
+                        </div>
+                    </div>
+                    </form>
+                    </div>
+                </div>  -->
+                    
                 
                 
                 <br>
                 <br>
 
-                <?php foreach ($dataClient as $row) :?>
+                <?php foreach ($dataDetail as $row) :?>
                
                 <!-- Timeline -->
                 <ul class="timeline">
-                    <li class="timeline-item bg-white rounded ml-3 p-4 shadow  ">
+                    <li class="timeline-item bg-white rounded ml-3 p-4 shadow " >
                         <div class="timeline-arrow"></div>
                         <h2 class="h5 mb-0"><?php echo $row->title; ?></h2><br>
                         <pre>
@@ -48,9 +62,12 @@
                 </ul><!-- End -->
 
             <?php endforeach; ?>
+            <div class="float-right">
+                <?php echo $pager->links('dataDetail', 'bootstrap_pagination'); ?>
+                </div>
                     
                     <?php
-                    if (empty($dataClient)) {
+                    if (empty($dataDetail)) {
                     ?>
                         <div class="card">
                             <div class="card-body">
@@ -71,9 +88,7 @@
 
                           
                 
-                <!--<div style="float: right">
-                <?php/* echo $pager->links('dataClient', 'bootstrap_pagination'); */?>
-                </div>-->
+               
            
             </div>
             <br>

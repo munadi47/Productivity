@@ -38,4 +38,12 @@ class videoModel extends Model
 
          ->get()->getResultObject(); 
     }
+    public function get_where($id)
+    {
+         return $this->db->table('video')
+         ->join('sales_pipeline', 'sales_pipeline.id_SalesPipeline=video.id_SalesPipeline','inner')
+         ->where('video.id_video',$id)
+
+         ->get()->getResultObject(); 
+    }
 }

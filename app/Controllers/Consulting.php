@@ -21,6 +21,7 @@ class Consulting extends BaseController{
         $this->session = \Config\Services::session();
         $this->consultingModel = new \App\Models\consultingModel();
         $this->sales_pipelineModel = new \App\Models\sales_pipelineModel();
+        $this->activityModel = new \App\Models\activityModel();
         helper(['form', 'url']);
     }
 
@@ -33,6 +34,22 @@ class Consulting extends BaseController{
         echo view ('users/footer_v');
         
     }
+    public function record ($activity_name,$nik) { //method untuk merekam aktivitas
+
+        $toRecord = array();
+        $toRecord['activity_name'] = $activity_name;
+        $toRecord['datetime'] = date("Y-m-d h:i:s");
+        $toRecord['nik'] = $nik;
+  
+        $result = $this->activityModel->insert($toRecord); // simpan data ke tabel
+  
+         if(!$result):
+            return false;
+         endif;
+         return $result;
+  
+     }
+
 
    
 
@@ -91,6 +108,8 @@ class Consulting extends BaseController{
                     'gantt_chart'=> $gantt_chart->getName(),
                 ];
                 $this->consultingModel->insert($data);
+                $act = 'Insert new consulting data '.$data['project_name'];
+                $this->record($act,session()->get('nik'));
                 
                 
             }
@@ -131,7 +150,8 @@ class Consulting extends BaseController{
                     'gantt_chart'=> $this->request->getFile('gantt_chart')->getName()  
                 ];
                 $this->consultingModel->update($where,$data);
-                   
+                $act = 'Update consulting data '.$data['project_name'];
+                $this->record($act,session()->get('nik'));   
                
             }
             
@@ -158,6 +178,8 @@ class Consulting extends BaseController{
         @unlink($path.$gantt_chart);
         
         $response = $this->consultingModel->delete($where);
+        $act = 'Delete consulting data '.$id;
+        $this->record($act,session()->get('nik'));
         if($response){
             return redirect()->to(site_url('Consulting'))->with('Success', '<i class="fas fa-trash"></i> Data has been deleted');
         }else{
@@ -212,6 +234,8 @@ $spreadsheet->setActiveSheetIndex(0)
 
 ;
 $i++;
+$act = 'Export all consulting data to excel ';
+$this->record($act,session()->get('nik'));
 }
 
 // Rename worksheet
@@ -236,6 +260,7 @@ header('Pragma: public'); // HTTP/1.0
 $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 $writer->save('php://output');
 exit;
+
 }
 
 
@@ -279,7 +304,10 @@ exit;
    
    ;
    $i++;
+   
    }
+   $act = 'Export consulting data to excel '.$row->project_name;
+    $this->record($act,session()->get('nik'));
    
    // Rename worksheet
    $spreadsheet->getActiveSheet()->setTitle('Client Consulting'.date('d-m-Y H'));
@@ -303,6 +331,8 @@ exit;
    $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
    $writer->save('php://output');
    exit;
+   $act = 'Export client consulting data to excel';
+   $this->record($act,session()->get('nik'));
    }
 
 

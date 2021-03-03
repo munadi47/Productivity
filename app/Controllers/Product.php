@@ -21,6 +21,7 @@ class Product extends BaseController{
         $this->session = \Config\Services::session();
         $this->productModel = new \App\Models\productModel();
         $this->companyModel = new \App\Models\companyModel();
+        $this->activityModel = new \App\Models\activityModel();
 
     }
 
@@ -33,8 +34,21 @@ class Product extends BaseController{
         echo view ('users/footer_v');
         
     }
+    public function record ($activity_name,$nik) { //method untuk merekam aktivitas
 
-   
+        $toRecord = array();
+        $toRecord['activity_name'] = $activity_name;
+        $toRecord['datetime'] = date("Y-m-d h:i:s");
+        $toRecord['nik'] = $nik;
+  
+        $result = $this->activityModel->insert($toRecord); // simpan data ke tabel
+  
+         if(!$result):
+            return false;
+         endif;
+         return $result;
+  
+     }
 
     public function add(){
      
@@ -69,6 +83,8 @@ class Product extends BaseController{
             ];
             
             $response = $this->productModel->insert($data);
+            $act = 'Insert new Product data '.$data['product_name'];
+            $this->record($act,session()->get('nik'));
             if($response){
                 return redirect()->to(site_url('Product'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
             }else{
@@ -88,6 +104,8 @@ class Product extends BaseController{
          
            
             $response = $this->productModel->update($where, $data);
+            $act = 'Update Product data '.$data['product_name'];
+            $this->record($act,session()->get('nik'));
             if($response){
                 return redirect()->to(site_url('Product'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
             }else{
@@ -108,6 +126,8 @@ class Product extends BaseController{
     
         
         $response = $this->productModel->delete($where);
+        $act = 'Delete Product data';
+        $this->record($act,session()->get('nik'));
         if($response){
             return redirect()->to(site_url('Product'))->with('Success', '<i class="fas fa-trash"></i> Data has been deleted');
         }else{
@@ -156,6 +176,8 @@ $spreadsheet->setActiveSheetIndex(0)
 ;
 $i++;
 }
+$act = 'Export all Product data to excel';
+$this->record($act,session()->get('nik'));
 
 // Rename worksheet
 $spreadsheet->getActiveSheet()->setTitle('Product Data'.date('d-m-Y H'));
@@ -179,6 +201,7 @@ header('Pragma: public'); // HTTP/1.0
 $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 $writer->save('php://output');
 exit;
+       
 }
 
 

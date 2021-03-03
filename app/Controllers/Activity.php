@@ -18,12 +18,21 @@ class Activity extends BaseController{
     {
         $this->session = \Config\Services::session();
         $this->activityModel = new \App\Models\activityModel();
+        $this->pager = \Config\Services::pager();
         
     }
 
     public function index(){
         $session = session();
-        $data['dataAct'] = $this->activityModel->joinEmp();
+        
+        $activity = $this->activityModel->joinEmp();
+         // paginate
+        $paginate = 10;
+        $data['dataAct']   = $activity->paginate($paginate,'dataAct');
+        $data['pager']      = $activity->pager;
+        $data['validation'] = $this->validator;
+        
+      
 
         echo view ('users/header_v');
         echo view ('admin/act_v',$data);

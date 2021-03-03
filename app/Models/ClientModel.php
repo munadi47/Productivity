@@ -31,15 +31,16 @@ class clientModel extends Model
     }
     public function getDetail($id)
     {
-        return $this->db->table('client as c')
-        ->join('sales_pipeline as sp','sp.id_client=c.id_client')
-        ->where('sp.id_client',$id)
-        ->get()->getResultObject(); 
-
-    }
-    public function search($keyword){
         $builder = $this->table('client');
-        $builder->like('id_client',$keyword)
+        $builder->join('sales_pipeline','sales_pipeline.id_client=client.id_client')
+        ->where('sales_pipeline.id_client',$id);
+        return $builder;
+    }
+    public function search($keyword,$id){
+        $builder = $this->table('client');
+        $builder->join('sales_pipeline','sales_pipeline.id_client=client.id_client')
+        ->where('sales_pipeline.id_client',$id)
+        ->like('id_client',$keyword)
         ->orLike('category',$keyword)
         ->orLike('count',$keyword)
         ->orLike('total_revenue',$keyword)

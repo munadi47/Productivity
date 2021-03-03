@@ -22,10 +22,12 @@ class activityModel extends Model
     protected $skipValidation     = false;
 
     public function joinEmp(){
-        return $this->db->table('activity_log')
-        ->join('employee','employee.nik = activity_log.nik')
-        ->get()->getResultObject();
+        $builder = $this->table('activity_log');
+        $builder->join('employee','employee.nik = activity_log.nik')
+        ->orderBy('id_log','DESC');
+        return $builder;
     }
+   
 
    
    
