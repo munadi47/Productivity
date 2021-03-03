@@ -134,6 +134,7 @@ class Employee extends BaseController{
         } else { // Update
                 $where = ['nik'=>$id];
                 $response =  $this->employeeModel->update($where, $data);
+                
                 $act = 'Update Employee data '.$data['name'];
                 $this->record($act,session()->get('nik'));
 
