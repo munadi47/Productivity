@@ -49,7 +49,7 @@ class Auth extends BaseController{
             'address'=>$this->request->getPost('address'),
             'birthday'=>$this->request->getPost('birthday'),
             'email'=>$this->request->getPost('email'),
-            'password'=> $this->request->getPost('password'),
+            'password'=> password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
             'phone1'=>$this->request->getPost('phone1'),
             'phone2'=>$this->request->getPost('phone2'),
             'id_eStatus'=>$this->request->getPost('id_eStatus'),
@@ -65,7 +65,7 @@ class Auth extends BaseController{
     public function login()
     {
         $session = session();
-        $model = new authModel();
+        $model = new AuthModel;
         $table = 'employee';
         $username = $this->request->getPost('email');
         $password = $this->request->getPost('password');
@@ -76,17 +76,28 @@ class Auth extends BaseController{
         if ($row == NULL){
             return redirect()->to('/login')->with('Failed', '<i class="fas fa-exclamation"></i> Failed To Login');
         }
-        /*elseif (password_verify($password,$row->password)){
+        if(password_verify($password,$row->password)){
             $data = array(
-                'login' => TRUE,
-                'nama' => $row->name,
-                'email' => $row->email,
-                'level' => $row->level,
+            'login' => TRUE,
+            'nik' => $row->nik,
+            'name' => $row->name,
+            'birthday' => $row->birthday,
+            'email' => $row->email,
+            'level' => $row->level,
+            'address' => $row->address,
+            'phone1' => $row->phone1,
+            'phone2' => $row->phone2,
+            'id_eStatus' => $row->id_eStatus,
             );
-            session()->set($data);
-            return redirect()->to('/Client')->with('Success', '<i class="fas fa-exclamination"></i> Sucsess To Login');
-        }*/
-        $data = array(
+
+        $session->set($data);
+        
+        return redirect()->to('/Client')->with('Success', '<i class="fas fa-exclamation"></i> Sucsess To Login');
+        }                
+        return redirect()->to('/login')->with('Failed', '<i class="fas fa-exclamation"></i> Failed To Login');
+
+
+        /*$data = array(
             'login' => TRUE,
             'nik' => $row->nik,
             'name' => $row->name,
@@ -100,7 +111,7 @@ class Auth extends BaseController{
         );
         $session->set($data);
         //var_dump($data);
-        return redirect()->to('/Client')->with('Success', '<i class="fas fa-exclamation"></i> Sucsess Login');
+        return redirect()->to('/Client')->with('Success', '<i class="fas fa-exclamation"></i> Sucsess Login');*/
     }
 
     public function logout()
