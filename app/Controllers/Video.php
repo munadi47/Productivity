@@ -21,6 +21,7 @@ class Video extends BaseController{
         $this->session = \Config\Services::session();
         $this->videoModel = new \App\Models\videoModel();
         $this->sales_pipelineModel = new \App\Models\sales_pipelineModel();
+        $this->activityModel = new \App\Models\activityModel();
 
     }
 
@@ -33,6 +34,21 @@ class Video extends BaseController{
         echo view ('users/footer_v');
         
     }
+    public function record ($activity_name,$nik) { //method untuk merekam aktivitas
+
+        $toRecord = array();
+        $toRecord['activity_name'] = $activity_name;
+        $toRecord['datetime'] = date("Y-m-d h:i:s");
+        $toRecord['nik'] = $nik;
+  
+        $result = $this->activityModel->insert($toRecord); // simpan data ke tabel
+  
+         if(!$result):
+            return false;
+         endif;
+         return $result;
+  
+     }
 
    
 
@@ -74,6 +90,8 @@ class Video extends BaseController{
             ];
             
             $response = $this->videoModel->insert($data);
+            $act = 'Insert new video data, storyboard PIC = '.$data['storyboard_pic'];
+            $this->record($act,session()->get('nik'));
             if($response){
                 return redirect()->to(site_url('Video'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
             }else{
@@ -98,6 +116,8 @@ class Video extends BaseController{
          
            
             $response = $this->videoModel->update($where, $data);
+            $act = 'Update video data, storyboard pic = '.$data['storyboard_pic'];
+            $this->record($act,session()->get('nik'));
             if($response){
                 return redirect()->to(site_url('Video'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
             }else{
@@ -118,6 +138,8 @@ class Video extends BaseController{
     
         
         $response = $this->videoModel->delete($where);
+        $act = 'Delete video data ';
+        $this->record($act,session()->get('nik'));
         if($response){
             return redirect()->to(site_url('Video'))->with('Success', '<i class="fas fa-trash"></i> Data has been deleted');
         }else{
@@ -176,6 +198,8 @@ $spreadsheet->setActiveSheetIndex(0)
 ;
 $i++;
 }
+$act = 'Export all video data to excel';
+$this->record($act,session()->get('nik'));
 
 // Rename worksheet
 $spreadsheet->getActiveSheet()->setTitle('Video Data'.date('d-m-Y H'));
@@ -199,6 +223,7 @@ header('Pragma: public'); // HTTP/1.0
 $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 $writer->save('php://output');
 exit;
+
 }
 
 
@@ -247,6 +272,8 @@ exit;
     ;
     $i++;
     }
+    $act = 'Export client video data to excel '.$row->id_client;
+    $this->record($act,session()->get('nik'));
     
     // Rename worksheet
     $spreadsheet->getActiveSheet()->setTitle('Schedule Video'.date('d-m-Y H'));
@@ -270,6 +297,7 @@ exit;
     $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
     $writer->save('php://output');
     exit;
+    
     }
     
 

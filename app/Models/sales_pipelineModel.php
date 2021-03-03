@@ -54,5 +54,30 @@ class sales_pipelineModel extends Model
          
          
     }
+    public function statVideo($id)
+    {
+         $query = $this->db->query('select id_SalesPipeline from video where id_SalesPipeline ='.$id);
+         return $query->getRow();
+         
+    }
+    public function statLearning($id)
+    {
+         $query = $this->db->query('select id_SalesPipeline from learning where id_SalesPipeline ='.$id);
+         return $query->getRow();
+         
+    }
+    public function statDigital($id)
+    {
+         $query = $this->db->query('select id_SalesPipeline from digital_content where id_SalesPipeline ='.$id);
+         return $query->getRow();
+         
+    }
+    public function statConsulting($id)
+    {
+         $query = $this->db->query('select id_SalesPipeline from consulting where id_SalesPipeline ='.$id);
+         return $query->getRow();
+         
+    }
+
 
 }

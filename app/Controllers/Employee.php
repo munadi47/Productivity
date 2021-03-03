@@ -19,6 +19,7 @@ class Employee extends BaseController{
         $this->session = \Config\Services::session();
         $this->employeeModel = new \App\Models\employeeModel();
         $this->empstatusModel = new \App\Models\empstatusModel();
+        $this->activityModel = new \App\Models\activityModel();
 
     }
 
@@ -31,6 +32,21 @@ class Employee extends BaseController{
         echo view ('users/footer_v');
         
     }
+    public function record ($activity_name,$nik) { //method untuk merekam aktivitas
+
+        $toRecord = array();
+        $toRecord['activity_name'] = $activity_name;
+        $toRecord['datetime'] = date("Y-m-d h:i:s");
+        $toRecord['nik'] = $nik;
+  
+        $result = $this->activityModel->insert($toRecord); // simpan data ke tabel
+  
+         if(!$result):
+            return false;
+         endif;
+         return $result;
+  
+     }
 
    
 
@@ -83,8 +99,9 @@ class Employee extends BaseController{
         if (empty($id)) { //Insert
            
             $response = $this->employeeModel->insert($data);
+            $act = 'Insert new Employee data '.$data['name'];
+            $this->record($act,session()->get('nik'));
             
-            //masih aneh
             if($response != true){
                 return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
             }else{
@@ -95,6 +112,8 @@ class Employee extends BaseController{
         } else { // Update
                 $where = ['nik'=>$id];
                 $response =  $this->employeeModel->update($where, $data);
+                $act = 'Update Employee data '.$data['name'];
+                $this->record($act,session()->get('nik'));
 
             if($response){
                 return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
@@ -114,6 +133,8 @@ class Employee extends BaseController{
         $where = ['nik'=>$id];   
 
         $response = $this->employeeModel->delete($where);
+        $act = 'Delete Employee data '.$id;
+        $this->record($act,session()->get('nik'));
         if($response){
             return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-trash"></i> Data has been deleted');
         }else{
@@ -167,6 +188,8 @@ $spreadsheet->setActiveSheetIndex(0)
 ;
 $i++;
 }
+$act = 'Export all Employee data to excel';
+$this->record($act,session()->get('nik'));
 
 // Rename worksheet
 $spreadsheet->getActiveSheet()->setTitle('Employee Data'.date('d-m-Y H'));
@@ -190,6 +213,7 @@ header('Pragma: public'); // HTTP/1.0
 $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 $writer->save('php://output');
 exit;
+
 }
 
 }

@@ -21,6 +21,7 @@ class Learning extends BaseController{
         $this->session = \Config\Services::session();
         $this->learningModel = new \App\Models\learningModel();
         $this->sales_pipelineModel = new \App\Models\sales_pipelineModel();
+        $this->activityModel = new \App\Models\activityModel();
 
     }
 
@@ -33,6 +34,22 @@ class Learning extends BaseController{
         echo view ('users/footer_v');
         
     }
+    public function record ($activity_name,$nik) { //method untuk merekam aktivitas
+
+        $toRecord = array();
+        $toRecord['activity_name'] = $activity_name;
+        $toRecord['datetime'] = date("Y-m-d h:i:s");
+        $toRecord['nik'] = $nik;
+  
+        $result = $this->activityModel->insert($toRecord); // simpan data ke tabel
+  
+         if(!$result):
+            return false;
+         endif;
+         return $result;
+  
+     }
+
 
    
 
@@ -72,6 +89,9 @@ class Learning extends BaseController{
             ];
             
             $response = $this->learningModel->insert($data);
+            $act = 'Insert new Learning data, coach = '.$data['coach_name'];
+            $this->record($act,session()->get('nik'));
+            
             if($response){
                 return redirect()->to(site_url('Learning'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
             }else{
@@ -93,6 +113,8 @@ class Learning extends BaseController{
             ];
            
             $response = $this->learningModel->update($where, $data);
+            $act = 'Update Learning data, coach = '.$data['coach_name'];
+            $this->record($act,session()->get('nik'));
             if($response){
                 return redirect()->to(site_url('Learning'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
             }else{
@@ -113,6 +135,8 @@ class Learning extends BaseController{
     
         
         $response = $this->learningModel->delete($where);
+        $act = 'Delete Learning data';
+        $this->record($act,session()->get('nik'));
         if($response){
             return redirect()->to(site_url('Learning'))->with('Success', '<i class="fas fa-trash"></i> Data has been deleted');
         }else{
@@ -168,6 +192,8 @@ $spreadsheet->setActiveSheetIndex(0)
 ;
 $i++;
 }
+$act = 'Export all Learning data to excel';
+$this->record($act,session()->get('nik'));
 
 // Rename worksheet
 $spreadsheet->getActiveSheet()->setTitle('Learning Data'.date('d-m-Y H'));
@@ -191,6 +217,7 @@ header('Pragma: public'); // HTTP/1.0
 $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 $writer->save('php://output');
 exit;
+
 }
 
 
@@ -258,6 +285,8 @@ exit;
     $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
     $writer->save('php://output');
     exit;
+    $act = 'Export client Learning data to excel';
+    $this->record($act,session()->get('nik'));
     }
     
 

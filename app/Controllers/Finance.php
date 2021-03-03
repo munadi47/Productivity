@@ -24,6 +24,7 @@ class Finance extends BaseController{
         $this->financeModel = new \App\Models\financeModel();
         $this->financestatusModel = new \App\Models\financestatusModel();
         $this->clientModel = new \App\Models\clientModel();
+        $this->activityModel = new \App\Models\activityModel();
 
     }
 
@@ -36,7 +37,23 @@ class Finance extends BaseController{
         echo view ('users/footer_v');
         
     }
+    public function record ($activity_name,$nik) { //method untuk merekam aktivitas
 
+        $toRecord = array();
+        $toRecord['activity_name'] = $activity_name;
+        $toRecord['datetime'] = date("Y-m-d h:i:s");
+        $toRecord['nik'] = $nik;
+  
+        $result = $this->activityModel->insert($toRecord); // simpan data ke tabel
+  
+         if(!$result):
+            return false;
+         endif;
+         return $result;
+  
+     }
+
+   
    
 
     public function add(){
@@ -76,6 +93,8 @@ class Finance extends BaseController{
         if (empty($id)) { //Insert
            
             $response = $this->financeModel->insert($data);
+            $act = 'Insert new Finance data, Client = '.$data['id_client'];
+            $this->record($act,session()->get('nik'));
             
             //masih aneh
             if($response){
@@ -88,6 +107,8 @@ class Finance extends BaseController{
         } else { // Update
                 $where = ['nik'=>$id];
                 $response =  $this->financeModel->update($where, $data);
+                $act = 'Update Finance data, Client = '.$data['id_client'];
+                $this->record($act,session()->get('nik'));
 
             if($response){
                 return redirect()->to(site_url('Finance'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
@@ -107,6 +128,8 @@ class Finance extends BaseController{
         $where = ['id_finance'=>$id];   
 
         $response = $this->financeModel->delete($where);
+        $act = 'Delete Finance data '.$id;
+        $this->record($act,session()->get('nik'));
         if($response){
             return redirect()->to(site_url('Finance'))->with('Success', '<i class="fas fa-save"></i> Data has been deleted');
         }else{
@@ -140,6 +163,8 @@ class Finance extends BaseController{
         $this->response->setContentType('application/pdf');
         //Close and output PDF document
         $pdf->Output('example_001.pdf', 'I');
+        $act = 'Generate new Invoice data';
+        $this->record($act,session()->get('nik'));
     }
 
 
@@ -161,7 +186,7 @@ $spreadsheet->getProperties()->setTitle('Office 2007 XLSX Test Document')
 
 // Add some data
 $spreadsheet->setActiveSheetIndex(0)
-->setCellValue('A1', 'ID FINANCE')
+->setCellValue('A1', 'ID')
 ->setCellValue('B1', 'INVOICE DATE')
 ->setCellValue('C1', 'INOVICE DUE DATE')
 ->setCellValue('D1', 'INVOICE AMOUNT')
@@ -181,6 +206,8 @@ $spreadsheet->setActiveSheetIndex(0)
 ;
 $i++;
 }
+$act = 'Export all Finance data to excel';
+$this->record($act,session()->get('nik'));
 
 // Rename worksheet
 $spreadsheet->getActiveSheet()->setTitle('Finance Data'.date('d-m-Y H'));
@@ -204,6 +231,7 @@ header('Pragma: public'); // HTTP/1.0
 $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 $writer->save('php://output');
 exit;
+
 }
 
 }

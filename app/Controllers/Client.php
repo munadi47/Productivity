@@ -20,6 +20,8 @@ class Client extends BaseController{
         $this->clientModel = new \App\Models\clientModel();
         $this->employeeModel = new \App\Models\employeeModel();
         $this->classModel = new \App\Models\classModel();
+        $this->activityModel = new \App\Models\activityModel();
+        $this->pager = \Config\Services::pager();
       
     }
 
@@ -35,11 +37,28 @@ class Client extends BaseController{
         
     }
 
+    public function record ($activity_name,$nik) { //method untuk merekam aktivitas
+
+        $toRecord = array();
+        $toRecord['activity_name'] = $activity_name;
+        $toRecord['datetime'] = date("Y-m-d h:i:s");
+        $toRecord['nik'] = $nik;
+  
+        $result = $this->activityModel->insert($toRecord); // simpan data ke tabel
+  
+         if(!$result):
+            return false;
+         endif;
+         return $result;
+  
+     }
+
    
 
     public function add(){
         $data['dataEmployee']  = $this->employeeModel->findAll();
         $data['dataClass']  = $this->classModel->findAll();
+      
         echo view('users/header_v');
         echo view('users/client_form_v',$data);
         echo view('users/footer_v');
@@ -50,14 +69,23 @@ class Client extends BaseController{
         $data['dataClass']  = $this->classModel->findAll();
         $data['dataEmployee']  = $this->employeeModel->findAll();
         $data['dataClient'] = $this->clientModel->where($where)->findAll()[0];
-        
+      
         echo view('users/header_v');
         echo view('users/client_edit_form_v',$data);
         echo view ('users/footer_v');
     }
     public function detail($id){
         
-        $data['dataClient'] = $this->clientModel->getDetail($id);
+        $detail = $this->clientModel->getDetail($id);
+        
+
+         // paginate
+        $paginate = 5;
+        $data['dataDetail']   = $detail->paginate($paginate, 'dataDetail');
+        $data['pager']      = $this->clientModel->getDetail($id)->pager;
+        $data['validation'] = $this->validator;
+        
+       
 
 
         echo view('users/header_v');
@@ -71,6 +99,7 @@ class Client extends BaseController{
         echo view('users/class_form_v');
         echo view ('users/footer_v');
     }
+   
 
 
 
@@ -85,6 +114,8 @@ class Client extends BaseController{
               
             ];
                 $this->clientModel->insert($data);
+                $act = 'Insert new client data '.$data['id_client'];
+                $this->record($act,session()->get('nik'));
                 return redirect()->to(site_url('Client'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
                 
             
@@ -106,6 +137,8 @@ class Client extends BaseController{
          
            
            $this->clientModel->update($where, $data);
+           $act = 'Update client data '.$id;
+           $this->record($act,session()->get('nik'));
            return redirect()->to(site_url('Client'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
             
             
@@ -119,6 +152,8 @@ class Client extends BaseController{
                 'sector'=>$this->request->getPost('sector'),
               
             ];
+                $act = 'Insert new type business data '.$data['sector'];
+                $this->record($act,session()->get('nik'));
                 $this->classModel->insert($data);
                 return redirect()->to(site_url('Client/add'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
                 
@@ -132,6 +167,8 @@ class Client extends BaseController{
         $where = ['id_client'=>$id];   
 
         $response = $this->clientModel->delete($where);
+        $act = 'Delete client data '.$id;
+        $this->record($act,session()->get('nik'));
         if($response){
             return redirect()->to(site_url('Client'))->with('Success', '<i class="fas fa-trash"></i> Data has been deleted');
         }else{
@@ -179,6 +216,8 @@ $spreadsheet->setActiveSheetIndex(0)
 
 ;
 $i++;
+$act = 'Export all client data to excel ';
+$this->record($act,session()->get('nik'));  
 }
 
 // Rename worksheet
@@ -203,6 +242,7 @@ header('Pragma: public'); // HTTP/1.0
 $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 $writer->save('php://output');
 exit;
+
 }
 
 
@@ -248,6 +288,8 @@ exit;
   
   ;
   $i++;
+  $act = 'Export client data to excel '.$row->id_client;
+  $this->record($act,session()->get('nik'));  
   }
   
   // Rename worksheet
@@ -272,7 +314,8 @@ exit;
   $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
   $writer->save('php://output');
   exit;
-  }
+  
+}
 
 
 }

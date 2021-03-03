@@ -21,6 +21,7 @@ class Digital extends BaseController{
         $this->session = \Config\Services::session();
         $this->digital_contentModel = new \App\Models\digital_contentModel();
         $this->sales_pipelineModel = new \App\Models\sales_pipelineModel();
+        $this->activityModel = new \App\Models\activityModel();
 
     }
 
@@ -33,6 +34,23 @@ class Digital extends BaseController{
         echo view ('users/footer_v');
         
     }
+    public function record ($activity_name,$nik) { //method untuk merekam aktivitas
+
+        $toRecord = array();
+        $toRecord['activity_name'] = $activity_name;
+        $toRecord['datetime'] = date("Y-m-d h:i:s");
+        $toRecord['nik'] = $nik;
+  
+        $result = $this->activityModel->insert($toRecord); // simpan data ke tabel
+  
+         if(!$result):
+            return false;
+         endif;
+         return $result;
+  
+     }
+
+
 
    
 
@@ -76,6 +94,9 @@ class Digital extends BaseController{
             ];
             
             $response = $this->digital_contentModel->insert($data);
+            $act = 'Insert new digital content data, storyboard PIC = '.$data['storyboard_pic'];
+            $this->record($act,session()->get('nik'));
+            
             if($response){
                 return redirect()->to(site_url('Digital'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
             }else{
@@ -102,6 +123,9 @@ class Digital extends BaseController{
          
            
             $response = $this->digital_contentModel->update($where, $data);
+         
+            $act = 'Update digital content data, storyboard PIC = '.$data['storyboard_pic'];
+            $this->record($act,session()->get('nik'));
             if($response){
                 return redirect()->to(site_url('Digital'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
             }else{
@@ -122,6 +146,9 @@ class Digital extends BaseController{
     
         
         $response = $this->digital_contentModel->delete($where);
+        $act = 'Delete digital content data';
+        $this->record($act,session()->get('nik'));
+        
         if($response){
             return redirect()->to(site_url('Digital'))->with('Success', '<i class="fas fa-trash"></i> Data has been deleted');
         }else{
@@ -184,7 +211,8 @@ $spreadsheet->setActiveSheetIndex(0)
 ;
 $i++;
 }
-
+$act = 'Export all digital content data to excel';
+$this->record($act,session()->get('nik'));
 // Rename worksheet
 $spreadsheet->getActiveSheet()->setTitle('Digital Data'.date('d-m-Y H'));
 
@@ -207,6 +235,8 @@ header('Pragma: public'); // HTTP/1.0
 $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 $writer->save('php://output');
 exit;
+
+
 }
 
 
@@ -259,6 +289,8 @@ exit;
     ;
     $i++;
     }
+    $act = 'Export client digital content data to excel, storyboard_PIC = '.$row->storyboard_pic;
+    $this->record($act,session()->get('nik'));
     
     // Rename worksheet
     $spreadsheet->getActiveSheet()->setTitle('Schedule Data'.date('d-m-Y H'));

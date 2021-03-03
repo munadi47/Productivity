@@ -36,7 +36,7 @@ class SalesPipeline extends BaseController{
         $session = session();
     
         $data['dataPipeline'] = $this->sales_pipelineModel->JoinPipeline();
-        $status = 'closing';
+
         $data['countClosing'] = $this->sales_pipelineModel->closing();
         $data['countProposal'] = $this->sales_pipelineModel->proposal();
         $data['countMeeting'] = $this->sales_pipelineModel->meeting();
@@ -47,32 +47,7 @@ class SalesPipeline extends BaseController{
         
     }
 
-   
-
-    public function add(){
-     
-        $data['dataProduct'] = $this->productModel->findAll();
-        $data['dataClient'] = $this->clientModel->findAll();
-        $data['dataEmployee'] = $this->employeeModel->findAll();
-        $act = 'Membuka form tambah pipeline';
-        $this->record($act,session()->get('nik'));
-        echo view('users/header_v');
-        echo view('users/sp_form_v',$data);
-        echo view('users/footer_v');
-    }
-
-    public function edit($id){
-        $where = ['id_SalesPipeline'=> $id];
-        $data['dataPipeline'] = $this->sales_pipelineModel->where($where)->findAll()[0];
-        $data['dataProduct'] = $this->productModel->findAll();
-        $data['dataClient'] = $this->clientModel->findAll();
-        $data['dataEmployee'] = $this->employeeModel->findAll();
-
-        echo view('users/header_v');
-        echo view('users/sp_form_v',$data);
-        echo view ('users/footer_v');
-    }
-
+    
     public function record ($activity_name,$nik) { //method untuk merekam aktivitas
 
         $toRecord = array();
@@ -88,6 +63,33 @@ class SalesPipeline extends BaseController{
          return $result;
   
      }
+
+
+   
+
+    public function add(){
+     
+        $data['dataProduct'] = $this->productModel->findAll();
+        $data['dataClient'] = $this->clientModel->findAll();
+        $data['dataEmployee'] = $this->employeeModel->findAll();
+       
+        echo view('users/header_v');
+        echo view('users/sp_form_v',$data);
+        echo view('users/footer_v');
+    }
+
+    public function edit($id){
+        $where = ['id_SalesPipeline'=> $id];
+        $data['dataPipeline'] = $this->sales_pipelineModel->where($where)->findAll()[0];
+        $data['dataProduct'] = $this->productModel->findAll();
+        $data['dataClient'] = $this->clientModel->findAll();
+        $data['dataEmployee'] = $this->employeeModel->findAll();
+       
+
+        echo view('users/header_v');
+        echo view('users/sp_form_v',$data);
+        echo view ('users/footer_v');
+    }
 
     public function save() {
         
@@ -107,22 +109,26 @@ class SalesPipeline extends BaseController{
                 'status'=>$this->request->getPost('status'), 
             ];
             $this->sales_pipelineModel->insert($data);
+            $act = 'Insert new pipeline data '.$data['id_client'];
+            $this->record($act,session()->get('nik'));
             $category = $this->request->getPost('category');
             $status = $this->request->getPost('status');
+
+          
             if($status=='closing' && $category=='video' ){
                
-                return redirect()->to(site_url('Video/add/'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
+                return redirect()->to(site_url('Video/add'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
      
             }elseif($status=='closing' && $category=='digital content'){
                
-                return redirect()->to(site_url('Digital/add/'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
+                return redirect()->to(site_url('Digital/add'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
 
             }elseif($status=='closing' && $category=='learning'){
                 
-                return redirect()->to(site_url('Learning/add/'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
+                return redirect()->to(site_url('Learning/add'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
             }elseif($status=='closing' && $category=='consulting'){
                 
-                return redirect()->to(site_url('Consulting/add/'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
+                return redirect()->to(site_url('Consulting/add'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
             }else{
                 return redirect()->to(site_url('SalesPipeline'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
             }
@@ -151,56 +157,27 @@ class SalesPipeline extends BaseController{
            
 
             $this->sales_pipelineModel->update($where,$data);
+            $act = 'Update pipeline data '.$data['id_client'].' to '.$data['status'];
+            $this->record($act,session()->get('nik'));
             $category = $this->request->getPost('category');
             $status = $this->request->getPost('status');
-            
+            $video = $this->sales_pipelineModel->statVideo($id);
+            $digital = $this->sales_pipelineModel->statDigital($id);
+            $learning = $this->sales_pipelineModel->statLearning($id);
+            $consulting = $this->sales_pipelineModel->statConsulting($id);
 
-            
-            $statVid = $this->videoModel->where('id_SalesPipeline',$id)->get();
-            $statDigital = $this->digital_contentModel->where('id_SalesPipeline',$id)->get();
-            $statLearn = $this->learningModel->where('id_SalesPipeline',$id)->get();
-            $statConsul = $this->consultingModel->where('id_SalesPipeline',$id)->get();
-
-                       
-                       
-           
-            
-            if($status=='closing' && $category=='video'  ){
-                    if(empty($statVid)){
-                        return redirect()->to(site_url('Video/add/'))->with('Warning', '<i class="fas fa-check"></i>  your pipeline has successfully saved and entered the closing stage, please input this delivery data ');
-                    }else{
-                        return redirect()->to(site_url('SalesPipeline'))->with('Success', '<i class="fas fa-save"></i> Data has been updated');
-                    }
-                   
-          
-                
-            }elseif($status=='closing' && $category=='digital content'){
-                if(empty( $statDigital)){
-                    return redirect()->to(site_url('Digital/add/'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
-                }else{
-                    return redirect()->to(site_url('SalesPipeline'))->with('Success', '<i class="fas fa-save"></i> Data has been updated');
-                }
-                   
-               
-               
-
-            }elseif($status=='closing' && $category=='learning'){
-                if(empty( $statLearn)){
-                    return redirect()->to(site_url('Digital/add/'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
-                }else{
-                    return redirect()->to(site_url('SalesPipeline'))->with('Success', '<i class="fas fa-save"></i> Data has been updated');
-                }
-        
-            }elseif($status=='closing' && $category=='consulting'){
-                if(empty( $statConsul)){
-                    return redirect()->to(site_url('Consulting/add/'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
-                }else{
-                    return redirect()->to(site_url('SalesPipeline'))->with('Success', '<i class="fas fa-save"></i> Data has been updated');
-                }
-               
+            if($status=='closing' && $category=='video' && empty($video)){
+                return redirect()->to(site_url('Video/add'))->with('Success', '<i class="fas fa-check"></i>  your pipeline has successfully saved and entered the closing stage, please input this delivery data ');
+            }elseif($status=='closing' && $category=='digital content' && empty($digital)){
+                return redirect()->to(site_url('Digital/add'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
+            }elseif($status=='closing' && $category=='learning' && empty($learning)){
+                return redirect()->to(site_url('Learning/add'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
+            }elseif($status=='closing' && $category=='consulting' && empty($consulting)){
+                    return redirect()->to(site_url('Consulting/add'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
             }else{
                 return redirect()->to(site_url('SalesPipeline'))->with('Success', '<i class="fas fa-save"></i> Data has been updated');
             }
+          
            
         }
 
@@ -214,6 +191,8 @@ class SalesPipeline extends BaseController{
 
         
         $response = $this->sales_pipelineModel->delete($where);
+        $act = 'Delete pipeline data';
+        $this->record($act,session()->get('nik'));
         if($response){
             
             return redirect()->to(site_url('SalesPipeline'))->with('Success', '<i class="fas fa-trash"></i> Data has been deleted');
@@ -288,6 +267,9 @@ $spreadsheet->setActiveSheetIndex(0)
 $i++;
 }
 
+$act = 'Export to excel all pipeline data';
+$this->record($act,session()->get('nik'));
+
 // Rename worksheet
 $spreadsheet->getActiveSheet()->setTitle('Pipeline Data'.date('d-m-Y H'));
 
@@ -310,6 +292,7 @@ header('Pragma: public'); // HTTP/1.0
 $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 $writer->save('php://output');
 exit;
+
 }
 
 

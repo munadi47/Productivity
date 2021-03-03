@@ -20,6 +20,7 @@ class Company extends BaseController{
     {
         $this->session = \Config\Services::session();
         $this->companyModel = new \App\Models\companyModel();
+        $this->activityModel = new \App\Models\activityModel();
       
     }
 
@@ -31,6 +32,21 @@ class Company extends BaseController{
         echo view ('users/footer_v');
         
     }
+    public function record ($activity_name,$nik) { //method untuk merekam aktivitas
+
+        $toRecord = array();
+        $toRecord['activity_name'] = $activity_name;
+        $toRecord['datetime'] = date("Y-m-d h:i:s");
+        $toRecord['nik'] = $nik;
+  
+        $result = $this->activityModel->insert($toRecord); // simpan data ke tabel
+  
+         if(!$result):
+            return false;
+         endif;
+         return $result;
+  
+     }
 
    
 
@@ -48,6 +64,7 @@ class Company extends BaseController{
         echo view('users/company_form_v',$data);
         echo view ('users/footer_v');
     }
+   
 
     public function save() {
         
@@ -61,7 +78,9 @@ class Company extends BaseController{
             ];
         
             $this->companyModel->insert($data);
-            
+           
+             $act = 'Insert new company data '.$data['company_name'];
+             $this->record($act,session()->get('nik'));
 
             
         } else { // Update
@@ -73,7 +92,8 @@ class Company extends BaseController{
             ];
          
             $this->companyModel->update($where, $data);
-            
+            $act = 'Update company data '.$data['company_name'];
+             $this->record($act,session()->get('nik'));
             
         }
 
@@ -84,9 +104,9 @@ class Company extends BaseController{
     //delete
     public function delete($id){
         $where = ['id_company'=>$id];   
-
         $this->companyModel->delete($where);
-        
+        $act = 'Delete company data '.$id;
+        $this->record($act,session()->get('nik'));
         
         
 
@@ -128,6 +148,9 @@ $spreadsheet->setActiveSheetIndex(0)
 
 ;
 $i++;
+$act = 'Export all company data ';
+$this->record($act,session()->get('nik'));
+
 }
 
 // Rename worksheet
@@ -152,6 +175,8 @@ header('Pragma: public'); // HTTP/1.0
 $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 $writer->save('php://output');
 exit;
+$act = 'Export to excel company data';
+$this->record($act,session()->get('nik'));
 }
 
 

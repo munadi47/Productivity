@@ -28,38 +28,57 @@
            
                
 	<div class="row">
-		<h2>Activity </h2>
+		<h2>Activity Log</h2>
+		
 	</div>
-    <div class="qa-message-list" id="wallmessages">
+	<!--<div class="row">
+			<div class="col-8">
+			</div>
+            <div class="col-4" >
+            <form method="GET" action="">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Cari Keyword Disini..." name="keyword">
+                <div class="input-group-append">
+                    <button class="btn btn-info" name="submit" type="submit">Search</button>
+                </div>
+            </div>
+            </form>
+            </div>
+        </div>  
+-->
+    <div class="qa-message-list" id="wallmessages myTable">
 		<?php foreach($dataAct as $row):  ?>
     				<div class="message-item" id="m16">
 						<div class="message-inner">
 							<div class="message-head clearfix">
 								<div class="avatar pull-left"><a href="./index.php?qa=user&qa_1=Oleg+Kolesnichenko"><img class="img-emp" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"></a></div>
 								<div class="user-detail">
-									<h5 class="handle"><?php $row->name; ?></h5>
+									<h5 class="handle"><?php echo $row->name; ?></h5>
 									<div class="post-meta">
 										<div class="asker-meta">
 											<span class="qa-message-what"></span>
 											<span class="qa-message-when">
-												<span class="qa-message-when-data"><?php $row->datetime; ?></span>
+												<span class="qa-message-when-data"><?php echo $row->datetime; ?></span>
 											</span>
 											<span class="qa-message-who">
 												<span class="qa-message-who-pad">by </span>
-												<span class="qa-message-who-data"><a href="./index.php?qa=user&qa_1=Oleg+Kolesnichenko"><?php $row->name; ?></a></span>
+												<span class="qa-message-who-data"><a href="./index.php?qa=user&qa_1=Oleg+Kolesnichenko"><?php echo $row->name; ?></a></span>
 											</span>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="qa-message-content">
-								<?php $row->activity_name; ?>
+								<?php echo $row->activity_name; ?>
 							</div>
 					    </div>
                     </div>
 					<?php endforeach; ?>
+                    <div class="float-right">
+                    <?php echo $pager->links('dataAct', 'bootstrap_pagination'); ?>
+                    </div>
 					
-				
+        	
 					
 	</div>
 </div>
