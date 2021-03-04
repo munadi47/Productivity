@@ -53,7 +53,6 @@ class Client extends BaseController{
   
      }
 
-   
 
     public function add(){
         $data['dataEmployee']  = $this->employeeModel->findAll();
@@ -210,9 +209,9 @@ $i=2; foreach($dataClient as $row) {
 
 $spreadsheet->setActiveSheetIndex(0)
 ->setCellValue('A'.$i, $row->id_client)
-->setCellValue('C'.$i, $row->address)
-->setCellValue('D'.$i, $row->phone)
-->setCellValue('E'.$i, $row->name)
+->setCellValue('B'.$i, $row->address)
+->setCellValue('C'.$i, $row->phone)
+->setCellValue('D'.$i, $row->name)
 
 ;
 $i++;
@@ -249,7 +248,7 @@ exit;
   // Export ke excel
   public function export_detail($id)
   {
-  $dataClient = $this->clientModel->getDetail($id);
+  $dataClient = $this->clientModel->exportClient($id);
   // Create new Spreadsheet object
   $spreadsheet = new Spreadsheet();
   

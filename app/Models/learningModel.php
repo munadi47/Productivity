@@ -36,4 +36,11 @@ class learningModel extends Model
          ->where('learning.id_learning',$id)
          ->get()->getResultObject(); 
     }
+    public function countLearning()
+    {
+         return $this->db->table('learning')
+         ->select('*')
+         ->countAllResults();
+ 
+    }
 }
