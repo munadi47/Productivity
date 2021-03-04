@@ -39,4 +39,10 @@ class financeModel extends Model
          ->where('f.id_finance',$id)
          ->get()->getResultObject(); 
     }
+    public function countFinance(){
+         return $this->table('finance')
+         ->select('CONCAT(YEAR(finance.invoice_date)) AS tahun, COUNT(*) AS amount')
+         ->groupBy('YEAR(finance.invoice_date)')
+         ->get()->getResult();
+    }
 }

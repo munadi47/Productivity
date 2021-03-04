@@ -14,6 +14,7 @@ class Dashboard extends BaseController{
         $this->learningModel = new \App\Models\learningModel();
         $this->digitalModel = new \App\Models\digital_contentModel();
         $this->consultingModel = new \App\Models\consultingModel();
+        $this->financeModel = new \App\Models\financeModel();
         
         
     }
@@ -27,6 +28,8 @@ class Dashboard extends BaseController{
        $data['countLearning'] = $this->learningModel->countLearning();
        $data['countDigital'] = $this->digitalModel->countDigital();
        $data['countConsulting'] = $this->consultingModel->countConsulting();
+       $data['countFinance'] = $this->financeModel->countFinance();
+       
         echo view ('users/header_v');
         echo view ('admin/dashboard',$data);
         echo view ('users/footer_v');
