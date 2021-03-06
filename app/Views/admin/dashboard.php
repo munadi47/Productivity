@@ -41,46 +41,101 @@
     </div>
     </div>
    
-        <div class="row">
-            <div class="col">
-                <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info "  data-aos="zoom-in" data-aos-duration="1000">
-                    <div id="deliveryChart" >
-                    </div>
-                </div>
-            </div>        
+      <div class="row">
+        <div class="col col-lg-8">
+          <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info "  data-aos="zoom-in" data-aos-duration="1000">
+            <div id="financeChart">
+            </div>
+          </div>
         </div>
- 
+        
+        <div class="col col-lg-4">
+          <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info "  data-aos="zoom-in" data-aos-duration="1000">
+            <div id="deliveryChart">
+            </div>
+          </div>
+        
+        </div>
+      </div>
+     
+  
+        
+    
        
         <script>
-                  const chart = Highcharts.chart('deliveryChart', {
-                    title: {
-                        text: 'Delivery Count Data'
-                    },
-                    subtitle: {
-                        text: 'Jumlah delivery setiap kategori'
-                    },
-                    xAxis: {
-                        categories: ['Video','Learning','Digital Content','Consulting']
-                    },
-                    series: [{
-                        type: 'column',
-                        colorByPoint: true,
-                        data: [<?php echo $countVideo;?>,<?php echo $countLearning; ?>,<?php echo $countDigital; ?>,<?php echo $countConsulting; ?>],
-                        showInLegend: false
-                    }]
-                });
-
-                document.getElementById('plain').addEventListener('click', () => {
-                    chart.update({
-                        chart: {
-                            inverted: false,
-                            polar: false
-                        },
-                        subtitle: {
-                            text: 'Plain'
-                        }
-                    });
-                });          
+              Highcharts.chart('financeChart', {
+              chart: {
+                  type: 'line'
+              },
+              title: {
+                  text: 'Finance Amount Data per Year'
+              },
+              
+              xAxis: {
+                  categories: [<?php  foreach ($countFinance as $data) echo $data->tahun.", "?>]
+              },
+              yAxis: {
+                  title: {
+                      text: 'Amount'
+                  }
+              },
+              plotOptions: {
+                  line: {
+                      dataLabels: {
+                          enabled: true
+                      },
+                      enableMouseTracking: false
+                  }
+              },
+              series: [{
+                  name: 'Amount',
+                  data: [<?php foreach ($countFinance as $data) echo $data->jumlah.", "?>]
+              }]
+          });
+                          
+       
         </script>
+
+        <script>
+          Highcharts.chart('deliveryChart', {
+              chart: {
+                  plotBackgroundColor: null,
+                  plotBorderWidth: null,
+                  plotShadow: false,
+                  type: 'pie'
+              },
+              title: {
+                  text: 'Delivery data count'
+              },
+             
+              plotOptions: {
+                  pie: {
+                      allowPointSelect: true,
+                      cursor: 'pointer',
+                      
+                  }
+              },
+              series: [{
+                  name: 'Delivery',
+                  colorByPoint: true,
+                  data: [{
+                      name: 'Video',
+                      y: <?php echo $countVideo;?>,
+                      sliced: true,
+                      selected: true
+                  }, {
+                      name: 'Digital Content',
+                      y: <?php echo $countDigital; ?>
+                  }, {
+                      name: 'Learning',
+                      y: <?php echo $countLearning; ?>
+                  }, {
+                      name: 'Consulting',
+                      y: <?php echo $countConsulting; ?>
+                  }]
+              }]
+          });
+        </script>
+   
   
 </div>
