@@ -58,7 +58,7 @@
                 <?php endif; ?>
 
                 <li>
-                    <a href="#"><i class="fas fa-user-clock"></i> Attendance</a>
+                    <a href="<?php echo base_url('Attendance')?>"><i class="fas fa-user-clock"></i> Attendance</a>
                 </li>
                 </li><?php if(allow('admin')) : ?>
 
