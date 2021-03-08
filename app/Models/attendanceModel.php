@@ -27,6 +27,24 @@ class attendanceModel extends Model
         //->orderBy('id_log','DESC');
         return $builder;
     }
+
+    public function getATD(){
+        return $this->db->table('log_attendance')
+        ->join('employee','employee.nik=log_attendance.nik')
+        ->get()->getResultObject(); 
+    }
+
+
+    public function update_data($co, $tbl, $id_atd)
+    {
+        $builder = $this->db->table($tbl);
+        $builder->set('clock_out',$co);
+        $builder->where('id_attendance',$id_atd);
+        $builder->update();
+        //$log = $builder->get()->getRow();
+        return $builder;
+    }   
+
    
 
    

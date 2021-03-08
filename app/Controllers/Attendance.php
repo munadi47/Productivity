@@ -23,7 +23,7 @@ class Attendance extends BaseController{
         $this->session = \Config\Services::session();
 
         $this->attendanceModel = new \App\Models\attendanceModel();
-
+        $this->clientModel = new \App\Models\clientModel();
         $this->employeeModel = new \App\Models\employeeModel();
         $this->empstatusModel = new \App\Models\empstatusModel();
         $this->activityModel = new \App\Models\activityModel();
@@ -32,6 +32,10 @@ class Attendance extends BaseController{
 
     public function index(){
         $session = session();
+        
+        //$this->load->library('user_agent');
+
+        
         $data['dataAttendance'] = $this->attendanceModel->getAttendanceEmp();
         $data['dataEmployee'] = $this->employeeModel->findAll();
 
@@ -41,6 +45,81 @@ class Attendance extends BaseController{
         
     }
 
+    public function view(){
+        $session = session();
+
+        $data['dataAttendance'] = $this->attendanceModel->getATD();
+        
+        echo view('users/header_v');
+        echo view('users/log_attendance_v',$data);
+        echo view('users/footer_v');
+        
+    }
+
+    public function clockout($id){
+        $where = ['id_attendance'=> $id];
+        $data['dataEmployee'] = $this->employeeModel->findAll();
+        $data['dataAttendance'] = $this->attendanceModel->where($where)->findAll()[0];
+        
+        echo view('users/header_v');
+        echo view('users/attendance_v_out',$data);
+        echo view ('users/footer_v');
+    }
+
+    public function save_clockin() {
+        $session = session();
+
+        /* update data juga
+        $table = 'log_attendance';
+        $id = $this->request->getPost('id_attendance');
+        $co = $this->request->getPost('clock_out');
+        $row = $this->attendanceModel->update_data($co,$table,$id);
+        */
+
+        $datain = [ 	 	
+            'id_attendance'=>$this->request->getPost('id_attendance'), 
+            'nik'=>$this->request->getPost('nik'),
+            'clock_in'=>$this->request->getPost('clock_in'),          
+            'clock_out'=>$this->request->getPost('clock_out'),
+
+        ]; 
+        
+        $id = $this->request->getPost('id_attendance');
+
+
+        if (empty($id)) { //Insert
+            $response = $this->attendanceModel->insert($datain);
+            $id = $this->attendanceModel->getInsertID(); 
+            //bug activity
+            //$act = 'Insert new Attendance data, Client = '.$datain['nik'];
+            //$this->record($act,session()->get('name'));
+    
+            if($response){
+                
+                return redirect()->to(site_url('Attendance/clockout/'.$id))->with('Success', '<i class="fas fa-save"></i> Clockin saved');
+            }else{
+                return redirect()->to(site_url('Attendance'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to save');
+            }
+            
+            
+        } else 
+        { // Update
+                $where = ['id_attendance'=>$id];
+                $response =  $this->attendanceModel->update($where, $datain);
+                //$act = 'Update Attendance data, Client = '.$datain['id_attendance'];
+                //$this->record($act,session()->get('nik'));
+
+            if($response){
+                return redirect()->to(site_url('Attendance'))->with('Success', '<i class="fas fa-save"></i> Clockout saved');
+            }else{
+                return redirect()->to(site_url('Attendance'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to save');
+            }
+        }
+
+       
+    }
+
+    
     public function record ($activity_name,$nik) { //method untuk merekam aktivitas
 
         $toRecord = array();
@@ -57,98 +136,27 @@ class Attendance extends BaseController{
   
      }
 
-   
-   
+     public function delete($id){
+        $where = ['id_attendance'=>$id];   
 
-    public function add(){
-        $data['dataEmployee'] = $this->employeeModel->findAll();
-        
-        echo view('users/header_v');
-        echo view('admin/finance_form_v',$data);
-        echo view('users/footer_v');
-    }
-
-    /*public function edit($id){
-        $where = ['id_finance'=> $id];
-        $data['datafinancestatus'] = $this->financestatusModel->findAll();
-        $data['dataClient'] = $this->clientModel->findAll();
-        $data['dataFinance'] = $this->financeModel->where($where)->findAll()[0];
-        
-
-        echo view('users/header_v');
-        echo view('admin/finance_form_v',$data);
-        echo view ('users/footer_v');
-    }*/
-
-    public function save_clockin() {
-        $datain = [ 	 	 
-            'nik'=>$this->request->getPost('nik'),
-            'clock_in'=>$this->request->getPost('clock_in'),          
-            'clock_out'=>$this->request->getPost('clock_out'),
-
-        ]; 
-
-        $dataout = [ 	 	 
-            'id_attendance'=>$this->request->getPost('id_attendance'),
-            'nik'=>$this->request->getPost('nik'),
-            'clock_out'=>$this->request->getPost('clock_out'),
-
-        ]; 
-        
-        $id = $this->request->getPost('id_attendance');
-
-        if (empty($id)) { //Insert
-           
-            $response = $this->attendanceModel->insert($datain);
-            //bug activity
-            //$act = 'Insert new Attendance data, Client = '.$dataout['nik'];
-            //$this->record($act,session()->get('name'));
-            
-
-            if($response){
-                return redirect()->to(site_url('Attendance'))->with('Success', '<i class="fas fa-save"></i> Clockin saved');
-            }else{
-                return redirect()->to(site_url('Attendance'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to save');
-            }
-            
-            
-        } /*else 
-        { // Update
-                $where = ['id_attendance'=>$id];
-                $response =  $this->financeModel->update($where, $datain);
-                $act = 'Update Attendance data, Client = '.$datain['id_attendance'];
-                $this->record($act,session()->get('nik'));
-
-            if($response){
-                return redirect()->to(site_url('Attendance'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
-            }else{
-                return redirect()->to(site_url('Attendance'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to save');
-            }
-        }*/
-
-       
-    }
-
-    //delete
-    /*public function delete($id){
-        $where = ['id_finance'=>$id];   
-
-        $response = $this->financeModel->delete($where);
-        $act = 'Delete Finance data '.$id;
+        $response = $this->attendanceModel->delete($where);
+        /*$act = 'Delete client data '.$id;
         $this->record($act,session()->get('nik'));
+        */
         if($response){
-            return redirect()->to(site_url('Finance'))->with('Success', '<i class="fas fa-save"></i> Data has been deleted');
+            return redirect()->to(site_url('Attendance/view'))->with('Success', '<i class="fas fa-trash"></i> Data has been deleted');
         }else{
-            return redirect()->to(site_url('Finance'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to delete');
+            return redirect()->to(site_url('Attendance/view'))->with('Failed', '<i class="fas fa-exclamation"></i> Data Failed to delete');
         }
        
 
-    }*/
+    }
+
 
     // Export ke excel
 public function export()
 {
-$dataFinance = $this->financeModel->getStatusFinance();
+$dataAttendance = $this->attendanceModel->getATD();
 // Create new Spreadsheet object
 $spreadsheet = new Spreadsheet(); 
 
@@ -163,21 +171,19 @@ $spreadsheet->getProperties()->setTitle('Office 2007 XLSX Test Document')
 // Add some data
 $spreadsheet->setActiveSheetIndex(0)
 ->setCellValue('A1', 'ID')
-->setCellValue('B1', 'INVOICE DATE')
-->setCellValue('C1', 'INOVICE DUE DATE')
-->setCellValue('D1', 'INVOICE AMOUNT')
-->setCellValue('E1', 'STATUS')
+->setCellValue('B1', 'NAME')
+->setCellValue('C1', 'CLOCK IN')
+->setCellValue('D1', 'CLOCK OUT')
 ;
 
 // Miscellaneous glyphs, UTF-8
-$i=2; foreach($dataFinance as $row) {
+$i=2; foreach($dataAttendance as $row) {
 
 $spreadsheet->setActiveSheetIndex(0)
-->setCellValue('A'.$i, $row->id_finance)
-->setCellValue('B'.$i, $row->invoice_date)
-->setCellValue('C'.$i, $row->invoice_duedate)
-->setCellValue('D'.$i, $row->invoice_amount)
-->setCellValue('E'.$i, $row->id_fStatus)
+->setCellValue('A'.$i, $row->id_attendance)
+->setCellValue('B'.$i, $row->name)
+->setCellValue('C'.$i, $row->clock_in)
+->setCellValue('D'.$i, $row->clock_out)
 
 ;
 $i++;
@@ -186,7 +192,7 @@ $act = 'Export all Finance data to excel';
 $this->record($act,session()->get('nik'));
 
 // Rename worksheet
-$spreadsheet->getActiveSheet()->setTitle('Finance Data'.date('d-m-Y H'));
+$spreadsheet->getActiveSheet()->setTitle('Attendance Data'.date('d-m-Y H'));
 
 // Set active sheet index to the first sheet, so Excel opens this as the first sheet
 $spreadsheet->setActiveSheetIndex(0);

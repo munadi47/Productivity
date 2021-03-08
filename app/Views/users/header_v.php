@@ -57,10 +57,10 @@
                 </li>
                 <?php endif; ?>
 
-                <li>
-                    <a href="<?php echo base_url('Attendance')?>"><i class="fas fa-user-clock"></i> Attendance</a>
+                <!--li>
+                    <a href="<?php //echo base_url('Attendance')?>"><i class="fas fa-user-clock"></i> Attendance</a>
                 </li>
-                </li><?php if(allow('admin')) : ?>
+                </li--><?php if(allow('admin')) : ?>
 
                 <li>
                     <a href="#masterSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-table"></i> Company Data</a>
@@ -125,7 +125,7 @@
                             <a href="<?php echo base_url('Report_Attendance')?>"><i class="fas fa-user-clock"></i> Report Attendance</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('Activity')?>"><i class="fas fa-file-alt"></i> Activity Log</a>
+                            <a href="<?php echo base_url('Attendance/view')?>"><i class="fas fa-file-alt"></i> Activity Log</a>
                         </li>
                        
                         
