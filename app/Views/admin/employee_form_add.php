@@ -1,9 +1,9 @@
 <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="700" >
 <section>
     <div class="container">
-    <h2> <i class="fas fa-user-tie"></i> Employee Form Update</h2>
+    <h2> <i class="fas fa-user-tie"></i> Employee Form Add</h2>
     <hr>
-        <form method="POST" action="<?php echo site_url('Employee/saveUpdate'); ?>">
+        <form method="POST" action="<?php echo site_url('Employee/save'); ?>">
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">NIK</label>
             <div class="col-sm-10">
@@ -42,7 +42,14 @@
                 value="<?php if(!empty($dataEmployee)) echo $dataEmployee->email; ?>">
             </div>
         </div>
-        
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Password</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="password" name="password" required
+                value="<?php if(!empty($dataEmployee)) echo $dataEmployee->password; ?>">
+                <input type="checkbox" onclick="myFunction()" style="margin-top: 10px;"> Show Password 
+            </div>
+        </div>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Phone</label>
             <div class="col-sm-10">

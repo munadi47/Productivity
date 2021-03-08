@@ -51,13 +51,20 @@
             </div>
 
             <ul class="list-unstyled components">
-                
+                <?php if(allow('admin')) : ?>
                 <li>
                     <a href="<?php echo base_url('Dashboard')?>"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                 </li>
+                <?php endif; ?>
+
+                <?php if(allow('user')) : ?>
+
                 <li>
-                    <a href="#"><i class="fas fa-user-clock"></i> Attendance</a>
+                    <a href="<?php echo base_url('Attendance')?>"><i class="fas fa-user-clock"></i> Attendance</a>
                 </li>
+                <?php endif; ?>
+
+                <?php if(allow('admin')) : ?>
                 <li>
                     <a href="#masterSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-table"></i> Company Data</a>
                     <ul class="collapse list-unstyled" id="masterSubmenu">
@@ -70,9 +77,9 @@
                        
                     </ul>
                 </li>
-               
+                <?php endif; ?>
+
                 <li >
-                    
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-filter"></i>  Sales Pipeline</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
@@ -106,7 +113,8 @@
                         </li>
                        
                     </ul>
-                </li>
+                </li><?php if(allow('admin')) : ?>
+
                 <li>
                     <a href="<?php echo base_url('Finance');?>"><i class="fas fa-money-bill"></i> Finance </a>
                 </li>
@@ -119,12 +127,13 @@
                             <a href="<?php echo base_url('Report_Attendance')?>"><i class="fas fa-user-clock"></i> Report Attendance</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('Activity')?>"><i class="fas fa-file-alt"></i> Activity Log</a>
+                            <a href="<?php echo base_url('Attendance/view')?>"><i class="fas fa-file-alt"></i> Activity Log</a>
                         </li>
                        
                         
                     </ul>
-                </li>
+                </li><?php endif; ?>
+
                
 
               
@@ -238,7 +247,15 @@
                                                     </ul>
                                                     <div class="tab-content ml-1" id="myTabContent">
                                                         <div class="tab-pane fade show active" id="basicInfo" role="tabpanel" aria-labelledby="basicInfo-tab">
-                                                            
+                                                            <div class="row">
+                                                                <div class="col-sm-3 col-md-2 col-5">
+                                                                    <label style="font-weight:bold;">NIK</label>
+                                                                </div>
+                                                                <div class="col-md-8 col-6">
+                                                                <?= session()->get('nik') ?>
+                                                                </div>
+                                                            </div>
+                                                            <hr />
 
                                                             <div class="row">
                                                                 <div class="col-sm-3 col-md-2 col-5">
@@ -328,7 +345,14 @@
                             </div>
                             <!-- footer modal -->
                             <div class="modal-footer">
+                                <a href="<?php echo base_url("Employee/editProfile/".session()->get('nik')); ?>"> 
+                                    <button  type="button" class="btn btn-info">
+                                        <i class="fas fa-user"></i> Edit
+                                    </button>
+                                </a>
+
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+                                
                             </div>
                         </div>
                     </div>

@@ -19,6 +19,9 @@ class Filters extends BaseConfig
 		'csrf'     => CSRF::class,
 		'toolbar'  => DebugToolbar::class,
 		'honeypot' => Honeypot::class,
+		'authFilter' => \App\Filters\AuthFilter::class,
+		'filterAdmin' => \App\Filters\FilterAdmin::class,
+
 	];
 
 	/**
@@ -29,11 +32,47 @@ class Filters extends BaseConfig
 	 */
 	public $globals = [
 		'before' => [
+			'authFilter' => ['except' => ['/','/login','/auth','auth/*','register/']],
+
+			'filterAdmin' => ['except' => ['/','/login','/auth','auth/*','register/']],
+
 			// 'honeypot',
 			// 'csrf',
 		],
 		'after'  => [
 			'toolbar',
+
+			'authFilter' => ['except' => ['/Client','/Client/*','/Product','/Product/*','/Salespipeline','/Salespipeline/*',
+			'/Video','/Video/*',
+			'/Digital','/Digital/*',
+			'/Learning','/Learning/*',
+			'/Consulting','/Consulting/*',
+			'/Employee/edit/*','/Employee/editProfile/*',
+			'/Attendance','/Attendance/clockout/*','/Attendance/save_clockin'
+
+			]],
+
+			'filterAdmin' => ['except' => ['/Client','/Client/*','/Product','/Product/*','/Salespipeline','/Salespipeline/*',
+			'/Video','/Video/*',
+			'/Digital','/Digital/*',
+			'/Learning','/Learning/*',
+			'/Consulting','/Consulting/*',
+			'/Employee','/Employee/*',
+			'/Company','/Company/*',
+			'/Finance','/Finance/*',
+			'/Activity','/Activity/*',
+			'/Dashboard','/Dashboard/*',
+			'/Attendance','/Attendance/*',
+			]],
+
+			/*'filterAdmin' => ['except' => ['/Client','/Client/*','/Employee','/Employee/*','/Company','/Company/*','/Product','/Product/*','/Salespipeline','/Salespipeline/*',
+			'/Video','/Video/*',
+			'/Digital','/Digital/*',
+			'/Learning','/Learning/*',
+			'/Consulting','/Consulting/*',
+			'/Finance','/Finance/*',
+			'/Activity','/Activity/*',
+			]],*/
 			// 'honeypot',
 		],
 	];

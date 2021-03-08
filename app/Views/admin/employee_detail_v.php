@@ -100,14 +100,7 @@
                                                 <p><?php echo $row->email; ?></p>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Password</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo $row->password; ?></p>
-                                            </div>
-                                        </div>
+                                        
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label>Phone 1</label>
@@ -143,7 +136,7 @@
                                                     <?php if($row->status=='aman'){
                                                         ?><span class="badge badge-success"><?php
                                                     
-                                                    } elseif($row->status=='peringatan3'){
+                                                    } elseif($row->status=='peringatan1'){
                                                         ?><span class="badge badge-danger"><?php
                                                     }else{
                                                         ?><span class="badge badge-warning"><?php

@@ -55,7 +55,7 @@ class Employee extends BaseController{
         $data['dataEmpstatus'] = $this->empstatusModel->findAll();
 
         echo view('users/header_v');
-        echo view('admin/employee_form_v',$data);
+        echo view('admin/employee_form_add',$data);
         echo view('users/footer_v');
     }
 
@@ -69,6 +69,28 @@ class Employee extends BaseController{
         echo view('users/header_v');
         echo view('admin/employee_form_v',$data);
         echo view ('users/footer_v');
+
+        /*$session = session();
+        $session->destroy();
+        return redirect()->to('/login')->with('Success', '<i class="fas fa-exclamation"></i> Logout Sucsess');
+        */
+
+    }
+
+    public function editProfile($id){
+        $where = ['nik'=> $id];
+        $data['dataEmpstatus'] = $this->empstatusModel->findAll();
+        $data['dataEmployee'] = $this->employeeModel->where($where)->findAll()[0];
+        $data['dataEmpstatus'] = $this->empstatusModel->findAll();
+        
+
+        echo view('users/header_v');
+        echo view('admin/profile_form',$data);
+        echo view ('users/footer_v');
+
+        /*$session = session();
+        $session->destroy();
+        return redirect()->to('/login')->with('Success', '<i class="fas fa-exclamation"></i> Logout Sucsess');*/
     }
 
     public function detail($id){
@@ -85,9 +107,9 @@ class Employee extends BaseController{
             'nik'=>$this->request->getPost('nik'),
             'name'=>$this->request->getPost('name'),
             'address'=>$this->request->getPost('address'),
-            'birthday'=>$this->request->getPost('birthday'),
+            'birthday'=>$this->request->getPost('birthday'), 
             'email'=>$this->request->getPost('email'),
-            'password'=>$this->request->getPost('password'),
+            'password'=> password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
             'phone1'=>$this->request->getPost('phone1'),
             'phone2'=>$this->request->getPost('phone2'),
             'id_eStatus'=>$this->request->getPost('id_eStatus'),
@@ -113,13 +135,106 @@ class Employee extends BaseController{
         } else { // Update
                 $where = ['nik'=>$id];
                 $response =  $this->employeeModel->update($where, $data);
+                
                 $act = 'Update Employee data '.$data['name'];
                 $this->record($act,session()->get('nik'));
 
             if($response){
                 return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
+            }else {
+                return redirect()->to(site_url('Employee'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to save');
+
+            }
+            
+            
+        }
+
+       
+    }
+
+    public function saveUpdate() {
+        $data = [
+            'nik'=>$this->request->getPost('nik'),
+            'name'=>$this->request->getPost('name'),
+            'address'=>$this->request->getPost('address'),
+            'birthday'=>$this->request->getPost('birthday'), 
+            'email'=>$this->request->getPost('email'),
+            'phone1'=>$this->request->getPost('phone1'),
+            'phone2'=>$this->request->getPost('phone2'),
+            'id_eStatus'=>$this->request->getPost('id_eStatus'),
+            'level'=>$this->request->getPost('level'),
+          
+        ]; 
+        
+        $id = $this->request->getPost('id');
+
+        if (empty($id)) { //Insert
+           
+            $response = $this->employeeModel->insert($data);
+            
+            if($response != true){
+                return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
             }else{
                 return redirect()->to(site_url('Employee'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to save');
+            }
+            
+            
+        } else { // Update
+                $where = ['nik'=>$id];
+                $response =  $this->employeeModel->update($where, $data);
+        
+            if($response){
+                return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
+            }else {
+                return redirect()->to(site_url('Employee'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to save');
+
+            }
+            
+            
+        }
+
+       
+    }
+
+    public function saveProfile() {
+        $data = [
+            'nik'=>$this->request->getPost('nik'),
+            'name'=>$this->request->getPost('name'),
+            'address'=>$this->request->getPost('address'),
+            'birthday'=>$this->request->getPost('birthday'), 
+            'email'=>$this->request->getPost('email'),
+            'password'=> password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+            'phone1'=>$this->request->getPost('phone1'),
+            'phone2'=>$this->request->getPost('phone2'),
+            
+          
+        ]; 
+        
+        $id = $this->request->getPost('id');
+
+        if (empty($id)) { //Insert
+           
+            $response = $this->employeeModel->insert($data);
+            
+            if($response != true){
+                return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
+            }else{
+                return redirect()->to(site_url('Employee'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to save');
+            }
+            
+            
+        } else { // Update
+                $where = ['nik'=>$id];
+                $response =  $this->employeeModel->update($where, $data);
+        
+            if($response && session()->get('nik') == true){
+                $session = session();
+                $session->destroy();
+                return redirect()->to('/login')->with('Logout', '<i class="fas fa-exclamation"></i> Data has been changed! Please Login.');
+
+            }else {
+                return redirect()->to(site_url('Employee'))->with('Failed', '<i class="fas fa-exclamation"></i> Data Failed to save');
+
             }
             
             

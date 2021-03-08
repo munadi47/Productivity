@@ -71,10 +71,10 @@
                 <td><?php if($row->status=='aman'){
                     ?><span class="badge badge-success"><?php
                    
-                } elseif($row->status=='peringatan3'){
-                    ?><span class="badge badge-danger"><?php
-                }else{
-                    ?><span class="badge badge-warning"><?php
+                ?> 
+                <?php } else{
+                    ?>
+                    <span class="badge badge-warning"><?php
                 } echo $row->status; ?></td>
                 <td>
                     <a title="Detail" href="<?php echo base_url("Employee/detail/".$row->nik); ?>" class="btn btn-outline-info btn-sm">

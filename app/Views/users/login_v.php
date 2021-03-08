@@ -46,8 +46,9 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                <?php
-                                }
+                                
+
+                                <?php } 
                                 ?>                         
 
                                 <h3 class="text-center text-info"><i class="fas fa-sign-in-alt"></i> Login</h3>
