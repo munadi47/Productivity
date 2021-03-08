@@ -58,11 +58,14 @@
                 </li>
                 <?php endif; ?>
 
-                <!--li>
-                    <a href="<?php //echo base_url('Attendance')?>"><i class="fas fa-user-clock"></i> Attendance</a>
-                </li>
-                </li--><?php if(allow('admin')) : ?>
+                <?php if(allow('user')) : ?>
 
+                <li>
+                    <a href="<?php echo base_url('Attendance')?>"><i class="fas fa-user-clock"></i> Attendance</a>
+                </li>
+                <?php endif; ?>
+
+                <?php if(allow('admin')) : ?>
                 <li>
                     <a href="#masterSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-table"></i> Company Data</a>
                     <ul class="collapse list-unstyled" id="masterSubmenu">
@@ -78,7 +81,6 @@
                 <?php endif; ?>
 
                 <li >
-                    
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-filter"></i>  Sales Pipeline</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>

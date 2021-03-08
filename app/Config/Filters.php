@@ -48,7 +48,7 @@ class Filters extends BaseConfig
 			'/Learning','/Learning/*',
 			'/Consulting','/Consulting/*',
 			'/Employee/edit/*','/Employee/editProfile/*',
-			'/Attendance','/Attendance/clockout/*',
+			'/Attendance','/Attendance/clockout/*','/Attendance/save_clockin'
 
 			]],
 

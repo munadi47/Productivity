@@ -20,7 +20,7 @@ class FilterAdmin implements FilterInterface
     {
         $session = session();
         if ($session->get('level') == 'admin'){
-            return redirect()->to('/Finance');
+            return redirect()->to('/Dashboard');
         }
     }
 }

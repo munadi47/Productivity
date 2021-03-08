@@ -17,11 +17,58 @@
                     </div>
     <?php
     }
-    ?>
+?>
 
     <div class="container">
     <h2><i class="fas fa-briefcase"></i> Presensi </h2>
     <hr>
+
+    <form method="POST" action="<?php echo base_url('Attendance/save_clockin'); ?>">
+        <div class="form-group row">
+            <label hidden class="col-sm-2 col-form-label">NO</label>
+            <div class="col-sm-10">
+            <input type="hidden" id="id_attendance" name="id_attendance" value="<?php if(!empty($dataAttendance)) echo $dataAttendance->id_attendance; ?>"> 
+            </div>
+        </div>
+
+        <div hidden class="form-group row">
+                <label class="col-sm-2 col-form-label">Name </label>
+                <div class="col-sm-10">
+                    <select name="nik" class="form-select" aria-label="Default select example">
+                        
+                        <?php foreach($dataEmployee as $row) : ?>
+                            <option value="<?php echo $row->nik; ?>"
+                            
+                            <?php if(!empty($dataAttendance) && session()->get('nik') == $row->nik) echo 'selected'; ?> > 
+                            
+                            <?php echo $row->name//session()->get('name') ?> </option>
+                        <?php endforeach;?>
+                        
+                    </select>
+                </div>
+                
+        </div>
+    
+        <div hidden class="form-group row">
+            <label class="col-sm-2 col-form-label">Clock In </label>
+            <div class="col-sm-9">
+            <input type="text" class="form-control" id="clock_in" name="clock_in" value="<?php if(!empty($dataAttendance)) echo date("Y-m-d h:i:s"); else echo $dataAttendance->clock_in; ?>"> 
+               
+            </div>
+        </div>
+
+        <div hidden class="form-group row">
+            <label class="col-sm-2 col-form-label">Clock Out </label>
+            <div class="col-sm-9">
+            <input type="text" class="form-control" id="clock_out" name="clock_out" value="<?php if(!empty($dataAttendance)) echo date("Y-m-d h:i:s"); ?>"> 
+               
+            </div>
+        </div>
+
+            <button type="submit" class="btn btn-success" id="checktime">Clock In</button>
+
+        </form>
+
         <form method="POST" action="<?php echo base_url('Attendance/save_clockin'); ?>">
         <div hidden class="form-group row">
             <label hidden class="col-sm-2 col-form-label">NO</label>
@@ -65,7 +112,7 @@
         </div>
            
            
-            <button type="submit" class="btn btn-success">Clock Out</button>
+            <button type="submit" class="btn btn-success" id="checktime2">Clock Out</button>
 
         </form>
     </div>

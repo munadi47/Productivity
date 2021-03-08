@@ -20,7 +20,7 @@ class AuthFilter implements FilterInterface
     {
         $session = session();
         if ($session->get('level') == 'user'){
-            return redirect()->to('/Client');
+            return redirect()->to('/Attendance');
         }
     }
 }
