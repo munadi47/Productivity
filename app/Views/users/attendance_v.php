@@ -49,11 +49,6 @@
         <i class="fa fa-sign-out-alt fa-5x" aria-hidden="true"></i><br> Clock Out 
         </a>
 
-
-
-
-
-
     </div>
 </section>
 </div>
