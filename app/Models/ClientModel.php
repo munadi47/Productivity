@@ -36,6 +36,14 @@ class clientModel extends Model
         ->where('sales_pipeline.id_client',$id);
         return $builder;
     }
+    public function exportClient($id)
+    {
+        return $this->db->table('client')
+        ->join('sales_pipeline', 'sales_pipeline.id_client=client.id_client','inner')
+        ->where('client.id_client',$id)
+
+        ->get()->getResultObject(); 
+    }
     public function search($keyword,$id){
         $builder = $this->table('client');
         $builder->join('sales_pipeline','sales_pipeline.id_client=client.id_client')
@@ -47,4 +55,12 @@ class clientModel extends Model
         ->orLike('title',$keyword);
         return $builder;
     }
+    public function countClient()
+    {
+         return $this->db->table('client')
+         ->select('*')
+         ->countAllResults();
+ 
+    }
+    
 }

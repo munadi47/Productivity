@@ -58,7 +58,7 @@
         <div class="form-group row">
             <label  class="col-sm-2 col-form-label">Gantt chart Attachment </label>
             <div class="col-sm-10">
-            <input required class="form-control" type="file" id="gantt_chart" name="gantt_chart" value="<?php if(!empty($dataConsul)) echo base_url('assets/uploads/'.$dataConsul->gantt_chart); ?>">
+            <input  class="form-control" type="file" id="gantt_chart" name="gantt_chart" value="<?php if(!empty($dataConsul)) echo base_url('assets/uploads/'.$dataConsul->gantt_chart); ?>">
             </div>
         </div>
         

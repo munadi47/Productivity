@@ -49,7 +49,6 @@
                         <th >CLIENT</th>
                         <th >PROJECT NAME</th>
                         <th >PROJECT MANAGER</th>
-                        <th >GANTT CHART (ATTACH)</th>
                         <th >REMARK </th>
                         <th >ACTION</th>
                     
@@ -69,9 +68,9 @@
                         <td><?php echo $row->id_client; ?></td>
                         <td><?php echo $row->project_name; ?></td>
                         <td><?php echo $row->project_manager; ?></td>
-                        <td><a title="View Gantt Chart" class="btn btn-outline-secondary" href="<?php echo base_url('Consulting/view_pdf/'.$row->id_consulting); ?>"><i class="fa fa-file-alt"></i> &nbsp;<?php echo $row->gantt_chart; ?></a></td>
                         <td><?php echo $row->remark; ?></td>
                         <td>
+                            <a title="View Gantt Chart" class="btn btn-outline-info btn-sm" href="<?php echo base_url('Consulting/view_pdf/'.$row->id_consulting); ?>"><i class="fa fa-chart-bar"></i></a>
                             <a title="Download Report"  href="<?php echo base_url("Consulting/Report/".$row->id_consulting); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
                             <i class="fa fa-file-excel"></i> 
                             </a>

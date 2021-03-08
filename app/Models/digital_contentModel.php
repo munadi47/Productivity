@@ -35,5 +35,12 @@ class digital_contentModel extends Model
          ->where('digital_content.id_digital',$id)
          ->get()->getResultObject(); 
     }
+    public function countDigital()
+    {
+         return $this->db->table('digital_content')
+         ->select('*')
+         ->countAllResults();
+ 
+    }
 
 }

@@ -28,16 +28,35 @@ if(!empty(session()->getFlashdata('Success'))){ ?>
    
     <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="fade-out" data-aos-duration="1000" >
     <section>  
-             
-                <a title="Back" href="<?php echo base_url("Consulting"); ?>" class="btn btn-outline-info btn-md">
-                <i class="fas fa-arrow-left"></i> 
-                </a>
+                <div class="row">
+                    <div class="col">
+                    <a title="Back" href="<?php echo base_url("Consulting"); ?>" class="btn btn-outline-info btn-md">
+                    <i class="fas fa-arrow-left"></i> 
+                    </a>
+                    </div>
+                    <div class="col-9">
+                  
+                    </div>
+                    <div class="col">
+                   
+                    </div>
+                </div>
+               
+
+               
                 <br>    
                 <br>
-                <h1><strong> <?php echo $dataConsul->project_name; ?></strong><br>
-              </h1>
-                <h4><?php echo $dataConsul->gantt_chart; ?><br>
-              </h4>
+                <h1><strong> <?php echo $dataConsul->project_name; ?></strong><br></h1>
+                <?php if(empty($dataConsul->gantt_chart)){ ?>
+                    <div class="alert alert-warning" role="alert">
+                    <i class="fa fa-exclamation"> </i> &nbsp; Please Upload File First &nbsp; <a title="Upload on edit menu"  href="<?php echo base_url("Consulting/edit/".$dataConsul->id_consulting); ?>" alt="Upload" class="btn btn-outline-info btn-sm">
+                            <i class="fa fa-edit"> </i>  Upload Gantt Chart
+                            </a>
+                    </div>
+                <?php }?>
+               
+                    <h4><?php echo $dataConsul->gantt_chart; ?><br></h4>
+                    
               
                 <embed src="<?php echo base_url('assets/uploads/'.$dataConsul->gantt_chart); ?>" type="application/pdf" width="100%" height="800px"></embed>
                

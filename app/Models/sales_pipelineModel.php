@@ -78,6 +78,13 @@ class sales_pipelineModel extends Model
          return $query->getRow();
          
     }
+    public function countSales()
+    {
+         return $this->db->table('sales_pipeline')
+         ->select('*')
+         ->countAllResults();
+ 
+    }
 
 
 }

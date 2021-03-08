@@ -37,6 +37,13 @@ class consultingModel extends Model
          ->where('consulting.id_consulting',$id)
          ->get()->getResultObject(); 
     }
+    public function countConsulting()
+    {
+         return $this->db->table('consulting')
+         ->select('*')
+         ->countAllResults();
+ 
+    }
 
     
    

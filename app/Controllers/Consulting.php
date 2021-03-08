@@ -96,7 +96,17 @@ class Consulting extends BaseController{
             ]);
             
             if (!$validation){
-                return redirect()->to(site_url('Consulting'))->with('Failed', '<i class="fas fa-exclamation"></i> Plese Input Right File or Upload file');
+                $data = [
+                    'remark'=>$this->request->getPost('remark'),
+                    'project_name'=>$this->request->getPost('project_name'),
+                    'project_manager'=>$this->request->getPost('project_manager'),
+                    'id_SalesPipeline'=>$this->request->getPost('id_SalesPipeline'),
+                    
+                ];
+                $this->consultingModel->insert($data);
+                $act = 'Insert new consulting data '.$data['project_name'];
+                $this->record($act,session()->get('nik'));
+               
             }else{
                 $gantt_chart = $this->request->getFile('gantt_chart');
                 $gantt_chart->move('assets/uploads/');
@@ -123,15 +133,23 @@ class Consulting extends BaseController{
             $validation= $this->validate([
                 'gantt_chart' => [
                     'uploaded[gantt_chart]',
-                    'mime_in[gantt_chart,application/pdf,application/zip,application/msword,application/x-tar]',
+                    'mime_in[gantt_chart,application/pdf,application/zip,application/msword,application/jpg,application/png,application/x-tar]',
                     'max_size[gantt_chart,5000]',
                 ]
             ]);
           
             
             if (!$validation){
-                return redirect()->to(site_url('Consulting'))->with('Failed', '<i class="fas fa-exclamation"></i> Plese Input Right File or Upload file');
-              
+                $data = [
+                    'remark'=>$this->request->getPost('remark'),
+                    'project_name'=>$this->request->getPost('project_name'),
+                    'project_manager'=>$this->request->getPost('project_manager'),
+                    'id_SalesPipeline'=>$this->request->getPost('id_SalesPipeline'),
+                    
+                ];
+                $this->consultingModel->update($where,$data);
+                $act = 'Update consulting data '.$data['project_name'];
+                $this->record($act,session()->get('nik'));
             
             
             }else{
@@ -189,7 +207,7 @@ class Consulting extends BaseController{
 
      
     }
-
+   
     
 
 

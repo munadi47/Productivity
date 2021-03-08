@@ -31,6 +31,8 @@
   <script>
     AOS.init();
   </script>
+  <!-- Custom JS-->
+  <script src="<?php echo base_url('assets/js/style.js') ?>"></script>
 
   
   

@@ -21,8 +21,8 @@
 
         <nav aria-label="breadcrumb shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="fade-out" data-aos-duration="1000">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item" aria-current="page"><i class="fas fa-table"></i> Data Master</li>
-            <li class="breadcrumb-item" aria-current="page"><i class="fas fa-users"></i> Employee</li>
+            <li class="breadcrumb-item" aria-current="page"><i class="fas fa-table"></i> Company Data</li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-users"></i> Employee</li>
         </ol>
         </nav>
 
@@ -31,7 +31,9 @@
 
         <div class="card-body">
         <h4> Employee  </h4>
-
+        <a title="Back" href="<?php echo base_url("Employee"); ?>" class="btn btn-outline-info btn-md">
+        <i class="fas fa-arrow-left"></i> 
+        </a>
         
         <br>
         <?php foreach ($dataEmployee as $row) :?>
@@ -61,7 +63,7 @@
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Detail</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Pipeline</a>
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Performance</a>
                                 </li>
                             </ul>
                         </div>
@@ -107,6 +109,7 @@
                                                 <p><a class="btn btn-primary" href="tel:<?php echo $row->phone1; ?>"><i class="fas fa-phone" style="padding-right: 1px;"></i>  <?php echo $row->phone1; ?></a></p>
                                             </div>
                                         </div>
+                                        <?php if(!empty($row->phone2)) {?>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label>Phone 2</label>
@@ -115,6 +118,7 @@
                                                 <p><a class="btn btn-primary" href="tel:<?php echo $row->phone2; ?>"><i class="fas fa-phone" style="padding-right: 1px;"></i>  <?php echo $row->phone2; ?></a></p>
                                             </div>
                                         </div>
+                                        <?php } ?>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label>Address</label>
@@ -144,50 +148,29 @@
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Experience</label>
+                                                <label>Closing count</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Expert</p>
+                                                <p>20</p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Hourly Rate</label>
+                                                <label>Present count for this week </label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>10$/hr</p>
+                                                <p>20</p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Total Projects</label>
+                                                <label>PIC client count</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>230</p>
+                                                <p>20</p>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>English Level</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>Expert</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Availability</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>6 months</p>
-                                            </div>
-                                        </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label>Your Bio</label><br/>
-                                        <p>Your detail description</p>
-                                    </div>
-                                </div>
+                                        
                             </div>
                         </div>
                     </div>

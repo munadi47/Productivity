@@ -36,4 +36,11 @@ class employeeModel extends Model
          ->where('employee.nik',$id)
          ->get()->getResultObject(); 
     }
+    public function countEmployee()
+    {
+         return $this->db->table('employee')
+         ->select('*')
+         ->countAllResults();
+ 
+    }
 }

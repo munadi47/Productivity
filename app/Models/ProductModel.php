@@ -28,4 +28,11 @@ class productModel extends Model
          ->join('company', 'company.id_company=product.id_company')
          ->get()->getResultObject(); 
     }
+    public function countProduct()
+    {
+         return $this->db->table('product')
+         ->select('*')
+         ->countAllResults();
+ 
+    }
 }
