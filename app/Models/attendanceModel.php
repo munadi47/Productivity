@@ -45,6 +45,11 @@ class attendanceModel extends Model
         return $builder;
     }   
 
+    public function getId()
+    {
+        
+    }
+
    
 
    

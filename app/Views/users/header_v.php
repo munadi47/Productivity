@@ -125,10 +125,10 @@
                     <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-file"></i>  Report</a>
                     <ul class="collapse list-unstyled" id="reportSubmenu">
                         <li>
-                            <a href="<?php echo base_url('Report_Attendance')?>"><i class="fas fa-user-clock"></i> Report Attendance</a>
+                            <a href="<?php echo base_url('Attendance/view')?>"><i class="fas fa-user-clock"></i> Report Attendance</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('Attendance/view')?>"><i class="fas fa-file-alt"></i> Activity Log</a>
+                            <a href="<?php echo base_url('Activity')?>"><i class="fas fa-file-alt"></i> Activity Log</a>
                         </li>
                        
                         
