@@ -59,6 +59,7 @@
             <label  class="col-sm-2 col-form-label">Gantt chart Attachment </label>
             <div class="col-sm-10">
             <input  class="form-control" type="file" id="gantt_chart" name="gantt_chart" value="<?php if(!empty($dataConsul)) echo base_url('assets/uploads/'.$dataConsul->gantt_chart); ?>">
+            <label for="formFileDisabled" class="form-label"><p style="color: red;">* Max file 5MB with format pdf, word, and zip</p></label>
             </div>
         </div>
         

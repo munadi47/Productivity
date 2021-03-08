@@ -32,8 +32,8 @@
         <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Title</label>
                 <div class="col-sm-10">
-                    <select required name="id_SalesPipeline" class="form-select" aria-label="Default select example" >
-                        
+                    <select required name="id_SalesPipeline" class="form-select" aria-label="Default select example" data-live-search="true" >
+
                         <?php foreach($dataPipeline as $row) : ?>
                             <option value="<?php echo $row->id_SalesPipeline; ?>"<?php if(!empty($dataLearning) && $dataLearning->id_SalesPipeline == $row->id_SalesPipeline) echo 'selected'; ?> > <?php echo $row->title; ?> </option>
                         <?php endforeach;?>

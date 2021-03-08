@@ -43,4 +43,20 @@ class employeeModel extends Model
          ->countAllResults();
  
     }
+    public function countClosing($id)
+    {
+         return $this->db->table('sales_pipeline')
+         ->select('*')
+         ->where('nik',$id)
+         ->countAllResults();
+ 
+    }
+    public function countPICClient($id)
+    {
+         return $this->db->table('client')
+         ->select('*')
+         ->where('nik',$id)
+         ->countAllResults();
+ 
+    }
 }
