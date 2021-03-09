@@ -33,7 +33,7 @@
                     <i class="fa fa-plus"></i> 
                 </a>
                
-                <a class="btn btn-outline-info btn-sm dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="btn btn-outline-info btn-sm" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-file-excel"></i>  <i class="fa fa-caret-down"></i>
                 </a>
 
@@ -42,6 +42,7 @@
                     <a class="dropdown-item" href="Company/import">Import Excel</a>
                     
                 </div>
+                
                 
                             
                
