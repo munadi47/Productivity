@@ -124,7 +124,7 @@
                         <th>TITLE</th>
                         <th>COUNT</th>
                         <th>POTENTIAL REVENUE</th>
-                        <th>TOTAL REVENUE</th>
+                        <th style="width: 50%">TOTAL REVENUE</th>
                         <th>STATUS</th>
                         <th>ACTION</th>
                     

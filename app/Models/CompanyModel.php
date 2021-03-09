@@ -10,7 +10,7 @@ class companyModel extends Model
     protected $returnType     = 'object';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['id_company','company_name'];
+    protected $allowedFields = ['id_company','company_name','address','phone','field'];
 
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';

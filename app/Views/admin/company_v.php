@@ -32,10 +32,18 @@
                 <a title="Add data"  href="<?php echo base_url("Company/add/"); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
                     <i class="fa fa-plus"></i> 
                 </a>
-                
-                <a title="Export data to excel" href="<?php echo base_url("Company/export/"); ?>" class="btn btn-outline-info btn-sm">
-                <i class="fas fa-file-excel"></i> 
+               
+                <a class="btn btn-outline-info btn-sm dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-file-excel"></i>  <i class="fa fa-caret-down"></i>
                 </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" >
+                    <a class="dropdown-item" href="Company/export">Export Excel</a>
+                    <a class="dropdown-item" href="Company/import">Import Excel</a>
+                    
+                </div>
+                
+                            
                
                 <br>
                 <br>
@@ -45,6 +53,9 @@
                     <tr>
                         <th> # </th>
                         <th>COMPANY NAME</th>
+                        <th>ADDRESS</th>
+                        <th>PHONE</th>
+                        <th>FIELD</th>
                         <th>ACTION</th>
                        
                     
@@ -62,6 +73,9 @@
                     <tr>
                         <td><?php echo $nomor++; ?></td>
                         <td><?php echo $row->company_name; ?></td>
+                        <td><?php echo $row->address; ?></td>
+                        <td><?php echo $row->phone; ?></td>
+                        <td><?php echo $row->field; ?></td>
                         <td>
                             <a title="Edit"  href="<?php echo base_url("Company/edit/".$row->id_company); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
                             <i class="fa fa-edit"></i> 

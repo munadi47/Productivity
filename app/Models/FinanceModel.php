@@ -43,7 +43,6 @@ class financeModel extends Model
    
     public function countFinance(){
      $query = $this->db->query("SELECT sum(invoice_amount) AS jumlah, YEAR(invoice_date) as tahun FROM finance GROUP BY(tahun) ");
-       
      if($query){
          foreach($query->getResult() as $data){
              $countFinance[] = $data;

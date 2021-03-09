@@ -57,6 +57,14 @@
         
         </div>
       </div>
+
+      <div class="row">
+      <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="fade-out" data-aos-duration="1000" >
+        <div id="sp_chart">
+           
+        </div>
+      </div>
+      </div>
      
   
         
@@ -68,7 +76,7 @@
                   type: 'line'
               },
               title: {
-                  text: 'Finance Amount Data per Year'
+                  text: 'Finance Total Income per Year'
               },
               
               xAxis: {
@@ -76,7 +84,7 @@
               },
               yAxis: {
                   title: {
-                      text: 'Amount'
+                      text: 'Income'
                   }
               },
               plotOptions: {
@@ -136,6 +144,63 @@
               }]
           });
         </script>
+
+        <script> 
+                    Highcharts.chart('sp_chart', {
+                        chart: {
+                            type: 'funnel'
+                        },
+                        title: {
+                            text: 'Sales funnel'
+                        },
+                        plotOptions: {
+                            series: {
+                                dataLabels: {
+                                    enabled: true,
+                                    format: '<b>{point.name}</b> ({point.y:,.0f})',
+                                    softConnector: true
+                                },
+                                center: ['50%', '50%'],
+                                neckWidth: '20%',
+                                neckHeight: '40%',
+                                width: '50%'
+                            }
+                        },
+                        legend: {
+                            enabled: false
+                        },
+                        series: [{
+                            name: 'Client',
+                            data: [
+                                ['Meeting', <?php echo $countMeeting; ?> ],
+                                ['Proposal', <?php echo $countProposal; ?>],
+                                ['Closing',  <?php echo $countClosing; ?>]
+                            ]
+                        }],
+
+                        responsive: {
+                            rules: [{
+                                condition: {
+                                    maxWidth: 300
+                                },
+                                chartOptions: {
+                                    plotOptions: {
+                                        series: {
+                                            dataLabels: {
+                                                inside: true
+                                            },
+                                            center: ['50%', '50%'],
+                                            width: '100%'
+                                        }
+                                    }
+                                }
+                            }]
+                        }
+                    });
+          
+            </script>
+
+
    
   
 </div>

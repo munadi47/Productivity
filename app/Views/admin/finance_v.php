@@ -50,7 +50,7 @@
                     <th>INVOICE CREATE</th> 	 	 	 	 	 
                     <th>INVOICE DUE DATE</th>
                     <!--th>password</th-->
-                    <th>AMMOUNT</th>
+                    <th>AMOUNT</th>
                     <th>STATUS</th>
                     <!--th>level</th-->
                     <th>ACTION</th>

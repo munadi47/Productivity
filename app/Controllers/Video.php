@@ -22,6 +22,7 @@ class Video extends BaseController{
         $this->videoModel = new \App\Models\videoModel();
         $this->sales_pipelineModel = new \App\Models\sales_pipelineModel();
         $this->activityModel = new \App\Models\activityModel();
+        
 
     }
 
@@ -35,12 +36,11 @@ class Video extends BaseController{
         
     }
     public function record ($activity_name,$nik) { //method untuk merekam aktivitas
-
-        $toRecord = array();
-        $toRecord['activity_name'] = $activity_name;
-        $toRecord['datetime'] = date("Y-m-d h:i:s");
-        $toRecord['nik'] = $nik;
-  
+        date_default_timezone_set("Asia/Jakarta");
+        $toRecord = [
+            'activity_name'=>$activity_name, 	 	 
+            'nik'=> $nik,
+            'datetime'=> date('Y-m-d H:i:s'),      ];
         $result = $this->activityModel->insert($toRecord); // simpan data ke tabel
   
          if(!$result):
@@ -90,7 +90,7 @@ class Video extends BaseController{
             ];
             
             $response = $this->videoModel->insert($data);
-            $act = 'Insert new video data, storyboard PIC = '.$data['storyboard_pic'];
+            $act = 'Insert new video data, storyboard PIC : '.$data['storyboard_pic'];
             $this->record($act,session()->get('nik'));
             if($response){
                 return redirect()->to(site_url('Video'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
@@ -116,7 +116,7 @@ class Video extends BaseController{
          
            
             $response = $this->videoModel->update($where, $data);
-            $act = 'Update video data, storyboard pic = '.$data['storyboard_pic'];
+            $act = 'Update video data, storyboard PIC : '.$data['storyboard_pic'];
             $this->record($act,session()->get('nik'));
             if($response){
                 return redirect()->to(site_url('Video'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');

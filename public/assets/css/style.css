@@ -149,6 +149,24 @@ a.article:hover {
     transition: ease all 0.3s;
     position: fixed;
 }
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+  }
+  .btn-circle.btn-lg {
+    width: 50px;
+    height: 50px;
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 25px;
+  }
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
@@ -159,6 +177,8 @@ a.article:hover {
     min-height: 100vh;
     transition: all 0.3s;
 }
+
+
 
 
 /* ---------------------------------------------------
@@ -635,8 +655,7 @@ li.timeline-item::before {
     opacity: 0.5;
     display: block;
     font-size: 18px;
-<<<<<<< Updated upstream
-=======
+  
   }
 
 
@@ -669,5 +688,4 @@ li.timeline-item::before {
     text-align: center;
     width: 100%;
     max-width: 500px;
->>>>>>> Stashed changes
   }
