@@ -21,6 +21,7 @@ class Company extends BaseController{
         $this->session = \Config\Services::session();
         $this->companyModel = new \App\Models\companyModel();
         $this->activityModel = new \App\Models\activityModel();
+       
       
     }
 
@@ -28,17 +29,16 @@ class Company extends BaseController{
         $session = session();
         $data['dataCompany'] = $this->companyModel->findAll();
         echo view ('users/header_v');
-        echo view ('users/company_v',$data);
+        echo view ('admin/company_v',$data);
         echo view ('users/footer_v');
         
     }
     public function record ($activity_name,$nik) { //method untuk merekam aktivitas
-
-        $toRecord = array();
-        $toRecord['activity_name'] = $activity_name;
-        $toRecord['datetime'] = date("Y-m-d h:i:s");
-        $toRecord['nik'] = $nik;
-  
+        date_default_timezone_set("Asia/Jakarta");
+        $toRecord = [
+            'activity_name'=>$activity_name, 	 	 
+            'nik'=> $nik,
+            'datetime'=> date('Y-m-d H:i:s'),      ];
         $result = $this->activityModel->insert($toRecord); // simpan data ke tabel
   
          if(!$result):
@@ -48,11 +48,12 @@ class Company extends BaseController{
   
      }
 
+
    
 
     public function add(){
         echo view('users/header_v');
-        echo view('users/company_form_v');
+        echo view('admin/company_form_v');
         echo view('users/footer_v');
     }
 
@@ -61,7 +62,7 @@ class Company extends BaseController{
         $data['dataCompany'] = $this->companyModel->where($where)->findAll()[0];
         
         echo view('users/header_v');
-        echo view('users/company_form_v',$data);
+        echo view('admin/company_form_v',$data);
         echo view ('users/footer_v');
     }
    
@@ -105,7 +106,7 @@ class Company extends BaseController{
     public function delete($id){
         $where = ['id_company'=>$id];   
         $this->companyModel->delete($where);
-        $act = 'Delete company data '.$id;
+        $act = 'Delete company data';
         $this->record($act,session()->get('nik'));
         
         
@@ -135,6 +136,9 @@ $spreadsheet->getProperties()->setTitle('Office 2007 XLSX Test Document')
 $spreadsheet->setActiveSheetIndex(0)
 ->setCellValue('A1', 'ID COMPANY')
 ->setCellValue('B1', 'COMPANY NAME')
+->setCellValue('C1', 'ADDRESS')
+->setCellValue('D1', 'PHONE')
+->setCellValue('E1', 'FIELD')
 
 
 ;
@@ -145,6 +149,9 @@ $i=2; foreach($dataCompany as $row) {
 $spreadsheet->setActiveSheetIndex(0)
 ->setCellValue('A'.$i, $row->id_company)
 ->setCellValue('B'.$i, $row->company_name)
+->setCellValue('C'.$i, $row->address)
+->setCellValue('D'.$i, $row->phone)
+->setCellValue('E'.$i, $row->field)
 
 ;
 $i++;
@@ -179,9 +186,61 @@ $act = 'Export to excel company data';
 $this->record($act,session()->get('nik'));
 }
 
-
-
+public function import(){
+    echo view('users/header_v');
+    echo view('admin/company_excel_form_v');
+    echo view('users/footer_v');
 }
+
+public function do_upload(){
+    $validated = $this->validate([
+        'company_file' => 'uploaded[company_file]|max_size[company_file,1024]'
+    ]);
+    if(!$validated){
+        return redirect()->to(site_url('Company'))->with('Failed','<i class="fas fa-trash-alt"></i>Failed to import, please check again');
+    }
+    else{
+        $company_file = $this->request->getFile('company_file');
+                //$userfile->move(WRITEPATH . 'uploads');
+        $company_file->move('assets/uploads/file_excel/');
+        $M = $company_file->getName();
+        $this->import_file($M);
+        return redirect()->to(site_url('Company'))->with('Success','<i class="fas fa-check"></i> Success to import file');
+        
+    }
+}
+
+public function import_file($nf){
+    $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+    $spreadsheet = $reader->load('assets/uploads/file_excel/'.$nf);
+    $sheetData = $spreadsheet->getActiveSheet()->toArray();
+    
+    for($i = 1;$i < count($sheetData);$i++)
+    {
+        //perhatikan indeks harus sama dengan field atau column di database
+        $data[$i]['company_name']  = $sheetData[$i][0];
+        $data[$i]['address']  = $sheetData[$i][1];
+        $data[$i]['phone']  = $sheetData[$i][2];
+        $data[$i]['field'] = $sheetData[$i][3];
+       
+    }
+    foreach($data as $row):{
+        $this->companyModel->insert($row);
+    }
+    //$this->adminModel->set($data);
+    //$this->adminModel->insert($data);
+    //$this->adminModel->insert($data);
+    endforeach;
+    $act = 'Import new company data';
+    $this->record($act,session()->get('nik'));
+}	
+        
+    
+}
+
+
+
+
 
 
 

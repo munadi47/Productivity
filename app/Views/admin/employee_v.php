@@ -37,9 +37,16 @@
             <i class="fa fa-plus"></i> 
         </a>
         
-        <a title="Export data to excel" href="<?php echo base_url("Employee/export/"); ?>" class="btn btn-outline-info btn-sm">
-            <i class="fas fa-file-excel"></i> 
-        </a>
+        <a class="btn btn-outline-info btn-sm" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-file-excel"></i>  <i class="fa fa-caret-down"></i>
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" >
+                    <a class="dropdown-item" href="Employee/export">Export Excel</a>
+                    <a class="dropdown-item" href="Employee/import">Import Excel</a>
+                    
+                </div>
+                
         
         <br><br>
 

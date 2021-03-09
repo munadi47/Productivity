@@ -18,8 +18,31 @@
             </div>
         </div>
         <br>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Address </label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="address" name="address" required
+                value="<?php if(!empty($dataCompany)) echo $dataCompany->address; ?>">
+            </div>
+        </div>
        
         <br>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Phone</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="phone" name="phone" required
+                value="<?php if(!empty($dataCompany)) echo $dataCompany->phone; ?>">
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Field</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="field" name="field" required
+                value="<?php if(!empty($dataCompany)) echo $dataCompany->field; ?>">
+            </div>
+        </div>
+       
        
         <br>
         <br>

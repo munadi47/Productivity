@@ -27,23 +27,37 @@ class Attendance extends BaseController{
         $this->employeeModel = new \App\Models\employeeModel();
         $this->empstatusModel = new \App\Models\empstatusModel();
         $this->activityModel = new \App\Models\activityModel();
+        date_default_timezone_set("Asia/Jakarta");
+        
 
     }
 
     public function index(){
         $session = session();
-        
         //$this->load->library('user_agent');
-
-        
         $data['dataAttendance'] = $this->attendanceModel->getAttendanceEmp();
         $data['dataEmployee'] = $this->employeeModel->findAll();
-
+        
         echo view ('users/header_v');
         echo view ('users/attendance_v',$data);
         echo view ('users/footer_v');
         
     }
+    public function record ($activity_name,$nik) { //method untuk merekam aktivitas
+        date_default_timezone_set("Asia/Jakarta");
+        $toRecord = [
+            'activity_name'=>$activity_name, 	 	 
+            'nik'=> $nik,
+            'datetime'=> date('Y-m-d H:i:s'),      ];
+        $result = $this->activityModel->insert($toRecord); // simpan data ke tabel
+  
+         if(!$result):
+            return false;
+         endif;
+         return $result;
+  
+     }
+    
 
     public function view(){
         $session = session();
@@ -58,15 +72,19 @@ class Attendance extends BaseController{
 
     public function clockout($id){
         $where = ['id_attendance'=> $id];
-        $data['dataEmployee'] = $this->employeeModel->findAll();
-        $data['dataAttendance'] = $this->attendanceModel->where($where)->findAll()[0];
+        $datain = [ 	 	
+            'clock_out'=> date('Y-m-d H:i:s'),          
+        ]; 
+            $this->attendanceModel->update($where,$datain);
+            $id = $this->attendanceModel->getInsertID(); 
+            $act = 'Out (Clock out)';
+            $this->record($act,session()->get('nik'));
+            return redirect()->to(site_url('Attendance'))->with('Success', '<i class="fas fa-save"></i> Clockout saved');            
         
-        echo view('users/header_v');
-        echo view('users/attendance_v_out',$data);
-        echo view ('users/footer_v');
+       
     }
 
-    public function save_clockin() {
+    public function clockin() {
         $session = session();
 
         /* update data juga
@@ -75,66 +93,38 @@ class Attendance extends BaseController{
         $co = $this->request->getPost('clock_out');
         $row = $this->attendanceModel->update_data($co,$table,$id);
         */
-
-        $datain = [ 	 	
-            'id_attendance'=>$this->request->getPost('id_attendance'), 
-            'nik'=>$this->request->getPost('nik'),
-            'clock_in'=>$this->request->getPost('clock_in'),          
-            'clock_out'=>$this->request->getPost('clock_out'),
-
-        ]; 
         
-        $id = $this->request->getPost('id_attendance');
+        $datain = [ 	 	 
+            'nik'=> session()->get('nik'),
+            'clock_in'=> date('Y-m-d H:i:s'),          
+        ]; 
 
-
-        if (empty($id)) { //Insert
-            $response = $this->attendanceModel->insert($datain);
+        
+        
+            $insert = $this->attendanceModel->insert($datain);
             $id = $this->attendanceModel->getInsertID(); 
+
+            if($insert) {
+                $data = array(
+                    'id_attendance' => $id,
+                    );
+        
+                $session->set($data);
+            }
+            $act = 'Present (Clock in)';
+            $this->record($act,session()->get('nik'));
+            
             //bug activity
             //$act = 'Insert new Attendance data, Client = '.$datain['nik'];
             //$this->record($act,session()->get('name'));
-    
-            if($response){
-                
-                return redirect()->to(site_url('Attendance/clockout/'.$id))->with('Success', '<i class="fas fa-save"></i> Clockin saved');
-            }else{
-                return redirect()->to(site_url('Attendance'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to save');
-            }
-            
-            
-        } else 
-        { // Update
-                $where = ['id_attendance'=>$id];
-                $response =  $this->attendanceModel->update($where, $datain);
-                //$act = 'Update Attendance data, Client = '.$datain['id_attendance'];
-                //$this->record($act,session()->get('nik'));
-
-            if($response){
-                return redirect()->to(site_url('Attendance'))->with('Success', '<i class="fas fa-save"></i> Clockout saved');
-            }else{
-                return redirect()->to(site_url('Attendance'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to save');
-            }
-        }
-
-       
-    }
+                return redirect()->to(site_url('Attendance'))->with('Success', '<i class="fas fa-save"></i> Clockin saved');            
+    } 
 
     
-    public function record ($activity_name,$nik) { //method untuk merekam aktivitas
 
-        $toRecord = array();
-        $toRecord['activity_name'] = $activity_name;
-        $toRecord['datetime'] = date("Y-m-d h:i:s");
-        $toRecord['nik'] = $nik;
-  
-        $result = $this->activityModel->insert($toRecord); // simpan data ke tabel
-  
-         if(!$result):
-            return false;
-         endif;
-         return $result;
-  
-     }
+    
+    
+
 
      public function delete($id){
         $where = ['id_attendance'=>$id];   

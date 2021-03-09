@@ -20,6 +20,7 @@ class Employee extends BaseController{
         $this->employeeModel = new \App\Models\employeeModel();
         $this->empstatusModel = new \App\Models\empstatusModel();
         $this->activityModel = new \App\Models\activityModel();
+      
 
     }
 
@@ -33,12 +34,11 @@ class Employee extends BaseController{
         
     }
     public function record ($activity_name,$nik) { //method untuk merekam aktivitas
-
-        $toRecord = array();
-        $toRecord['activity_name'] = $activity_name;
-        $toRecord['datetime'] = date("Y-m-d h:i:s");
-        $toRecord['nik'] = $nik;
-  
+        date_default_timezone_set("Asia/Jakarta");
+        $toRecord = [
+            'activity_name'=>$activity_name, 	 	 
+            'nik'=> $nik,
+            'datetime'=> date('Y-m-d H:i:s'),      ];
         $result = $this->activityModel->insert($toRecord); // simpan data ke tabel
   
          if(!$result):
@@ -47,6 +47,7 @@ class Employee extends BaseController{
          return $result;
   
      }
+
 
    
 
@@ -249,7 +250,7 @@ class Employee extends BaseController{
         $where = ['nik'=>$id];   
 
         $response = $this->employeeModel->delete($where);
-        $act = 'Delete Employee data '.$id;
+        $act = 'Delete Employee data, NIK : '.$id;
         $this->record($act,session()->get('nik'));
         if($response){
             return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-trash"></i> Data has been deleted');
@@ -258,6 +259,17 @@ class Employee extends BaseController{
         }
        
 
+    }
+
+    public function upload_profile(){
+        $validation = $this->validate([
+            'photo_profile' => [
+                'uploaded[photo_profile]',
+                'mime_in[photo_profile,image/jpg,image/jpeg,image/gif,image/png]',
+                'max_size[photo_profile,5000]',
+            ]
+        ]);
+        
     }
 
 
@@ -331,6 +343,65 @@ $writer->save('php://output');
 exit;
 
 }
+
+
+public function import(){
+    echo view('users/header_v');
+    echo view('admin/employee_excel_form_v');
+    echo view('users/footer_v');
+}
+
+
+public function do_upload(){
+    $validated = $this->validate([
+        'employee_file' => 'uploaded[employee_file]|max_size[employee_file,1024]'
+    ]);
+    if(!$validated){
+        return redirect()->to(site_url('Employee'))->with('Failed','<i class="fas fa-trash-alt"></i>Failed to import, please check again');
+    }
+    else{
+        $employee_file = $this->request->getFile('employee_file');
+                //$userfile->move(WRITEPATH . 'uploads');
+        $employee_file->move('assets/uploads/file_excel/');
+        $M = $employee_file->getName();
+        $this->import_file($M);
+        return redirect()->to(site_url('Employee'))->with('Success','<i class="fas fa-check"></i> Success to import file');
+        
+    }
+}
+
+public function import_file($nf){
+    $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+    $spreadsheet = $reader->load('assets/uploads/file_excel/'.$nf);
+    $sheetData = $spreadsheet->getActiveSheet()->toArray();
+    
+    for($i = 1;$i < count($sheetData);$i++)
+    {
+        //perhatikan indeks harus sama dengan field atau column di database
+        $data[$i]['nik']  = $sheetData[$i][0];
+        $data[$i]['name']  = $sheetData[$i][1];
+        $data[$i]['address']  = $sheetData[$i][2];
+        $data[$i]['birthday'] = $sheetData[$i][3];
+        $data[$i]['email'] = $sheetData[$i][4];
+        $data[$i]['password'] = $sheetData[$i][5];
+        $data[$i]['phone1'] = $sheetData[$i][6];
+        $data[$i]['phone2'] = $sheetData[$i][7];
+        $data[$i]['id_eStatus'] = $sheetData[$i][8];
+        $data[$i]['level'] = $sheetData[$i][9];
+
+       
+    }
+    foreach($data as $row):{
+        $this->employeeModel->insert($row);
+    }
+    //$this->adminModel->set($data);
+    //$this->adminModel->insert($data);
+    //$this->adminModel->insert($data);
+    endforeach;
+    $act = 'Import new employee data';
+    $this->record($act,session()->get('nik'));
+}	
+        
 
 }
 

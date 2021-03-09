@@ -49,7 +49,8 @@
                                 
 
                                 <?php } 
-                                ?>                         
+                                ?>
+                                <?= $validate->listErrors(); ?>                         
 
                                 <h3 class="text-center text-info"><i class="fas fa-sign-in-alt"></i> Login</h3>
                                 <div class="form-group">

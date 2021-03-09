@@ -4,10 +4,10 @@
     <h2><i class="fas fa-users"></i> Client Form Input </h2>
     <hr>
         <form method="POST" action="<?php echo base_url('Client/update'); ?>">
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Client Name</label>
-            <div class="col-sm-10">
-                <input required type="text" class="form-control" id="id_client" name="id_client" value="<?php if(!empty($dataClient)) echo $dataClient->id_client; ?>"> 
+        <div hidden class="form-group row">
+            <label hidden class="col-sm-2 col-form-label">Client Name</label>
+            <div hidden class="col-sm-10">
+                <input hidden required type="text" class="form-control" id="id_client" name="id_client" value="<?php if(!empty($dataClient)) echo $dataClient->id_client; ?>"> 
             </div>
         </div>
        

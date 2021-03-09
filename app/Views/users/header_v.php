@@ -20,10 +20,15 @@
     <!--AOS -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <!-- Font Awesome JS -->
+    
     <script  src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script  src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+   
+
+    <!--CK Editor-->
+    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+    
     <!--Chart JS-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     
@@ -124,10 +129,10 @@
                     <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-file"></i>  Report</a>
                     <ul class="collapse list-unstyled" id="reportSubmenu">
                         <li>
-                            <a href="<?php echo base_url('Report_Attendance')?>"><i class="fas fa-user-clock"></i> Report Attendance</a>
+                            <a href="<?php echo base_url('Attendance/view')?>"><i class="fas fa-user-clock"></i> Report Attendance</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('Attendance/view')?>"><i class="fas fa-file-alt"></i> Activity Log</a>
+                            <a href="<?php echo base_url('Activity')?>"><i class="fas fa-file-alt"></i> Activity Log</a>
                         </li>
                        
                         
@@ -180,6 +185,7 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
+                      
                             <li class="nav-item active">
                                 <a class="nav-link" href="#"> 
                                     <button data-toggle="modal" data-target="#myModal" type="button" id="sidebarCollapse" class="btn btn-info">
@@ -220,10 +226,12 @@
                                             <div class="card-title mb-4">
                                                 <div class="d-flex justify-content-start">
                                                     <div class="image-container">
-                                                        <img src="http://placehold.it/150x150" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+                                                        <img src="<?php if(empty(session()->get('photo'))){
+                                                            echo base_url('http://placehold.it/150x150');
+                                                        }else{
+                                                            echo base_url(session()->get('photo'));
+                                                        } ?>" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
                                                         <div class="middle">
-                                                            <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change" />
-                                                            <input type="file" style="display: none;" id="profilePicture" name="file" />
                                                         </div>
                                                     </div>
                                                     <div class="userData ml-3">

@@ -25,6 +25,7 @@ class Finance extends BaseController{
         $this->financestatusModel = new \App\Models\financestatusModel();
         $this->clientModel = new \App\Models\clientModel();
         $this->activityModel = new \App\Models\activityModel();
+     
 
     }
 
@@ -38,12 +39,11 @@ class Finance extends BaseController{
         
     }
     public function record ($activity_name,$nik) { //method untuk merekam aktivitas
-
-        $toRecord = array();
-        $toRecord['activity_name'] = $activity_name;
-        $toRecord['datetime'] = date("Y-m-d h:i:s");
-        $toRecord['nik'] = $nik;
-  
+        date_default_timezone_set("Asia/Jakarta");
+        $toRecord = [
+            'activity_name'=>$activity_name, 	 	 
+            'nik'=> $nik,
+            'datetime'=> date('Y-m-d H:i:s'),      ];
         $result = $this->activityModel->insert($toRecord); // simpan data ke tabel
   
          if(!$result):
@@ -52,6 +52,7 @@ class Finance extends BaseController{
          return $result;
   
      }
+
 
    
    
@@ -93,7 +94,7 @@ class Finance extends BaseController{
         if (empty($id)) { //Insert
            
             $response = $this->financeModel->insert($data);
-            $act = 'Insert new Finance data, Client = '.$data['id_client'];
+            $act = 'Insert new Finance data, Client : '.$data['id_client'];
             $this->record($act,session()->get('nik'));
             
             //masih aneh
@@ -107,7 +108,7 @@ class Finance extends BaseController{
         } else { // Update
                 $where = ['nik'=>$id];
                 $response =  $this->financeModel->update($where, $data);
-                $act = 'Update Finance data, Client = '.$data['id_client'];
+                $act = 'Update Finance data, Client : '.$data['id_client'];
                 $this->record($act,session()->get('nik'));
 
             if($response){
@@ -128,7 +129,7 @@ class Finance extends BaseController{
         $where = ['id_finance'=>$id];   
 
         $response = $this->financeModel->delete($where);
-        $act = 'Delete Finance data '.$id;
+        $act = 'Delete Finance data';
         $this->record($act,session()->get('nik'));
         if($response){
             return redirect()->to(site_url('Finance'))->with('Success', '<i class="fas fa-save"></i> Data has been deleted');
