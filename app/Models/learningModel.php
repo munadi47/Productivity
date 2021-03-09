@@ -43,4 +43,12 @@ class learningModel extends Model
          ->countAllResults();
  
     }
+    public function learning()
+    {
+         return $this->db->table('sales_pipeline')
+         ->select('*')
+         ->where("sales_pipeline.category = 'learning'")
+         ->get()->getResult();
+ 
+    }
 }

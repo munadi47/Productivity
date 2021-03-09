@@ -44,6 +44,14 @@ class consultingModel extends Model
          ->countAllResults();
  
     }
+    public function consulting()
+    {
+         return $this->db->table('sales_pipeline')
+         ->select('*')
+         ->where("sales_pipeline.category = 'consulting'")
+         ->get()->getResult();
+ 
+    }
 
     
    

@@ -15,6 +15,16 @@
     <?php
     }
     ?>
+
+<?php if(empty($dataPipeline)){ ?>
+    <div class="alert alert-warning" role="alert" data-aos="zoom-in" data-aos-duration="1000" >
+    <i class="fas fa-exclamation"></i> &nbsp;You doesn't input Video on pipeline table yet, Please input data first ! &nbsp;  
+    <a title="Add pipeline for video" href="<?php echo base_url("SalesPipeline/add"); ?>" class="btn btn-info btn-md">
+        <i class="fas fa-edit"></i> Input data 
+    </a> 
+    </div>
+
+<?php } ?>
 <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
 <section>
     <div class="container">

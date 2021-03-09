@@ -15,6 +15,15 @@
     <?php
     }
     ?>
+    <?php if(empty($dataPipeline)){ ?>
+    <div class="alert alert-warning" role="alert" data-aos="zoom-in" data-aos-duration="1000" >
+    <i class="fas fa-exclamation"></i> &nbsp;You doesn't input Learning on pipeline table yet, Please input data first ! &nbsp;  
+    <a title="Add pipeline for learning" href="<?php echo base_url("SalesPipeline/add"); ?>" class="btn btn-info btn-md">
+        <i class="fas fa-edit"></i> Input data 
+    </a> 
+    </div>
+
+<?php } ?>
 <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
 <section>
     <div class="container">
@@ -33,7 +42,6 @@
                 <label class="col-sm-2 col-form-label">Title</label>
                 <div class="col-sm-10">
                     <select required name="id_SalesPipeline" class="form-select" aria-label="Default select example" data-live-search="true" >
-
                         <?php foreach($dataPipeline as $row) : ?>
                             <option value="<?php echo $row->id_SalesPipeline; ?>"<?php if(!empty($dataLearning) && $dataLearning->id_SalesPipeline == $row->id_SalesPipeline) echo 'selected'; ?> > <?php echo $row->title; ?> </option>
                         <?php endforeach;?>
