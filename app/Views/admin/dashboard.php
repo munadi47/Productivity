@@ -72,7 +72,7 @@
               },
               
               xAxis: {
-                  categories: [<?php  foreach ($countFinance as $data) echo $data->tahun.", "?>]
+                  categories: [<?php if(!empty($countFinance)) foreach ($countFinance as $data) echo $data->tahun.", "?>]
               },
               yAxis: {
                   title: {
@@ -89,7 +89,7 @@
               },
               series: [{
                   name: 'Amount',
-                  data: [<?php foreach ($countFinance as $data) echo $data->jumlah.", "?>]
+                  data: [<?php if(!empty($countFinance)) foreach ($countFinance as $data) echo $data->jumlah.", "?>]
               }]
           });
                           
