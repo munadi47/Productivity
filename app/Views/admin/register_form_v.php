@@ -1,6 +1,20 @@
 <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
 <section>
     <div class="container">
+        <?php 
+        $errors=session()->getFlashdata('errors'); 
+        if (!empty($errors)){ ?>
+            <div class="alert alert-danger" role="alert">
+            <ul>
+            <?php foreach ($errors as $error) : ?>
+                <li><?= esc($error) ?></li>
+            <?php endforeach ?>
+            </ul>
+            </div>
+        <?php } 
+        ?>
+        
+        
     <h2><i class="fas fa-users"></i> Register Employee </h2>
     <hr>
         <form method="POST" action="<?php echo site_url('Auth/register'); ?>">
@@ -39,7 +53,7 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Password</label>
             <div class="col-sm-10">
-                <input type="password" class="form-control" id="password" name="password" required>
+                <input type="password" class="form-control" id="password" name="password" placeholder="must be 6 characters" required>
                 <input type="checkbox" onclick="myFunction()"> Show Password 
             </div>
         </div>
