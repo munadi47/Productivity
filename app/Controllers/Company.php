@@ -21,6 +21,7 @@ class Company extends BaseController{
         $this->session = \Config\Services::session();
         $this->companyModel = new \App\Models\companyModel();
         $this->activityModel = new \App\Models\activityModel();
+       
       
     }
 
@@ -33,12 +34,11 @@ class Company extends BaseController{
         
     }
     public function record ($activity_name,$nik) { //method untuk merekam aktivitas
-
-        $toRecord = array();
-        $toRecord['activity_name'] = $activity_name;
-        $toRecord['datetime'] = date("Y-m-d h:i:s");
-        $toRecord['nik'] = $nik;
-  
+        date_default_timezone_set("Asia/Jakarta");
+        $toRecord = [
+            'activity_name'=>$activity_name, 	 	 
+            'nik'=> $nik,
+            'datetime'=> date('Y-m-d H:i:s'),      ];
         $result = $this->activityModel->insert($toRecord); // simpan data ke tabel
   
          if(!$result):
@@ -47,6 +47,7 @@ class Company extends BaseController{
          return $result;
   
      }
+
 
    
 

@@ -20,6 +20,7 @@ class Employee extends BaseController{
         $this->employeeModel = new \App\Models\employeeModel();
         $this->empstatusModel = new \App\Models\empstatusModel();
         $this->activityModel = new \App\Models\activityModel();
+      
 
     }
 
@@ -33,12 +34,11 @@ class Employee extends BaseController{
         
     }
     public function record ($activity_name,$nik) { //method untuk merekam aktivitas
-
-        $toRecord = array();
-        $toRecord['activity_name'] = $activity_name;
-        $toRecord['datetime'] = date("Y-m-d h:i:s");
-        $toRecord['nik'] = $nik;
-  
+        date_default_timezone_set("Asia/Jakarta");
+        $toRecord = [
+            'activity_name'=>$activity_name, 	 	 
+            'nik'=> $nik,
+            'datetime'=> date('Y-m-d H:i:s'),      ];
         $result = $this->activityModel->insert($toRecord); // simpan data ke tabel
   
          if(!$result):
@@ -47,6 +47,7 @@ class Employee extends BaseController{
          return $result;
   
      }
+
 
    
 
@@ -257,6 +258,17 @@ class Employee extends BaseController{
         }
        
 
+    }
+
+    public function upload_profile(){
+        $validation = $this->validate([
+            'photo_profile' => [
+                'uploaded[photo_profile]',
+                'mime_in[photo_profile,image/jpg,image/jpeg,image/gif,image/png]',
+                'max_size[photo_profile,5000]',
+            ]
+        ]);
+        
     }
 
 

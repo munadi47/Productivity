@@ -229,8 +229,6 @@
                                                     <div class="image-container">
                                                         <img src="http://placehold.it/150x150" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
                                                         <div class="middle">
-                                                            <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change" />
-                                                            <input type="file" style="display: none;" id="profilePicture" name="file" />
                                                         </div>
                                                     </div>
                                                     <div class="userData ml-3">

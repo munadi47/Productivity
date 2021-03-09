@@ -28,6 +28,7 @@ class Auth extends BaseController{
         $this->loginModel = new \App\Models\AuthModel();
         helper('form');
         $this->form_validation = \Config\Services::validation();
+        $this->activityModel = new \App\Models\activityModel();
 
     }
 
@@ -42,6 +43,21 @@ class Auth extends BaseController{
         echo view ('users/footer_v');
 
     }
+
+    public function record ($activity_name,$nik) { //method untuk merekam aktivitas
+        date_default_timezone_set("Asia/Jakarta");
+        $toRecord = [
+            'activity_name'=>$activity_name, 	 	 
+            'nik'=> $nik,
+            'datetime'=> date('Y-m-d H:i:s'),      ];
+        $result = $this->activityModel->insert($toRecord); // simpan data ke tabel
+  
+         if(!$result):
+            return false;
+         endif;
+         return $result;
+  
+     }
 
     public function register(){   
         $data['dataEmployee'] = $this->employeeModel->getEmployee();
@@ -113,6 +129,7 @@ class Auth extends BaseController{
             return redirect()->to('/login')->with('Failed', '<i class="fas fa-exclamation"></i> Failed To Login');
         }
         if(password_verify($password,$row->password)){
+            
             $data = array(
             'login' => TRUE,
             'nik' => $row->nik,
@@ -125,16 +142,19 @@ class Auth extends BaseController{
             'phone2' => $row->phone2,
             'id_eStatus' => $row->id_eStatus,
             );
+        $act = 'Has Login';
+        $this->record($act,$data['nik']);
 
         $session->set($data);        
         return redirect()->to('/Client')->with('Success', '<i class="fas fa-exclamation"></i> Sucsess To Login');
-        
+       
         }else{
+
                 return redirect()->to('/login')->with('Failed', '<i class="fas fa-exclamation"></i> Failed To Login');
                 //->withInput()->with('validate',$pesanValidasi);
                 //->with('Failed', '<i class="fas fa-exclamation"></i> Failed To Login');
         }
-
+        
         /*$data = array(
             'login' => TRUE,
             'nik' => $row->nik,
@@ -154,10 +174,12 @@ class Auth extends BaseController{
 
     public function logout()
     {
+        $act = 'Has Logout';
+        $this->record($act,session()->get('nik'));
         $session = session();
         $session->destroy();
         return redirect()->to('/login')->with('Success', '<i class="fas fa-exclamation"></i> Logout Sucsess');
-
+       
     }
 
 

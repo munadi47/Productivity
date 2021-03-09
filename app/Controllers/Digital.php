@@ -22,6 +22,7 @@ class Digital extends BaseController{
         $this->digital_contentModel = new \App\Models\digital_contentModel();
         $this->sales_pipelineModel = new \App\Models\sales_pipelineModel();
         $this->activityModel = new \App\Models\activityModel();
+      
 
     }
 
@@ -35,12 +36,11 @@ class Digital extends BaseController{
         
     }
     public function record ($activity_name,$nik) { //method untuk merekam aktivitas
-
-        $toRecord = array();
-        $toRecord['activity_name'] = $activity_name;
-        $toRecord['datetime'] = date("Y-m-d h:i:s");
-        $toRecord['nik'] = $nik;
-  
+        date_default_timezone_set("Asia/Jakarta");
+        $toRecord = [
+            'activity_name'=>$activity_name, 	 	 
+            'nik'=> $nik,
+            'datetime'=> date('Y-m-d H:i:s'),      ];
         $result = $this->activityModel->insert($toRecord); // simpan data ke tabel
   
          if(!$result):

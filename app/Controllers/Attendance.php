@@ -43,6 +43,21 @@ class Attendance extends BaseController{
         echo view ('users/footer_v');
         
     }
+    public function record ($activity_name,$nik) { //method untuk merekam aktivitas
+        date_default_timezone_set("Asia/Jakarta");
+        $toRecord = [
+            'activity_name'=>$activity_name, 	 	 
+            'nik'=> $nik,
+            'datetime'=> date('Y-m-d H:i:s'),      ];
+        $result = $this->activityModel->insert($toRecord); // simpan data ke tabel
+  
+         if(!$result):
+            return false;
+         endif;
+         return $result;
+  
+     }
+    
 
     public function view(){
         $session = session();
@@ -62,9 +77,10 @@ class Attendance extends BaseController{
         ]; 
             $this->attendanceModel->update($where,$datain);
             $id = $this->attendanceModel->getInsertID(); 
-        
+            $act = 'Out (Clock out)';
+            $this->record($act,session()->get('nik'));
             return redirect()->to(site_url('Attendance'))->with('Success', '<i class="fas fa-save"></i> Clockout saved');            
-
+        
        
     }
 
@@ -95,6 +111,8 @@ class Attendance extends BaseController{
         
                 $session->set($data);
             }
+            $act = 'Present (Clock in)';
+            $this->record($act,session()->get('nik'));
             
             //bug activity
             //$act = 'Insert new Attendance data, Client = '.$datain['nik'];
@@ -105,21 +123,8 @@ class Attendance extends BaseController{
     
 
     
-    public function record ($activity_name,$nik) { //method untuk merekam aktivitas
+    
 
-        $toRecord = array();
-        $toRecord['activity_name'] = $activity_name;
-        $toRecord['datetime'] = date("Y-m-d h:i:s");
-        $toRecord['nik'] = $nik;
-  
-        $result = $this->activityModel->insert($toRecord); // simpan data ke tabel
-  
-         if(!$result):
-            return false;
-         endif;
-         return $result;
-  
-     }
 
      public function delete($id){
         $where = ['id_attendance'=>$id];   

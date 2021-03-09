@@ -22,6 +22,8 @@ class Client extends BaseController{
         $this->classModel = new \App\Models\classModel();
         $this->activityModel = new \App\Models\activityModel();
         $this->pager = \Config\Services::pager();
+        date_default_timezone_set("Asia/Jakarta");
+
       
     }
 
@@ -38,12 +40,11 @@ class Client extends BaseController{
     }
 
     public function record ($activity_name,$nik) { //method untuk merekam aktivitas
-
-        $toRecord = array();
-        $toRecord['activity_name'] = $activity_name;
-        $toRecord['datetime'] = date("Y-m-d h:i:s");
-        $toRecord['nik'] = $nik;
-  
+        date_default_timezone_set("Asia/Jakarta");
+        $toRecord = [
+            'activity_name'=>$activity_name, 	 	 
+            'nik'=> $nik,
+            'datetime'=> date('Y-m-d H:i:s'),      ];
         $result = $this->activityModel->insert($toRecord); // simpan data ke tabel
   
          if(!$result):
@@ -126,7 +127,6 @@ class Client extends BaseController{
             $id =  $this->request->getPost('id_client');
             $where = ['id_client'=>$id];
             $data = [
-               
                 'address'=>$this->request->getPost('address'),
                 'phone'=>$this->request->getPost('phone'),
                 'nik'=>$this->request->getPost('nik'),
@@ -135,7 +135,7 @@ class Client extends BaseController{
             ];
          
            
-           $this->clientModel->update($where, $data);
+           $this->clientModel->update($where,$data);
            $act = 'Update client data '.$id;
            $this->record($act,session()->get('nik'));
            return redirect()->to(site_url('Client'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
