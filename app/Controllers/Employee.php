@@ -20,12 +20,16 @@ class Employee extends BaseController{
         $this->employeeModel = new \App\Models\employeeModel();
         $this->empstatusModel = new \App\Models\empstatusModel();
         $this->activityModel = new \App\Models\activityModel();
-      
+        helper('form');
+        $this->form_validation = \Config\Services::validation();
+
 
     }
 
     public function index(){
-        $session = session();
+        session();
+        $data = [ 'validate' => \Config\Services::validation()];
+
         $data['dataEmployee'] = $this->employeeModel->getEmployee();
 
         echo view ('users/header_v');
@@ -102,38 +106,90 @@ class Employee extends BaseController{
         echo view ('users/footer_v');
     }
 
-    public function save() {
-        $data = [
-            'nik'=>$this->request->getPost('nik'),
-            'name'=>$this->request->getPost('name'),
-            'address'=>$this->request->getPost('address'),
-            'birthday'=>$this->request->getPost('birthday'), 
-            'email'=>$this->request->getPost('email'),
-            'password'=> password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-            'phone1'=>$this->request->getPost('phone1'),
-            'phone2'=>$this->request->getPost('phone2'),
-            'id_eStatus'=>$this->request->getPost('id_eStatus'),
-            'level'=>$this->request->getPost('level'),
-          
-        ]; 
+    public function upload_profile(){
+        $validation = $this->validate([
+            'photo_profile' => [
+                'uploaded[photo_profile]',
+                'mime_in[photo_profile,image/jpg,image/jpeg,image/gif,image/png]',
+                'max_size[photo_profile,5000]',
+            ]
+        ]);
         
-        $id = $this->request->getPost('id');
+    }
 
+    public function save() {
+
+        $id = $this->request->getPost('id');
+        $val = $this->validate([
+            'email' => [
+                'label'  => 'email',
+                'rules'  => 'required|valid_email',
+                'errors' => [
+                    'required' => 'Email Required'
+                ]
+            ],
+            'password' => [
+                'label'  => 'Rules.password',
+                'rules'  => 'required|min_length[6]',
+                'errors' => [
+                    'min_length' => 'Your Password is too short, min : 6'
+                ]
+            ],
+            'photo_profile' => [
+                'uploaded[photo_profile]',
+                'mime_in[photo_profile,image/jpg,image/jpeg,image/gif,image/png]',
+                'max_size[photo_profile,5000]',
+            ]
+            ]);
         if (empty($id)) { //Insert
-           
-            $response = $this->employeeModel->insert($data);
+           if($val==true) {
+                $data = [
+                    'nik'=>$this->request->getPost('nik'),
+                    'name'=>$this->request->getPost('name'),
+                    'address'=>$this->request->getPost('address'),
+                    'birthday'=>$this->request->getPost('birthday'),
+                    'email'=>$this->request->getPost('email'),
+                    'password'=> password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+                    'phone1'=>$this->request->getPost('phone1'),
+                    'phone2'=>$this->request->getPost('phone2'),
+                    'id_eStatus'=>$this->request->getPost('id_eStatus'),
+                    'level'=>$this->request->getPost('level'),
+                    'photo'=>$this->request->getPost('photo'),
+
+                  
+                ]; 
+                    $this->employeeModel->insert($data);
+                    return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
+                
+                }
+                else{
+                    //tidak valid
+                    session()->setFlashdata('errors', \Config\Services::validation()->getErrors() );
+                    return redirect()->to(site_url('Employee/add'));//->with('Success', '<i class="fas fa-save"></i> You Can Login Now');
+        
+                }            
+            
+            
             $act = 'Insert new Employee data '.$data['name'];
             $this->record($act,session()->get('nik'));
-            
-            if($response != true){
-                return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
-            }else{
-                return redirect()->to(site_url('Employee'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to save');
-            }
             
             
         } else { // Update
                 $where = ['nik'=>$id];
+                $data = [
+                    'nik'=>$this->request->getPost('nik'),
+                    'name'=>$this->request->getPost('name'),
+                    'address'=>$this->request->getPost('address'),
+                    'birthday'=>$this->request->getPost('birthday'), 
+                    'email'=>$this->request->getPost('email'),
+                    'password'=> password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+                    'phone1'=>$this->request->getPost('phone1'),
+                    'phone2'=>$this->request->getPost('phone2'),
+                    'id_eStatus'=>$this->request->getPost('id_eStatus'),
+                    'level'=>$this->request->getPost('level'),
+                
+                ]; 
+
                 $response =  $this->employeeModel->update($where, $data);
                 
                 $act = 'Update Employee data '.$data['name'];
@@ -260,16 +316,7 @@ class Employee extends BaseController{
 
     }
 
-    public function upload_profile(){
-        $validation = $this->validate([
-            'photo_profile' => [
-                'uploaded[photo_profile]',
-                'mime_in[photo_profile,image/jpg,image/jpeg,image/gif,image/png]',
-                'max_size[photo_profile,5000]',
-            ]
-        ]);
-        
-    }
+    
 
 
     // Export ke excel

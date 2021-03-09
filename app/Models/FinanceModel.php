@@ -47,7 +47,7 @@ class financeModel extends Model
          foreach($query->getResult() as $data){
              $countFinance[] = $data;
          }
-         if(!empty($countFinance)){
+        if(!empty($countFinance)){
             return $countFinance;
          } return false;
          

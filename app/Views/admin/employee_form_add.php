@@ -1,6 +1,20 @@
 <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="700" >
 <section>
     <div class="container">
+    <?php 
+        $errors=session()->getFlashdata('errors'); 
+        if (!empty($errors)){ ?>
+            <div class="alert alert-danger" role="alert">
+            <ul>
+            <?php foreach ($errors as $error) : ?>
+                <li><?= esc($error) ?></li>
+            <?php endforeach ?>
+            </ul>
+            </div>
+        <?php } 
+        ?>
+        
+
     <h2> <i class="fas fa-user-tie"></i> Employee Form Add</h2>
     <hr>
         <form method="POST" action="<?php echo site_url('Employee/save'); ?>">
