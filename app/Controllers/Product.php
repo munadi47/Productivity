@@ -204,6 +204,59 @@ exit;
        
 }
 
+public function import(){
+    echo view('users/header_v');
+    echo view('users/product_excel_form_v');
+    echo view('users/footer_v');
+}
+
+
+public function do_upload(){
+    $validated = $this->validate([
+        'product_file' => 'uploaded[product_file]|max_size[product_file,1024]'
+    ]);
+    if(!$validated){
+        return redirect()->to(site_url('Product'))->with('Failed','<i class="fas fa-trash-alt"></i>Failed to import, please check again');
+    }
+    else{
+        $product_file = $this->request->getFile('product_file');
+                //$userfile->move(WRITEPATH . 'uploads');
+        $product_file->move('assets/uploads/file_excel/');
+        $M = $product_file->getName();
+        $this->import_file($M);
+        return redirect()->to(site_url('Product'))->with('Success','<i class="fas fa-check"></i> Success to import file');
+        
+    }
+}
+
+public function import_file($nf){
+    $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+    $spreadsheet = $reader->load('assets/uploads/file_excel/'.$nf);
+    $sheetData = $spreadsheet->getActiveSheet()->toArray();
+    
+    for($i = 1;$i < count($sheetData);$i++)
+    {
+        //perhatikan indeks harus sama dengan field atau column di database
+        $data[$i]['product_name']  = $sheetData[$i][0];
+        $data[$i]['std_price']  = $sheetData[$i][1];
+        $data[$i]['id_company']  = $sheetData[$i][2];
+        
+
+       
+    }
+    foreach($data as $row):{
+        $this->productModel->insert($row);
+    }
+    //$this->adminModel->set($data);
+    //$this->adminModel->insert($data);
+    //$this->adminModel->insert($data);
+    endforeach;
+    $act = 'Import new product data';
+    $this->record($act,session()->get('nik'));
+}	
+        
+
+
 
 
 }

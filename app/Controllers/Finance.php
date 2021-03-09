@@ -93,7 +93,7 @@ class Finance extends BaseController{
         if (empty($id)) { //Insert
            
             $response = $this->financeModel->insert($data);
-            $act = 'Insert new Finance data, Client = '.$data['id_client'];
+            $act = 'Insert new Finance data, Client : '.$data['id_client'];
             $this->record($act,session()->get('nik'));
             
             //masih aneh
@@ -107,7 +107,7 @@ class Finance extends BaseController{
         } else { // Update
                 $where = ['nik'=>$id];
                 $response =  $this->financeModel->update($where, $data);
-                $act = 'Update Finance data, Client = '.$data['id_client'];
+                $act = 'Update Finance data, Client : '.$data['id_client'];
                 $this->record($act,session()->get('nik'));
 
             if($response){
@@ -128,7 +128,7 @@ class Finance extends BaseController{
         $where = ['id_finance'=>$id];   
 
         $response = $this->financeModel->delete($where);
-        $act = 'Delete Finance data '.$id;
+        $act = 'Delete Finance data';
         $this->record($act,session()->get('nik'));
         if($response){
             return redirect()->to(site_url('Finance'))->with('Success', '<i class="fas fa-save"></i> Data has been deleted');

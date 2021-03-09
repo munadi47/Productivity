@@ -90,7 +90,7 @@ class Video extends BaseController{
             ];
             
             $response = $this->videoModel->insert($data);
-            $act = 'Insert new video data, storyboard PIC = '.$data['storyboard_pic'];
+            $act = 'Insert new video data, storyboard PIC : '.$data['storyboard_pic'];
             $this->record($act,session()->get('nik'));
             if($response){
                 return redirect()->to(site_url('Video'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
@@ -116,7 +116,7 @@ class Video extends BaseController{
          
            
             $response = $this->videoModel->update($where, $data);
-            $act = 'Update video data, storyboard pic = '.$data['storyboard_pic'];
+            $act = 'Update video data, storyboard PIC : '.$data['storyboard_pic'];
             $this->record($act,session()->get('nik'));
             if($response){
                 return redirect()->to(site_url('Video'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');

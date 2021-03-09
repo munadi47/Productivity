@@ -29,7 +29,9 @@ class Dashboard extends BaseController{
        $data['countDigital'] = $this->digitalModel->countDigital();
        $data['countConsulting'] = $this->consultingModel->countConsulting();
        $data['countFinance'] = $this->financeModel->countFinance();
-     
+       $data['countClosing'] = $this->sales_pipelineModel->closing();
+       $data['countProposal'] = $this->sales_pipelineModel->proposal();
+       $data['countMeeting'] = $this->sales_pipelineModel->meeting();
       
          
       

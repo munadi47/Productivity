@@ -94,7 +94,7 @@ class Digital extends BaseController{
             ];
             
             $response = $this->digital_contentModel->insert($data);
-            $act = 'Insert new digital content data, storyboard PIC = '.$data['storyboard_pic'];
+            $act = 'Insert new digital content data, storyboard PIC : '.$data['storyboard_pic'];
             $this->record($act,session()->get('nik'));
             
             if($response){
@@ -124,7 +124,7 @@ class Digital extends BaseController{
            
             $response = $this->digital_contentModel->update($where, $data);
          
-            $act = 'Update digital content data, storyboard PIC = '.$data['storyboard_pic'];
+            $act = 'Update digital content data, storyboard PIC : '.$data['storyboard_pic'];
             $this->record($act,session()->get('nik'));
             if($response){
                 return redirect()->to(site_url('Digital'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');

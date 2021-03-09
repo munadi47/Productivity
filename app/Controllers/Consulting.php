@@ -79,7 +79,6 @@ class Consulting extends BaseController{
         echo view ('users/footer_v');
     }
     
-    
 
     public function save() {
       
@@ -196,7 +195,7 @@ class Consulting extends BaseController{
         @unlink($path.$gantt_chart);
         
         $response = $this->consultingModel->delete($where);
-        $act = 'Delete consulting data '.$id;
+        $act = 'Delete consulting data ';
         $this->record($act,session()->get('nik'));
         if($response){
             return redirect()->to(site_url('Consulting'))->with('Success', '<i class="fas fa-trash"></i> Data has been deleted');

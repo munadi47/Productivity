@@ -34,6 +34,12 @@
   <!-- Custom JS-->
   <script src="<?php echo base_url('assets/js/style.js') ?>"></script>
 
+  <!--CKEditor-->
+  
+<script>
+    CKEDITOR.replace( 'remark' );
+</script>
+
   
   
 </body>
