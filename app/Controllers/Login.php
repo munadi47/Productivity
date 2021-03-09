@@ -24,8 +24,12 @@ class Login extends BaseController{
     }
 
     public function index(){
-        $session = session();
-        echo view ('users/login_v');
+        session();
+        $data = [
+            'validate' => \Config\Services::validation(),
+
+        ];
+        echo view ('users/login_v',$data);
         
     }
 

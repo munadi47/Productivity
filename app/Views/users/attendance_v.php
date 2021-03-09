@@ -41,14 +41,45 @@
 <br/>
 
         <div class='text-center'>
-        <a title="Delete" href="<?php echo base_url("Attendance/clockin"); ?>" class="btn btn-sq-lg btn-primary">
+            <!--
+        <a title="clokin" href="<?php echo base_url("Attendance/clockin"); ?>" class="btn btn-sq-lg btn-primary">
         <i class="fa fa-sign-in-alt fa-5x"></i><br> Clock In 
         </a>
 
-        <a title="Delete" href="<?php echo base_url("Attendance/clockout/".getInsertID()); ?>" class="btn btn-sq-lg btn-danger">
+        <a title="clokout" href="<?php echo base_url("Attendance/clockout/".session()->get('id_attendance')); ?>" class="btn btn-sq-lg btn-danger" type="submit" id="checktime">
         <i class="fa fa-sign-out-alt fa-5x" aria-hidden="true"></i><br> Clock Out 
         </a>
+
+-->
+        <input class="submit" type="submit" id="checktime" value="Check"/>
+
+        <form action="<?php echo base_url("Attendance/clockin"); ?>">
+         <button type="submit" class="btn btn-sq-lg btn-primary" id="checktime1"><i class="fa fa-sign-in-alt fa-5x" aria-hidden="true"></i><br>Clock In</button>
+        </form>
+        
+        <form action="<?php echo base_url("Attendance/clockout/".session()->get('id_attendance')); ?>">
+        <button type="submit" class="btn btn-sq-lg btn-danger" id="checktime2"><i class="fa fa-sign-out-alt fa-5x" aria-hidden="true"></i><br>Clock Out</button>
+        </form>
+       
 
     </div>
 </section>
 </div>
+
+<script type="text/javascript" defer="defer">
+<!-- 
+var enableDisable = function(){
+    
+    var UTC_hours = new Date().getUTCHours() +7;
+    if (UTC_hours > 10 && UTC_hours < 24){
+        document.getElementById('checktime1').disabled = false;
+    }
+    else
+    {
+        document.getElementById('checktime1').disabled = true;
+    }
+};
+setInterval(enableDisable, 1000*60);
+enableDisable();
+// -->
+</script>

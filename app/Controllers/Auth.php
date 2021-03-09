@@ -26,11 +26,15 @@ class Auth extends BaseController{
         $this->employeeModel = new \App\Models\employeeModel();
         $this->empstatusModel = new \App\Models\empstatusModel();
         $this->loginModel = new \App\Models\AuthModel();
+        helper('form');
+        $this->form_validation = \Config\Services::validation();
 
     }
 
     public function index()
     {
+        session();
+        $data = [ 'validate' => \Config\Services::validation()];
         $data['dataEmpstatus'] = $this->empstatusModel->findAll();
 
         echo view ('users/header_v');
@@ -43,6 +47,39 @@ class Auth extends BaseController{
         $data['dataEmployee'] = $this->employeeModel->getEmployee();
         $data['dataEmpstatus'] = $this->empstatusModel->findAll();
 
+        if ($this->validate([
+            'username' => [
+                'label'  => 'Rules.username',
+                'rules'  => 'required|is_unique[users.username]',
+                'errors' => [
+                    'required' => 'Rules.username.required'
+                ]
+            ],
+            'password' => [
+                'label'  => 'Rules.password',
+                'rules'  => 'required|min_length[10]',
+                'errors' => [
+                    'min_length' => 'Rules.password.min_length'
+                ]
+            ]
+        ])) {
+
+        }
+        /* 'email' => [
+		'label'  => 'email',
+		'rules'  => 'required|is_unique[employee.email]',
+		'errors' => [
+			'required' => '{field} Required'
+		]
+	],
+	'password' => [
+		'label'  => 'password',
+		'rules'  => 'required|min_length[2]',
+		'errors' => [
+			'min_length' => 'Your {field} is too short'
+		]
+	]
+*/
         $data = [
             'nik'=>$this->request->getPost('nik'),
             'name'=>$this->request->getPost('name'),
@@ -57,11 +94,9 @@ class Auth extends BaseController{
           
         ]; 
             $this->employeeModel->insert($data);
-        return redirect()->to(site_url('Login'))->with('Success', '<i class="fas fa-save"></i> You Can Login Now');
-
+            return redirect()->to(site_url('Login'))->with('Success', '<i class="fas fa-save"></i> You Can Login Now');
+        }
         
-    }
-
     public function login()
     {
         $session = session();
@@ -71,8 +106,9 @@ class Auth extends BaseController{
         $password = $this->request->getPost('password');
         $row = $model->get_data_login($username,$table);
         //$data = $model->where('email',$username)->first();
-
+        
         //var_dump($data);
+
         if ($row == NULL){
             return redirect()->to('/login')->with('Failed', '<i class="fas fa-exclamation"></i> Failed To Login');
         }
@@ -90,12 +126,14 @@ class Auth extends BaseController{
             'id_eStatus' => $row->id_eStatus,
             );
 
-        $session->set($data);
-        
+        $session->set($data);        
         return redirect()->to('/Client')->with('Success', '<i class="fas fa-exclamation"></i> Sucsess To Login');
-        }                
-        return redirect()->to('/login')->with('Failed', '<i class="fas fa-exclamation"></i> Failed To Login');
-
+        
+        }else{
+                return redirect()->to('/login')->with('Failed', '<i class="fas fa-exclamation"></i> Failed To Login');
+                //->withInput()->with('validate',$pesanValidasi);
+                //->with('Failed', '<i class="fas fa-exclamation"></i> Failed To Login');
+        }
 
         /*$data = array(
             'login' => TRUE,

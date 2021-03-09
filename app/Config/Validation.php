@@ -37,7 +37,21 @@ class Validation
 		'single' => 'CodeIgniter\Validation\Views\single',
 	];
 
+	public $register = [
+    'email' => 'required|valid_email',
+    'password' => 'required|min_length[2]'
+	];
 	//--------------------------------------------------------------------
 	// Rules
 	//--------------------------------------------------------------------
+	public $register_errors = [
+		'email' => [
+			'required'          => 'Email wajib diisi',
+			'email.valid_email' => 'Email tidak valid'
+		],
+		'password' => [
+			'required'      => 'Password wajib diisi',
+			'min_length'    => 'Password minimal terdiri dari 8 karakter',
+		]
+	];
 }
