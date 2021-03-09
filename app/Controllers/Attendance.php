@@ -27,19 +27,17 @@ class Attendance extends BaseController{
         $this->employeeModel = new \App\Models\employeeModel();
         $this->empstatusModel = new \App\Models\empstatusModel();
         $this->activityModel = new \App\Models\activityModel();
-
-        helper('date');
+        date_default_timezone_set("Asia/Jakarta");
         
 
     }
 
     public function index(){
         $session = session();
-        
         //$this->load->library('user_agent');
         $data['dataAttendance'] = $this->attendanceModel->getAttendanceEmp();
         $data['dataEmployee'] = $this->employeeModel->findAll();
-
+        
         echo view ('users/header_v');
         echo view ('users/attendance_v',$data);
         echo view ('users/footer_v');
@@ -60,11 +58,13 @@ class Attendance extends BaseController{
     public function clockout($id){
         $where = ['id_attendance'=> $id];
         $datain = [ 	 	
-            'clock_out'=> now('America/Chicago', 'en_US'),          
+            'clock_out'=> date('Y-m-d H:i:s'),          
         ]; 
             $this->attendanceModel->update($where,$datain);
             $id = $this->attendanceModel->getInsertID(); 
-            
+        
+            return redirect()->to(site_url('Attendance'))->with('Success', '<i class="fas fa-save"></i> Clockout saved');            
+
        
     }
 
@@ -77,17 +77,24 @@ class Attendance extends BaseController{
         $co = $this->request->getPost('clock_out');
         $row = $this->attendanceModel->update_data($co,$table,$id);
         */
-        date_default_timezone_set("Asia/Jakarta");
-        $datain = [ 	 	
-            'id_attendance'=>$this->request->getPost('id_attendance'), 
+        
+        $datain = [ 	 	 
             'nik'=> session()->get('nik'),
             'clock_in'=> date('Y-m-d H:i:s'),          
         ]; 
 
         
         
-            $this->attendanceModel->insert($datain);
+            $insert = $this->attendanceModel->insert($datain);
             $id = $this->attendanceModel->getInsertID(); 
+
+            if($insert) {
+                $data = array(
+                    'id_attendance' => $id,
+                    );
+        
+                $session->set($data);
+            }
             
             //bug activity
             //$act = 'Insert new Attendance data, Client = '.$datain['nik'];
