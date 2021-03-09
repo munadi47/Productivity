@@ -227,7 +227,11 @@
                                             <div class="card-title mb-4">
                                                 <div class="d-flex justify-content-start">
                                                     <div class="image-container">
-                                                        <img src="http://placehold.it/150x150" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+                                                        <img src="<?php if(empty(session()->get('photo'))){
+                                                            echo base_url('http://placehold.it/150x150');
+                                                        }else{
+                                                            echo base_url(session()->get('photo'));
+                                                        } ?>" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
                                                         <div class="middle">
                                                         </div>
                                                     </div>
