@@ -4,10 +4,27 @@
     <div class="container">
     <h2> <i class="fas fa-user-tie"></i> Profile Update </h2>
     <hr>
+    <?php if(!empty(session()->getFlashdata('Success'))){ ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <?php echo session()->getFlashdata('Success');?>
+                        <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php }elseif(!empty(session()->getFlashdata('Failed'))){ ?>
+                    <div class="alert alert-danger">
+                        <?php 
+                            echo session()->getFlashdata('Failed');
+                        ?>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+    <?php
+    }
+    ?>
     <p>
     *Each change must update or retype your password for confirmation
     </p>
-        <form method="POST" action="<?php echo site_url('Employee/saveProfile'); ?>">
+        <form enctype="multipart/form-data" method="POST" action="<?php echo site_url('Employee/saveProfile'); ?>">
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">NIK</label>
             <div class="col-sm-10">
@@ -69,12 +86,10 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Photo </label>
+            <label  class="col-sm-2 col-form-label">Photo </label>
             <div class="col-sm-10">
-                <img style="width: 150px; height:150px;" src="<?php echo base_url(session()->get('photo')); ?>" />
-                <br/>
-                <input  class="form-control" type="file" id="photo_profile" name="photo_profile" value="<?php if(!empty($dataEmployee)) echo base_url('assets/uploads/profile/'.$dataEmployee->photo); ?>">
-                <label class="form-label" for="customFile" style="color: red; font-size: 12px;"> * Upload Data (Max: 5MB, Format: JPG,JPEG,PNG)</label>
+            <input  class="form-control" type="file" id="photo" name="photo" value="<?php if(!empty($dataEmployee)) echo base_url('assets/uploads/profile/'.$dataEmployee->photo); ?>">
+            <label class="form-label" for="customFile" style="color: red; font-size: 12px;"> * Upload Data (Max: 5MB, Format: PDF, JPG, PNG)</label>
             </div>
         </div>
         

@@ -22,11 +22,14 @@ class Employee extends BaseController{
         $this->activityModel = new \App\Models\activityModel();
         $this->form_validation = \Config\Services::validation();
         helper(['form', 'url']);
+        helper('form');
 
 
     }
 
     public function index(){
+        $session = session();
+
         session();
         $data = [ 'validate' => \Config\Services::validation()];
         $data['validation'] = $this->validator;
@@ -68,7 +71,6 @@ class Employee extends BaseController{
         $where = ['nik'=> $id];
         $data['dataEmpstatus'] = $this->empstatusModel->findAll();
         $data['dataEmployee'] = $this->employeeModel->where($where)->findAll()[0];
-        $data['dataEmpstatus'] = $this->empstatusModel->findAll();
         
 
         echo view('users/header_v');
@@ -86,7 +88,6 @@ class Employee extends BaseController{
         $where = ['nik'=> $id];
         $data['dataEmpstatus'] = $this->empstatusModel->findAll();
         $data['dataEmployee'] = $this->employeeModel->where($where)->findAll()[0];
-        $data['dataEmpstatus'] = $this->empstatusModel->findAll();
         
 
         echo view('users/header_v');
@@ -138,7 +139,7 @@ class Employee extends BaseController{
             ],
             ]);
         if (empty($id)) { //Insert
-           if($val==true) {
+           if($val) {
                 $data = [
                     'nik'=>$this->request->getPost('nik'),
                     'name'=>$this->request->getPost('name'),
@@ -168,42 +169,12 @@ class Employee extends BaseController{
             $this->record($act,session()->get('nik'));
             
             
-        } else { // Update
-                $where = ['nik'=>$id];
-                $data = [
-                    'nik'=>$this->request->getPost('nik'),
-                    'name'=>$this->request->getPost('name'),
-                    'address'=>$this->request->getPost('address'),
-                    'birthday'=>$this->request->getPost('birthday'), 
-                    'email'=>$this->request->getPost('email'),
-                    'password'=> password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-                    'phone1'=>$this->request->getPost('phone1'),
-                    'phone2'=>$this->request->getPost('phone2'),
-                    'id_eStatus'=>$this->request->getPost('id_eStatus'),
-                    'level'=>$this->request->getPost('level'),
-                
-                ]; 
-
-                $response =  $this->employeeModel->update($where, $data);
-                
-                $act = 'Update Employee data '.$data['name'];
-                $this->record($act,session()->get('nik'));
-
-            if($response){
-                return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
-            }else {
-                return redirect()->to(site_url('Employee'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to save');
-
-            }
-            
-            
         }
-
        
     }
 
     public function saveUpdate() {
-        $data = [
+        /*$data = [
             'nik'=>$this->request->getPost('nik'),
             'name'=>$this->request->getPost('name'),
             'address'=>$this->request->getPost('address'),
@@ -214,23 +185,81 @@ class Employee extends BaseController{
             'id_eStatus'=>$this->request->getPost('id_eStatus'),
             'level'=>$this->request->getPost('level'),
           
-        ]; 
+        ];*/ 
         
         $id = $this->request->getPost('id');
 
         if (empty($id)) { //Insert
            
-            $response = $this->employeeModel->insert($data);
-            
-            if($response != true){
-                return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
-            }else{
-                return redirect()->to(site_url('Employee'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to save');
-            }
-            
             
         } else { // Update
-                $where = ['nik'=>$id];
+            $where = ['nik'=>$id];
+            $validation= $this->validate([
+                'photo' => [
+                    'uploaded[photo]',
+                    'mime_in[photo,application/pdf,application/zip,application/msword,application/x-tar,image/jpg,image/jpeg,image/png]',
+                    'max_size[photo,5000]',
+                ]
+            ]);
+          
+            
+            if (!$validation){
+                $data = [
+                    'nik'=>$this->request->getPost('nik'),
+                    'name'=>$this->request->getPost('name'),
+                    'address'=>$this->request->getPost('address'),
+                    'birthday'=>$this->request->getPost('birthday'), 
+                    'email'=>$this->request->getPost('email'),
+                    'phone1'=>$this->request->getPost('phone1'),
+                    'phone2'=>$this->request->getPost('phone2'),
+                    'id_eStatus'=>$this->request->getPost('id_eStatus'),
+                    'level'=>$this->request->getPost('level'),
+                  
+                ]; 
+        
+                $response = $this->employeeModel->update($where,$data);
+                if($response){
+                    return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-save"></i> Data has been updated, but chart not uploaded, please check again');
+                }else{
+                    return redirect()->to(site_url('Employee'))->with('Failed', '<i class="fas fa-times"></i> Data failed to save');
+                }
+                $act = 'Update employee data '.$data['project_name'];
+                $this->record($act,session()->get('nik'));
+            
+            
+            }else{
+                $dt = $this->employeeModel->getWhere(['nik'=>$id])->getRow();
+                $file1 = $dt->photo;
+                $path = 'assets/uploads/profile/';
+                @unlink($path.$file1);
+                    $photo = $this->request->getFile('photo');
+                                   
+                    $data = [
+                        'nik'=>$this->request->getPost('nik'),
+                        'name'=>$this->request->getPost('name'),
+                        'address'=>$this->request->getPost('address'),
+                        'birthday'=>$this->request->getPost('birthday'), 
+                        'email'=>$this->request->getPost('email'),
+                        'phone1'=>$this->request->getPost('phone1'),
+                        'phone2'=>$this->request->getPost('phone2'),
+                        'id_eStatus'=>$this->request->getPost('id_eStatus'),
+                        'level'=>$this->request->getPost('level'),
+                        'photo'=> $this->request->getFile('photo')->getName()  
+
+                    ]; 
+                    
+                $response =  $this->employeeModel->update($where, $data);
+                if($response){
+                    return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-save"></i> Data has been updated');
+                }else{
+                    return redirect()->to(site_url('Employee'))->with('Failed', '<i class="fas fa-times"></i> Data failed to save');
+                }
+                $act = 'Update Employee data '.$data['project_name'];
+                $this->record($act,session()->get('nik'));   
+            }
+
+            ///////////////////
+                /*$where = ['nik'=>$id];
                 $response =  $this->employeeModel->update($where, $data);
         
             if($response){
@@ -238,7 +267,7 @@ class Employee extends BaseController{
             }else {
                 return redirect()->to(site_url('Employee'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to save');
 
-            }
+            }*/
             
             
         }
@@ -255,33 +284,72 @@ class Employee extends BaseController{
 
         
         } else { // Update
-
                 $where = ['nik'=>$id];
-                $data = array(
-                    'nik'=>$this->request->getPost('nik'),
-                    'name'=>$this->request->getPost('name'),
-                    'address'=>$this->request->getPost('address'),
-                    'birthday'=>$this->request->getPost('birthday'), 
-                    'email'=>$this->request->getPost('email'),
-                    'password'=> password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-                    'phone1'=>$this->request->getPost('phone1'),
-                    'phone2'=>$this->request->getPost('phone2'),
-                    'photo_profile'=> $photo_profile->getName(),
 
-                );
-        
-                $session->set($data); 
-                $response =  $this->employeeModel->update($where, $data);
-        
-            if($response && session()->get('nik') == true){
-                //$session = session();
-                //$session->destroy();
-                return redirect()->to('/login')->with('Logout', '<i class="fas fa-exclamation"></i> Data has been changed! Please Login.');
+                $validation= $this->validate([
+                    'photo' => [
+                        'uploaded[photo]',
+                        'mime_in[photo,image/jpg,image/jpeg,image/png]',
+                        'max_size[photo,5000]',
+                    ]
+                ]);
 
-            }else {
-                return redirect()->to(site_url('Employee'))->with('Failed', '<i class="fas fa-exclamation"></i> Data Failed to save');
-
-            }
+                if (!$validation){
+                    $data = array(
+                        'nik'=>$this->request->getPost('nik'),
+                        'name'=>$this->request->getPost('name'),
+                        'address'=>$this->request->getPost('address'),
+                        'birthday'=>$this->request->getPost('birthday'), 
+                        'email'=>$this->request->getPost('email'),
+                        'password'=> password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+                        'phone1'=>$this->request->getPost('phone1'),
+                        'phone2'=>$this->request->getPost('phone2'),
+                        
+                    );
+                    $session->set($data); 
+                    $response = $this->employeeModel->update($where,$data);
+                    if($response){
+                        return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-save"></i> Data has been updated, but photo not uploaded, please check again');
+                    }else{
+                        return redirect()->to(site_url('Employee'))->with('Failed', '<i class="fas fa-times"></i> Data failed to save');
+                    }
+                    $act = 'Update Employee data '.$data['project_name'];
+                    $this->record($act,session()->get('nik'));
+                
+                
+                }else{
+                    $dt = $this->employeeModel->getWhere(['nik'=>$id])->getRow();
+                    $file1 = $dt->photo;
+                    $path = 'assets/uploads/profile/';
+                    @unlink($path.$file1);
+                        $photo = $this->request->getFile('photo');
+                        $photo->move('assets/uploads/profile/');
+                   
+                    $data = array(
+                        'nik'=>$this->request->getPost('nik'),
+                        'name'=>$this->request->getPost('name'),
+                        'address'=>$this->request->getPost('address'),
+                        'birthday'=>$this->request->getPost('birthday'), 
+                        'email'=>$this->request->getPost('email'),
+                        'password'=> password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+                        'phone1'=>$this->request->getPost('phone1'),
+                        'phone2'=>$this->request->getPost('phone2'),
+                        'photo'=> $this->request->getFile('photo')->getName()  
+    
+                    );
+                    $session->set($data); 
+                    $response = $this->employeeModel->update($where,$data);
+                    if($response){
+                        return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-save"></i> Data has been updated');
+                    }else{
+                        return redirect()->to(site_url('Employee'))->with('Failed', '<i class="fas fa-times"></i> Data failed to save');
+                    }
+                    $act = 'Update Employee data '.$data['project_name'];
+                    $this->record($act,session()->get('nik'));   
+                   
+                }
+              
+               
         }
 
     }
