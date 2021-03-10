@@ -89,7 +89,7 @@ class Consulting extends BaseController{
             $validation = $this->validate([
                 'gantt_chart' => [
                     'uploaded[gantt_chart]',
-                    'mime_in[gantt_chart,application/pdf,application/zip,application/msword,application/x-tar]',
+                    'mime_in[gantt_chart,application/pdf,application/zip,application/msword,application/x-tar,image/jpg,image/jpeg,image/png]',
                     'max_size[gantt_chart,5000]',
                 ]
             ]);
@@ -143,7 +143,7 @@ class Consulting extends BaseController{
             $validation= $this->validate([
                 'gantt_chart' => [
                     'uploaded[gantt_chart]',
-                    'mime_in[gantt_chart,application/pdf,application/zip,application/msword,application/jpg,application/png,application/x-tar]',
+                    'mime_in[gantt_chart,application/pdf,application/zip,application/msword,application/x-tar,image/jpg,image/jpeg,image/png]',
                     'max_size[gantt_chart,5000]',
                 ]
             ]);
