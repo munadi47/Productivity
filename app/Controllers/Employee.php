@@ -100,7 +100,8 @@ class Employee extends BaseController{
 
     public function detail($id){
         $data['dataEmployee'] = $this->employeeModel->getDetail($id);
-
+        $data['countClosing'] = $this->employeeModel->countClosing($id);
+        $data['countPICClient'] = $this->employeeModel->countPICClient($id);
         echo view('users/header_v');
         echo view('admin/employee_detail_v',$data);
         echo view ('users/footer_v');

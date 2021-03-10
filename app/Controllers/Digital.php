@@ -56,7 +56,7 @@ class Digital extends BaseController{
 
     public function add(){
      
-        $data['dataPipeline'] = $this->sales_pipelineModel->findAll();
+        $data['dataPipeline'] = $this->digital_contentModel->digital();
 
         echo view('users/header_v');
         echo view('users/digital_content_form_v',$data);
@@ -66,7 +66,7 @@ class Digital extends BaseController{
     public function edit($id){
         $where = ['id_digital'=> $id];
         $data['dataDigital'] = $this->digital_contentModel->where($where)->findAll()[0];
-        $data['dataPipeline'] = $this->sales_pipelineModel->findAll();
+        $data['dataPipeline'] = $this->digital_contentModel->digital();
 
         echo view('users/header_v');
         echo view('users/digital_content_form_v',$data);

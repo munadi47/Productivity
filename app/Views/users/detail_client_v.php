@@ -9,13 +9,17 @@
 <div class="card shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-out" data-aos-duration="1000" >
 <section>  
                 <div class="card-body">
-                <h4> CLIENT DETAIL  </h4>
                 <div class="row">
-                <div class="col-8">    
-                    <a title="Back" href="<?php echo base_url("Client"); ?>" class="btn btn-outline-info btn-md">
+                    <div class="col-8">    
+                        <a title="Back" href="<?php echo base_url("Client"); ?>" class="btn btn-outline-info btn-md">
                         <i class="fas fa-arrow-left"></i> 
-                    </a>
+                        </a>
+                        <br>
+                        <br>
+                    </div>
                 </div>
+                <h4> CLIENT DETAIL  </h4>
+               
                 <!--
                     <div class="col-4" >
                     <form method="GET" action="">
@@ -29,13 +33,53 @@
                     </div>
                 </div>  -->
                     
-                
+                <?php foreach ($dataClient as $row) :?>
                 
                 <br>
                 <br>
-
+                <div class="row justify-content-start">
+                    <div class="col-2">
+                    <i class="fas fa-users"></i> Client 
+                    </div>
+                    <div class="col-4">
+                        : <?php echo $row->id_client ?>
+                    </div>
+                </div>
+                <br>
+                <div class="row justify-content-start">
+                    <div class="col-2">
+                    <i class="fas fa-building"></i> Business Type 
+                    </div>
+                    <div class="col-4">
+                        : <?php echo $row->sector ?>
+                    </div>
+                </div>
+                <br>
+                <div class="row justify-content-start">
+                    <div class="col-2">
+                    <i class="fas fa-map"></i> Address 
+                    </div>
+                    <div class="col-4">
+                        : <?php echo $row->address ?>
+                        
+                    </div>
+                </div>
+                <br>
+                <div class="row justify-content-start">
+                    <div class="col-2">
+                    <i class="fas fa-phone"></i> Phone 
+                    </div>
+                    <div class="col-4">
+                        : <?php echo $row->phone ?>
+                    </div>
+                </div>
+                <br>
+                
+                <?php endforeach; ?>
                 <?php foreach ($dataDetail as $row) :?>
-               
+                   
+                <br>
+                <br>
                 <!-- Timeline -->
                 <ul class="timeline">
                     <li class="timeline-item bg-white rounded ml-3 p-4 shadow " >
@@ -71,7 +115,7 @@
                     ?>
                         <div class="card">
                             <div class="card-body">
-                                No data
+                                No data in pipeline 
                             </div>
                         </div>
     
@@ -94,7 +138,7 @@
             <br>
 
                
-                
+        </div>  
                 
                
       

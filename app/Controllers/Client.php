@@ -75,7 +75,7 @@ class Client extends BaseController{
         echo view ('users/footer_v');
     }
     public function detail($id){
-        
+        $data['dataClient'] = $this->clientModel->joinclient($id);
         $detail = $this->clientModel->getDetail($id);
         
 

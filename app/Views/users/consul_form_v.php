@@ -15,6 +15,15 @@
     <?php
     }
     ?>
+    <?php if(empty($dataPipeline)){ ?>
+    <div class="alert alert-warning" role="alert" data-aos="zoom-in" data-aos-duration="1000" >
+    <i class="fas fa-exclamation"></i> &nbsp;You doesn't input Consulting on pipeline table yet, Please input data first ! &nbsp;  
+    <a title="Add pipeline for consulting" href="<?php echo base_url("SalesPipeline/add"); ?>" class="btn btn-info btn-md">
+        <i class="fas fa-edit"></i> Input data 
+    </a> 
+    </div>
+
+<?php } ?>
 <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
 <section>
     <div class="container">
@@ -33,6 +42,7 @@
         <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Title</label>
                 <div class="col-sm-10">
+               
                     <select required name="id_SalesPipeline" class="form-select" aria-label="Default select example" >
                         
                         <?php foreach($dataPipeline as $row) : ?>
@@ -41,6 +51,7 @@
                         
                     </select>
                 </div>
+              
         </div>
         <div class="form-group row">
             <label  class="col-sm-2 col-form-label">Project Name</label>
@@ -59,20 +70,10 @@
             <label  class="col-sm-2 col-form-label">Gantt chart Attachment </label>
             <div class="col-sm-10">
             <input  class="form-control" type="file" id="gantt_chart" name="gantt_chart" value="<?php if(!empty($dataConsul)) echo base_url('assets/uploads/'.$dataConsul->gantt_chart); ?>">
-            <label class="form-label" for="customFile" style="color: red; font-size: 12px;"> * Upload Data (Max: 5MB, Format: PDF)</label>
+            <label class="form-label" for="customFile" style="color: red; font-size: 12px;"> * Upload Data (Max: 5MB, Format: PDF, JPG, PNG)</label>
             </div>
         </div>
-        
-                <!-- We'll transform this input into a pond -->
-    
-        <!-- Load FilePond library -->
-        <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
-
-        <!-- Turn all file input elements into ponds -->
-        <script>
-        FilePond.parse(document.body);
-        </script>
-
+  
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Remark</label>
             <div class="col-sm-10">

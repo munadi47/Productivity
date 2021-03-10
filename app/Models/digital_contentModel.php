@@ -42,5 +42,13 @@ class digital_contentModel extends Model
          ->countAllResults();
  
     }
+    public function digital()
+    {
+         return $this->db->table('sales_pipeline')
+         ->select('*')
+         ->where("sales_pipeline.category = 'digital content'")
+         ->get()->getResult();
+ 
+    }
 
 }

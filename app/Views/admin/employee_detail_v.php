@@ -153,7 +153,7 @@
                                                 <label>Closing count</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>20</p>
+                                                <p><?php echo $countClosing; ?></p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -169,8 +169,14 @@
                                                 <label>PIC client count</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>20</p>
+                                                <p><?php echo $countPICClient ?></p>
                                             </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                               
+                                            </div>
+                                            
                                         </div>
                                         
                             </div>

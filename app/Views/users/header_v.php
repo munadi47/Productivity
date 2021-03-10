@@ -40,8 +40,7 @@
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-    <!-- CHART.JS-->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    
     
 </head>
 
@@ -306,29 +305,30 @@
                                                                 <?= session()->get('phone1') ?>
                                                                 </div>
                                                             </div>
+                                                            
+                                                            <?php if(!empty(session()->get('phone2'))){?>
                                                             <hr />
-
                                                             <div class="row">
                                                                 <div class="col-sm-3 col-md-2 col-5">
                                                                     <label style="font-weight:bold;">Phone2</label>
                                                                 </div>
                                                                 <div class="col-md-8 col-6">
-                                                                <?= session()->get('phone2') ?>
+                                                                    <?= session()->get('phone2') ?>
                                                                 </div>
                                                             </div>
+                                                            <?php } ?>
                                                             <hr />
                                                             <div class="row">
                                                                 <div class="col-sm-3 col-md-2 col-5">
                                                                     <label style="font-weight:bold;">Status</label>
                                                                 </div>
+                                                                <!--Di update jika ada perubahan -->
                                                                 <div class="col-md-8 col-6">
-                                                                <?php if(session()->get('id_eStatus') !='1'){
-                                                                    ?><span class="badge badge-success"> Aman<?php
+                                                                <?php if(session()->get('id_eStatus')=='0'){ echo "<span class='badge badge-success'> aman </span>";}
+                                                                elseif(session()->get('id_eStatus')=='1'){ echo "<span class='badge badge-warning'> peringatan 1 </span>";} 
+                                                                elseif(session()->get('id_eStatus')=='2'){ echo "<span class='badge badge-warning'> peringatan 2 </span>";}
+                                                                elseif(session()->get('id_eStatus')=='3'){ echo "<span class='badge badge-danger'> peringatan 3 </span>";}?>
                                                                 
-                                                                    ?><?php
-                                                                    }else{
-                                                                        ?><span class="badge badge-warning"> Peringatan<?php
-                                                                }?>                                                               
                                                                 </div>
                                                             </div>
                                                             <hr />
@@ -338,7 +338,7 @@
 
                                                         </div>
                                                         <div class="tab-pane fade" id="connectedServices" role="tabpanel" aria-labelledby="ConnectedServices-tab">
-                                                            Facebook, Google, Twitter Account that are connected to this account
+                                                           Coming soon
                                                         </div>
                                                     </div>
                                                 </div>

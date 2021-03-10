@@ -62,5 +62,13 @@ class clientModel extends Model
          ->countAllResults();
  
     }
+    public function joinclient($id)
+    {
+         return $this->db->table('client')
+         ->join('employee','employee.nik=client.nik')
+         ->join('classification','classification.id_class=client.id_class')
+         ->where('client.id_client',$id)
+         ->get()->getResultObject(); 
+    }
     
 }

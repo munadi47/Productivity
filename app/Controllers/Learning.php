@@ -55,7 +55,7 @@ class Learning extends BaseController{
 
     public function add(){
      
-        $data['dataPipeline'] = $this->sales_pipelineModel->findAll();
+        $data['dataPipeline'] = $this->learningModel->learning();
 
         echo view('users/header_v');
         echo view('users/learning_form_v',$data);
@@ -65,7 +65,7 @@ class Learning extends BaseController{
     public function edit($id){
         $where = ['id_learning'=> $id];
         $data['dataLearning'] = $this->learningModel->where($where)->findAll()[0];
-        $data['dataPipeline'] = $this->sales_pipelineModel->findAll();
+        $data['dataPipeline'] = $this->learningModel->learning();
 
         echo view('users/header_v');
         echo view('users/learning_form_v',$data);

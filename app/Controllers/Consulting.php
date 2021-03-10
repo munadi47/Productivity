@@ -54,7 +54,7 @@ class Consulting extends BaseController{
    
 
     public function add(){
-        $data['dataPipeline'] = $this->sales_pipelineModel->findAll();
+        $data['dataPipeline'] = $this->consultingModel->consulting();
 
         echo view('users/header_v');
         echo view('users/consul_form_v',$data);
@@ -64,7 +64,7 @@ class Consulting extends BaseController{
     public function edit($id){
         $where = ['id_consulting'=> $id];
         $data['dataConsul'] = $this->consultingModel->where($where)->findAll()[0];
-        $data['dataPipeline'] = $this->sales_pipelineModel->findAll();
+        $data['dataPipeline'] = $this->consultingModel->consulting();
 
         echo view('users/header_v');
         echo view('users/consul_form_v',$data);

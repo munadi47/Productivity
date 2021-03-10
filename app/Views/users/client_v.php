@@ -44,8 +44,6 @@
                     <tr>
                         <th>#</th>
                         <th>CLIENT</th>
-                        <th>BUSINESS TYPE</th>
-                        <th>ADDRESS</th>
                         <th>PHONE</th>
                         <th>PIC</th>
                         <th>ACTION</th>
@@ -64,8 +62,6 @@
                     <tr>
                         <td><?php echo $nomor++; ?></td>
                         <td><?php echo $row->id_client ?></td>
-                        <td><?php echo $row->sector; ?></td>
-                        <td><?php echo $row->address; ?></td>
                         
                         <td><a class="btn btn-primary" href="tel:<?php echo $row->phone; ?>"><?php echo $row->phone; ?>&nbsp;<i class="fas fa-phone" style="padding-right: 1px;"></i></a></td>
                         <td><?php echo $row->name; ?></td>

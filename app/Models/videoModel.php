@@ -53,4 +53,12 @@ class videoModel extends Model
          ->countAllResults();
  
     }
+    public function video()
+    {
+         return $this->db->table('sales_pipeline')
+         ->select('*')
+         ->where("sales_pipeline.category = 'video'")
+         ->get()->getResult();
+ 
+    }
 }

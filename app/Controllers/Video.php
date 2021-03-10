@@ -54,7 +54,7 @@ class Video extends BaseController{
 
     public function add(){
      
-        $data['dataPipeline'] = $this->sales_pipelineModel->findAll();
+        $data['dataPipeline'] = $this->videoModel->video();
 
         echo view('users/header_v');
         echo view('users/video_form_v',$data);
@@ -64,7 +64,7 @@ class Video extends BaseController{
     public function edit($id){
         $where = ['id_video'=> $id];
         $data['dataVideo'] = $this->videoModel->where($where)->findAll()[0];
-        $data['dataPipeline'] = $this->sales_pipelineModel->findAll();
+        $data['dataPipeline'] = $this->videoModel->video();
 
         echo view('users/header_v');
         echo view('users/video_form_v',$data);

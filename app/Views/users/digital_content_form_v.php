@@ -15,6 +15,15 @@
     <?php
     }
     ?>
+<?php if(empty($dataPipeline)){ ?>
+    <div class="alert alert-warning" role="alert" data-aos="zoom-in" data-aos-duration="1000" >
+    <i class="fas fa-exclamation"></i> &nbsp;You doesn't input Digital Content on pipeline table yet, Please input data first ! &nbsp;  
+    <a title="Add pipeline for digital content" href="<?php echo base_url("SalesPipeline/add"); ?>" class="btn btn-info btn-md">
+        <i class="fas fa-edit"></i> Input data 
+    </a> 
+    </div>
+
+<?php } ?>
 <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
 <section>
     <div class="container">
@@ -31,7 +40,7 @@
         
         <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Title</label>
-                <div class="col-sm-10">
+                    <div class="col-sm-10">
                     <select required name="id_SalesPipeline" class="form-select" aria-label="Default select example" >
                         
                         <?php foreach($dataPipeline as $row) : ?>
@@ -40,6 +49,7 @@
                         
                     </select>
                 </div>
+  
         </div>
         
         <div class="form-group row">
