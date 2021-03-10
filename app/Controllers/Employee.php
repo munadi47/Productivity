@@ -154,7 +154,6 @@ class Employee extends BaseController{
                     'phone2'=>$this->request->getPost('phone2'),
                     'id_eStatus'=>$this->request->getPost('id_eStatus'),
                     'level'=>$this->request->getPost('level'),
-                    'photo'=>$this->request->getPost('photo'),
 
                   
                 ]; 
@@ -253,6 +252,8 @@ class Employee extends BaseController{
     }
 
     public function saveProfile() {
+        $session = session();
+
         $data = [
             'nik'=>$this->request->getPost('nik'),
             'name'=>$this->request->getPost('name'),
@@ -270,6 +271,7 @@ class Employee extends BaseController{
 
         if (empty($id)) { //Insert
            
+
             $response = $this->employeeModel->insert($data);
             
             if($response != true){
@@ -281,11 +283,24 @@ class Employee extends BaseController{
             
         } else { // Update
                 $where = ['nik'=>$id];
+                $data = array(
+                    'nik'=>$this->request->getPost('nik'),
+                    'name'=>$this->request->getPost('name'),
+                    'address'=>$this->request->getPost('address'),
+                    'birthday'=>$this->request->getPost('birthday'), 
+                    'email'=>$this->request->getPost('email'),
+                    'password'=> password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+                    'phone1'=>$this->request->getPost('phone1'),
+                    'phone2'=>$this->request->getPost('phone2'),
+                            
+                );
+        
+                $session->set($data); 
                 $response =  $this->employeeModel->update($where, $data);
         
             if($response && session()->get('nik') == true){
-                $session = session();
-                $session->destroy();
+                //$session = session();
+                //$session->destroy();
                 return redirect()->to('/login')->with('Logout', '<i class="fas fa-exclamation"></i> Data has been changed! Please Login.');
 
             }else {
