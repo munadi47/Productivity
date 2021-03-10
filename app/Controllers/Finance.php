@@ -132,7 +132,7 @@ class Finance extends BaseController{
         $act = 'Delete Finance data';
         $this->record($act,session()->get('nik'));
         if($response){
-            return redirect()->to(site_url('Finance'))->with('Success', '<i class="fas fa-save"></i> Data has been deleted');
+            return redirect()->to(site_url('Finance'))->with('Success', '<i class="fas fa-trash"></i> Data has been deleted');
         }else{
             return redirect()->to(site_url('Finance'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to delete');
         }
@@ -234,6 +234,58 @@ $writer->save('php://output');
 exit;
 
 }
+
+
+public function import(){
+    echo view('users/header_v');
+    echo view('admin/finance_excel_form_v');
+    echo view('users/footer_v');
+}
+
+public function do_upload(){
+    $validated = $this->validate([
+        'finance_file' => 'uploaded[finance_file]|max_size[finance_file,1024]'
+    ]);
+    if(!$validated){
+        return redirect()->to(site_url('Finance'))->with('Failed','<i class="fas fa-trash-alt"></i>Failed to import, please check again');
+    }
+    else{
+        $finance_file = $this->request->getFile('finance_file');
+                //$userfile->move(WRITEPATH . 'uploads');
+        $finance_file->move('assets/uploads/file_excel/');
+        $M = $finance_file->getName();
+        $this->import_file($M);
+        return redirect()->to(site_url('Finance'))->with('Success','<i class="fas fa-check"></i> Success to import file');
+        
+    }
+}
+
+public function import_file($nf){
+    $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+    $spreadsheet = $reader->load('assets/uploads/file_excel/'.$nf);
+    $sheetData = $spreadsheet->getActiveSheet()->toArray();
+    
+    for($i = 1;$i < count($sheetData);$i++)
+    {
+        //perhatikan indeks harus sama dengan field atau column di database
+        $data[$i]['id_client']  = $sheetData[$i][0];
+        $data[$i]['id_fStatus'] = $sheetData[$i][1];
+        $data[$i]['invoice_date']  = $sheetData[$i][2];
+        $data[$i]['invoice_amount'] = $sheetData[$i][3];
+        $data[$i]['invoice_duedate']  = $sheetData[$i][4];
+        
+        
+       
+    }
+    foreach($data as $row):{
+        $this->financeModel->insert($row);
+    }
+    endforeach;
+    $act = 'Import new finance data';
+    $this->record($act,session()->get('nik'));
+}	
+        
+    
 
 }
 

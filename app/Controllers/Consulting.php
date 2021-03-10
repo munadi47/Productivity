@@ -89,7 +89,7 @@ class Consulting extends BaseController{
             $validation = $this->validate([
                 'gantt_chart' => [
                     'uploaded[gantt_chart]',
-                    'mime_in[gantt_chart,application/pdf,application/zip,application/msword,application/x-tar]',
+                    'mime_in[gantt_chart,application/pdf,application/zip,application/msword,application/x-tar,image/jpg,image/jpeg,image/png]',
                     'max_size[gantt_chart,5000]',
                 ]
             ]);
@@ -102,13 +102,19 @@ class Consulting extends BaseController{
                     'id_SalesPipeline'=>$this->request->getPost('id_SalesPipeline'),
                     
                 ];
-                $this->consultingModel->insert($data);
+                $response = $this->consultingModel->insert($data);
+                if($response){
+                    return redirect()->to(site_url('Consulting'))->with('Success', '<i class="fas fa-save"></i> Data has been saved, but chart not uploaded, please check again');
+                }else{
+                    return redirect()->to(site_url('Consulting'))->with('Failed', '<i class="fas fa-times"></i> Data failed to save');
+                }
+               
                 $act = 'Insert new consulting data '.$data['project_name'];
                 $this->record($act,session()->get('nik'));
                
             }else{
                 $gantt_chart = $this->request->getFile('gantt_chart');
-                $gantt_chart->move('assets/uploads/');
+                $gantt_chart->move('assets/uploads/chart/');
                 $data = [
                     'remark'=>$this->request->getPost('remark'),
                     'project_name'=>$this->request->getPost('project_name'),
@@ -116,7 +122,12 @@ class Consulting extends BaseController{
                     'id_SalesPipeline'=>$this->request->getPost('id_SalesPipeline'),
                     'gantt_chart'=> $gantt_chart->getName(),
                 ];
-                $this->consultingModel->insert($data);
+                $response = $this->consultingModel->insert($data);
+                if($response){
+                    return redirect()->to(site_url('Consulting'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
+                }else{
+                    return redirect()->to(site_url('Consulting'))->with('Failed', '<i class="fas fa-times"></i> Data failed to save');
+                }
                 $act = 'Insert new consulting data '.$data['project_name'];
                 $this->record($act,session()->get('nik'));
                 
@@ -132,7 +143,7 @@ class Consulting extends BaseController{
             $validation= $this->validate([
                 'gantt_chart' => [
                     'uploaded[gantt_chart]',
-                    'mime_in[gantt_chart,application/pdf,application/zip,application/msword,application/jpg,application/png,application/x-tar]',
+                    'mime_in[gantt_chart,application/pdf,application/zip,application/msword,application/x-tar,image/jpg,image/jpeg,image/png]',
                     'max_size[gantt_chart,5000]',
                 ]
             ]);
@@ -146,7 +157,12 @@ class Consulting extends BaseController{
                     'id_SalesPipeline'=>$this->request->getPost('id_SalesPipeline'),
                     
                 ];
-                $this->consultingModel->update($where,$data);
+                $response = $this->consultingModel->update($where,$data);
+                if($response){
+                    return redirect()->to(site_url('Consulting'))->with('Success', '<i class="fas fa-save"></i> Data has been updated, but chart not uploaded, please check again');
+                }else{
+                    return redirect()->to(site_url('Consulting'))->with('Failed', '<i class="fas fa-times"></i> Data failed to save');
+                }
                 $act = 'Update consulting data '.$data['project_name'];
                 $this->record($act,session()->get('nik'));
             
@@ -154,10 +170,10 @@ class Consulting extends BaseController{
             }else{
                 $dt = $this->consultingModel->getWhere(['id_consulting'=>$id])->getRow();
                 $file1 = $dt->gantt_chart;
-                $path = 'assets/uploads/';
+                $path = 'assets/uploads/chart/';
                 @unlink($path.$file1);
                     $gantt_chart = $this->request->getFile('gantt_chart');
-                    $gantt_chart->move('assets/uploads/');
+                    $gantt_chart->move('assets/uploads/chart/');
                
                 $data = [
                     'remark'=>$this->request->getPost('remark'),
@@ -166,7 +182,12 @@ class Consulting extends BaseController{
                     'id_SalesPipeline'=>$this->request->getPost('id_SalesPipeline'),
                     'gantt_chart'=> $this->request->getFile('gantt_chart')->getName()  
                 ];
-                $this->consultingModel->update($where,$data);
+                $response = $this->consultingModel->update($where,$data);
+                if($response){
+                    return redirect()->to(site_url('Consulting'))->with('Success', '<i class="fas fa-save"></i> Data has been updated');
+                }else{
+                    return redirect()->to(site_url('Consulting'))->with('Failed', '<i class="fas fa-times"></i> Data failed to save');
+                }
                 $act = 'Update consulting data '.$data['project_name'];
                 $this->record($act,session()->get('nik'));   
                
@@ -176,7 +197,7 @@ class Consulting extends BaseController{
            
             
         }
-        return redirect()->to(site_url('Consulting'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
+        
 
         
     }
