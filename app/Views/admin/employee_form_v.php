@@ -81,6 +81,15 @@
                     </select>
             </div>
         </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Photo </label>
+            <div class="col-sm-10">
+                <img style="width: 150px; height:150px;" src="<?php echo base_url(session()->get('photo')); ?>" />
+                <br/>
+                <input  class="form-control" type="file" id="photo_profile" name="photo_profile" value="<?php if(!empty($dataEmployee)) echo base_url('assets/uploads/'.$dataEmployee->photo); ?>">
+                <label class="form-label" for="customFile" style="color: red; font-size: 12px;"> * Upload Data (Max: 5MB, Format: JPG,JPEG,PNG)</label>
+            </div>
+        </div>
         
        
         

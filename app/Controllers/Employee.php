@@ -20,8 +20,8 @@ class Employee extends BaseController{
         $this->employeeModel = new \App\Models\employeeModel();
         $this->empstatusModel = new \App\Models\empstatusModel();
         $this->activityModel = new \App\Models\activityModel();
-        helper('form');
         $this->form_validation = \Config\Services::validation();
+        helper(['form', 'url']);
 
 
     }
@@ -29,7 +29,7 @@ class Employee extends BaseController{
     public function index(){
         session();
         $data = [ 'validate' => \Config\Services::validation()];
-
+        $data['validation'] = $this->validator;
         $data['dataEmployee'] = $this->employeeModel->getEmployee();
 
         echo view ('users/header_v');
@@ -136,11 +136,6 @@ class Employee extends BaseController{
                     'min_length' => 'Your Password is too short, min : 6'
                 ]
             ],
-            'photo_profile' => [
-                'uploaded[photo_profile]',
-                'mime_in[photo_profile,image/jpg,image/jpeg,image/gif,image/png]',
-                'max_size[photo_profile,5000]',
-            ]
             ]);
         if (empty($id)) { //Insert
            if($val==true) {
@@ -159,8 +154,7 @@ class Employee extends BaseController{
                   
                 ]; 
                     $this->employeeModel->insert($data);
-                    return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
-                
+                    return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');    
                 }
                 else{
                     //tidak valid
@@ -254,35 +248,14 @@ class Employee extends BaseController{
 
     public function saveProfile() {
         $session = session();
-
-        $data = [
-            'nik'=>$this->request->getPost('nik'),
-            'name'=>$this->request->getPost('name'),
-            'address'=>$this->request->getPost('address'),
-            'birthday'=>$this->request->getPost('birthday'), 
-            'email'=>$this->request->getPost('email'),
-            'password'=> password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-            'phone1'=>$this->request->getPost('phone1'),
-            'phone2'=>$this->request->getPost('phone2'),
-            
-          
-        ]; 
-        
         $id = $this->request->getPost('id');
-
+                
         if (empty($id)) { //Insert
-           
+            
 
-            $response = $this->employeeModel->insert($data);
-            
-            if($response != true){
-                return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
-            }else{
-                return redirect()->to(site_url('Employee'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to save');
-            }
-            
-            
+        
         } else { // Update
+
                 $where = ['nik'=>$id];
                 $data = array(
                     'nik'=>$this->request->getPost('nik'),
@@ -293,7 +266,8 @@ class Employee extends BaseController{
                     'password'=> password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
                     'phone1'=>$this->request->getPost('phone1'),
                     'phone2'=>$this->request->getPost('phone2'),
-                            
+                    'photo_profile'=> $photo_profile->getName(),
+
                 );
         
                 $session->set($data); 
@@ -308,11 +282,8 @@ class Employee extends BaseController{
                 return redirect()->to(site_url('Employee'))->with('Failed', '<i class="fas fa-exclamation"></i> Data Failed to save');
 
             }
-            
-            
         }
 
-       
     }
 
 
