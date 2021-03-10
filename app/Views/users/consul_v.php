@@ -70,7 +70,7 @@
                         <td><?php echo $row->project_manager; ?></td>
                         <td><?php echo $row->remark; ?></td>
                         <td>
-                            <a title="View Gantt Chart" class="btn btn-outline-info btn-sm" href="<?php echo base_url('Consulting/view_pdf/'.$row->id_consulting); ?>"><i class="fa fa-chart-bar"></i></a>
+                            <a title="Gantt Chart Attachment" class="btn btn-outline-info btn-sm" href="<?php echo base_url('Consulting/view_pdf/'.$row->id_consulting); ?>"><i class="fa fa-paperclip"></i></a>
                             <a title="Download Report"  href="<?php echo base_url("Consulting/Report/".$row->id_consulting); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
                             <i class="fa fa-file-excel"></i> 
                             </a>
