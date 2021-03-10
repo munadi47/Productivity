@@ -29,10 +29,6 @@
     <!--CK Editor-->
     <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
     
-    <!--Chart JS-->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.min.js"></script>
     <!--HIGH CHART-->
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/gantt.js"></script>

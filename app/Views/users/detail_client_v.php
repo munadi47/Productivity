@@ -74,12 +74,21 @@
                     </div>
                 </div>
                 <br>
+                <div class="row justify-content-start">
+                    <div class="col-2">
+                    <i class="fas fa-user-tie"></i> PIC 
+                    </div>
+                    <div class="col-4">
+                        : <?php echo $row->name ?>
+                    </div>
+                </div>
+                <br>
                 
                 <?php endforeach; ?>
                 <?php foreach ($dataDetail as $row) :?>
                    
-                <br>
-                <br>
+             
+               
                 <!-- Timeline -->
                 <ul class="timeline">
                     <li class="timeline-item bg-white rounded ml-3 p-4 shadow " >

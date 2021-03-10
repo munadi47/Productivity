@@ -39,7 +39,7 @@
         
         <a class="btn btn-outline-info btn-sm" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-file-excel"></i>  <i class="fa fa-caret-down"></i>
-                </a>
+        </a>
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" >
                     <a class="dropdown-item" href="Employee/export">Export Excel</a>
@@ -85,7 +85,7 @@
                 } echo $row->status; ?></td>
                 <td>
                     <a title="Detail" href="<?php echo base_url("Employee/detail/".$row->nik); ?>" class="btn btn-outline-info btn-sm">
-                    <i class="fa fa-info-circle" ></i>
+                    <i class="fa fa-search" ></i> 
                     </a>
                     <a title="Edit"  href="<?php echo base_url("Employee/edit/".$row->nik); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
                     <i class="fa fa-edit"></i>
