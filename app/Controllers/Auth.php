@@ -64,54 +64,46 @@ class Auth extends BaseController{
         $data['dataEmpstatus'] = $this->empstatusModel->findAll();
 
         if ($this->validate([
-            'username' => [
-                'label'  => 'Rules.username',
-                'rules'  => 'required|is_unique[users.username]',
+            'email' => [
+                'label'  => 'email',
+                'rules'  => 'required|valid_email',
                 'errors' => [
-                    'required' => 'Rules.username.required'
+                    'required' => 'Email Required'
                 ]
             ],
             'password' => [
                 'label'  => 'Rules.password',
-                'rules'  => 'required|min_length[10]',
+                'rules'  => 'required|min_length[6]',
                 'errors' => [
-                    'min_length' => 'Rules.password.min_length'
+                    'min_length' => 'Your Password is too short, min : 6'
                 ]
             ]
         ])) {
+            $data = [
+                'nik'=>$this->request->getPost('nik'),
+                'name'=>$this->request->getPost('name'),
+                'address'=>$this->request->getPost('address'),
+                'birthday'=>$this->request->getPost('birthday'),
+                'email'=>$this->request->getPost('email'),
+                'password'=> password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+                'phone1'=>$this->request->getPost('phone1'),
+                'phone2'=>$this->request->getPost('phone2'),
+                'id_eStatus'=>$this->request->getPost('id_eStatus'),
+                'level'=>$this->request->getPost('level'),
+              
+            ]; 
+                $this->employeeModel->insert($data);
+                return redirect()->to(site_url('Login'))->with('Success', '<i class="fas fa-save"></i> You Can Login Now');
+            
+        }
+        else{
+            //tidak valid
+            session()->setFlashdata('errors', \Config\Services::validation()->getErrors() );
+            return redirect()->to(site_url('/Auth'));//->with('Success', '<i class="fas fa-save"></i> You Can Login Now');
 
         }
-        /* 'email' => [
-		'label'  => 'email',
-		'rules'  => 'required|is_unique[employee.email]',
-		'errors' => [
-			'required' => '{field} Required'
-		]
-	],
-	'password' => [
-		'label'  => 'password',
-		'rules'  => 'required|min_length[2]',
-		'errors' => [
-			'min_length' => 'Your {field} is too short'
-		]
-	]
-*/
-        $data = [
-            'nik'=>$this->request->getPost('nik'),
-            'name'=>$this->request->getPost('name'),
-            'address'=>$this->request->getPost('address'),
-            'birthday'=>$this->request->getPost('birthday'),
-            'email'=>$this->request->getPost('email'),
-            'password'=> password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-            'phone1'=>$this->request->getPost('phone1'),
-            'phone2'=>$this->request->getPost('phone2'),
-            'id_eStatus'=>$this->request->getPost('id_eStatus'),
-            'level'=>$this->request->getPost('level'),
-          
-        ]; 
-            $this->employeeModel->insert($data);
-            return redirect()->to(site_url('Login'))->with('Success', '<i class="fas fa-save"></i> You Can Login Now');
-        }
+    }        
+        
         
     public function login()
     {

@@ -69,8 +69,8 @@
         <div class="form-group row">
             <label  class="col-sm-2 col-form-label">Gantt chart Attachment </label>
             <div class="col-sm-10">
-            <input  class="form-control" placeholder="Optional" type="file" id="gantt_chart" name="gantt_chart" value="<?php if(!empty($dataConsul)) echo base_url('assets/uploads/'.$dataConsul->gantt_chart); ?>">
-            <label class="form-label" for="customFile" style="color: red; font-size: 12px;"> * Optional Upload Data (Max: 5MB, Format: PDF, JPG, PNG)</label>
+            <input  class="form-control" type="file" id="gantt_chart" name="gantt_chart" value="<?php if(!empty($dataConsul)) echo base_url('assets/uploads/chart/'.$dataConsul->gantt_chart); ?>">
+            <label class="form-label" for="customFile" style="color: red; font-size: 12px;"> * Upload Data (Max: 5MB, Format: PDF, JPG, PNG)</label>
             </div>
         </div>
   

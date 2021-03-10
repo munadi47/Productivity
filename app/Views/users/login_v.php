@@ -46,11 +46,7 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                
-
-                                <?php } 
-                                ?>
-                                <?= $validate->listErrors(); ?>                         
+                                <?php } ?>
 
                                 <h3 class="text-center text-info"><i class="fas fa-sign-in-alt"></i> Login</h3>
                                 <div class="form-group">
@@ -59,7 +55,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="password" class="text-info"><i class="fas fa-key"></i> Password:</label><br>
-                                    <input type="password" name="password" id="password" class="form-control" alt="password"  placeholder="your password" required>
+                                    <input type="password" pattern=".{6,}" required title="6 characters minimum" name="password" id="password" class="form-control" alt="password"  placeholder="your password" required>
                                     <input type="checkbox" onclick="myFunction()"> Show Password    
                                 </div>
                                 <div class="form-group">
