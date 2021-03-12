@@ -228,6 +228,9 @@
                                                             echo base_url('assets/uploads/profile/'.session()->get('photo'));
                                                         } ?>" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
                                                         <div class="middle">
+                                                            <a href="<?php echo base_url("Employee/editProfile/".session()->get('nik')); ?>">
+                                                            <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change" />
+                                                            </a>
                                                         </div>
                                                     </div>
                                                     <div class="userData ml-3">

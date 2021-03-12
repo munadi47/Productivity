@@ -75,7 +75,9 @@ class Company extends BaseController{
            
             $data = [
                 'company_name'=>$this->request->getPost('company_name'),
-              
+                'address'=>$this->request->getPost('address'),
+                'phone'=>$this->request->getPost('phone'),
+                'field'=>$this->request->getPost('field'),
             ];
         
             $this->companyModel->insert($data);
@@ -88,8 +90,9 @@ class Company extends BaseController{
             $where = ['id_company'=>$id];
             $data = [
                 'company_name'=>$this->request->getPost('company_name'),
-             
-                    
+                'address'=>$this->request->getPost('address'),
+                'phone'=>$this->request->getPost('phone'),
+                'field'=>$this->request->getPost('field'),    
             ];
          
             $this->companyModel->update($where, $data);

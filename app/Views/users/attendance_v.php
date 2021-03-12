@@ -71,12 +71,16 @@
 var enableDisable = function(){
     
     var UTC_hours = new Date().getUTCHours() +7;
-    if (UTC_hours > 10 && UTC_hours < 24){
+    if (UTC_hours > 7 && UTC_hours < 24){
         document.getElementById('checktime1').disabled = false;
+        document.getElementById('checktime2').disabled = false;
+
     }
     else
     {
         document.getElementById('checktime1').disabled = true;
+        document.getElementById('checktime2').disabled = true;
+
     }
 };
 setInterval(enableDisable, 1000*60);

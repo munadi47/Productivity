@@ -43,7 +43,7 @@
                     <div class="col-md-4">
                         <div class="profile-img">
                             <img src="<?php if(!empty($row->photo)){ 
-                                echo base_url('assets/uploads/profile/'.session()->get('photo'));
+                                echo base_url('assets/uploads/profile/'.$row->photo);
                             }
                             else
                             { 
