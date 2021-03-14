@@ -30,6 +30,9 @@ class Video extends BaseController{
         $session = session();
     
         $data['dataVideo'] = $this->videoModel->JoinVideo();
+        $data['storyboard'] = $this->videoModel->storyboard();
+        $data['shooting'] = $this->videoModel->shooting();
+        $data['editing'] = $this->videoModel->editing();
         echo view ('users/header_v');
         echo view ('users/video_v',$data);
         echo view ('users/footer_v');
@@ -61,6 +64,8 @@ class Video extends BaseController{
         echo view('users/footer_v');
     }
 
+  
+
     public function edit($id){
         $where = ['id_video'=> $id];
         $data['dataVideo'] = $this->videoModel->where($where)->findAll()[0];
@@ -79,11 +84,14 @@ class Video extends BaseController{
            
             $data = [
                 'storyboard_pic'=>$this->request->getPost('storyboard_pic'),
-                'storyboard_date'=>$this->request->getPost('storyboard_date'),
+                'storyboard_start'=>$this->request->getPost('storyboard_start'),
+                'storyboard_end'=>$this->request->getPost('storyboard_end'),
                 'shooting_pic'=>$this->request->getPost('shooting_pic'),
-                'shooting_date'=>$this->request->getPost('shooting_date'),
+                'shooting_start'=>$this->request->getPost('shooting_start'),
+                'shooting_end'=>$this->request->getPost('shooting_end'),
                 'editing_pic'=>$this->request->getPost('editing_pic'),
-                'editing_date'=>$this->request->getPost('editing_date'),
+                'editing_start'=>$this->request->getPost('editing_start'),
+                'editing_end'=>$this->request->getPost('editing_end'),
                 'remark'=>$this->request->getPost('remark'),
                 'id_SalesPipeline'=>$this->request->getPost('id_SalesPipeline'),
                     
@@ -104,11 +112,14 @@ class Video extends BaseController{
             $where = ['id_video'=>$id];
             $data = [
                 'storyboard_pic'=>$this->request->getPost('storyboard_pic'),
-                'storyboard_date'=>$this->request->getPost('storyboard_date'),
+                'storyboard_start'=>$this->request->getPost('storyboard_start'),
+                'storyboard_end'=>$this->request->getPost('storyboard_end'),
                 'shooting_pic'=>$this->request->getPost('shooting_pic'),
-                'shooting_date'=>$this->request->getPost('shooting_date'),
+                'shooting_start'=>$this->request->getPost('shooting_start'),
+                'shooting_end'=>$this->request->getPost('shooting_end'),
                 'editing_pic'=>$this->request->getPost('editing_pic'),
-                'editing_date'=>$this->request->getPost('editing_date'),
+                'editing_start'=>$this->request->getPost('editing_start'),
+                'editing_end'=>$this->request->getPost('editing_end'),
                 'remark'=>$this->request->getPost('remark'),
                 'id_SalesPipeline'=>$this->request->getPost('id_SalesPipeline'),
                     
@@ -173,11 +184,11 @@ $spreadsheet->setActiveSheetIndex(0)
 ->setCellValue('A1', 'ID VIDEO')
 ->setCellValue('B1', 'CLIENT')
 ->setCellValue('C1', 'STORYBOARD PIC')
-->setCellValue('D1', 'STORYBOARD DATE')
+->setCellValue('D1', 'STORYBOARD DUE DATE')
 ->setCellValue('E1', 'SHOOTING PIC')
-->setCellValue('F1', 'SHOOTING DATE')
+->setCellValue('F1', 'SHOOTING DUE DATE')
 ->setCellValue('G1', 'EDITING PIC')
-->setCellValue('H1', 'EDITING DATE')
+->setCellValue('H1', 'EDITING DUE DATE')
 ->setCellValue('I1', 'REMARK')
 
 ;
@@ -189,11 +200,11 @@ $spreadsheet->setActiveSheetIndex(0)
 ->setCellValue('A'.$i, $row->id_video)
 ->setCellValue('B'.$i, $row->id_client)
 ->setCellValue('C'.$i, $row->storyboard_pic)
-->setCellValue('D'.$i, $row->storyboard_date)
+->setCellValue('D'.$i, $row->storyboard_end)
 ->setCellValue('E'.$i, $row->shooting_pic)
-->setCellValue('F'.$i, $row->shooting_date)
+->setCellValue('F'.$i, $row->shooting_end)
 ->setCellValue('G'.$i, $row->editing_pic)
-->setCellValue('H'.$i, $row->editing_date)
+->setCellValue('H'.$i, $row->editing_end)
 ->setCellValue('I'.$i, $row->remark)
 ;
 $i++;
@@ -248,11 +259,11 @@ exit;
     $spreadsheet->setActiveSheetIndex(0)
     ->setCellValue('A1', 'CLIENT')
     ->setCellValue('B1', 'STORYBOARD PIC')
-    ->setCellValue('C1', 'STORYBOARD DATE')
+    ->setCellValue('C1', 'STORYBOARD DUE DATE')
     ->setCellValue('D1', 'SHOOTING PIC')
-    ->setCellValue('E1', 'SHOOTING DATE')
+    ->setCellValue('E1', 'SHOOTING DUE DATE')
     ->setCellValue('F1', 'EDITING PIC')
-    ->setCellValue('G1', 'EDITING DATE')
+    ->setCellValue('G1', 'EDITING DUE DATE')
     ->setCellValue('H1', 'REMARK')
     
     ;
@@ -263,11 +274,11 @@ exit;
     $spreadsheet->setActiveSheetIndex(0)
     ->setCellValue('A'.$i, $row->id_client)
     ->setCellValue('B'.$i, $row->storyboard_pic)
-    ->setCellValue('C'.$i, $row->storyboard_date)
+    ->setCellValue('C'.$i, $row->storyboard_end)
     ->setCellValue('D'.$i, $row->shooting_pic)
-    ->setCellValue('E'.$i, $row->shooting_date)
+    ->setCellValue('E'.$i, $row->shooting_end)
     ->setCellValue('F'.$i, $row->editing_pic)
-    ->setCellValue('G'.$i, $row->editing_date)
+    ->setCellValue('G'.$i, $row->editing_end)
     ->setCellValue('H'.$i, $row->remark)
     ;
     $i++;

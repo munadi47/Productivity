@@ -24,6 +24,7 @@
         <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-video"></i> Video</li>
     </ol>
     </nav>
+   
     <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="fade-out" data-aos-duration="1000" >
            
                 <div class="card-body">
@@ -118,7 +119,64 @@
             </table>
                 </span>
             </div>
-        
+    </div>
+    <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info"  data-aos="fade-out" data-aos-duration="1000" >
+        <div class="card-body">
+            <h4> Video Calendar </h4>
+                <p> Note : Information in due date </p>
+              
+                <br>
+                <div id="calendar"></div>
+                <script>
+
+                    document.addEventListener('DOMContentLoaded', function() {
+                        var calendarEl = document.getElementById('calendar');
+                        var calendar = new FullCalendar.Calendar(calendarEl, {
+                            events: [
+                        {
+                            <?php if(!empty($storyboard)){ ?>
+                            <?php foreach ($storyboard as $data):{?>
+                            title:'Storyboard : <?php echo $data->pic; ?> <?php echo $data->judul; ?>',
+                            start: '<?php echo $data->duedate;?>',
+                            <?php }endforeach; }?>
+                            },
+                            {
+                            <?php if(!empty($shooting)){ ?>
+                            <?php foreach ($shooting as $data):{?>
+                            title: 'Shooting : <?php echo $data->pic; ?> <?php echo $data->judul; ?>',
+                            start: '<?php echo $data->duedate;?>',
+                            <?php }endforeach; }?>
+                            },
+                            {
+                            <?php if(!empty($editing)){ ?>
+                            <?php foreach ($editing as $data):{?>
+                            title: 'Editing : <?php echo $data->pic; ?> <?php echo $data->judul; ?>',
+                            start: '<?php echo $data->duedate;?>',
+                            <?php }endforeach; }?>
+                        }
+                    ],
+                        eventColor: '#3498db',
+               
+                        headerToolbar: {
+                            left: 'prev,next today',
+                            center: 'title',
+                            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                            
+                        },
+                        initialView: 'dayGridMonth',
+                        editable: false,
+                       
+                        });
+                        calendar.render();
+                      
+                    });
+
+                    </script>
+               
+              
+        </div>
+    </div>       
+   
     
 
 

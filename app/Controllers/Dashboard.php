@@ -32,7 +32,13 @@ class Dashboard extends BaseController{
        $data['countClosing'] = $this->sales_pipelineModel->closing();
        $data['countProposal'] = $this->sales_pipelineModel->proposal();
        $data['countMeeting'] = $this->sales_pipelineModel->meeting();
-      
+       $data['deadlineStory'] = $this->videoModel->deadlineStory();
+       $data['deadlineShoot'] = $this->videoModel->deadlineShoot();
+       $data['deadlineEdit'] = $this->videoModel->deadlineEdit();
+       $data['deadlineStoryDigital'] = $this->digitalModel->deadlineStory();
+       $data['deadlineVoice'] = $this->digitalModel->deadlineVoice();
+       $data['deadlineAnimate'] = $this->digitalModel->deadlineAnimate();
+       $data['deadlineCompile'] = $this->digitalModel->deadlineCompile();
          
       
         echo view ('users/header_v');

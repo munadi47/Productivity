@@ -28,8 +28,12 @@ class Digital extends BaseController{
 
     public function index(){
         $session = session();
-    
+        
         $data['dataDigital'] = $this->digital_contentModel->JoinDigital();
+        $data['storyboard'] = $this->digital_contentModel->storyboard();
+        $data['voiceover'] = $this->digital_contentModel->voiceover();
+        $data['animate'] = $this->digital_contentModel->animate();
+        $data['compile'] = $this->digital_contentModel->compile();
         echo view ('users/header_v');
         echo view ('users/digital_v',$data);
         echo view ('users/footer_v');

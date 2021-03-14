@@ -24,6 +24,12 @@
     <script  src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
    
+    <!--FullCalendar-->
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/FullCalendar.min.css') ?>" />
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/FullCalendar.css') ?>" />
+    <script src="<?php echo base_url('assets/js/FullCalendar.min.js') ?>"></script>
+    <script src="<?php echo base_url('assets/js/FullCalendar.js') ?>"></script>
+    
 
     <!--CK Editor-->
     <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
@@ -180,7 +186,6 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
-                      
                             <li class="nav-item active">
                                 <a class="nav-link" href="#"> 
                                     <button data-toggle="modal" data-target="#myModal" type="button" id="sidebarCollapse" class="btn btn-info">

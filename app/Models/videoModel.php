@@ -61,4 +61,72 @@ class videoModel extends Model
          ->get()->getResult();
  
     }
+    public function storyboard()
+    {
+
+         $query = $this->db->query("SELECT storyboard_pic AS pic, storyboard_date AS duedate, title AS judul FROM video,sales_pipeline WHERE video.id_SalesPipeline = sales_pipeline.id_SalesPipeline");
+         if($query){
+             foreach($query->getResult() as $data){
+                 $storyboard[] = $data;
+             }
+            if(!empty($storyboard)){
+                return $storyboard;
+             } return false;
+             
+         }
+ 
+    }
+    public function shooting()
+    {
+
+         $query = $this->db->query("SELECT shooting_pic AS pic, shooting_date AS duedate, title AS judul FROM video,sales_pipeline WHERE video.id_SalesPipeline = sales_pipeline.id_SalesPipeline");
+         if($query){
+             foreach($query->getResult() as $data){
+                 $shooting[] = $data;
+             }
+            if(!empty($shooting)){
+                return $shooting;
+             } return false;
+             
+         }
+ 
+    }
+    public function editing()
+    {
+
+         $query = $this->db->query("SELECT editing_pic AS pic, editing_date AS duedate, title AS judul FROM video,sales_pipeline WHERE video.id_SalesPipeline = sales_pipeline.id_SalesPipeline");
+         if($query){
+             foreach($query->getResult() as $data){
+                 $editing[] = $data;
+             }
+            if(!empty($editing)){
+                return $editing;
+             } return false;
+             
+         }
+ 
+    }
+
+    public function deadlineStory()
+    {
+        $query = $this->db->query("SELECT video.storyboard_date,video.storyboard_pic FROM video WHERE video.storyboard_date = CURDATE()");
+        return $query->getResult();
+ 
+    }
+
+    public function deadlineShoot()
+    {
+
+        $query = $this->db->query("SELECT video.shooting_date,video.shooting_pic FROM video WHERE video.shooting_date = CURDATE()");
+        return $query->getResult();
+ 
+ 
+    }
+    public function deadlineEdit()
+    {
+
+        $query = $this->db->query("SELECT video.editing_date,video.editing_pic FROM video WHERE video.editing_date = CURDATE()");
+        return $query->getResult();
+ 
+    }
 }
