@@ -7,6 +7,7 @@
     </nav>
 
 <div class="container">
+
     <div class="row" style="padding-bottom: 3vw;" >
     <div class="col-md-3">
       <div class="card-counter primary"  data-aos="zoom-in" data-aos-duration="1000">
@@ -40,35 +41,86 @@
       </div>
     </div>
     </div>
-   
-      <div class="row">
+
+    <div class="row">
+        <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
+            <div id="attendanceChart">
+            </div>
+        </div>
+    </div>
+    
+      
+        <div class="row">
         <div class="col col-lg-8">
           <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info "  data-aos="zoom-in" data-aos-duration="1000">
             <div id="financeChart">
             </div>
           </div>
         </div>
+
         
         <div class="col col-lg-4">
           <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info "  data-aos="zoom-in" data-aos-duration="1000">
             <div id="deliveryChart">
             </div>
           </div>
-        
         </div>
+
       </div>
 
       <div class="row">
-      <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="fade-out" data-aos-duration="1000" >
+      <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="fade-out" data-aos-duration="1000">
         <div id="sp_chart">
            
         </div>
       </div>
       </div>
-     
-  
-        
-    
+
+    <script>
+        Highcharts.chart('attendanceChart', {
+
+        title: {
+            text: 'Attendance Monitoring Graphic per Month'
+        },
+
+        subtitle: {
+            text: 'Source: ide-group.com'
+        },
+
+        yAxis: {
+            title: {
+                text: 'Number of Attendance'
+            }
+        },
+
+        xAxis: {
+            categories: ['Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+            
+        },
+
+
+        series: [{
+            name: 'Other',
+            data: [<?php if(!empty($countAttendance)) foreach ($countAttendance as $data) echo $data->total.", "?>]
+        }],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+
+        });
+        </script>
        
         <script>
               Highcharts.chart('financeChart', {

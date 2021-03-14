@@ -50,8 +50,34 @@ class attendanceModel extends Model
         
     }
 
-   
+    public function getStatusAtt(){
+        $id = session()->get('nik');
+        
+        $query = $this->db->query("SELECT YEARWEEK(clock_in) AS tahun_minggu,SUM($id) AS jumlah FROM log_attendance WHERE YEARWEEK(clock_in)=YEARWEEK(NOW() ) GROUP BY YEARWEEK(clock_in) ");
+        
+        if($query){
+            foreach($query->getResult() as $data){
+                $getStatusAttendance[] = $data;
+            }
+           if(!empty($getStatusAttendance)){
+               return $getStatusAttendance;
+            } return false;
+            
+        }
+    }
 
-   
+    public function countAttendance(){        
+        $query = $this->db->query("SELECT (DATE_FORMAT(clock_in,'%M')) AS 'bulan', COUNT(*) AS total FROM log_attendance WHERE year(clock_in)= '2021' GROUP BY (DATE_FORMAT(clock_in,'%M')) ORDER BY 'bulan' ");
+        
+        if($query){
+            foreach($query->getResult() as $data){
+                $countAttendance[] = $data;
+            }
+           if(!empty($countAttendance)){
+               return $countAttendance;
+            } return false;
+            
+        }
+    }
    
 }

@@ -1,75 +1,78 @@
 <html>
 	<head>
-		<style>
-			table{
-				border-collapse: collapse;
-				width: 100%;
-			}
-			td, th {
-				border : 1px solid #000000;
-				text-align: center;
-			}
-		</style>
 	</head>
 	<body>
     <section>
-   
-   <?php if(!empty(session()->getFlashdata('Success'))){ ?>
-               <div class="alert alert-success">
-                   <?php echo session()->getFlashdata('Success');?>
-                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                       <span aria-hidden="true">&times;</span>
-                   </button>
-               </div>
-           <?php }elseif(!empty(session()->getFlashdata('Failed'))){ ?>
-               <div class="alert alert-danger">
-                   <?php 
-                       echo session()->getFlashdata('Failed');
-                   ?>
-                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                       <span aria-hidden="true">&times;</span>
-                   </button>
-               </div>
-       <?php
-           }
-       ?>
-
-		<p align="right">        
-			<img src="../public/assets/img/ide.jpg" height="60px"/><br/>
-			
-			<i>IDE GROUP</i><br>
-			Jakarta, Indonesia<br>
-			021911911
-		</p>
-
-		<hr>
-		<hr>
-		<p></p>
-        <?php foreach ($dataFinance as $row) :?>
-		<p>
-			Pembeli : <?php echo $row->id_client; ?><br>
-			Alamat : <?php echo $row->id_client; ?><br>
-			Transaksi No :
-			Tanggal : 
-            
-            <?php echo date('Y-m-d', strtotime($row->invoice_date)) ?>
 		
-        </p>
-		<table cellpadding="6" >
+	<style>
+	table, tr, td {
+	padding: 15px;
+	}
+	</style>
+	<table style="background-color: #fffff; color: #fff">
+		<tbody>
 			<tr>
-				<th><strong>Client Name</strong></th>
-				<th><strong>Ammount</strong></th>
-				<th><strong>Total Harga</strong></th>
+				<td><img src="../public/assets/img/ide.png" height="60px"/></td>
+				<td align="right"><br/>
+					IDE GROUP<br/>
+						Jakarta Utara, Indonesia<br/>
+					<strong>01234567890</strong> | <strong>ide-group@ide.co.id</strong>
+				</td>
 			</tr>
+		</tbody>
+	</table>
+	<?php foreach ($dataFinance as $row) :?>
+
+
+	<table>
+		<tbody>
 			<tr>
-				<td><?php echo $row->id_client; ?></td>
-				<td><?php echo number_format($row->invoice_amount,0,",","."); ?></td>
-				<td><?php echo number_format($row->invoice_amount,0,",","."); ?></td>
+				<td>Invoice to<br/>
+				<strong><?php echo $row->id_client; ?></strong>
+				<br/>
+				<?php echo $row->address; ?>
+				</td>
+
+				<td align="right">
+				<strong>Total : Rp<?php echo number_format($row->invoice_amount,0,",","."); ?></strong><br/>
+				Invoice ID: <?php echo $row->id_finance; ?>LKC<br/>
+				Invoice Create: <?php echo date('Y-m-d', strtotime($row->invoice_date)) ?>
+				</td>
+			
 			</tr>
-		</table>
-        <?php
-         endforeach;
-        ?>
-    </section>
-	</body>
+		</tbody>
+	</table>
+<br />
+<br />
+<br />
+	<hr>
+
+	<table>
+	<tr>
+		<th><strong>Client Name</strong></th>
+		<th><strong>Total</strong></th>
+		<th><strong>Status</strong></th>
+	</tr>
+	<tr>
+		<td><?php echo $row->id_client; ?></td>
+		<td><?php echo number_format($row->invoice_amount,0,",","."); ?></td>
+		<td><?php echo $row->status; ?> </td>
+	</tr>
+	<tr>
+	<hr>
+	<td colspan="4">
+	<div align="right">
+	<h2 align="right">Thank you for your business.</h2><br/>
+	<img src="../public/assets/img/ide.jpg" height="60px"/><br/><br/><br/>
+	</div>
+	<p align="right">IDE GROUP.</p>
+	</td>
+	</tr>
+	</table>
+
+	<?php
+		endforeach;
+	?>
+</section>
+</body>
 </html>

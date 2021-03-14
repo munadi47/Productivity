@@ -147,10 +147,11 @@ class Finance extends BaseController{
         
         // create new PDF document
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        $pdf->SetMargins(-1, 0, -1);
 
         // set document information
         $pdf->SetCreator(PDF_CREATOR);
-        $pdf->SetAuthor('Nicola Asuni');
+        $pdf->SetAuthor('IDE GROUP');
         $pdf->SetTitle('Invoice');
         $pdf->SetSubject('Invoice');
         $pdf->SetKeywords('PDF, example, test, invoice');    
@@ -163,7 +164,7 @@ class Finance extends BaseController{
         
         $this->response->setContentType('application/pdf');
         //Close and output PDF document
-        $pdf->Output('example_001.pdf', 'I');
+        $pdf->Output('Invoice.pdf', 'I');
         $act = 'Generate new Invoice data';
         $this->record($act,session()->get('nik'));
     }

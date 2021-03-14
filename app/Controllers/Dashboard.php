@@ -15,7 +15,8 @@ class Dashboard extends BaseController{
         $this->digitalModel = new \App\Models\digital_contentModel();
         $this->consultingModel = new \App\Models\consultingModel();
         $this->financeModel = new \App\Models\FinanceModel();
-        
+        $this->attendanceModel = new \App\Models\attendanceModel();
+
         
     }
 
@@ -32,11 +33,11 @@ class Dashboard extends BaseController{
        $data['countClosing'] = $this->sales_pipelineModel->closing();
        $data['countProposal'] = $this->sales_pipelineModel->proposal();
        $data['countMeeting'] = $this->sales_pipelineModel->meeting();
-      
+       $data['countAttendance'] = $this->attendanceModel->countAttendance();
          
       
         echo view ('users/header_v');
-        echo view ('admin/dashboard',$data);
+        echo view ('admin/dashboard_v',$data);
         echo view ('users/footer_v');
         
     }

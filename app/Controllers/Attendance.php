@@ -79,7 +79,7 @@ class Attendance extends BaseController{
             $id = $this->attendanceModel->getInsertID(); 
             $act = 'Out (Clock out)';
             $this->record($act,session()->get('nik'));
-            return redirect()->to(site_url('Attendance'))->with('Success', '<i class="fas fa-save"></i> Clockout saved');            
+            return redirect()->to(site_url('Attendance'))->with('Success', '<i class="fas fa-save"></i> Clockout saved on '.date('H:i:s'));            
         
        
     }
@@ -117,7 +117,7 @@ class Attendance extends BaseController{
             //bug activity
             //$act = 'Insert new Attendance data, Client = '.$datain['nik'];
             //$this->record($act,session()->get('name'));
-                return redirect()->to(site_url('Attendance'))->with('Success', '<i class="fas fa-save"></i> Clockin saved');            
+                return redirect()->to(site_url('Attendance'))->with('Success', '<i class="fas fa-save"></i> Clockin saved on '.date('H:i:s'));            
     } 
 
     

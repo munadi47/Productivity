@@ -67,11 +67,15 @@
 </div>
 
 <script type="text/javascript" defer="defer">
-<!-- 
+//<!-- 
 var enableDisable = function(){
     
     var UTC_hours = new Date().getUTCHours() +7;
+    
     if (UTC_hours > 7 && UTC_hours < 24){
+        if (){
+            
+        }
         document.getElementById('checktime1').disabled = false;
         document.getElementById('checktime2').disabled = false;
 
