@@ -53,28 +53,32 @@
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Storyboard</label>
-            <div class="col-sm-7">
+            <div class="col-sm-3">
             <input class="form-control" type="text" placeholder="PIC" id="storyboard_pic" name="storyboard_pic" value="<?php if(!empty($dataVideo)) echo $dataVideo->storyboard_pic; ?>"> 
             </div>
-            <div class="col-sm-3">
+            <label class="col">Due Date</label>
+            <div class="col-sm-2">
+            
             <input  class="form-control"  type="date" id="storyboard_date" name="storyboard_date" value="<?php if(!empty($dataVideo)) echo $dataVideo->storyboard_date; ?>"> 
             </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Shooting</label>
-            <div class="col-sm-7">
+            <div class="col-sm-3">
             <input  class="form-control" type="text" placeholder="PIC" id="shooting_pic" name="shooting_pic" value="<?php if(!empty($dataVideo)) echo $dataVideo->shooting_pic; ?>"> 
             </div>
-            <div class="col-sm-3">
+            <label class="col">Due Date</label>
+            <div class="col-sm-2">
             <input  class="form-control" type="date" id="shooting_date" name="shooting_date" value="<?php if(!empty($dataVideo)) echo $dataVideo->shooting_date; ?>"> 
             </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Editing</label>
-            <div class="col-sm-7">
+            <div class="col-sm-3">
             <input  class="form-control" type="text" placeholder="PIC" id="editing_pic" name="editing_pic" value="<?php if(!empty($dataVideo)) echo $dataVideo->editing_pic; ?>"> 
             </div>
-            <div class="col-sm-3">
+            <label class="col">Due Date</label>
+            <div class="col-sm-2">
             <input  class="form-control" type="date" id="editing_date" name="editing_date" value="<?php if(!empty($dataVideo)) echo $dataVideo->editing_date; ?>"> 
             </div>
         </div>

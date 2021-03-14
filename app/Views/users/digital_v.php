@@ -92,6 +92,7 @@
                         <td >
                           
                             <span>
+                               
                                 <a title="Download Report"  href="<?php echo base_url("Digital/schedule/".$row->id_digital); ?>" alt="Edit" class="btn btn-outline-info btn-sm">
                                 <i class="fa fa-file-excel"></i> 
                                 </a>
@@ -128,7 +129,44 @@
             </table>
                 </span>
             </div>
-        
+    </div>
+    <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info"  >
+        <div class="card-body">
+            <h4> Digital Content Calendar </h4>
+                <p> Note : Information in due date </p>
+              
+                <br>
+                <div id="calendar"></div>
+                
+                <script>
+
+                    document.addEventListener('DOMContentLoaded', function() {
+                    var calendarEl = document.getElementById('calendar');
+                    var calendar = new FullCalendar.Calendar(calendarEl, {
+                        headerToolbar: {
+                            left: 'prev,next today',
+                            center: 'title',
+                            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                        },
+                            initialView: 'dayGridMonth',
+                            editable: false,
+                            
+                        eventColor: '#3498db',
+                           
+                        
+                    });
+                    calendar.render();
+                        calendar.changeView('dayGridMonth');
+                        calendar.addEvent({ title: '<?php if(!empty($storyboard)) foreach ($storyboard as $data) echo $data->pic; echo " : Storyboard "; echo $data->judul;?>', start: '<?php echo $data->duedate ?>' });
+                        calendar.addEvent({ title: '<?php if(!empty($voiceover)) foreach ($voiceover as $data) echo $data->pic;  echo " : Voiceover "; echo $data->judul;?>', start: '<?php echo $data->duedate ?>' });
+                        calendar.addEvent({ title: '<?php if(!empty($animate)) foreach ($animate as $data) echo $data->pic; echo " : Animate "; echo $data->judul;?>', start: '<?php echo $data->duedate ?>' });
+                        calendar.addEvent({ title: '<?php if(!empty($compile)) foreach ($compile as $data) echo $data->pic; echo " : Compile "; echo $data->judul;?>', start: '<?php echo $data->duedate ?>' });
+                    });
+
+                </script>
+        </div>
+    </div>       
+    
     
 
 

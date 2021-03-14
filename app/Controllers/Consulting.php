@@ -22,6 +22,7 @@ class Consulting extends BaseController{
         $this->consultingModel = new \App\Models\consultingModel();
         $this->sales_pipelineModel = new \App\Models\sales_pipelineModel();
         $this->activityModel = new \App\Models\activityModel();
+       
         helper(['form', 'url']);
        
     }
@@ -49,10 +50,6 @@ class Consulting extends BaseController{
          return $result;
   
      }
-
-
-   
-
     public function add(){
         $data['dataPipeline'] = $this->consultingModel->consulting();
 
@@ -70,6 +67,7 @@ class Consulting extends BaseController{
         echo view('users/consul_form_v',$data);
         echo view ('users/footer_v');
     }
+
     public function view_pdf($id){
         $where = ['id_consulting'=> $id];
         $data['dataConsul'] = $this->consultingModel->where($where)->findAll()[0];
@@ -78,6 +76,7 @@ class Consulting extends BaseController{
         echo view('users/pdf_v',$data);
         echo view ('users/footer_v');
     }
+   
     
 
     public function save() {
@@ -202,10 +201,7 @@ class Consulting extends BaseController{
         
     }
 
-
-   
-
-
+    
     //delete
     public function delete($id){
 
@@ -227,6 +223,7 @@ class Consulting extends BaseController{
 
      
     }
+
    
     
 

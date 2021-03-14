@@ -38,47 +38,47 @@
                 <br>
                 <br>
                 <div class="row justify-content-start">
-                    <div class="col-2">
+                    <div class="col col-lg-2">
                     <i class="fas fa-users"></i> Client 
                     </div>
-                    <div class="col-4">
+                    <div class="col col-lg-5">
                         : <?php echo $row->id_client ?>
                     </div>
                 </div>
                 <br>
                 <div class="row justify-content-start">
-                    <div class="col-2">
+                    <div class="col col-lg-2">
                     <i class="fas fa-building"></i> Business Type 
                     </div>
-                    <div class="col-4">
+                    <div class="col col-lg-5">
                         : <?php echo $row->sector ?>
                     </div>
                 </div>
                 <br>
                 <div class="row justify-content-start">
-                    <div class="col-2">
+                    <div class="col col-lg-2">
                     <i class="fas fa-map"></i> Address 
                     </div>
-                    <div class="col-4">
+                    <div class="col col-lg-5">
                         : <?php echo $row->address ?>
                         
                     </div>
                 </div>
                 <br>
                 <div class="row justify-content-start">
-                    <div class="col-2">
+                    <div class="col col-lg-2">
                     <i class="fas fa-phone"></i> Phone 
                     </div>
-                    <div class="col-4">
+                    <div class="col col-lg-5">
                         : <?php echo $row->phone ?>
                     </div>
                 </div>
                 <br>
                 <div class="row justify-content-start">
-                    <div class="col-2">
+                    <div class="col col-lg-2">
                     <i class="fas fa-user-tie"></i> PIC 
                     </div>
-                    <div class="col-4">
+                    <div class="col col-lg-5">
                         : <?php echo $row->name ?>
                     </div>
                 </div>
