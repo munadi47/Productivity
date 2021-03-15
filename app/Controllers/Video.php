@@ -22,7 +22,7 @@ class Video extends BaseController{
         $this->videoModel = new \App\Models\videoModel();
         $this->sales_pipelineModel = new \App\Models\sales_pipelineModel();
         $this->activityModel = new \App\Models\activityModel();
-        
+        $this->attendanceModel = new \App\Models\attendanceModel();
 
     }
 
