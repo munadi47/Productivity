@@ -24,8 +24,6 @@ class Video extends BaseController{
         $this->activityModel = new \App\Models\activityModel();
         $this->attendanceModel = new \App\Models\attendanceModel();
 
-        
-
     }
 
     public function index(){
