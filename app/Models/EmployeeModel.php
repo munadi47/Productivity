@@ -60,4 +60,5 @@ class employeeModel extends Model
          ->countAllResults();
  
     }
+    
 }
