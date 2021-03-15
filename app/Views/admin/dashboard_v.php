@@ -121,15 +121,15 @@
         </div>
         <div class="col col-lg-4">
             <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000">
-            <h4 style="padding-bottom: 2vw;"> Employee Attendance Today </h4>
-            <?php $nomor = 1;
+            <h4 style="padding-bottom: 1vw;"> Employee Attendance Today </h4>
+            <?php
                 if (!empty($AttToday)){ 
             ?>
             <br/>
-            <ul style="margin-bottom: 2vw;" class="list-group">
+            <ul style="margin-bottom: 1vw;" class="list-group">
                 <?php
-                foreach ($AttToday as $row): { ?>
-                <li class="list-group-item"><?php echo $nomor++.'. '.$row->name; ?></li>
+                foreach ($AttToday as $no => $row): { ?>
+                <li class="list-group-item"><?php echo ++$no.'. '.$row->name; ?></li>
                 <?php }endforeach; ?>
             </ul>
         
