@@ -93,14 +93,6 @@
     </div>
     </div>
 
-    <div class="row">
-        <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
-            <div id="attendanceChart">
-            </div>
-        </div>
-    </div>
-    
-      
         <div class="row">
         <div class="col col-lg-8">
           <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info "  data-aos="zoom-in" data-aos-duration="1000">
@@ -120,12 +112,41 @@
       </div>
 
       <div class="row">
-      <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="fade-out" data-aos-duration="1000">
-        <div id="sp_chart">
-           
+        <div class="col col-lg-8">
+            <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
+                <div id="sp_chart"> 
+                
+                </div>
+            </div>
         </div>
-      </div>
-      </div>
+        <div class="col col-lg-4">
+            <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000">
+            <h4 style="padding-bottom: 2vw;"> Employee Attendance Today </h4>
+            <?php $nomor = 1;
+                if (!empty($AttToday)){ 
+            ?>
+            <br/>
+            <ul style="margin-bottom: 2vw;" class="list-group">
+                <?php
+                foreach ($AttToday as $row): { ?>
+                <li class="list-group-item"><?php echo $nomor++.'. '.$row->name; ?></li>
+                <?php }endforeach; ?>
+            </ul>
+        
+            <?php }else{?>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        No one has been absent today
+                    </li>
+                </ul>
+            
+            <?php } ?>
+            <div class="float-right">
+                <?php echo $pager->links('AttToday', 'bootstrap_pagination'); ?>
+            </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         Highcharts.chart('attendanceChart', {

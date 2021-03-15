@@ -79,5 +79,15 @@ class attendanceModel extends Model
             
         }
     }
+
+    public function AttToday()
+    {
+        
+        $builder = $this->table('log_attendance');
+        $builder->select('employee.name,clock_in')
+        ->join('employee','employee.nik=log_attendance.nik')
+        ->where("DATE('clock_in')",'CURDATE()');
+        return $builder;
+    }
    
 }
