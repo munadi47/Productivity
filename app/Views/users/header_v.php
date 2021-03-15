@@ -322,16 +322,26 @@
                                                             <?php } ?>
                                                             <hr />
                                                             <div class="row">
-                                                                <div class="col-sm-3 col-md-2 col-5">
-                                                                    <label style="font-weight:bold;">Status</label>
+                                                                <div class="col-lg-5 col-md-6 col-8">
+                                                                    <label style="font-weight:bold; ">Status Attendance</label>
                                                                 </div>
                                                                 <!--Di update jika ada perubahan -->
-                                                                <div class="col-md-8 col-6">
-                                                                <?php if(session()->get('id_eStatus')=='0'){ echo "<span class='badge badge-success'> aman </span>";}
-                                                                elseif(session()->get('id_eStatus')=='1'){ echo "<span class='badge badge-warning'> peringatan 1 </span>";} 
-                                                                elseif(session()->get('id_eStatus')=='2'){ echo "<span class='badge badge-warning'> peringatan 2 </span>";}
-                                                                elseif(session()->get('id_eStatus')=='3'){ echo "<span class='badge badge-danger'> peringatan 3 </span>";}?>
+                                                                <div class="col-lg-3 col-3">
                                                                 
+                                                                <?php if(!empty($dataAttendance)){ ?>
+                                                                <?php foreach ($dataAttendance as $row):{?>
+                                                                <?php if($row->jumlah < 3 ){?>
+                                                                    <?php echo "<span class='badge badge-warning'>Not Fulfilled</span>"?>
+
+                                                                <?php }else {
+                                                                     echo "<span class='badge badge-success'>Fulfilled</span>";
+                                                                }
+                                                                ?>
+                                                                
+                                                                <?php }endforeach; }?>
+
+                                                                
+
                                                                 </div>
                                                             </div>
                                                             <hr />

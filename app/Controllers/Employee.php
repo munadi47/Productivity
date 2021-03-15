@@ -32,12 +32,12 @@ class Employee extends BaseController{
         $session = session();
 
         session();
-        $data = [ 'validate' => \Config\Services::validation()];
         $data['validation'] = $this->validator;
+        $data = [ 'validate' => \Config\Services::validation()];
         $data['dataEmployee'] = $this->employeeModel->getEmployee();
-        $data['dataAttendance'] = $this->attendanceModel->getStatusAtt();
-        
-        echo view ('users/header_v');
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+
+        echo view ('users/header_v', $statusEmp);
         echo view ('admin/employee_v',$data);
         echo view ('users/footer_v');
         
@@ -63,8 +63,9 @@ class Employee extends BaseController{
     public function add(){
 
         $data['dataEmpstatus'] = $this->empstatusModel->findAll();
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
-        echo view('users/header_v');
+        echo view('users/header_v',$statusEmp);
         echo view('admin/employee_form_add',$data);
         echo view('users/footer_v');
     }
@@ -73,9 +74,10 @@ class Employee extends BaseController{
         $where = ['nik'=> $id];
         $data['dataEmpstatus'] = $this->empstatusModel->findAll();
         $data['dataEmployee'] = $this->employeeModel->where($where)->findAll()[0];
-        
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
-        echo view('users/header_v');
+
+        echo view('users/header_v',$statusEmp);
         echo view('admin/employee_form_v',$data);
         echo view ('users/footer_v');
 
@@ -90,9 +92,10 @@ class Employee extends BaseController{
         $where = ['nik'=> $id];
         $data['dataEmpstatus'] = $this->empstatusModel->findAll();
         $data['dataEmployee'] = $this->employeeModel->where($where)->findAll()[0];
-        
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
-        echo view('users/header_v');
+
+        echo view('users/header_v',$statusEmp);
         echo view('admin/profile_form',$data);
         echo view ('users/footer_v');
 
@@ -102,10 +105,13 @@ class Employee extends BaseController{
     }
 
     public function detail($id){
+        $data['dataAttendance'] = $this->attendanceModel->getStatusAttX($id);
+
         $data['dataEmployee'] = $this->employeeModel->getDetail($id);
         $data['countClosing'] = $this->employeeModel->countClosing($id);
         $data['countPICClient'] = $this->employeeModel->countPICClient($id);
-        echo view('users/header_v');
+
+        echo view('users/header_v',$data);
         echo view('admin/employee_detail_v',$data);
         echo view ('users/footer_v');
     }
@@ -235,7 +241,8 @@ class Employee extends BaseController{
                 $path = 'assets/uploads/profile/';
                 @unlink($path.$file1);
                     $photo = $this->request->getFile('photo');
-                                   
+                    $photo->move('assets/uploads/profile/');
+    
                     $data = [
                         'nik'=>$this->request->getPost('nik'),
                         'name'=>$this->request->getPost('name'),
@@ -449,7 +456,9 @@ exit;
 
 
 public function import(){
-    echo view('users/header_v');
+    $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+
+    echo view('users/header_v',$statusEmp);
     echo view('admin/employee_excel_form_v');
     echo view('users/footer_v');
 }

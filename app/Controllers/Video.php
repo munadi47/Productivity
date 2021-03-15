@@ -33,7 +33,9 @@ class Video extends BaseController{
         $data['storyboard'] = $this->videoModel->storyboard();
         $data['shooting'] = $this->videoModel->shooting();
         $data['editing'] = $this->videoModel->editing();
-        echo view ('users/header_v');
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+
+        echo view ('users/header_v',$statusEmp);
         echo view ('users/video_v',$data);
         echo view ('users/footer_v');
         
@@ -58,8 +60,9 @@ class Video extends BaseController{
     public function add(){
      
         $data['dataPipeline'] = $this->videoModel->video();
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
-        echo view('users/header_v');
+        echo view('users/header_v',$statusEmp);
         echo view('users/video_form_v',$data);
         echo view('users/footer_v');
     }
@@ -70,8 +73,9 @@ class Video extends BaseController{
         $where = ['id_video'=> $id];
         $data['dataVideo'] = $this->videoModel->where($where)->findAll()[0];
         $data['dataPipeline'] = $this->videoModel->video();
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
-        echo view('users/header_v');
+        echo view('users/header_v',$statusEmp);
         echo view('users/video_form_v',$data);
         echo view ('users/footer_v');
     }

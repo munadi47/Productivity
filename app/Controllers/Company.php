@@ -21,14 +21,17 @@ class Company extends BaseController{
         $this->session = \Config\Services::session();
         $this->companyModel = new \App\Models\companyModel();
         $this->activityModel = new \App\Models\activityModel();
-       
+        $this->attendanceModel = new \App\Models\attendanceModel();
+
       
     }
 
     public function index(){
         $session = session();
         $data['dataCompany'] = $this->companyModel->findAll();
-        echo view ('users/header_v');
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+
+        echo view ('users/header_v',$statusEmp);
         echo view ('admin/company_v',$data);
         echo view ('users/footer_v');
         
@@ -52,7 +55,9 @@ class Company extends BaseController{
    
 
     public function add(){
-        echo view('users/header_v');
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+
+        echo view('users/header_v',$statusEmp);
         echo view('admin/company_form_v');
         echo view('users/footer_v');
     }
@@ -60,8 +65,9 @@ class Company extends BaseController{
     public function edit($id){
         $where = ['id_company'=> $id];
         $data['dataCompany'] = $this->companyModel->where($where)->findAll()[0];
-        
-        echo view('users/header_v');
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+
+        echo view('users/header_v',$statusEmp);
         echo view('admin/company_form_v',$data);
         echo view ('users/footer_v');
     }
@@ -190,7 +196,9 @@ $this->record($act,session()->get('nik'));
 }
 
 public function import(){
-    echo view('users/header_v');
+    $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+
+    echo view('users/header_v',$statusEmp);
     echo view('admin/company_excel_form_v');
     echo view('users/footer_v');
 }

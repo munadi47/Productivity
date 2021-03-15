@@ -22,7 +22,8 @@ class Learning extends BaseController{
         $this->learningModel = new \App\Models\learningModel();
         $this->sales_pipelineModel = new \App\Models\sales_pipelineModel();
         $this->activityModel = new \App\Models\activityModel();
-       
+        $this->attendanceModel = new \App\Models\attendanceModel();
+
 
     }
 
@@ -30,7 +31,9 @@ class Learning extends BaseController{
         $session = session();
     
         $data['dataLearning'] = $this->learningModel->JoinLearning();
-        echo view ('users/header_v');
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+
+        echo view ('users/header_v'),$statusEmp;
         echo view ('users/learning_v',$data);
         echo view ('users/footer_v');
         
@@ -56,8 +59,9 @@ class Learning extends BaseController{
     public function add(){
      
         $data['dataPipeline'] = $this->learningModel->learning();
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
-        echo view('users/header_v');
+        echo view('users/header_v',$statusEmp);
         echo view('users/learning_form_v',$data);
         echo view('users/footer_v');
     }
@@ -66,8 +70,10 @@ class Learning extends BaseController{
         $where = ['id_learning'=> $id];
         $data['dataLearning'] = $this->learningModel->where($where)->findAll()[0];
         $data['dataPipeline'] = $this->learningModel->learning();
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
-        echo view('users/header_v');
+
+        echo view('users/header_v',$statusEmp);
         echo view('users/learning_form_v',$data);
         echo view ('users/footer_v');
     }

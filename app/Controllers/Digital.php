@@ -22,7 +22,8 @@ class Digital extends BaseController{
         $this->digital_contentModel = new \App\Models\digital_contentModel();
         $this->sales_pipelineModel = new \App\Models\sales_pipelineModel();
         $this->activityModel = new \App\Models\activityModel();
-      
+        $this->attendanceModel = new \App\Models\attendanceModel();
+
 
     }
 
@@ -34,7 +35,9 @@ class Digital extends BaseController{
         $data['voiceover'] = $this->digital_contentModel->voiceover();
         $data['animate'] = $this->digital_contentModel->animate();
         $data['compile'] = $this->digital_contentModel->compile();
-        echo view ('users/header_v');
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+
+        echo view ('users/header_v',$statusEmp);
         echo view ('users/digital_v',$data);
         echo view ('users/footer_v');
         
@@ -61,8 +64,9 @@ class Digital extends BaseController{
     public function add(){
      
         $data['dataPipeline'] = $this->digital_contentModel->digital();
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
-        echo view('users/header_v');
+        echo view('users/header_v',$statusEmp);
         echo view('users/digital_content_form_v',$data);
         echo view('users/footer_v');
     }
@@ -71,8 +75,9 @@ class Digital extends BaseController{
         $where = ['id_digital'=> $id];
         $data['dataDigital'] = $this->digital_contentModel->where($where)->findAll()[0];
         $data['dataPipeline'] = $this->digital_contentModel->digital();
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
-        echo view('users/header_v');
+        echo view('users/header_v',$statusEmp);
         echo view('users/digital_content_form_v',$data);
         echo view ('users/footer_v');
     }

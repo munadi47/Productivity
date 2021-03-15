@@ -41,9 +41,10 @@ class Dashboard extends BaseController{
        $data['deadlineVoice'] = $this->digitalModel->deadlineVoice();
        $data['deadlineAnimate'] = $this->digitalModel->deadlineAnimate();
        $data['deadlineCompile'] = $this->digitalModel->deadlineCompile();
-         
+       $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+
       
-        echo view ('users/header_v');
+        echo view ('users/header_v',$statusEmp);
         echo view ('admin/dashboard_v',$data);
         echo view ('users/footer_v');
         

@@ -22,7 +22,8 @@ class Product extends BaseController{
         $this->productModel = new \App\Models\productModel();
         $this->companyModel = new \App\Models\companyModel();
         $this->activityModel = new \App\Models\activityModel();
-        
+        $this->attendanceModel = new \App\Models\attendanceModel();
+
 
     }
 
@@ -30,7 +31,9 @@ class Product extends BaseController{
         $session = session();
     
         $data['dataProduct'] = $this->productModel->getCompany();
-        echo view ('users/header_v');
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+
+        echo view ('users/header_v',$statusEmp);
         echo view ('users/product_v',$data);
         echo view ('users/footer_v');
         
@@ -54,8 +57,9 @@ class Product extends BaseController{
     public function add(){
      
         $data['dataCompany'] = $this->companyModel->findAll();
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
-        echo view('users/header_v');
+        echo view('users/header_v',$statusEmp);
         echo view('users/product_form_v',$data);
         echo view('users/footer_v');
     }
@@ -64,8 +68,9 @@ class Product extends BaseController{
         $where = ['id_product'=> $id];
         $data['dataProduct'] = $this->productModel->where($where)->findAll()[0];
         $data['dataCompany'] = $this->companyModel->findAll();
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
-        echo view('users/header_v');
+        echo view('users/header_v',$statusEmp);
         echo view('users/product_form_v',$data);
         echo view ('users/footer_v');
     }
@@ -206,7 +211,9 @@ exit;
 }
 
 public function import(){
-    echo view('users/header_v');
+    $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+
+    echo view('users/header_v',$statusEmp);
     echo view('users/product_excel_form_v');
     echo view('users/footer_v');
 }

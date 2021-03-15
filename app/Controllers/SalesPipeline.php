@@ -29,7 +29,8 @@ class SalesPipeline extends BaseController{
         $this->digital_contentModel = new \App\Models\digital_contentModel();
         $this->activityModel = new \App\Models\activityModel();
         $this->db = \Config\Database::connect();
-       
+        $this->attendanceModel = new \App\Models\attendanceModel();
+
 
     }
 
@@ -37,12 +38,12 @@ class SalesPipeline extends BaseController{
         $session = session();
     
         $data['dataPipeline'] = $this->sales_pipelineModel->JoinPipeline();
-
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
         $data['countClosing'] = $this->sales_pipelineModel->closing();
         $data['countProposal'] = $this->sales_pipelineModel->proposal();
         $data['countMeeting'] = $this->sales_pipelineModel->meeting();
       
-        echo view ('users/header_v');
+        echo view ('users/header_v',$statusEmp);
         echo view ('users/sp_v',$data);
         echo view ('users/footer_v');
         
@@ -73,8 +74,9 @@ class SalesPipeline extends BaseController{
         $data['dataProduct'] = $this->productModel->findAll();
         $data['dataClient'] = $this->clientModel->findAll();
         $data['dataEmployee'] = $this->employeeModel->findAll();
-       
-        echo view('users/header_v');
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+
+        echo view('users/header_v',$statusEmp);
         echo view('users/sp_form_v',$data);
         echo view('users/footer_v');
     }
@@ -85,9 +87,9 @@ class SalesPipeline extends BaseController{
         $data['dataProduct'] = $this->productModel->findAll();
         $data['dataClient'] = $this->clientModel->findAll();
         $data['dataEmployee'] = $this->employeeModel->findAll();
-       
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
-        echo view('users/header_v');
+        echo view('users/header_v',$statusEmp);
         echo view('users/sp_form_v',$data);
         echo view ('users/footer_v');
     }

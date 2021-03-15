@@ -48,7 +48,7 @@
                             else
                             { 
                                 echo base_url('http://placehold.it/250x250'); 
-                                }?>" alt=""/>
+                                }?>" style="width: 200px; height:200px" alt=""/>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -135,14 +135,19 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <p>
-                                                    <?php if($row->status=='aman'){
-                                                        ?><span class="badge badge-success"><?php
-                                                    
-                                                    } elseif($row->status=='peringatan1'){
-                                                        ?><span class="badge badge-danger"><?php
-                                                    }else{
-                                                        ?><span class="badge badge-warning"><?php
-                                                    } echo $row->status; ?><br>
+                                                <?php if(!empty($dataAttendance)){ ?>
+                                                <?php foreach ($dataAttendance as $atd):{?>
+                                                <?php if($atd->jumlah < 3){?>
+                                                    <?php echo "<span class='badge badge-warning'>Peringatan</span>"?>
+
+
+                                                <?php }else {
+                                                        echo "<span class='badge badge-success'>Clear</span>";
+                                                }
+                                                ?>
+                                                
+                                                <?php }endforeach; }?>
+                                                <br>
                                                 </p>
                                             </div>
                                         </div>
@@ -161,7 +166,16 @@
                                                 <label>Present count for this week </label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>20</p>
+                                            <?php if(!empty($dataAttendance)){ ?>
+                                            <?php foreach ($dataAttendance as $row):{?>
+                                            <?php if(!empty($row)){?>
+                                                <p><?php echo $row->jumlah?></p>
+                                            <?php }else {
+                                            }
+                                            ?>
+                                            <?php }endforeach; }?>
+
+                                                <p><?  ?></p>
                                             </div>
                                         </div>
                                         <div class="row">

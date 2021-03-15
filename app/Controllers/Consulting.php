@@ -22,7 +22,8 @@ class Consulting extends BaseController{
         $this->consultingModel = new \App\Models\consultingModel();
         $this->sales_pipelineModel = new \App\Models\sales_pipelineModel();
         $this->activityModel = new \App\Models\activityModel();
-       
+        $this->attendanceModel = new \App\Models\attendanceModel();
+
         helper(['form', 'url']);
        
     }
@@ -31,7 +32,9 @@ class Consulting extends BaseController{
         $session = session();
         $data['validation'] = $this->validator;
         $data['dataConsul'] = $this->consultingModel->JoinConsul();
-        echo view ('users/header_v');
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+
+        echo view ('users/header_v',$statusEmp);
         echo view ('users/consul_v',$data);
         echo view ('users/footer_v');
         
@@ -52,8 +55,9 @@ class Consulting extends BaseController{
      }
     public function add(){
         $data['dataPipeline'] = $this->consultingModel->consulting();
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
-        echo view('users/header_v');
+        echo view('users/header_v',$statusEmp);
         echo view('users/consul_form_v',$data);
         echo view('users/footer_v');
     }
@@ -62,8 +66,10 @@ class Consulting extends BaseController{
         $where = ['id_consulting'=> $id];
         $data['dataConsul'] = $this->consultingModel->where($where)->findAll()[0];
         $data['dataPipeline'] = $this->consultingModel->consulting();
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
-        echo view('users/header_v');
+
+        echo view('users/header_v',$statusEmp);
         echo view('users/consul_form_v',$data);
         echo view ('users/footer_v');
     }
@@ -71,8 +77,9 @@ class Consulting extends BaseController{
     public function view_pdf($id){
         $where = ['id_consulting'=> $id];
         $data['dataConsul'] = $this->consultingModel->where($where)->findAll()[0];
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
-        echo view('users/header_v');
+        echo view('users/header_v',$statusEmp);
         echo view('users/pdf_v',$data);
         echo view ('users/footer_v');
     }

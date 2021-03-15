@@ -51,7 +51,6 @@
         </a>
 
 -->
-        <input class="submit" type="submit" id="checktime" value="Check"/>
 
         <form action="<?php echo base_url("Attendance/clockin"); ?>">
          <button type="submit" class="btn btn-sq-lg btn-primary" id="checktime1"><i class="fa fa-sign-in-alt fa-5x" aria-hidden="true"></i><br>Clock In</button>

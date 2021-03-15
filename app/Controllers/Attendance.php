@@ -27,18 +27,17 @@ class Attendance extends BaseController{
         $this->employeeModel = new \App\Models\employeeModel();
         $this->empstatusModel = new \App\Models\empstatusModel();
         $this->activityModel = new \App\Models\activityModel();
-        date_default_timezone_set("Asia/Jakarta");
-        
+        $this->attendanceModel = new \App\Models\attendanceModel();
 
+        date_default_timezone_set("Asia/Jakarta");
     }
 
     public function index(){
         $session = session();
         //$this->load->library('user_agent');
-        $data['dataAttendance'] = $this->attendanceModel->getAttendanceEmp();
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
         $data['dataEmployee'] = $this->employeeModel->findAll();
-        
-        echo view ('users/header_v');
+        echo view ('users/header_v',$statusEmp);
         echo view ('users/attendance_v',$data);
         echo view ('users/footer_v');
         
@@ -61,10 +60,9 @@ class Attendance extends BaseController{
 
     public function view(){
         $session = session();
-
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
         $data['dataAttendance'] = $this->attendanceModel->getATD();
-        
-        echo view('users/header_v');
+        echo view('users/header_v',$statusEmp);
         echo view('users/log_attendance_v',$data);
         echo view('users/footer_v');
         

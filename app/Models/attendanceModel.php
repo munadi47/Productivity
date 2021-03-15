@@ -53,18 +53,35 @@ class attendanceModel extends Model
     public function getStatusAtt(){
         $id = session()->get('nik');
         
-        $query = $this->db->query("SELECT YEARWEEK(clock_in) AS tahun_minggu,SUM($id) AS jumlah FROM log_attendance WHERE YEARWEEK(clock_in)=YEARWEEK(NOW() ) GROUP BY YEARWEEK(clock_in) ");
-        return $query->getResult();
+        $query = $this->db->query("SELECT YEARWEEK(clock_in) AS tahun_minggu,SUM(nik=$id) AS jumlah FROM log_attendance WHERE YEARWEEK(clock_in)=YEARWEEK(NOW() ) GROUP BY YEARWEEK(clock_in) ");
+        //return $query->getResult();
 
-        /*if($query){
+        if($query){
             foreach($query->getResult() as $data){
-                $getStatusAttendance[] = $data;
+                $dataAttendance[] = $data;
             }
-           if(!empty($getStatusAttendance)){
-               return $getStatusAttendance;
+           if(!empty($dataAttendance)){
+               return $dataAttendance;
             } return false;
             
-        }*/
+        }
+    }
+
+    public function getStatusAttX($id){
+        
+        $query = $this->db->query("SELECT YEARWEEK(clock_in) AS tahun_minggu,SUM(nik=$id) AS jumlah FROM log_attendance WHERE YEARWEEK(clock_in)=YEARWEEK(NOW() ) GROUP BY YEARWEEK(clock_in) ");
+        //return $query->getResult();
+        
+
+        if($query){
+            foreach($query->getResult() as $data){
+                $dataAttendance[] = $data;
+            }
+           if(!empty($dataAttendance)){
+               return $dataAttendance;
+            } return false;
+            
+        }
     }
 
     public function countAttendance(){        

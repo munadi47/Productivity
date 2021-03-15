@@ -21,6 +21,8 @@ class Client extends BaseController{
         $this->employeeModel = new \App\Models\employeeModel();
         $this->classModel = new \App\Models\classModel();
         $this->activityModel = new \App\Models\activityModel();
+        $this->attendanceModel = new \App\Models\attendanceModel();
+
         $this->pager = \Config\Services::pager();
         date_default_timezone_set("Asia/Jakarta");
 
@@ -30,8 +32,9 @@ class Client extends BaseController{
     public function index(){
         $session = session();
         $data['dataClient'] = $this->clientModel->getPIC();
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
-        echo view ('users/header_v');
+        echo view ('users/header_v',$statusEmp);
         echo view ('users/client_v',$data);
         echo view ('users/footer_v');
 
@@ -58,8 +61,9 @@ class Client extends BaseController{
     public function add(){
         $data['dataEmployee']  = $this->employeeModel->findAll();
         $data['dataClass']  = $this->classModel->findAll();
-      
-        echo view('users/header_v');
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+
+        echo view('users/header_v',$statusEmp);
         echo view('users/client_form_v',$data);
         echo view('users/footer_v');
     }
@@ -69,15 +73,17 @@ class Client extends BaseController{
         $data['dataClass']  = $this->classModel->findAll();
         $data['dataEmployee']  = $this->employeeModel->findAll();
         $data['dataClient'] = $this->clientModel->where($where)->findAll()[0];
-      
-        echo view('users/header_v');
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+
+        echo view('users/header_v',$statusEmp);
         echo view('users/client_edit_form_v',$data);
         echo view ('users/footer_v');
     }
     public function detail($id){
         $data['dataClient'] = $this->clientModel->joinclient($id);
         $detail = $this->clientModel->getDetail($id);
-        
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+
 
          // paginate
         $paginate = 5;
@@ -88,14 +94,15 @@ class Client extends BaseController{
        
 
 
-        echo view('users/header_v');
+        echo view('users/header_v',$statusEmp);
         echo view('users/detail_client_v',$data);
         echo view ('users/footer_v');
     }
     public function add_type(){
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+
         
-        
-        echo view('users/header_v');
+        echo view('users/header_v',$statusEmp);
         echo view('users/class_form_v');
         echo view ('users/footer_v');
     }
