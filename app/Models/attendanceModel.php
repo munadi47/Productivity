@@ -71,7 +71,7 @@ class attendanceModel extends Model
     public function getStatusAttX($id){
         
         $query = $this->db->query("SELECT YEARWEEK(clock_in) AS tahun_minggu,SUM(nik=$id) AS jumlah FROM log_attendance WHERE YEARWEEK(clock_in)=YEARWEEK(NOW() ) GROUP BY YEARWEEK(clock_in) ");
-        //return $query->getResult();
+        //return $query->getResult(); 
         
 
         if($query){
@@ -96,16 +96,6 @@ class attendanceModel extends Model
             } return false;
             
         }
-    }
-
-    public function AttToday()
-    {
-        
-        $builder = $this->table('log_attendance');
-        $builder->select('employee.name,clock_in')
-        ->join('employee','employee.nik=log_attendance.nik')
-        ->where("DATE('clock_in')",'CURDATE()');
-        return $builder;
     }
    
 }
