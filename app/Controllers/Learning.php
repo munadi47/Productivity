@@ -33,7 +33,7 @@ class Learning extends BaseController{
         $data['dataLearning'] = $this->learningModel->JoinLearning();
         $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
-        echo view ('users/header_v'),$statusEmp;
+        echo view ('users/header_v',$statusEmp);
         echo view ('users/learning_v',$data);
         echo view ('users/footer_v');
         
