@@ -130,7 +130,7 @@
                 </span>
             </div>
     </div>
-    <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info"  >
+    <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="fade-out" data-aos-duration="1000" >
         <div class="card-body">
             <h4> Digital Content Calendar </h4>
                 <p> Note : Information in due date </p>
