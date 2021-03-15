@@ -20,6 +20,7 @@ class Employee extends BaseController{
         $this->employeeModel = new \App\Models\employeeModel();
         $this->empstatusModel = new \App\Models\empstatusModel();
         $this->activityModel = new \App\Models\activityModel();
+        $this->attendanceModel = new \App\Models\attendanceModel();
         $this->form_validation = \Config\Services::validation();
         helper(['form', 'url']);
         helper('form');
@@ -34,7 +35,8 @@ class Employee extends BaseController{
         $data = [ 'validate' => \Config\Services::validation()];
         $data['validation'] = $this->validator;
         $data['dataEmployee'] = $this->employeeModel->getEmployee();
-
+        $data['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        
         echo view ('users/header_v');
         echo view ('admin/employee_v',$data);
         echo view ('users/footer_v');
