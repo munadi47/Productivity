@@ -55,14 +55,15 @@
     <div class="row">
         <div class="col col-lg-6">
             <form action="<?php echo base_url("Attendance/clockin"); ?>" >
-                <button type="submit" class="btn btn-sq-lg btn-primary" id="checktime1"><i class="fa fa-sign-in-alt fa-5x" aria-hidden="true"></i><br>Clock In</button>
+                <button type="submit" class="btn btn-sq-lg btn-primary" id="checktime1" <?php if(!empty($dataCheckIn)) echo "disabled" ?> ><i class="fa fa-sign-in-alt fa-5x" aria-hidden="true"></i><br>Clock In</button>
+            
             </form>
         </div>
 
         
         <div class="col col-lg-6">
             <form action="<?php echo base_url("Attendance/clockout/".session()->get('id_attendance')); ?>" >
-                <button type="submit" class="btn btn-sq-lg btn-danger" id="checktime2"><i class="fa fa-sign-out-alt fa-5x" aria-hidden="true"></i><br>Clock Out</button>
+                <button type="submit" class="btn btn-sq-lg btn-danger" id="checktime2" <?php if(empty($dataCheckOut)) echo "disabled" ?>><i class="fa fa-sign-out-alt fa-5x" aria-hidden="true"></i><br>Clock Out </button>
             </form>
         </div>
     </div>
