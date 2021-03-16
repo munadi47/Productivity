@@ -65,7 +65,7 @@ class Employee extends BaseController{
         $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
         echo view('users/header_v',$statusEmp);
-        echo view('admin/employee_form_add',$data);
+        echo view('admin/employee_form_add');
         echo view('users/footer_v');
     }
 
