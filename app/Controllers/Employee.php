@@ -193,7 +193,7 @@ class Employee extends BaseController{
             $validation= $this->validate([
                 'photo' => [
                     'uploaded[photo]',
-                    'mime_in[photo,application/pdf,application/zip,application/msword,application/x-tar,image/jpg,image/jpeg,image/png]',
+                    'mime_in[photo,image/jpg,image/jpeg,image/png,image/svg]',
                     'max_size[photo,5000]',
                 ]
             ]);

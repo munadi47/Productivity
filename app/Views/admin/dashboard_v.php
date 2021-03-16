@@ -1,4 +1,8 @@
-<?php if(!empty($deadlineStory)){ ?>
+<?php
+
+use Config\Format;
+
+if(!empty($deadlineStory)){ ?>
     <div class="alert alert-warning" role="alert"  data-aos="zoom-in" data-aos-duration="1000">
     <?php foreach($deadlineStory as $row): echo '<i class="fas fa-bell"></i> '; echo $row->storyboard_date; echo ' '.$row->storyboard_pic; endforeach; ?>
      The storyboard is due today, please check the video schedule
@@ -122,7 +126,7 @@
       
      
         <div class="col col-lg-5">
-            <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" >
+            <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000">
             <h4 style="padding-bottom: 2vw;"> Employee Attendance Today </h4>
             <?php 
                 
@@ -155,6 +159,15 @@
       </div>
     </div>
 
+    <div class="row">
+        <div class="col col-lg-12">
+          <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info "  data-aos="zoom-in" data-aos-duration="1000">
+            <div id="attendanceChart">
+            </div>
+          </div>
+        </div>
+    </div>
+
     <script>
         Highcharts.chart('attendanceChart', {
 
@@ -174,12 +187,13 @@
 
         xAxis: {
             categories: ['Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
-            
+            //categories: [<?php if(!empty($countAttendance)) foreach ($countAttendance as $data) :?> <?php echo  date($data->bulan).", "?>  <?php endforeach;?>]
+
         },
 
 
         series: [{
-            name: 'Other',
+            name: 'Count',
             data: [<?php if(!empty($countAttendance)) foreach ($countAttendance as $data) echo $data->total.", "?>]
         }],
 
@@ -204,7 +218,7 @@
         <script>
               Highcharts.chart('financeChart', {
               chart: {
-                  type: 'line'
+                  type: 'column'
               },
               title: {
                   text: 'Finance Total Income per Year'

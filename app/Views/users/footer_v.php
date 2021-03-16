@@ -26,7 +26,28 @@
       $('#myTable').DataTable();
     } );
   </script>
-  <script>
+
+    <!--script>
+    $(document).ready( function () {
+      var table = $('#Att').DataTable( {
+        pageLength : 5,
+        searching : false,
+        lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']]
+      } )
+    } );    
+    </script-->
+
+    
+    <script>
+    $(document).ready(function() {
+      var table = $('#log').DataTable( {
+        "order": [[ 0, "desc" ]]
+      } )
+    } );    
+    </script>
+
+
+  <!--script>
     $(document).ready( function () {
       $('#AttToday').DataTable(
         {
@@ -34,7 +55,7 @@
         }
       );
     } );
-  </script>
+  </script-->
     <!--AOS-->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>

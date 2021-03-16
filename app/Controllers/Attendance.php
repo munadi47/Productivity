@@ -36,7 +36,12 @@ class Attendance extends BaseController{
         $session = session();
         //$this->load->library('user_agent');
         $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        $data['dataCheckIn'] = $this->attendanceModel->checkin();
+        $data['dataCheckOut'] = $this->attendanceModel->checkout();
+
         $data['dataEmployee'] = $this->employeeModel->findAll();
+        
+
         echo view ('users/header_v',$statusEmp);
         echo view ('users/attendance_v',$data);
         echo view ('users/footer_v');

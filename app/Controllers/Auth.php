@@ -128,6 +128,7 @@ class Auth extends BaseController{
             'address' => $row->address,
             'phone1' => $row->phone1,
             'phone2' => $row->phone2,
+            'photo' => $row->photo,
             );
         $act = 'Has Login';
         $this->record($act,$data['nik']);

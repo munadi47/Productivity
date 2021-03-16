@@ -23,15 +23,15 @@ class attendanceModel extends Model
 
     public function getAttendanceEmp(){
         $builder = $this->table('log_attendance');
-        $builder->join('employee','employee.nik = log_attendance.nik');
-        //->orderBy('id_log','DESC');
+        $builder->join('employee','employee.nik = log_attendance.nik')
+        ;//->orderBy('id_attendance','DESC');
         return $builder;
     }
 
     public function getATD(){
         return $this->db->table('log_attendance')
         ->join('employee','employee.nik=log_attendance.nik')
-        ->orderBy('id_attendance','DESC')
+        //->orderBy('id_attendance DESC')
         ->get()->getResultObject(); 
     }
 
@@ -108,6 +108,40 @@ class attendanceModel extends Model
         ->where("DATE('clock_in')",'CURDATE()')
         ->orderBy('id_attendance','DESC');
         return $builder;
+    }
+
+    public function checkin()
+    {
+        $id = session()->get('nik');
+
+        $query = $this->db->query("SELECT * FROM log_attendance WHERE (nik = $id) AND date(clock_in)=CURDATE() AND clock_in IS NOT NULL GROUP BY  date(clock_in)=CURDATE()");
+
+        if($query){
+            foreach($query->getResult() as $data){
+                $dataClock[] = $data;
+            }
+           if(!empty($dataClock)){
+               return $dataClock;
+            } return false;
+            
+        }
+    }
+
+    public function checkout()
+    {
+        $id = session()->get('nik');
+
+        $query = $this->db->query("SELECT * FROM log_attendance WHERE (nik = '$id') AND date(clock_in)=CURDATE() AND clock_out IS NULL GROUP BY date(clock_in)=CURDATE()");
+
+        if($query){
+            foreach($query->getResult() as $data){
+                $dataClock[] = $data;
+            }
+           if(!empty($dataClock)){
+               return $dataClock;
+            } return false;
+            
+        }
     }
    
 }
