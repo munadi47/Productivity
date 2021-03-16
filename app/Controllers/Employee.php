@@ -60,12 +60,11 @@ class Employee extends BaseController{
    
 
     public function add(){
-
-       
         $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        //$data['dataEmployee'] = $this->attendanceModel->findAll();
 
         echo view('users/header_v',$statusEmp);
-        echo view('admin/employee_form_add',$data);
+        echo view('admin/employee_form_add');
         echo view('users/footer_v');
     }
 

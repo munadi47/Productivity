@@ -83,9 +83,9 @@
                 <div class="col-sm-10">
                     <select required name="id_eStatus" class="form-select" aria-label="Default select example" >
                         
-                        <?php foreach($dataEmpstatus as $row) : ?>
-                            <option value="<?php echo $row->id_eStatus; ?>"<?php if(!empty($dataEmployee) && $dataEmployee->id_eStatus == $row->id_eStatus) echo 'selected'; ?> > <?php echo $row->status; ?> </option>
-                        <?php endforeach;?>
+                            <option selected><?php if(!empty($dataEmployee)) echo $dataEmployee->level; ?> </option>
+                            <option value="admin"><span class="badge badge-primary"> Fulfiled </span></option>
+                            <option value="user"><span class="badge badge-warning"> Not Fulfiled </span></option>
                         
                     </select>
                 </div>
