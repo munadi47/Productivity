@@ -83,7 +83,7 @@
                 <div class="col-sm-10">
                     <select required name="id_eStatus" class="form-select" aria-label="Default select example" >
                         
-                            <option selected><?php if(!empty($dataEmployee)) echo $dataEmployee->level; ?> </option>
+                            <option selected><?php if(!empty($dataEmployee)) echo $dataEmployee->status; ?> </option>
                             <option value="admin"><span class="badge badge-primary"> Fulfiled </span></option>
                             <option value="user"><span class="badge badge-warning"> Not Fulfiled </span></option>
                         

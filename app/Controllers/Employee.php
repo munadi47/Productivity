@@ -146,7 +146,7 @@ class Employee extends BaseController{
                     'phone1'=>$this->request->getPost('phone1'),
                     'phone2'=>$this->request->getPost('phone2'),
                     'level'=>$this->request->getPost('level'),
-
+                    'status'=>$this->request->getPost('status'),
                   
                 ]; 
                     $this->employeeModel->insert($data);
