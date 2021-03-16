@@ -69,22 +69,6 @@
                     </select>
             </div>
         </div>
-        <div class="form-group row">
-            <label  class="col-sm-2 col-form-label">Photo </label>
-            <div class="col-sm-10">
-            <img src="<?php if(empty($dataEmployee)){
-                echo base_url('http://placehold.it/150x150');
-            }else{
-                echo base_url('assets/uploads/profile/'.$dataEmployee->photo);
-            } ?>" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
-            
-            <input  class="form-control" type="file" id="photo" name="photo" value="<?php if(!empty($dataEmployee)) echo base_url('assets/uploads/profile/'.$dataEmployee->photo); ?>">
-            <label class="form-label" for="customFile" style="color: red; font-size: 12px;"> * Upload Photo (Max: 5MB, Format: PNG, JPG, PNG)</label>
-            </div>
-        </div>      
-        
-       
-        
         <br>
 
     

@@ -175,8 +175,8 @@ $i=2; foreach($dataAttendance as $row) {
 $spreadsheet->setActiveSheetIndex(0)
 ->setCellValue('A'.$i, $row->id_attendance)
 ->setCellValue('B'.$i, $row->name)
-->setCellValue('C'.$i, $row->clock_in)
-->setCellValue('D'.$i, $row->clock_out)
+->setCellValue('C'.$i, date("h:i A", strtotime($row->clock_in)))
+->setCellValue('D'.$i, date("h:i A", strtotime($row->clock_out)))
 
 ;
 $i++;

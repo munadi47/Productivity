@@ -78,18 +78,7 @@
                 value="<?php if(!empty($dataEmployee)) echo $dataEmployee->phone2; ?>">
             </div>
         </div>
-        <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Status </label>
-                <div class="col-sm-10">
-                    <select required name="id_eStatus" class="form-select" aria-label="Default select example" >
-                        
-                            <option selected><?php if(!empty($dataEmployee)) echo $dataEmployee->status; ?> </option>
-                            <option value="admin"><span class="badge badge-primary"> Fulfiled </span></option>
-                            <option value="user"><span class="badge badge-warning"> Not Fulfiled </span></option>
-                        
-                    </select>
-                </div>
-        </div>
+        
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Role </label>
             <div class="col-sm-10">

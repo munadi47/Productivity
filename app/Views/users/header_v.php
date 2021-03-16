@@ -338,7 +338,7 @@
                                                                 }
                                                                 ?>
                                                                 
-                                                                <?php }endforeach; }?>
+                                                                <?php }endforeach; } else ?> <span class='badge badge-warning'>Not Fulfilled</span>
 
                                                                 
 

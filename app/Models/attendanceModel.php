@@ -46,12 +46,8 @@ class attendanceModel extends Model
         return $builder;
     }   
 
-    public function getId()
-    {
-        
-    }
 
-    public function getStatusAtt(){
+    public function getStatusAtt(){ //berapa kali dia absen per minggu
         $id = session()->get('nik');
         
         $query = $this->db->query("SELECT YEARWEEK(clock_in) AS tahun_minggu,SUM(nik=$id) AS jumlah FROM log_attendance WHERE YEARWEEK(clock_in)=YEARWEEK(NOW() ) GROUP BY YEARWEEK(clock_in) ");
@@ -68,7 +64,9 @@ class attendanceModel extends Model
         }
     }
 
-    public function getStatusAttX($id){
+    
+
+    public function getStatusAttX($id){ //untuk detail id
         
         $query = $this->db->query("SELECT YEARWEEK(clock_in) AS tahun_minggu,SUM(nik=$id) AS jumlah FROM log_attendance WHERE YEARWEEK(clock_in)=YEARWEEK(NOW() ) GROUP BY YEARWEEK(clock_in) ");
         //return $query->getResult(); 

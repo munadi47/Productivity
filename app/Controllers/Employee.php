@@ -34,8 +34,9 @@ class Employee extends BaseController{
         $data['validation'] = $this->validator;
         $data = [ 'validate' => \Config\Services::validation()];
         $data['dataEmployee'] = $this->employeeModel->getEmployee();
+        //$id = $this->request->getPost('nik');
+        //$data['dataEmployee'] = $this->attendanceModel->getStatusCount($id);
         $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
-
         echo view ('users/header_v', $statusEmp);
         echo view ('admin/employee_v',$data);
         echo view ('users/footer_v');
