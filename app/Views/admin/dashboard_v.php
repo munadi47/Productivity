@@ -93,6 +93,14 @@
     </div>
     </div>
 
+    <div class="row">
+        <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
+            <div id="attendanceChart">
+            </div>
+        </div>
+    </div>
+    
+      
         <div class="row">
         <div class="col col-lg-8">
           <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info "  data-aos="zoom-in" data-aos-duration="1000">
@@ -112,55 +120,12 @@
       </div>
 
       <div class="row">
-        <div class="col col-lg-7">
-            <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
-                <div id="sp_chart"> 
-                
-                </div>
-            </div>
-        </div>
-        <div class="col col-lg-5">
-            <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000">
-            <h4 style="padding-bottom: 2vw;"> Employee Attendance Today </h4>
-            <?php 
-                
-                if (!empty($AttToday)){ 
-            ?>
-            <br/>
-            <?php $no = 1; 
-            foreach($AttToday as $row) : {?>
-            <table id="myTable" class="table table-hover">
-                <thead>
-                    <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    <th scope="row"><?php echo $no++; ?></th>
-                    <td><?php echo $row->name; ?></td>
-                   
-                    </tr>
-                    
-                </tbody>
-                </table>
+      <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="fade-out" data-aos-duration="1000">
+        <div id="sp_chart">
            
-            
-            <?php
-            }endforeach;
-            } ?>
-            <!--
-            <div style="float: left;">
-                <?php // echo $pager->links('AttToday', 'bootstrap_pagination'); ?>
-            </div>
-            <div style="float: right;">
-                <label class="badge badge-info"> Total : </label>
-            </div>
-            -->
-            </div>
         </div>
-    </div>
+      </div>
+      </div>
 
     <script>
         Highcharts.chart('attendanceChart', {
