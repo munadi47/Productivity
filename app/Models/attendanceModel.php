@@ -31,7 +31,7 @@ class attendanceModel extends Model
     public function getATD(){
         return $this->db->table('log_attendance')
         ->join('employee','employee.nik=log_attendance.nik')
-        ->orderBy('id_attendance','DESC')
+        //->orderBy('id_attendance DESC')
         ->get()->getResultObject(); 
     }
 

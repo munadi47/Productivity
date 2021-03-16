@@ -39,11 +39,11 @@
 
     
     <script>
-      $(document).ready(function() {
-        $('#log').DataTable( {
-            "order": [[ 1, "desc" ]]
-        } );
-    } );
+    $(document).ready(function() {
+      var table = $('#log').DataTable( {
+        "order": [[ 0, "desc" ]]
+      } )
+    } );    
     </script>
 
 

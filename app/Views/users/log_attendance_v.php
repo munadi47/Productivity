@@ -39,7 +39,7 @@
                 <table id="log" class="table table-hover table-bordered text-center " >
                 <thead class="thead-dark ">
                     <tr>
-                    <th>ID</th>
+                    <th style="display:none;">ID</th>
                         <th>Date</th>
                         <th>Name</th>
                         <th>clock In</th>
@@ -56,7 +56,7 @@
                 <?php foreach ($dataAttendance as $row) :?>
                     
                     <tr>
-                    <td><?php echo $row->id_attendance; ?></td>
+                    <td style="display:none;"><?php echo $row->id_attendance; ?></td>
 
                         <td><?php echo date("M d, Y", strtotime($row->clock_in)); ?></td>
                         <td><?php echo $row->name; ?></td>
