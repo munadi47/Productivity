@@ -138,7 +138,7 @@
                                                 <?php if(!empty($dataAttendance)){ ?>
                                                 <?php foreach ($dataAttendance as $atd):{?>
                                                 <?php if($atd->jumlah < 3){?>
-                                                    <?php echo "<span class='badge badge-warning'>Peringatan</span>"?>
+                                                    <?php echo "<span class='badge badge-warning'>Not Fulfilled</span>"?>
 
 
                                                 <?php }else {

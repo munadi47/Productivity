@@ -10,7 +10,7 @@ class employeeModel extends Model
     protected $returnType     = 'object';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['nik','name','email','address','birthday','password','phone1','phone2','id_eStatus','level','photo'];
+    protected $allowedFields = ['nik','name','email','address','birthday','password','phone1','phone2','level','photo'];
 
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';
@@ -25,14 +25,12 @@ class employeeModel extends Model
     public function getEmployee()
     {
          return $this->db->table('employee')
-         ->join('employee_status', 'employee_status.id_eStatus=employee.id_eStatus')
          ->get()->getResultObject(); 
     }
 
     public function getDetail($id)
     {
          return $this->db->table('employee')
-         ->join('employee_status', 'employee_status.id_eStatus=employee.id_eStatus')
          ->where('employee.nik',$id)
          ->get()->getResultObject(); 
     }

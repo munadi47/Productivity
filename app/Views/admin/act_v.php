@@ -51,7 +51,7 @@
     				<div class="message-item" id="m16">
 						<div class="message-inner">
 							<div class="message-head clearfix">
-								<div class="avatar pull-left"><a href="./index.php?qa=user&qa_1=Oleg+Kolesnichenko"><img class="img-emp" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"></a></div>
+								<div class="avatar pull-left"><a href="<?php echo base_url('assets/uploads/profile/'.$row->photo); ?>"><img class="img-emp" src="<?php if(empty($row->photo)) { echo base_url( 'https://ssl.gstatic.com/accounts/ui/avatar_2x.png'); } else{ echo base_url('assets/uploads/profile/'.$row->photo);} ?>"></a></div>
 								<div class="user-detail">
 									<h5 class="handle"><?php echo $row->name; ?></h5>
 									<div class="post-meta">

@@ -26,6 +26,15 @@
       $('#myTable').DataTable();
     } );
   </script>
+  <script>
+    $(document).ready( function () {
+      $('#AttToday').DataTable(
+        {
+        "lengthMenu": [[ 4, 8, 12, -1], [4, 8, 12, "All"]]
+        }
+      );
+    } );
+  </script>
     <!--AOS-->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>

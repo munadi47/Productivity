@@ -58,18 +58,6 @@
             </div>
         </div>
         <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Status </label>
-                <div class="col-sm-10">
-                    <select required name="id_eStatus" class="form-select" aria-label="Default select example" >
-                        
-                        <?php foreach($dataEmpstatus as $row) : ?>
-                            <option value="<?php echo $row->id_eStatus; ?>"<?php if(!empty($dataEmployee) && $dataEmployee->id_eStatus == $row->id_eStatus) echo 'selected'; ?> > <?php echo $row->status; ?> </option>
-                        <?php endforeach;?>
-                        
-                    </select>
-                </div>
-        </div>
-        <div class="form-group row">
             <label class="col-sm-2 col-form-label">Role </label>
             <div class="col-sm-10">
                     <select required name="level" id="level" class="form-select" aria-label="Default select example">
