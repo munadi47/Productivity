@@ -95,7 +95,7 @@
             } ?>" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
             
             <input  class="form-control" type="file" id="photo" name="photo" value="<?php if(!empty($dataEmployee)) echo base_url('assets/uploads/profile/'.$dataEmployee->photo); ?>">
-            <label class="form-label" for="customFile" style="color: red; font-size: 12px;"> * Upload Data (Max: 5MB, Format: PDF, JPG, PNG)</label>
+            <label class="form-label" for="customFile" style="color: red; font-size: 12px;"> * Upload Photo (Max: 5MB, Format: PNG, JPG, PNG)</label>
             </div>
         </div>
         

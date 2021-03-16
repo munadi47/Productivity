@@ -170,8 +170,9 @@
                                             <?php foreach ($dataAttendance as $row):{?>
                                             <?php if(!empty($row)){?>
                                                 <p><?php echo $row->jumlah?></p>
-                                            <?php }else {
-                                            }
+                                            <?php }else {?>
+                                                <p><?php echo 0;?></p>
+                                            <?php }
                                             ?>
                                             <?php }endforeach; }?>
 
