@@ -133,6 +133,8 @@ class Auth extends BaseController{
             'phone1' => $row->phone1,
             'phone2' => $row->phone2,
             'id_eStatus' => $row->id_eStatus,
+            'photo' => $row->photo,
+
             );
         $act = 'Has Login';
         $this->record($act,$data['nik']);
