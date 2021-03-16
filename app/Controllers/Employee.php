@@ -32,10 +32,10 @@ class Employee extends BaseController{
         $session = session();
 
         session();
+        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
         $data['validation'] = $this->validator;
         $data = [ 'validate' => \Config\Services::validation()];
         $data['dataEmployee'] = $this->employeeModel->getEmployee();
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
         echo view ('users/header_v', $statusEmp);
         echo view ('admin/employee_v',$data);
