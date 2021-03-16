@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>IDE Productivity</title>
+    
      <!--Data Tables -->
      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.23/b-1.6.5/b-html5-1.6.5/sb-1.0.1/sp-1.2.2/datatables.min.css"/>
     <!-- New Bootstrap 5-->
@@ -42,7 +42,60 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     
-    
+    <!--Get Active Sidebar-->
+    <?php
+        $current_url = basename($_SERVER['PHP_SELF']);
+        
+        if($current_url == 'Dashboard'){
+            $title = "Dashboard";
+        }
+        elseif($current_url == 'Client'){
+            $title = "Client Data";
+        }
+        elseif ($current_url == 'Company'){
+            $title = "Company Data";
+        }
+        elseif ($current_url == 'Consulting'){
+            $title = "Consulting Delivery";
+        }
+        elseif ($current_url == 'Digital'){
+            $title = "Digital Delivery";
+        }
+        elseif ($current_url == 'Employee'){
+            $title = "Employee Data";
+        }
+        elseif ($current_url == 'Finance'){
+            $title = "Finance Data";
+        }
+        elseif ($current_url == 'Learning'){
+            $title = "Learning Delivery";
+        }
+        elseif ($current_url == 'Product'){
+            $title = "Product Data";
+        }
+        elseif ($current_url == 'Register'){
+            $title = "Register";
+        }
+        elseif ($current_url == 'SalesPipeline'){
+            $title = "Sales Pipeline Data";
+        }
+        elseif ($current_url == 'Video'){
+            $title = "Video Delivery";
+        }
+        elseif ($current_url == 'Attendance'){
+            $title = "Attendance";
+        }
+        elseif ($current_url == 'Activity'){
+            $title = "Activity Log";
+        }
+        elseif ($current_url == 'Video'){
+            $title = "Video Delivery";
+        }
+        else{
+            $title = "IDE Productivity";
+        }
+    ?>
+    <title> <?php echo $title ; ?></title>
 </head>
 
 <body>

@@ -117,7 +117,7 @@ if(!empty($deadlineStory)){ ?>
 
       <div class="row">
         <div class="col col-lg-7">
-            <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" >
+            <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
                 <div id="sp_chart"> 
                 
                 </div>
@@ -126,7 +126,7 @@ if(!empty($deadlineStory)){ ?>
       
      
         <div class="col col-lg-5">
-            <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000">
+            <div style="height: 28.5vw;" class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
             <h4 style="padding-bottom: 2vw;"> Employee Attendance Today </h4>
             <?php 
                 
@@ -157,16 +157,18 @@ if(!empty($deadlineStory)){ ?>
             </div>
         </div>
       </div>
-    </div>
 
-    <div class="row">
+      <div class="row">
         <div class="col col-lg-12">
-          <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info "  data-aos="zoom-in" data-aos-duration="1000">
+          <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info " data-aos="zoom-in" data-aos-duration="1000">
             <div id="attendanceChart">
             </div>
           </div>
         </div>
     </div>
+    </div>
+
+    
 
     <script>
         Highcharts.chart('attendanceChart', {
