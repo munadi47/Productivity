@@ -127,9 +127,8 @@
                 if (!empty($AttToday)){ 
             ?>
             <br/>
-            <?php $no = 1; 
-            foreach($AttToday as $row) : {?>
-            <table id="myTable" class="table table-hover">
+            <?php $no = 1; ?>
+            <table id="Att" class="table table-hover">
                 <thead>
                     <tr>
                     <th scope="col">#</th>
@@ -137,19 +136,18 @@
                     </tr>
                 </thead>
                 <tbody>
+                <?php foreach($AttToday as $row) : ?>
                     <tr>
-                    <th scope="row"><?php echo $no++; ?></th>
+                    <td scope="row"><?php echo $no++; ?></td>
                     <td><?php echo $row->name; ?></td>
                    
                     </tr>
-                    
+                    <?php endforeach ?>
                 </tbody>
                 </table>
-           
+           <?php } ?>
             
-            <?php
-            }endforeach;
-            } ?>
+            
             <!--
             <div style="float: left;">
                 <?php // echo $pager->links('AttToday', 'bootstrap_pagination'); ?>

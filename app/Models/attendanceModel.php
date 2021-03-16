@@ -23,8 +23,8 @@ class attendanceModel extends Model
 
     public function getAttendanceEmp(){
         $builder = $this->table('log_attendance');
-        $builder->join('employee','employee.nik = log_attendance.nik');
-        //->orderBy('id_log','DESC');
+        $builder->join('employee','employee.nik = log_attendance.nik')
+        ;//->orderBy('id_attendance','DESC');
         return $builder;
     }
 

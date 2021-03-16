@@ -36,10 +36,11 @@
                 <br>
                 <br>
                 <span class="table-responsive">
-                <table id="myTable" class="table table-hover table-bordered text-center " >
+                <table id="log" class="table table-hover table-bordered text-center " >
                 <thead class="thead-dark ">
                     <tr>
-                        <th> # </th>
+                    <th>ID</th>
+                        <th>Date</th>
                         <th>Name</th>
                         <th>clock In</th>
                         <th>clock Out</th>
@@ -52,14 +53,15 @@
                 <?php
                
                 ?>
-                <?php $nomor = 1; ?>
                 <?php foreach ($dataAttendance as $row) :?>
                     
                     <tr>
-                        <td><?php echo $nomor++; ?></td>
+                    <td><?php echo $row->id_attendance; ?></td>
+
+                        <td><?php echo date("M d, Y", strtotime($row->clock_in)); ?></td>
                         <td><?php echo $row->name; ?></td>
-                        <td><?php echo $row->clock_in; ?></td>
-                        <td><?php echo $row->clock_out; ?></td>
+                        <td><?php echo date("h:i A", strtotime($row->clock_in)); ?></td>
+                        <td><?php echo date("h:i A", strtotime($row->clock_out)); ?></td>
 
                         <td>
                             <a title="Delete" href="<?php echo base_url("Attendance/delete/".$row->id_attendance); ?>" class="btn btn-outline-info btn-sm" onclick="return confirm('Apakah yakin data akan dihapus?');">

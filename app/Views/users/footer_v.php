@@ -26,6 +26,27 @@
       $('#myTable').DataTable();
     } );
   </script>
+
+    <script>
+    $(document).ready( function () {
+      var table = $('#Att').DataTable( {
+        pageLength : 5,
+        searching : false,
+        lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']]
+      } )
+    } );    
+    </script>
+
+    
+    <script>
+      $(document).ready(function() {
+        $('#log').DataTable( {
+            "order": [[ 1, "desc" ]]
+        } );
+    } );
+    </script>
+
+
     <!--AOS-->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
