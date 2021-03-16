@@ -157,10 +157,10 @@
                     });
                     calendar.render();
                         calendar.changeView('dayGridMonth');
-                        calendar.addEvent({ title: '<?php if(!empty($storyboard)) foreach ($storyboard as $data) echo $data->pic; echo " : Storyboard "; echo $data->judul;?>', start: '<?php echo $data->duedate ?>' });
-                        calendar.addEvent({ title: '<?php if(!empty($voiceover)) foreach ($voiceover as $data) echo $data->pic;  echo " : Voiceover "; echo $data->judul;?>', start: '<?php echo $data->duedate ?>' });
-                        calendar.addEvent({ title: '<?php if(!empty($animate)) foreach ($animate as $data) echo $data->pic; echo " : Animate "; echo $data->judul;?>', start: '<?php echo $data->duedate ?>' });
-                        calendar.addEvent({ title: '<?php if(!empty($compile)) foreach ($compile as $data) echo $data->pic; echo " : Compile "; echo $data->judul;?>', start: '<?php echo $data->duedate ?>' });
+                        calendar.addEvent({ title: '<?php if(!empty($storyboard)) foreach ($storyboard as $data) : { echo $data->pic; echo " : Storyboard "; echo $data->judul;?>', start: '<?php echo $data->duedate; } endforeach; ?>' });
+                        calendar.addEvent({ title: '<?php if(!empty($voiceover)) foreach ($voiceover as $data) : { echo $data->pic;  echo " : Voiceover "; echo $data->judul;?>', start: '<?php echo $data->duedate; } endforeach; ?>' });
+                        calendar.addEvent({ title: '<?php if(!empty($animate)) foreach ($animate as $data) : { echo $data->pic; echo " : Animate "; echo $data->judul;?>', start: '<?php echo $data->duedate; } endforeach; ?>' });
+                        calendar.addEvent({ title: '<?php if(!empty($compile)) foreach ($compile as $data) : { echo $data->pic; echo " : Compile "; echo $data->judul;?>', start: '<?php echo $data->duedate; } endforeach; ?>' });
                     });
 
                 </script>

@@ -51,40 +51,44 @@
                 </div>
   
         </div>
-        
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Storyboard</label>
-            <div class="col-sm-7">
+            <div class="col-sm-4">
             <input class="form-control" type="text" placeholder="PIC" id="storyboard_pic" name="storyboard_pic" value="<?php if(!empty($dataDigital)) echo $dataDigital->storyboard_pic; ?>"> 
             </div>
-            <div class="col-sm-3">
+            <label class="col-sm-2 col-form-label">Due Date</label>
+            <div class="col-sm-4">
             <input  class="form-control" type="date" id="storyboard_date" name="storyboard_date" value="<?php if(!empty($dataDigital)) echo $dataDigital->storyboard_date; ?>"> 
             </div>
         </div>
+
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Voiceover</label>
-            <div class="col-sm-7">
+            <div class="col-sm-4">
             <input  class="form-control" type="text" placeholder="PIC" id="voiceover_pic" name="voiceover_pic" value="<?php if(!empty($dataDigital)) echo $dataDigital->voiceover_pic; ?>"> 
             </div>
-            <div class="col-sm-3">
+            <label class="col-sm-2 col-form-label">Due Date</label>
+            <div class="col-sm-4">
             <input  class="form-control" type="date" id="voiceover_date" name="voiceover_date" value="<?php if(!empty($dataDigital)) echo $dataDigital->voiceover_date; ?>"> 
             </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Animate</label>
-            <div class="col-sm-7">
+            <div class="col-sm-4">
             <input  class="form-control" type="text" placeholder="PIC" id="animate_pic" name="animate_pic" value="<?php if(!empty($dataDigital)) echo $dataDigital->animate_pic; ?>"> 
             </div>
-            <div class="col-sm-3">
+            <label class="col-sm-2 col-form-label">Due Date</label>
+            <div class="col-sm-4">
             <input  class="form-control" type="date" id="animate_date" name="animate_date" value="<?php if(!empty($dataDigital)) echo $dataDigital->animate_date; ?>"> 
             </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Compile</label>
-            <div class="col-sm-7">
+            <div class="col-sm-4">
             <input  class="form-control" type="text" placeholder="PIC" id="compile_pic" name="compile_pic" value="<?php if(!empty($dataDigital)) echo $dataDigital->compile_pic; ?>"> 
             </div>
-            <div class="col-sm-3">
+            <label class="col-sm-2 col-form-label">Due Date</label>
+            <div class="col-sm-4">
             <input  class="form-control" type="date" id="compile_date" name="compile_date" value="<?php if(!empty($dataDigital)) echo $dataDigital->compile_date; ?>"> 
             </div>
         </div>

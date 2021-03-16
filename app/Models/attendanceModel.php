@@ -103,9 +103,10 @@ class attendanceModel extends Model
     {
         
         $builder = $this->table('log_attendance');
-        $builder->select('employee.name,clock_in')
+        $builder->select('employee.name,clock_in,employee.photo,id_attendance')
         ->join('employee','employee.nik=log_attendance.nik')
-        ->where("DATE('clock_in')",'CURDATE()');
+        ->where("DATE('clock_in')",'CURDATE()')
+        ->orderBy('id_attendance','DESC');
         return $builder;
     }
 

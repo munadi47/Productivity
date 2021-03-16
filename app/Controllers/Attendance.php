@@ -25,7 +25,7 @@ class Attendance extends BaseController{
         $this->attendanceModel = new \App\Models\attendanceModel();
         $this->clientModel = new \App\Models\clientModel();
         $this->employeeModel = new \App\Models\employeeModel();
-        $this->empstatusModel = new \App\Models\empstatusModel();
+
         $this->activityModel = new \App\Models\activityModel();
         $this->attendanceModel = new \App\Models\attendanceModel();
 
@@ -192,7 +192,7 @@ $spreadsheet->setActiveSheetIndex(0);
 
 // Redirect output to a client’s web browser (Xlsx)
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment;filename="Client Data.xlsx"');
+header('Content-Disposition: attachment;filename="Attendance Data.xlsx"');
 header('Cache-Control: max-age=0');
 // If you're serving to IE 9, then the following may be needed
 header('Cache-Control: max-age=1');

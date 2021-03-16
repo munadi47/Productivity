@@ -223,7 +223,7 @@ $spreadsheet->setActiveSheetIndex(0);
 
 // Redirect output to a client’s web browser (Xlsx)
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment;filename="Client Data.xlsx"');
+header('Content-Disposition: attachment;filename="Finance.xlsx"');
 header('Cache-Control: max-age=0');
 // If you're serving to IE 9, then the following may be needed
 header('Cache-Control: max-age=1');
@@ -251,10 +251,15 @@ public function import(){
 
 public function do_upload(){
     $validated = $this->validate([
-        'finance_file' => 'uploaded[finance_file]|max_size[finance_file,1024]'
+        'finance_file' => [
+            'uploaded[finance_file]',
+            'mime_in[finance_file,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet]',
+            'max_size[finance_file,1024]',
+        ]
+        
     ]);
     if(!$validated){
-        return redirect()->to(site_url('Finance'))->with('Failed','<i class="fas fa-trash-alt"></i>Failed to import, please check again');
+        return redirect()->to(site_url('Finance'))->with('Failed','<i class="fas fa-times"></i> Failed to import, please check again');
     }
     else{
         $finance_file = $this->request->getFile('finance_file');

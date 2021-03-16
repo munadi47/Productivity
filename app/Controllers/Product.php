@@ -221,10 +221,15 @@ public function import(){
 
 public function do_upload(){
     $validated = $this->validate([
-        'product_file' => 'uploaded[product_file]|max_size[product_file,1024]'
+        'product_file' => [
+            'uploaded[product_file]',
+            'mime_in[product_file,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet]',
+            'max_size[product_file,1024]',
+        ]
+        
     ]);
     if(!$validated){
-        return redirect()->to(site_url('Product'))->with('Failed','<i class="fas fa-trash-alt"></i>Failed to import, please check again');
+        return redirect()->to(site_url('Product'))->with('Failed','<i class="fas fa-times"></i> Failed to import, please check again');
     }
     else{
         $product_file = $this->request->getFile('product_file');

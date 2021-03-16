@@ -205,10 +205,14 @@ public function import(){
 
 public function do_upload(){
     $validated = $this->validate([
-        'company_file' => 'uploaded[company_file]|max_size[company_file,1024]'
+        'company_file' => [
+            'uploaded[company_file]',
+            'mime_in[company_file,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet]',
+            'max_size[company_file,1024]',
+        ]
     ]);
     if(!$validated){
-        return redirect()->to(site_url('Company'))->with('Failed','<i class="fas fa-trash-alt"></i>Failed to import, please check again');
+        return redirect()->to(site_url('Company'))->with('Failed','<i class="fas fa-times"></i> Failed to import, please check again');
     }
     else{
         $company_file = $this->request->getFile('company_file');

@@ -24,7 +24,6 @@ class Auth extends BaseController{
     {
         $this->session = \Config\Services::session();
         $this->employeeModel = new \App\Models\employeeModel();
-        $this->empstatusModel = new \App\Models\empstatusModel();
         $this->loginModel = new \App\Models\AuthModel();
         helper('form');
         $this->form_validation = \Config\Services::validation();
@@ -36,7 +35,6 @@ class Auth extends BaseController{
     {
         session();
         $data = [ 'validate' => \Config\Services::validation()];
-        $data['dataEmpstatus'] = $this->empstatusModel->findAll();
 
         echo view ('users/header_v');
         echo view ('admin/register_form_v', $data);
@@ -61,7 +59,6 @@ class Auth extends BaseController{
 
     public function register(){   
         $data['dataEmployee'] = $this->employeeModel->getEmployee();
-        $data['dataEmpstatus'] = $this->empstatusModel->findAll();
 
         if ($this->validate([
             'email' => [
@@ -88,7 +85,6 @@ class Auth extends BaseController{
                 'password'=> password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
                 'phone1'=>$this->request->getPost('phone1'),
                 'phone2'=>$this->request->getPost('phone2'),
-                'id_eStatus'=>$this->request->getPost('id_eStatus'),
                 'level'=>$this->request->getPost('level'),
               
             ]; 
@@ -132,9 +128,7 @@ class Auth extends BaseController{
             'address' => $row->address,
             'phone1' => $row->phone1,
             'phone2' => $row->phone2,
-            'id_eStatus' => $row->id_eStatus,
             'photo' => $row->photo,
-
             );
         $act = 'Has Login';
         $this->record($act,$data['nik']);

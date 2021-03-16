@@ -18,7 +18,6 @@ class Employee extends BaseController{
     {
         $this->session = \Config\Services::session();
         $this->employeeModel = new \App\Models\employeeModel();
-        $this->empstatusModel = new \App\Models\empstatusModel();
         $this->activityModel = new \App\Models\activityModel();
         $this->attendanceModel = new \App\Models\attendanceModel();
         $this->form_validation = \Config\Services::validation();
@@ -62,7 +61,7 @@ class Employee extends BaseController{
 
     public function add(){
 
-        $data['dataEmpstatus'] = $this->empstatusModel->findAll();
+       
         $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
         echo view('users/header_v',$statusEmp);
@@ -72,7 +71,7 @@ class Employee extends BaseController{
 
     public function edit($id){
         $where = ['nik'=> $id];
-        $data['dataEmpstatus'] = $this->empstatusModel->findAll();
+        
         $data['dataEmployee'] = $this->employeeModel->where($where)->findAll()[0];
         $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
@@ -90,7 +89,7 @@ class Employee extends BaseController{
 
     public function editProfile($id){
         $where = ['nik'=> $id];
-        $data['dataEmpstatus'] = $this->empstatusModel->findAll();
+        
         $data['dataEmployee'] = $this->employeeModel->where($where)->findAll()[0];
         $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
@@ -116,17 +115,7 @@ class Employee extends BaseController{
         echo view ('users/footer_v');
     }
 
-    public function upload_profile(){
-        $validation = $this->validate([
-            'photo_profile' => [
-                'uploaded[photo_profile]',
-                'mime_in[photo_profile,image/jpg,image/jpeg,image/png,image/svg]',
-                'max_size[photo_profile,5000]',
-            ]
-        ]);
-        
-    }
-
+    
     public function save() {
 
         $id = $this->request->getPost('id');
@@ -157,7 +146,6 @@ class Employee extends BaseController{
                     'password'=> password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
                     'phone1'=>$this->request->getPost('phone1'),
                     'phone2'=>$this->request->getPost('phone2'),
-                    'id_eStatus'=>$this->request->getPost('id_eStatus'),
                     'level'=>$this->request->getPost('level'),
 
                   
@@ -220,7 +208,6 @@ class Employee extends BaseController{
                     'email'=>$this->request->getPost('email'),
                     'phone1'=>$this->request->getPost('phone1'),
                     'phone2'=>$this->request->getPost('phone2'),
-                    'id_eStatus'=>$this->request->getPost('id_eStatus'),
                     'level'=>$this->request->getPost('level'),
                   
                 ]; 
@@ -251,7 +238,6 @@ class Employee extends BaseController{
                         'email'=>$this->request->getPost('email'),
                         'phone1'=>$this->request->getPost('phone1'),
                         'phone2'=>$this->request->getPost('phone2'),
-                        'id_eStatus'=>$this->request->getPost('id_eStatus'),
                         'level'=>$this->request->getPost('level'),
                         'photo'=> $this->request->getFile('photo')->getName()  
 
@@ -406,8 +392,7 @@ $spreadsheet->setActiveSheetIndex(0)
 ->setCellValue('D1', 'PASSWORD')
 ->setCellValue('E1', 'PHONE1')
 ->setCellValue('F1', 'PHONE2')
-->setCellValue('G1', 'STATUS')
-->setCellValue('H1', 'LEVEL')
+->setCellValue('G1', 'LEVEL')
 ;
 
 // Miscellaneous glyphs, UTF-8
@@ -420,8 +405,7 @@ $spreadsheet->setActiveSheetIndex(0)
 ->setCellValue('D'.$i, $row->password)
 ->setCellValue('E'.$i, $row->phone1)
 ->setCellValue('F'.$i, $row->phone2)
-->setCellValue('G'.$i, $row->id_eStatus)
-->setCellValue('H'.$i, $row->level)
+->setCellValue('G'.$i, $row->level)
 
 ;
 $i++;
@@ -437,7 +421,7 @@ $spreadsheet->setActiveSheetIndex(0);
 
 // Redirect output to a client’s web browser (Xlsx)
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment;filename="Client Data.xlsx"');
+header('Content-Disposition: attachment;filename="Employee Data.xlsx"');
 header('Cache-Control: max-age=0');
 // If you're serving to IE 9, then the following may be needed
 header('Cache-Control: max-age=1');
@@ -466,10 +450,15 @@ public function import(){
 
 public function do_upload(){
     $validated = $this->validate([
-        'employee_file' => 'uploaded[employee_file]|max_size[employee_file,1024]'
+        'employee_file' => [
+            'uploaded[employee_file]',
+            'mime_in[employee_file,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet]',
+            'max_size[employee_file,1024]',
+        ]
+        
     ]);
     if(!$validated){
-        return redirect()->to(site_url('Employee'))->with('Failed','<i class="fas fa-trash-alt"></i>Failed to import, please check again');
+        return redirect()->to(site_url('Employee'))->with('Failed','<i class="fas fa-times"></i> Failed to import, please check again');
     }
     else{
         $employee_file = $this->request->getFile('employee_file');
@@ -498,8 +487,7 @@ public function import_file($nf){
         $data[$i]['password'] = $sheetData[$i][5];
         $data[$i]['phone1'] = $sheetData[$i][6];
         $data[$i]['phone2'] = $sheetData[$i][7];
-        $data[$i]['id_eStatus'] = $sheetData[$i][8];
-        $data[$i]['level'] = $sheetData[$i][9];
+        $data[$i]['level'] = $sheetData[$i][8];
 
        
     }
