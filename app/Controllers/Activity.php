@@ -19,8 +19,7 @@ class Activity extends BaseController{
         $this->session = \Config\Services::session();
         $this->activityModel = new \App\Models\activityModel();
         $this->pager = \Config\Services::pager();
-        $this->attendanceModel = new \App\Models\attendanceModel();
-
+        
     }
 
     public function index(){
@@ -32,11 +31,10 @@ class Activity extends BaseController{
         $data['dataAct']   = $activity->paginate($paginate,'dataAct');
         $data['pager']      = $activity->pager;
         $data['validation'] = $this->validator;
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
-
+        
       
 
-        echo view ('users/header_v',$statusEmp);
+        echo view ('users/header_v');
         echo view ('admin/act_v',$data);
         echo view ('users/footer_v');
 
