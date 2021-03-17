@@ -1,57 +1,5 @@
 <?php
-
-if(!empty($deadlineStory)){ ?>
-    <div class="alert alert-warning" role="alert"  data-aos="zoom-in" data-aos-duration="1000">
-    <?php foreach($deadlineStory as $row): echo '<i class="fas fa-bell"></i> '; echo $row->storyboard_date; echo ' '.$row->storyboard_pic; endforeach; ?>
-     The storyboard is due today, please check the video schedule
-    </div>
-<?php }?>
-
-<?php if(!empty($deadlineShoot)){ ?>
-    <div class="alert alert-warning" role="alert"  data-aos="zoom-in" data-aos-duration="1000">
-    <?php foreach($deadlineShoot as $row): echo '<i class="fas fa-bell"></i> '; echo $row->shooting_date; echo ' '.$row->shooting_pic; endforeach; ?>
-        The shooting is due today, please check the video schedule
-    </div>
-<?php }?>
-
-<?php if(!empty($deadlineEdit)){ ?>
-    <div class="alert alert-warning" role="alert"  data-aos="zoom-in" data-aos-duration="1000">
-    <?php foreach($deadlineEdit as $row): echo '<i class="fas fa-bell"></i> '; echo $row->editing_date; echo ' '.$row->editing_pic; endforeach; ?>
-        The editing is due today, please check the video schedule
-    </div>
-<?php }?>
-
-
-<?php if(!empty($deadlineStoryDigital)){ ?>
-    <div class="alert alert-warning" role="alert"  data-aos="zoom-in" data-aos-duration="1000">
-    <?php foreach($deadlineStoryDigital as $row): echo '<i class="fas fa-bell"></i> '; echo $row->storyboard_date; echo ' '.$row->storyboard_pic; endforeach; ?>
-        The storyboard is due today, please check the digital content schedule
-    </div>
-<?php }?>
-
-<?php if(!empty($deadlineVoice)){ ?>
-    <div class="alert alert-warning" role="alert"  data-aos="zoom-in" data-aos-duration="1000">
-    <?php foreach($deadlineVoice as $row):  echo '<i class="fas fa-bell"></i> '; echo $row->voiceover_date; echo ' '.$row->voiceover_pic; endforeach; ?>
-        The voiceover is due today, please check the digital content schedule
-    </div>
-<?php }?>
-
-
-<?php if(!empty($deadlineAnimate)){ ?>
-    <div class="alert alert-warning" role="alert"  data-aos="zoom-in" data-aos-duration="1000">
-    <?php foreach($deadlineAnimate as $row):  echo '<i class="fas fa-bell"></i> '; echo $row->animate_date; echo ' '.$row->animate_pic; endforeach; ?>
-        The animate is due today, please check the digital content schedule
-    </div>
-<?php }?>
-
-<?php if(!empty($deadlineCompile)){ ?>
-    <div class="alert alert-warning" role="alert"  data-aos="zoom-in" data-aos-duration="1000">
-    <?php foreach($deadlineCompile as $row):  echo '<i class="fas fa-bell"></i> ';  echo $row->compile_date; echo ' '.$row->compile_pic; endforeach; ?>
-        The animate is due today, please check the digital content schedule
-    </div>
-<?php }?>
-
-<?php if(!empty($deadlineFinance)){ ?>
+if(!empty($deadlineFinance)){ ?>
     <div class="alert alert-warning" role="alert"  data-aos="zoom-in" data-aos-duration="1000">
     <?php foreach($deadlineFinance as $row):  ?>
         <?php if ($row->id_fStatus == '5') {

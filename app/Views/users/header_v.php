@@ -107,7 +107,7 @@
         <nav id="sidebar">
             <div class="sidebar-header">
                 <a class="navbar-brand" href="#">
-                    <img src="<?php echo base_url('assets/img/LOGO IDE.png'); ?>" width="114" height="66" class="d-inline-block align-top" alt="">
+                    <img src="<?php echo base_url('assets/img/logo.png'); ?>" width="114" height="66" class="d-inline-block align-top" alt="">
                     
                   </a>
             </div>
@@ -262,54 +262,6 @@
                             
                         </ul>
                     </div>
-                    <div class="modal fade" id="notifModal" role="dialog">
-                        <div class="modal-dialog modal-sm">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h4 class="modal-title"> <i class="fas fa-bell"></i> Notification</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            
-                            </div>
-                            <div class="modal-body">
-                            <div class="activity-feed">
-                            <?php if(!empty($deadlineStory)){ ?>
-                                <?php foreach($deadlineStory as $row): {?>
-                           
-                                <div class="feed-item">
-                                <div class="date"><?php echo $row->storyboard_date; ?></div>
-                                <div class="text">Has due today <a href="single-need.php"> <?php echo $row->storyboard_pic; ?></a></div>
-                                </div>
-                            <?php } endforeach; ?>
-                            <?php } ?>
-                            <div class="feed-item">
-                                <div class="date">Sep 24</div>
-                                <div class="text">Added an interest “Volunteer Activities”</div>
-                            </div>
-                            <div class="feed-item">
-                                <div class="date">Sep 23</div>
-                                <div class="text">Joined the group <a href="single-group.php">“Boardsmanship Forum”</a></div>
-                            </div>
-                            <div class="feed-item">
-                                <div class="date">Sep 21</div>
-                                <div class="text">Responded to need <a href="single-need.php">“In-Kind Opportunity”</a></div>
-                            </div>
-                            <div class="feed-item">
-                                <div class="date">Sep 18</div>
-                                <div class="text">Created need <a href="single-need.php">“Volunteer Opportunity”</a></div>
-                            </div>
-                            <div class="feed-item">
-                                <div class="date">Sep 17</div>
-                                <div class="text">Attending the event <a href="single-event.php">“Some New Event”</a></div>
-                            </div>
-                            </div>
-                            </div>
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-  
 
                     <div id="myModal" class="modal fade" role="dialog">
                     <div class="modal-dialog">
