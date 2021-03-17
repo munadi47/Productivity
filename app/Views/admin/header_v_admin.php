@@ -241,7 +241,7 @@
                         <ul class="nav navbar-nav ml-auto">
                             <?php if(allow('admin')) : {?>
                             <li class="nav-item">
-                            <a class="btn btn-light w3-wrapper sdp-glow"  id="sidebarCollapse" data-toggle="modal" data-target="#notifModal" style="margin-right: 5px;" href="#"  class="">
+                            <a class="btn btn-light w3-wrapper sdp-glow"  id="sidebarCollapse" data-toggle="modal" data-target="#notifModal" style="margin-right: 5px;" href="#">
                                     <svg class="notify-icon" viewBox="6 4 30 30">           
                                         <path d="M19.1818,30.5455h3.6364a0,0,0,0,1,0,0v.9091A1.8182,1.8182,0,0,1,21,33.2727h0a1.8182,1.8182,0,0,1-1.8182-1.8182v-.9091A0,0,0,0,1,19.1818,30.5455Z"></path> 
                                         <path d="M20.9091,8.7273h.1818a.8182.8182,0,0,1,.8182.8182v2.8182a0,0,0,0,1,0,0H20.0909a0,0,0,0,1,0,0V9.5455A.8182.8182,0,0,1,20.9091,8.7273Z"></path>
@@ -352,9 +352,9 @@
                         </div>
                         </div>
                     </div>
-  
+                </div>
 
-                    <div id="myModal" class="modal fade" role="dialog">
+                <div id="myModal" class="modal fade" role="dialog">
                     <div class="modal-dialog">
                         <!-- konten modal-->
                         <div class="modal-content">
@@ -477,16 +477,17 @@
                                                                 <div class="col-lg-3 col-3">
                                                                 
                                                                 <?php if(!empty($dataAttendance)){ ?>
-                                                                <?php foreach ($dataAttendance as $row):{?>
-                                                                <?php if($row->jumlah < 3 ){?>
-                                                                    <?php echo "<span class='badge badge-warning'>Not Fulfilled</span>"?>
+                                                                    <?php foreach ($dataAttendance as $row):{?>
+                                                                    <?php if($row->jumlah < 3 ){?>
+                                                                        <?php echo "<span class='badge badge-warning'>Not Fulfilled</span>"?>
 
-                                                                <?php }else {
-                                                                     echo "<span class='badge badge-success'>Fulfilled</span>";
+                                                                    <?php }else {
+                                                                        echo "<span class='badge badge-success'>Fulfilled</span>";
                                                                 }
+                                                                }endforeach;
                                                                 ?>
                                                                 
-                                                                <?php }endforeach; }?>
+                                                                <?php } else {?> <span class='badge badge-warning'>Not Fulfilled</span><?php }?>
 
                                                                 
 
@@ -527,6 +528,8 @@
                     </div>
 	                </div>
                 </div>
+  
+                
             </nav>
 
 
