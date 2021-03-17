@@ -12,7 +12,7 @@
 	<table style="background-color: #fffff; color: #fff">
 		<tbody>
 			<tr>
-				<td><img src="../public/assets/img/ide.png" height="60px"/></td>
+				<td><img src="../public/assets/img/logo.jpg" height="60px"/></td>
 				<td align="right"><br/>
 					IDE GROUP<br/>
 						Jakarta Utara, Indonesia<br/>
