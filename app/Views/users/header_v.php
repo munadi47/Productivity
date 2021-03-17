@@ -239,7 +239,13 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
-                            <li class="nav-item active">
+                            <li class="nav-item notific">
+                                <a href="#">
+                                    <i class="fa fa-bell notific-bell"></i>
+                                    <span class="notific-count"></span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="#"> 
                                     <button data-toggle="modal" data-target="#myModal" type="button" id="sidebarCollapse" class="btn btn-info">
                                         <i class="fas fa-user"></i> Profile

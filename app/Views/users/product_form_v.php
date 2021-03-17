@@ -1,3 +1,11 @@
+   
+<?php if(empty($dataCompany)){ ?>
+    <div class="alert alert-warning" role="alert"  data-aos="zoom-in" data-aos-duration="1000">
+        Company data is empty, please input data first &nbsp; <a class="btn btn-info" href="<?php echo base_url('Company/add'); ?>"> <i class="fa fa-edit"></i> </a>
+    </div>
+<?php }?>
+
+
 <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
 <section>
     <div class="container">
