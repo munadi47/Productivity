@@ -42,6 +42,9 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     
+    <!--Daterangepicker -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    
     <!--Get Active Sidebar-->
     <?php
         $current_url = basename($_SERVER['PHP_SELF']);
