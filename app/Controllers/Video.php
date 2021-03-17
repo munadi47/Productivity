@@ -88,14 +88,11 @@ class Video extends BaseController{
            
             $data = [
                 'storyboard_pic'=>$this->request->getPost('storyboard_pic'),
-                'storyboard_start'=>$this->request->getPost('storyboard_start'),
-                'storyboard_end'=>$this->request->getPost('storyboard_end'),
+                'storyboard_date'=>$this->request->getPost('storyboard_date'),
                 'shooting_pic'=>$this->request->getPost('shooting_pic'),
-                'shooting_start'=>$this->request->getPost('shooting_start'),
-                'shooting_end'=>$this->request->getPost('shooting_end'),
+                'shooting_date'=>$this->request->getPost('shooting_date'),
                 'editing_pic'=>$this->request->getPost('editing_pic'),
-                'editing_start'=>$this->request->getPost('editing_start'),
-                'editing_end'=>$this->request->getPost('editing_end'),
+                'editing_date'=>$this->request->getPost('editing_date'),
                 'remark'=>$this->request->getPost('remark'),
                 'id_SalesPipeline'=>$this->request->getPost('id_SalesPipeline'),
                     
@@ -116,18 +113,16 @@ class Video extends BaseController{
             $where = ['id_video'=>$id];
             $data = [
                 'storyboard_pic'=>$this->request->getPost('storyboard_pic'),
-                'storyboard_start'=>$this->request->getPost('storyboard_start'),
-                'storyboard_end'=>$this->request->getPost('storyboard_end'),
+                'storyboard_date'=>$this->request->getPost('storyboard_date'),
                 'shooting_pic'=>$this->request->getPost('shooting_pic'),
-                'shooting_start'=>$this->request->getPost('shooting_start'),
-                'shooting_end'=>$this->request->getPost('shooting_end'),
+                'shooting_date'=>$this->request->getPost('shooting_date'),
                 'editing_pic'=>$this->request->getPost('editing_pic'),
-                'editing_start'=>$this->request->getPost('editing_start'),
-                'editing_end'=>$this->request->getPost('editing_end'),
+                'editing_date'=>$this->request->getPost('editing_date'),
                 'remark'=>$this->request->getPost('remark'),
                 'id_SalesPipeline'=>$this->request->getPost('id_SalesPipeline'),
                     
             ];
+            
          
            
             $response = $this->videoModel->update($where, $data);
@@ -204,11 +199,11 @@ $spreadsheet->setActiveSheetIndex(0)
 ->setCellValue('A'.$i, $row->id_video)
 ->setCellValue('B'.$i, $row->id_client)
 ->setCellValue('C'.$i, $row->storyboard_pic)
-->setCellValue('D'.$i, $row->storyboard_end)
+->setCellValue('D'.$i, $row->storyboard_date)
 ->setCellValue('E'.$i, $row->shooting_pic)
-->setCellValue('F'.$i, $row->shooting_end)
+->setCellValue('F'.$i, $row->shooting_date)
 ->setCellValue('G'.$i, $row->editing_pic)
-->setCellValue('H'.$i, $row->editing_end)
+->setCellValue('H'.$i, $row->editing_date)
 ->setCellValue('I'.$i, $row->remark)
 ;
 $i++;
@@ -278,11 +273,11 @@ exit;
     $spreadsheet->setActiveSheetIndex(0)
     ->setCellValue('A'.$i, $row->id_client)
     ->setCellValue('B'.$i, $row->storyboard_pic)
-    ->setCellValue('C'.$i, $row->storyboard_end)
+    ->setCellValue('C'.$i, $row->storyboard_date)
     ->setCellValue('D'.$i, $row->shooting_pic)
-    ->setCellValue('E'.$i, $row->shooting_end)
+    ->setCellValue('E'.$i, $row->shooting_date)
     ->setCellValue('F'.$i, $row->editing_pic)
-    ->setCellValue('G'.$i, $row->editing_end)
+    ->setCellValue('G'.$i, $row->editing_date)
     ->setCellValue('H'.$i, $row->remark)
     ;
     $i++;
