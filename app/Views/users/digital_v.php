@@ -81,13 +81,13 @@
                         <td><?php echo $row->title; ?></td>
                         <td><?php echo $row->id_client; ?></td>
                         <td><?php echo $row->storyboard_pic; ?></td>
-                        <td><?php echo $row->storyboard_date; ?></td>
+                        <td><?php echo date("d M, Y", strtotime($row->storyboard_date));?></td>
                         <td><?php echo $row->voiceover_pic; ?></td>
-                        <td><?php echo $row->voiceover_date; ?></td>
+                        <td><?php echo date("d M, Y", strtotime($row->voiceover_date));?></td>
                         <td><?php echo $row->animate_pic; ?></td>
-                        <td><?php echo $row->animate_date; ?></td>
+                        <td><?php echo date("d M, Y", strtotime($row->animate_date));?></td>
                         <td><?php echo $row->compile_pic; ?></td>
-                        <td><?php echo $row->compile_date; ?></td>
+                        <td><?php echo date("d M, Y", strtotime($row->compile_date));?></td>
                         <td><?php echo $row->remark; ?></td>
                         <td >
                           

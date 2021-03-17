@@ -67,7 +67,7 @@
                         <td><?php echo $nomor++; ?></td>
                         <td><?php echo $row->title; ?></td>
                         <td><?php echo $row->id_client; ?></td>
-                        <td><?php echo $row->date_deliver; ?></td>
+                        <td><?php echo date("d M, Y", strtotime($row->date_deliver));?></td>
                         <td><?php echo $row->coach_name; ?></td>
                         <td> <?php if($row->method=='online'){
 
