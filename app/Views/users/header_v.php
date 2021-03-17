@@ -99,6 +99,9 @@
         }
     ?>
     <title> <?php echo $title ; ?></title>
+    <!--Daterangepicker -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    
 </head>
 
 <body>
@@ -262,6 +265,7 @@
                             
                         </ul>
                     </div>
+  
 
                     <div id="myModal" class="modal fade" role="dialog">
                     <div class="modal-dialog">
