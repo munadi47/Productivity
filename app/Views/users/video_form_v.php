@@ -58,7 +58,6 @@
             </div>
             <label class="col-sm-2 col-form-label">Due Date</label>
             <div class="col-sm-4">
-            
             <input  class="form-control"  type="date" id="storyboard_date" name="storyboard_date" value="<?php if(!empty($dataVideo)) echo $dataVideo->storyboard_date; ?>"> 
             </div>
         </div>
@@ -85,7 +84,7 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Remark</label>
             <div class="col-sm-10">
-            <textarea placeholder="Catatan" id="remark" name="remark" class="form-control" id="exampleFormControlTextarea1" value="<?php if(!empty($dataVideo)) echo $dataVideo->remark; ?>" rows="3"></textarea> 
+            <textarea placeholder="Catatan" id="remark" name="remark" class="form-control" id="exampleFormControlTextarea1" value="" rows="3"><?php if(!empty($dataVideo)) echo $dataVideo->remark; ?></textarea> 
             </div>
         </div>
 

@@ -1,7 +1,5 @@
 <?php
 
-use Config\Format;
-
 if(!empty($deadlineStory)){ ?>
     <div class="alert alert-warning" role="alert"  data-aos="zoom-in" data-aos-duration="1000">
     <?php foreach($deadlineStory as $row): echo '<i class="fas fa-bell"></i> '; echo $row->storyboard_date; echo ' '.$row->storyboard_pic; endforeach; ?>

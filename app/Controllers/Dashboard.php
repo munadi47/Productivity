@@ -50,10 +50,10 @@ class Dashboard extends BaseController{
        $paginate = 5;
        $data['AttToday']   = $AttToday->paginate($paginate,'AttToday');
        $data['pager']      = $this->attendanceModel->AttToday()->pager;
-    echo view ('users/header_v',$statusEmp);
-    echo view ('admin/dashboard_v',$data);
-    echo view ('users/footer_v');
-        
-    }
+        echo view ('admin/header_v_admin',$data,$statusEmp);
+        echo view ('admin/dashboard_v',$data);
+        echo view ('users/footer_v');
+            
+        }
 
 }

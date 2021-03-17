@@ -96,9 +96,7 @@ class Product extends BaseController{
             }else{
                 return redirect()->to(site_url('Product'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to save');
             }
-            
 
-            
         } else { // Update
             $where = ['id_product'=>$id];
             $data = [
