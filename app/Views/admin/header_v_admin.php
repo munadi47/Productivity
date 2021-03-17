@@ -285,7 +285,7 @@
                                 <?php foreach($deadlineStory as $row): {?>
                            
                                 <div class="feed-item">
-                                <div class="date"><?php echo $row->storyboard_date; ?></div>
+                                <div class="date"><?php echo date("d M, Y", strtotime($row->storyboard_date)); ?></div>
                                 <div class="text"><a href="<?php echo base_url('Video') ?>">Storyboard video has due today PIC : <?php echo $row->storyboard_pic; ?></a></div>
                                 </div>
                             <?php } endforeach; ?>
@@ -294,7 +294,7 @@
                                 <?php foreach($deadlineShoot as $row): {?>
                            
                                 <div class="feed-item">
-                                <div class="date"><?php echo $row->shooting_date; ?></div>
+                                <div class="date"><?php echo date("d M, Y", strtotime($row->shooting_date)); ?></div>
                                 <div class="text"><a href="<?php echo base_url('Video') ?>"> Shooting video has due today PIC : <?php echo $row->shooting_pic; ?></a></div>
                                 </div>
                             <?php } endforeach; ?>
@@ -303,7 +303,7 @@
                                 <?php foreach($deadlineEdit as $row): {?>
                            
                                 <div class="feed-item">
-                                <div class="date"><?php echo $row->editing_date; ?></div>
+                                <div class="date"><?php echo date("d M, Y", strtotime($row->editing_date)); ?></div>
                                 <div class="text"><a href="<?php echo base_url('Video') ?>"> Editing video has due today PIC : <?php echo $row->editing_pic; ?></a></div>
                                 </div>
                             <?php } endforeach; ?>
@@ -312,7 +312,7 @@
                                 <?php foreach($deadlineStoryDigital as $row): {?>
                            
                                 <div class="feed-item">
-                                <div class="date"><?php echo $row->storyboard_date; ?></div>
+                                <div class="date"><?php echo date("d M, Y", strtotime($row->storyboard_date)); ?></div>
                                 <div class="text"><a href="<?php echo base_url('Digital') ?>"> Storyboard digital content has due today, PIC : <?php echo $row->storyboard_pic; ?></a></div>
                                 </div>
                             <?php } endforeach; ?>
@@ -321,7 +321,7 @@
                                 <?php foreach($deadlineVoice as $row): {?>
                            
                                 <div class="feed-item">
-                                <div class="date"><?php echo $row->voiceover_date; ?></div>
+                                <div class="date"><?php echo date("d M, Y", strtotime($row->voiceover_date)); ?></div>
                                 <div class="text"><a href="<?php echo base_url('Digital') ?>"> Voiceover digital content has due today, PIC : <?php echo $row->voiceover_pic; ?></a></div>
                                 </div>
                             <?php } endforeach; ?>
@@ -330,7 +330,7 @@
                                 <?php foreach($deadlineAnimate as $row): {?>
                            
                                 <div class="feed-item">
-                                <div class="date"><?php echo $row->animate_date; ?></div>
+                                <div class="date"><?php echo date("d M, Y", strtotime($row->animate_date)); ?></div>
                                 <div class="text"><a href="<?php echo base_url('Digital') ?>"> Animate digital content has due today, PIC : <?php echo $row->animate_pic; ?></a></div>
                                 </div>
                             <?php } endforeach; ?>
@@ -339,8 +339,17 @@
                                 <?php foreach($deadlineCompile as $row): {?>
                            
                                 <div class="feed-item">
-                                <div class="date"><?php echo $row->compile_date; ?></div>
+                                <div class="date"><?php echo date("d M, Y", strtotime($row->compile_date)); ?></div>
                                 <div class="text"><a href="<?php echo base_url('Digital') ?>"> Compile digital content has due today, PIC : <?php echo $row->compile_pic; ?></a></div>
+                                </div>
+                            <?php } endforeach; ?>
+                            <?php } ?>
+                            <?php if(!empty($deadlineFinance)){ ?>
+                                <?php foreach($deadlineFinance as $row): {?>
+                           
+                                <div class="feed-item">
+                                <div class="date"><?php echo date("d M, Y", strtotime($row->invoice_duedate)); ?></div>
+                                <div class="text"><a href="<?php echo base_url('Finance') ?>"> The Invoice payment due is today, for <?php echo $row->id_client; ?></a></div>
                                 </div>
                             <?php } endforeach; ?>
                             <?php } ?>
