@@ -142,11 +142,11 @@
 
 
                                                 <?php }else {
-                                                        echo "<span class='badge badge-success'>Clear</span>";
+                                                        echo "<span class='badge badge-success'>Fulfilled</span>";
                                                 }
                                                 ?>
                                                 
-                                                <?php }endforeach; }?>
+                                                <?php }endforeach; }else ?>
                                                 <br>
                                                 </p>
                                             </div>
@@ -171,12 +171,10 @@
                                             <?php if(!empty($row)){?>
                                                 <p><?php echo $row->jumlah?></p>
                                             <?php }else {?>
-                                                <p><?php echo 0;?></p>
+                                               <p> 0</p>
                                             <?php }
                                             ?>
-                                            <?php }endforeach; }?>
-
-                                                <p><?  ?></p>
+                                            <?php }endforeach; } else ?> <p>0</p>
                                             </div>
                                         </div>
                                         <div class="row">

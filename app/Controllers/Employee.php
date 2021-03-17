@@ -33,9 +33,13 @@ class Employee extends BaseController{
         session();
         $data['validation'] = $this->validator;
         $data = [ 'validate' => \Config\Services::validation()];
-        $data['dataEmployee'] = $this->employeeModel->getEmployee();
+        $data['dataEmployee'] = $this->employeeModel->findAll();
+        
+        //$id = $data['dataEmployee'] = $this->employeeModel->findAll();
+        //$data['dataStatus'] = $this->employeeModel->getEmployee($id);
+        //$id = $this->request->getPost('nik');
+        //$data['dataEmployee'] = $this->attendanceModel->getStatusCount($id);
         $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
-
         echo view ('users/header_v', $statusEmp);
         echo view ('admin/employee_v',$data);
         echo view ('users/footer_v');
@@ -60,9 +64,8 @@ class Employee extends BaseController{
    
 
     public function add(){
-
-       
         $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        //$data['dataEmployee'] = $this->attendanceModel->findAll();
 
         echo view('users/header_v',$statusEmp);
         echo view('admin/employee_form_add');
@@ -147,7 +150,7 @@ class Employee extends BaseController{
                     'phone1'=>$this->request->getPost('phone1'),
                     'phone2'=>$this->request->getPost('phone2'),
                     'level'=>$this->request->getPost('level'),
-
+                    'status'=>$this->request->getPost('status'),
                   
                 ]; 
                     $this->employeeModel->insert($data);

@@ -64,12 +64,9 @@
                             <option selected><?php if(!empty($dataEmployee)) echo $dataEmployee->level; ?> </option>
                             <option value="admin"><span class="badge badge-primary"> admin </span></option>
                             <option value="user"><span class="badge badge-warning"> user </span></option>
-                          
-                            
                     </select>
             </div>
         </div>
-      
         <br>
 
     

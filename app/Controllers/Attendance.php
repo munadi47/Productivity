@@ -36,6 +36,7 @@ class Attendance extends BaseController{
         $session = session();
         //$this->load->library('user_agent');
         $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        $data['dataRow'] = $this->attendanceModel->getRowAtt();
         $data['dataCheckIn'] = $this->attendanceModel->checkin();
         $data['dataCheckOut'] = $this->attendanceModel->checkout();
 
@@ -73,20 +74,6 @@ class Attendance extends BaseController{
         
     }
 
-    public function clockout($id){
-        $where = ['id_attendance'=> $id];
-        $datain = [ 	 	
-            'clock_out'=> date('Y-m-d H:i:s'),          
-        ]; 
-            $this->attendanceModel->update($where,$datain);
-            $id = $this->attendanceModel->getInsertID(); 
-            $act = 'Out (Clock out)';
-            $this->record($act,session()->get('nik'));
-            return redirect()->to(site_url('Attendance'))->with('Success', '<i class="fas fa-save"></i> Clockout saved on '.date('H:i:s'));            
-        
-       
-    }
-
     public function clockin() {
         $session = session();
 
@@ -102,10 +89,12 @@ class Attendance extends BaseController{
             'clock_in'=> date('Y-m-d H:i:s'),          
         ]; 
 
-        
-        
+        $status = [ 	 	 
+            'status'=> session()->get('status'),
+        ];
             $insert = $this->attendanceModel->insert($datain);
             $id = $this->attendanceModel->getInsertID(); 
+            
 
             if($insert) {
                 $data = array(
@@ -114,6 +103,7 @@ class Attendance extends BaseController{
         
                 $session->set($data);
             }
+            
             $act = 'Present (Clock in)';
             $this->record($act,session()->get('nik'));
             
@@ -123,10 +113,28 @@ class Attendance extends BaseController{
                 return redirect()->to(site_url('Attendance'))->with('Success', '<i class="fas fa-save"></i> Clockin saved on '.date('H:i:s'));            
     } 
 
-    
+    public function clockout($id){
+        $session = session();
+        //$id = $this->attendanceModel->getInsertID(); 
+        //$id['dataOut'] = $this->attendanceModel->getInsertID();
 
-    
-    
+        $where = ['id_attendance'=> $id];
+        $dataout = [ 	 	
+            'clock_out'=> date('Y-m-d H:i:s'),          
+        ]; 
+        $datain = [ 	 	 
+            'nik'=> session()->get('nik'),
+            'clock_in'=> date('Y-m-d H:i:s'),          
+        ]; 
+
+            $this->attendanceModel->update($where,$dataout);
+            //$id = $this->attendanceModel->getInsertID(); 
+            $act = 'Out (Clock out)';
+            $this->record($act,session()->get('nik'));
+            return redirect()->to(site_url('Attendance'))->with('Success', '<i class="fas fa-save"></i> Clockout saved on '.date('H:i:s'));            
+        
+       
+    }
 
 
      public function delete($id){
@@ -175,8 +183,8 @@ $i=2; foreach($dataAttendance as $row) {
 $spreadsheet->setActiveSheetIndex(0)
 ->setCellValue('A'.$i, $row->id_attendance)
 ->setCellValue('B'.$i, $row->name)
-->setCellValue('C'.$i, $row->clock_in)
-->setCellValue('D'.$i, $row->clock_out)
+->setCellValue('C'.$i, date("h:i A", strtotime($row->clock_in)))
+->setCellValue('D'.$i, date("h:i A", strtotime($row->clock_out)))
 
 ;
 $i++;
