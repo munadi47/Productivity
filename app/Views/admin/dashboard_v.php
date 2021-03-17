@@ -1,61 +1,4 @@
 
-
-<?php if(!empty($deadlineShoot)){ ?>
-    <div class="alert alert-warning" role="alert"  data-aos="zoom-in" data-aos-duration="1000">
-    <?php foreach($deadlineShoot as $row): echo '<i class="fas fa-bell"></i> '; echo $row->shooting_date; echo ' '.$row->shooting_pic; endforeach; ?>
-        The shooting is due today, please check the video schedule
-    </div>
-<?php }?>
-
-<?php if(!empty($deadlineEdit)){ ?>
-    <div class="alert alert-warning" role="alert"  data-aos="zoom-in" data-aos-duration="1000">
-    <?php foreach($deadlineEdit as $row): echo '<i class="fas fa-bell"></i> '; echo $row->editing_date; echo ' '.$row->editing_pic; endforeach; ?>
-        The editing is due today, please check the video schedule
-    </div>
-<?php }?>
-
-
-<?php if(!empty($deadlineStoryDigital)){ ?>
-    <div class="alert alert-warning" role="alert"  data-aos="zoom-in" data-aos-duration="1000">
-    <?php foreach($deadlineStoryDigital as $row): echo '<i class="fas fa-bell"></i> '; echo $row->storyboard_date; echo ' '.$row->storyboard_pic; endforeach; ?>
-        The storyboard is due today, please check the digital content schedule
-    </div>
-<?php }?>
-
-<?php if(!empty($deadlineVoice)){ ?>
-    <div class="alert alert-warning" role="alert"  data-aos="zoom-in" data-aos-duration="1000">
-    <?php foreach($deadlineVoice as $row):  echo '<i class="fas fa-bell"></i> '; echo $row->voiceover_date; echo ' '.$row->voiceover_pic; endforeach; ?>
-        The voiceover is due today, please check the digital content schedule
-    </div>
-<?php }?>
-
-
-<?php if(!empty($deadlineAnimate)){ ?>
-    <div class="alert alert-warning" role="alert"  data-aos="zoom-in" data-aos-duration="1000">
-    <?php foreach($deadlineAnimate as $row):  echo '<i class="fas fa-bell"></i> '; echo $row->animate_date; echo ' '.$row->animate_pic; endforeach; ?>
-        The animate is due today, please check the digital content schedule
-    </div>
-<?php }?>
-
-<?php if(!empty($deadlineCompile)){ ?>
-    <div class="alert alert-warning" role="alert"  data-aos="zoom-in" data-aos-duration="1000">
-    <?php foreach($deadlineCompile as $row):  echo '<i class="fas fa-bell"></i> ';  echo $row->compile_date; echo ' '.$row->compile_pic; endforeach; ?>
-        The animate is due today, please check the digital content schedule
-    </div>
-<?php }?>
-
-<?php if(!empty($deadlineFinance)){ ?>
-    <div class="alert alert-warning" role="alert"  data-aos="zoom-in" data-aos-duration="1000">
-    <?php foreach($deadlineFinance as $row):  ?>
-        <?php if ($row->id_fStatus == '5') {
-            echo '<i class="fas fa-bell"></i> '; echo ' The Invoice payment status for '.$row->id_client; echo ' is Done';?>
-        <?php } else { ?>
-        <?php echo '<i class="fas fa-bell"></i> '; echo ' The Invoice payment due is today ('.date("d M, Y", strtotime($row->invoice_duedate)).')'; echo ' for'; echo ' '.$row->id_client;  } ?>
-    <?php endforeach; ?>
-        
-    </div>
-<?php }?>
-
 <nav aria-label="breadcrumb shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-out" data-aos-duration="1000">
     <ol class="breadcrumb">
     
@@ -101,7 +44,7 @@
     </div>
 
     <div class="row">
-        <div class="col col-lg-7">
+        <div class="col col-lg-8">
           <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info "  data-aos="zoom-in" data-aos-duration="1000">
             <div id="financeChart">
             </div>
@@ -109,7 +52,7 @@
         </div>
 
         
-        <div class="col col-lg-5">
+        <div class="col col-lg-4">
           <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info "  data-aos="zoom-in" data-aos-duration="1000">
             <div id="deliveryChart">
             </div>
@@ -119,13 +62,6 @@
       </div>
 
       <div class="row">
-      <div class="col col-lg-12">
-          <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info " data-aos="zoom-in" data-aos-duration="1000">
-            <div id="attendanceChart">
-            </div>
-          </div>
-        </div>
-
         <div class="col col-lg-7">
             <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
                 <div id="sp_chart"> 
@@ -136,7 +72,7 @@
       
      
         <div class="col col-lg-5">
-            <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000">
+            <div style="height: 28.5vw;" class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
             <h4> Employee Attendance Today </h4>
             <?php 
                 
@@ -147,7 +83,7 @@
                 
             <div class="list list-row block">
                     <div class="list-item" data-id="19">
-                        <div><a href="#" data-abc="true"><span class="<?php  if(empty($row->photo)) { echo base_url( 'https://ssl.gstatic.com/accounts/ui/avatar_2x.png'); } ?>"><img class="img-emp" src="<?php if(empty($row->photo)) { echo base_url( 'https://ssl.gstatic.com/accounts/ui/avatar_2x.png'); } else{ echo base_url('assets/uploads/profile/'.$row->photo);} ?>"></span></a></div>
+                        <div><a href="#" data-abc="true"><span class="<?php  if(empty($row->photo)) { echo base_url( 'https://ssl.gstatic.com/accounts/ui/avatar_2x.png'); } ?>"></span></a></div>
                         <div class="flex"> <a href="#" class="item-author text-color" data-abc="true"><?php echo $row->name; ?></a>
                             <div class="item-except text-muted text-sm h-1x">Has been absent</div>
                         </div>
@@ -167,12 +103,19 @@
             </div>
         </div>
       </div>
-    
+
+      <div class="row">
+        <div class="col col-lg-12">
+          <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info " data-aos="zoom-in" data-aos-duration="1000">
+            <div id="attendanceChart">
+            </div>
+          </div>
+        </div>
+    </div>
+    </div>
 
     
 
-    
-</div>
     <script>
         Highcharts.chart('attendanceChart', {
 

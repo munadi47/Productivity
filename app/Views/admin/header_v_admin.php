@@ -247,7 +247,7 @@
                                         <path d="M20.9091,8.7273h.1818a.8182.8182,0,0,1,.8182.8182v2.8182a0,0,0,0,1,0,0H20.0909a0,0,0,0,1,0,0V9.5455A.8182.8182,0,0,1,20.9091,8.7273Z"></path>
                                         <path d="M21,12.5455q.2061,0,.4154.0134a6.3426,6.3426,0,0,1,5.7664,6.4486v2.9269a19.3045,19.3045,0,0,0,.8675,5.702H13.9507a19.3045,19.3045,0,0,0,.8675-5.702V18.7273A6.1887,6.1887,0,0,1,21,12.5455m0-2a8.1816,8.1816,0,0,0-8.1818,8.1818v3.2071A17.2221,17.2221,0,0,1,11,29.6364H31a17.2221,17.2221,0,0,1-1.8182-7.702V19.0075a8.368,8.368,0,0,0-7.6372-8.4444q-.274-.0177-.5446-.0176Z"></path>
                                     </svg>
-                                    <?php if(!empty($deadlineStory)){ ?> <span class="w3-count"><i class="fas fa-exclamation"></i></span> <?php } ?>
+                                    <?php if(!empty($deadlineStory || $deadlineShoot || $deadlineEdit || $deadlineStoryDigital || $deadlineVoice || $deadlineAnimate || $deadlineCompile )){ ?> <span class="w3-count"><i class="fas fa-exclamation"></i></span> <?php } ?>
                             </a>
                             </li>
                             <?php } endif; ?>
@@ -256,7 +256,6 @@
                                 <a class="nav-link" href="#"> 
                                     <button data-toggle="modal" data-target="#myModal" type="button" id="sidebarCollapse" class="btn btn-info">
                                         <i class="fas fa-user"></i> Profile
-                                  
                                     </button>
                                 </a>
                             </li>
@@ -279,37 +278,72 @@
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body">    
+                            <div class="class">
                             <div class="activity-feed">
                             <?php if(!empty($deadlineStory)){ ?>
                                 <?php foreach($deadlineStory as $row): {?>
                            
                                 <div class="feed-item">
                                 <div class="date"><?php echo $row->storyboard_date; ?></div>
-                                <div class="text">Has due today <a href="single-need.php"> <?php echo $row->storyboard_pic; ?></a></div>
+                                <div class="text"><a href="<?php echo base_url('Video') ?>">Storyboard video has due today PIC : <?php echo $row->storyboard_pic; ?></a></div>
                                 </div>
                             <?php } endforeach; ?>
                             <?php } ?>
-                            <div class="feed-item">
-                                <div class="date">Sep 24</div>
-                                <div class="text">Added an interest “Volunteer Activities”</div>
-                            </div>
-                            <div class="feed-item">
-                                <div class="date">Sep 23</div>
-                                <div class="text">Joined the group <a href="single-group.php">“Boardsmanship Forum”</a></div>
-                            </div>
-                            <div class="feed-item">
-                                <div class="date">Sep 21</div>
-                                <div class="text">Responded to need <a href="single-need.php">“In-Kind Opportunity”</a></div>
-                            </div>
-                            <div class="feed-item">
-                                <div class="date">Sep 18</div>
-                                <div class="text">Created need <a href="single-need.php">“Volunteer Opportunity”</a></div>
-                            </div>
-                            <div class="feed-item">
-                                <div class="date">Sep 17</div>
-                                <div class="text">Attending the event <a href="single-event.php">“Some New Event”</a></div>
-                            </div>
+                            <?php if(!empty($deadlineShoot)){ ?>
+                                <?php foreach($deadlineShoot as $row): {?>
+                           
+                                <div class="feed-item">
+                                <div class="date"><?php echo $row->shooting_date; ?></div>
+                                <div class="text"><a href="<?php echo base_url('Video') ?>"> Shooting video has due today PIC : <?php echo $row->shooting_pic; ?></a></div>
+                                </div>
+                            <?php } endforeach; ?>
+                            <?php } ?>
+                            <?php if(!empty($deadlineEdit)){ ?>
+                                <?php foreach($deadlineEdit as $row): {?>
+                           
+                                <div class="feed-item">
+                                <div class="date"><?php echo $row->editing_date; ?></div>
+                                <div class="text"><a href="<?php echo base_url('Video') ?>"> Editing video has due today PIC : <?php echo $row->editing_pic; ?></a></div>
+                                </div>
+                            <?php } endforeach; ?>
+                            <?php } ?>
+                            <?php if(!empty($deadlineStoryDigital)){ ?>
+                                <?php foreach($deadlineStoryDigital as $row): {?>
+                           
+                                <div class="feed-item">
+                                <div class="date"><?php echo $row->storyboard_date; ?></div>
+                                <div class="text"><a href="<?php echo base_url('Digital') ?>"> Storyboard digital content has due today, PIC : <?php echo $row->storyboard_pic; ?></a></div>
+                                </div>
+                            <?php } endforeach; ?>
+                            <?php } ?>
+                            <?php if(!empty($deadlineVoice)){ ?>
+                                <?php foreach($deadlineVoice as $row): {?>
+                           
+                                <div class="feed-item">
+                                <div class="date"><?php echo $row->voiceover_date; ?></div>
+                                <div class="text"><a href="<?php echo base_url('Digital') ?>"> Voiceover digital content has due today, PIC : <?php echo $row->voiceover_pic; ?></a></div>
+                                </div>
+                            <?php } endforeach; ?>
+                            <?php } ?>
+                            <?php if(!empty($deadlineAnimate)){ ?>
+                                <?php foreach($deadlineAnimate as $row): {?>
+                           
+                                <div class="feed-item">
+                                <div class="date"><?php echo $row->animate_date; ?></div>
+                                <div class="text"><a href="<?php echo base_url('Digital') ?>"> Animate digital content has due today, PIC : <?php echo $row->animate_pic; ?></a></div>
+                                </div>
+                            <?php } endforeach; ?>
+                            <?php } ?>
+                            <?php if(!empty($deadlineCompile)){ ?>
+                                <?php foreach($deadlineCompile as $row): {?>
+                           
+                                <div class="feed-item">
+                                <div class="date"><?php echo $row->compile_date; ?></div>
+                                <div class="text"><a href="<?php echo base_url('Digital') ?>"> Compile digital content has due today, PIC : <?php echo $row->compile_pic; ?></a></div>
+                                </div>
+                            <?php } endforeach; ?>
+                            <?php } ?>
                             </div>
                             </div>
                             <div class="modal-footer">
