@@ -28,7 +28,7 @@
     }
     ?>
 
-    <h2><i class="fas fa-user-clock"></i> Presensi </h2>
+    <h2><i class="fas fa-user-clock"></i> Attendance </h2>
 
     <figure class="highcharts-figure">
     <div id="watch"></div>
