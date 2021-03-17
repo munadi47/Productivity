@@ -22,10 +22,14 @@ class employeeModel extends Model
     protected $skipValidation     = false;
 
    
-    public function getEmployee()
+    public function getEmployee($id)
     {
-         return $this->db->table('employee')
-         ->get()->getResultObject(); 
+         $builder = $this->table('employee');
+         $builder->select("YEARWEEK(clock_in), SUM(nik='$id')")
+         ->join('id_attendance','id_attendance.nik=employee.nik')
+
+         ->where('YEARWEEK(clock_in), YEARWEEK(NOW() )')
+         ->get()->getResultObject();
     }
 
     public function getDetail($id)

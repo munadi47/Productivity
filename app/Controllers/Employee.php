@@ -33,7 +33,10 @@ class Employee extends BaseController{
         session();
         $data['validation'] = $this->validator;
         $data = [ 'validate' => \Config\Services::validation()];
-        $data['dataEmployee'] = $this->employeeModel->getEmployee();
+        $data['dataEmployee'] = $this->employeeModel->findAll();
+        
+        //$id = $data['dataEmployee'] = $this->employeeModel->findAll();
+        //$data['dataStatus'] = $this->employeeModel->getEmployee($id);
         //$id = $this->request->getPost('nik');
         //$data['dataEmployee'] = $this->attendanceModel->getStatusCount($id);
         $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();

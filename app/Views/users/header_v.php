@@ -42,6 +42,8 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     
+    <!--Daterangepicker -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     
 </head>
 
@@ -329,16 +331,17 @@
                                                                 <div class="col-lg-3 col-3">
                                                                 
                                                                 <?php if(!empty($dataAttendance)){ ?>
-                                                                <?php foreach ($dataAttendance as $row):{?>
-                                                                <?php if($row->jumlah < 3 ){?>
-                                                                    <?php echo "<span class='badge badge-warning'>Not Fulfilled</span>"?>
+                                                                    <?php foreach ($dataAttendance as $row):{?>
+                                                                    <?php if($row->jumlah < 3 ){?>
+                                                                        <?php echo "<span class='badge badge-warning'>Not Fulfilled</span>"?>
 
-                                                                <?php }else {
-                                                                     echo "<span class='badge badge-success'>Fulfilled</span>";
+                                                                    <?php }else {
+                                                                        echo "<span class='badge badge-success'>Fulfilled</span>";
                                                                 }
+                                                                }endforeach;
                                                                 ?>
                                                                 
-                                                                <?php }endforeach; } else ?> <span class='badge badge-warning'>Not Fulfilled</span>
+                                                                <?php } else {?> <span class='badge badge-warning'>Not Fulfilled</span><?php }?>
 
                                                                 
 

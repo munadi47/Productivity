@@ -50,7 +50,7 @@ class attendanceModel extends Model
     public function getStatusAtt(){ //berapa kali dia absen per minggu
         $id = session()->get('nik');
         
-        $query = $this->db->query("SELECT YEARWEEK(clock_in) AS tahun_minggu,SUM(nik=$id) AS jumlah FROM log_attendance WHERE YEARWEEK(clock_in)=YEARWEEK(NOW() ) GROUP BY YEARWEEK(clock_in) ");
+        $query = $this->db->query("SELECT id_attendance, YEARWEEK(clock_in) AS tahun_minggu,SUM(nik=$id) AS jumlah FROM log_attendance WHERE YEARWEEK(clock_in)=YEARWEEK(NOW() ) GROUP BY YEARWEEK(clock_in) ");
         //return $query->getResult();
 
         if($query){
@@ -62,6 +62,22 @@ class attendanceModel extends Model
             } return false;
             
         }
+    }
+
+    public function getRowAtt(){ //ambil id pertama row pertama
+        $id = session()->get('nik');
+
+        $query = $this->db->query("SELECT * FROM `log_attendance` WHERE (nik=$id) ORDER BY id_attendance DESC");
+        //return $query->getRow();
+        return $query->getRow();
+        //return $row;
+        
+        /*if($query){
+            if (isset($row)) {
+                return $row->id_attendance;
+            } return false;
+            
+        }*/
     }
 
     
@@ -99,7 +115,6 @@ class attendanceModel extends Model
 
     public function AttToday()
     {
-        
         $builder = $this->table('log_attendance');
         $builder->select('employee.name,clock_in,employee.photo,id_attendance')
         ->join('employee','employee.nik=log_attendance.nik')
@@ -113,6 +128,8 @@ class attendanceModel extends Model
         $id = session()->get('nik');
 
         $query = $this->db->query("SELECT * FROM log_attendance WHERE (nik = $id) AND date(clock_in)=CURDATE() AND clock_in IS NOT NULL GROUP BY  date(clock_in)=CURDATE()");
+
+        //return $query->get()->getResultObject();
 
         if($query){
             foreach($query->getResult() as $data){

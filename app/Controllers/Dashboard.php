@@ -41,6 +41,7 @@ class Dashboard extends BaseController{
        $data['deadlineVoice'] = $this->digitalModel->deadlineVoice();
        $data['deadlineAnimate'] = $this->digitalModel->deadlineAnimate();
        $data['deadlineCompile'] = $this->digitalModel->deadlineCompile();
+       $data['deadlineFinance'] = $this->financeModel->deadlineFinance();
        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
       

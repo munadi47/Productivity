@@ -28,7 +28,7 @@
     }
     ?>
 
-    <h2><i class="fas fa-briefcase"></i> Presensi </h2>
+    <h2><i class="fas fa-user-clock"></i> Presensi </h2>
 
     <figure class="highcharts-figure">
     <div id="watch"></div>
@@ -62,7 +62,7 @@
 
         
         <div class="col col-lg-6">
-            <form action="<?php echo base_url("Attendance/clockout/".session()->get('id_attendance')); ?>" >
+            <form action="<?php echo base_url("Attendance/clockout/".$dataRow->id_attendance); ?>" >
                 <button type="submit" class="btn btn-sq-lg btn-danger" id="checktime2" <?php if(empty($dataCheckOut)) echo "disabled" ?>><i class="fa fa-sign-out-alt fa-5x" aria-hidden="true"></i><br>Clock Out </button>
             </form>
         </div>
@@ -77,13 +77,13 @@
 </section>
 </div>
 
-<script type="text/javascript" defer="defer">
-//<!-- 
+<!--script type="text/javascript" defer="defer">
+// 
 var enableDisable = function(){
     
     var UTC_hours = new Date().getUTCHours() +7;
     
-    if (UTC_hours > 7 && UTC_hours < 24){
+    if (UTC_hours > 1 && UTC_hours < 24){
         if (){
             
         }
@@ -101,4 +101,4 @@ var enableDisable = function(){
 setInterval(enableDisable, 1000*60);
 enableDisable();
 // -->
-</script>
+</script-->

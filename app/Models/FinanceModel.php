@@ -51,8 +51,14 @@ class financeModel extends Model
             return $countFinance;
          } return false;
          
-     }
+    }
  }
+
+    public function deadlineFinance()
+    {
+        $query = $this->db->query("SELECT id_fStatus,finance.invoice_duedate,finance.id_client FROM finance WHERE finance.invoice_duedate = CURDATE()");
+        return $query->getResult();
+    }
 
  
 }

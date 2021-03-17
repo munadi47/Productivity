@@ -146,7 +146,7 @@
                                                 }
                                                 ?>
                                                 
-                                                <?php }endforeach; }else ?> 
+                                                <?php }endforeach; }else ?>
                                                 <br>
                                                 </p>
                                             </div>
