@@ -73,8 +73,8 @@
                 <tr>
                 <td><?php echo $i++; ?></td>
                 <td><?php echo $row->id_client; ?></td>
-                <td><?php echo $row->invoice_date; ?></td>
-                <td><?php echo $row->invoice_duedate; ?></td>
+                <td><?php echo date("F d, Y", strtotime($row->invoice_date)); ?></td>
+                <td><?php echo date("F d, Y", strtotime($row->invoice_duedate)); ?></td>
                 <td>Rp. <?php echo $row->invoice_amount=number_format($row->invoice_amount,0,",","."); ?></td>
 
 

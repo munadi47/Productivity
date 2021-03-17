@@ -56,7 +56,7 @@
     </div>
 
     <div class="row">
-        <div class="col col-lg-8">
+        <div class="col col-lg-7">
           <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info "  data-aos="zoom-in" data-aos-duration="1000">
             <div id="financeChart">
             </div>
@@ -64,7 +64,7 @@
         </div>
 
         
-        <div class="col col-lg-4">
+        <div class="col col-lg-5">
           <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info "  data-aos="zoom-in" data-aos-duration="1000">
             <div id="deliveryChart">
             </div>
@@ -74,6 +74,13 @@
       </div>
 
       <div class="row">
+      <div class="col col-lg-12">
+          <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info " data-aos="zoom-in" data-aos-duration="1000">
+            <div id="attendanceChart">
+            </div>
+          </div>
+        </div>
+
         <div class="col col-lg-7">
             <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
                 <div id="sp_chart"> 
@@ -84,7 +91,7 @@
       
      
         <div class="col col-lg-5">
-            <div style="height: 28.5vw;" class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
+        <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000">
             <h4> Employee Attendance Today </h4>
             <?php 
                 
@@ -95,7 +102,7 @@
                 
             <div class="list list-row block">
                     <div class="list-item" data-id="19">
-                        <div><a href="#" data-abc="true"><span class="<?php  if(empty($row->photo)) { echo base_url( 'https://ssl.gstatic.com/accounts/ui/avatar_2x.png'); } ?>"></span></a></div>
+                    <div><a href="#" data-abc="true"><span class="<?php  if(empty($row->photo)) { echo base_url( 'https://ssl.gstatic.com/accounts/ui/avatar_2x.png'); } ?>"><img class="img-emp" src="<?php if(empty($row->photo)) { echo base_url( 'https://ssl.gstatic.com/accounts/ui/avatar_2x.png'); } else{ echo base_url('assets/uploads/profile/'.$row->photo);} ?>"></span></a></div>
                         <div class="flex"> <a href="#" class="item-author text-color" data-abc="true"><?php echo $row->name; ?></a>
                             <div class="item-except text-muted text-sm h-1x">Has been absent</div>
                         </div>
@@ -116,14 +123,7 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="col col-lg-12">
-          <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info " data-aos="zoom-in" data-aos-duration="1000">
-            <div id="attendanceChart">
-            </div>
-          </div>
-        </div>
-    </div>
+      
     </div>
 
     

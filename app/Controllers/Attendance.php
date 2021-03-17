@@ -171,7 +171,7 @@ $spreadsheet->getProperties()->setTitle('Office 2007 XLSX Test Document')
 
 // Add some data
 $spreadsheet->setActiveSheetIndex(0)
-->setCellValue('A1', 'ID')
+->setCellValue('A1', 'DATE')
 ->setCellValue('B1', 'NAME')
 ->setCellValue('C1', 'CLOCK IN')
 ->setCellValue('D1', 'CLOCK OUT')
@@ -181,7 +181,7 @@ $spreadsheet->setActiveSheetIndex(0)
 $i=2; foreach($dataAttendance as $row) {
 
 $spreadsheet->setActiveSheetIndex(0)
-->setCellValue('A'.$i, $row->id_attendance)
+->setCellValue('A'.$i, date("M d, Y", strtotime($row->clock_in)))
 ->setCellValue('B'.$i, $row->name)
 ->setCellValue('C'.$i, date("h:i A", strtotime($row->clock_in)))
 ->setCellValue('D'.$i, date("h:i A", strtotime($row->clock_out)))
