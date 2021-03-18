@@ -3,10 +3,18 @@
 */
 
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+@import "https://fonts.googleapis.com/css?family=Open+Sans";
+@import 'https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap';
 body {
-    font-family: 'Raleway Medium', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     background: whitesmoke;
 }
+
+h4 {
+    font-family: 'Roboto', sans-serif;
+    background: whitesmoke;
+}
+
 
 p {
     font-family: 'Raleway Medium', sans-serif;

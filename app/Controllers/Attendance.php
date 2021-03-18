@@ -37,12 +37,17 @@ class Attendance extends BaseController{
         //$this->load->library('user_agent');
         $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
         $data['dataRow'] = $this->attendanceModel->getRowAtt();
+        $data['dataAttendance'] = $this->attendanceModel->getStatusAtttes();
         $data['dataCheckIn'] = $this->attendanceModel->checkin();
         $data['dataCheckOut'] = $this->attendanceModel->checkout();
-
+        $data['dataAttendance'] = $this->attendanceModel->getATD();
         $data['dataEmployee'] = $this->employeeModel->findAll();
         
+        $id = session()->get('nik');
+        $where = ['nik'=> $id];
+        $data['dataEmployee'] = $this->employeeModel->where($where)->findAll()[0];
 
+        
         echo view ('users/header_v',$statusEmp);
         echo view ('users/attendance_v',$data);
         echo view ('users/footer_v');
@@ -84,14 +89,32 @@ class Attendance extends BaseController{
         $row = $this->attendanceModel->update_data($co,$table,$id);
         */
         
+        if (!empty($_SERVER['HTTP_CLIENT_IP']))   
+            {
+            $ip_address = $_SERVER['HTTP_CLIENT_IP'];
+            }
+        //whether ip is from proxy
+        elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))  
+            {
+            $ip_address = $_SERVER['HTTP_X_FORWARDED_FOR'];
+            }
+        //whether ip is from remote address
+        else
+            {
+            $ip_address = $_SERVER['REMOTE_ADDR'];
+            }
+        echo $ip_address;
+        
         $datain = [ 	 	 
             'nik'=> session()->get('nik'),
-            'clock_in'=> date('Y-m-d H:i:s'),          
+            'clock_in'=> date('Y-m-d H:i:s'),       
+            'ip'=> $ip_address,   
         ]; 
 
         $status = [ 	 	 
             'status'=> session()->get('status'),
         ];
+        
             $insert = $this->attendanceModel->insert($datain);
             $id = $this->attendanceModel->getInsertID(); 
             
@@ -119,15 +142,31 @@ class Attendance extends BaseController{
         //$id['dataOut'] = $this->attendanceModel->getInsertID();
 
         $where = ['id_attendance'=> $id];
+
+        $where1 = ['nik'=> session()->get('nik')];
         $dataout = [ 	 	
             'clock_out'=> date('Y-m-d H:i:s'),          
         ]; 
-        $datain = [ 	 	 
-            'nik'=> session()->get('nik'),
-            'clock_in'=> date('Y-m-d H:i:s'),          
+        $dataON = [ 	 	 
+            'status'=> 'Fulfilled',          
+        ]; 
+        $dataOFF = [ 	 	 
+            'status'=> 'Not Fulfilled',          
         ]; 
 
-            $this->attendanceModel->update($where,$dataout);
+        foreach($this->attendanceModel->getStatusAtttes()->getResultArray() as $row){
+            echo $row['jumlah'];
+        }
+        if ($row['jumlah'] > 2 ){
+            $data['dataEmployee'] = $this->employeeModel->where($where1)->findAll()[0];
+            $tes = $this->employeeModel->update($where1,$dataON);
+            //var_dump($tes);
+        }else{
+            $data['dataEmployee'] = $this->employeeModel->where($where1)->findAll()[0];
+            $tes = $this->employeeModel->update($where1,$dataOFF);
+        }
+        $up =$this->attendanceModel->update($where,$dataout);
+        //var_dump($up);
             //$id = $this->attendanceModel->getInsertID(); 
             $act = 'Out (Clock out)';
             $this->record($act,session()->get('nik'));
@@ -175,6 +214,7 @@ $spreadsheet->setActiveSheetIndex(0)
 ->setCellValue('B1', 'NAME')
 ->setCellValue('C1', 'CLOCK IN')
 ->setCellValue('D1', 'CLOCK OUT')
+->setCellValue('E1', 'IP')
 ;
 
 // Miscellaneous glyphs, UTF-8
@@ -185,7 +225,7 @@ $spreadsheet->setActiveSheetIndex(0)
 ->setCellValue('B'.$i, $row->name)
 ->setCellValue('C'.$i, date("h:i A", strtotime($row->clock_in)))
 ->setCellValue('D'.$i, date("h:i A", strtotime($row->clock_out)))
-
+->setCellValue('E'.$i, $row->ip)
 ;
 $i++;
 }

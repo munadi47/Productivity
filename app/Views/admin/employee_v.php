@@ -75,7 +75,19 @@
                 <td><?php echo $row->name; ?></td>
                 <td><?php echo $row->email; ?></td>
                 <td><a class="btn btn-primary" href="tel:<?php echo $row->phone1; ?>"><i class="fas fa-phone" style="padding-right: 1px;"></i>  <?php echo $row->phone1; ?></a></td>
-                <td><?php echo $row->status; ?></td>
+                <td>
+                <?php 
+                if($row->status=='Fulfilled')
+                { 
+                    echo "<span class='badge badge-success'> Fulfilled </span>";
+                }
+                else
+                { 
+                    echo "<span class='badge badge-warning'> Not Fulfilled </span>";
+                } 
+                ?>
+                
+                </td>
                 <td>
                     <a title="Detail" href="<?php echo base_url("Employee/detail/".$row->nik); ?>" class="btn btn-outline-info btn-sm">
                     <i class="fa fa-search" ></i> 

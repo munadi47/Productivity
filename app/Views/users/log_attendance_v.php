@@ -45,6 +45,7 @@
                         <th>Name</th>
                         <th>clock In</th>
                         <th>clock Out</th>
+                        <th>IP</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -63,7 +64,7 @@
                         <td><?php echo $row->name; ?></td>
                         <td><?php echo date("h:i A", strtotime($row->clock_in)); ?></td>
                         <td><?php echo date("h:i A", strtotime($row->clock_out)); ?></td>
-
+                        <td><?php echo $row->ip; ?></td>
                         <td>
                             <a title="Delete" href="<?php echo base_url("Attendance/delete/".$row->id_attendance); ?>" class="btn btn-outline-info btn-sm" onclick="return confirm('Apakah yakin data akan dihapus?');">
                             <i class="fa fa-trash" ></i> 

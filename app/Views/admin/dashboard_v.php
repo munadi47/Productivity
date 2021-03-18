@@ -24,7 +24,7 @@
     <div class="row" style="padding-bottom: 3vw;" >
     <div class="col-md-3">
       <div class="card-counter primary"  data-aos="zoom-in" data-aos-duration="1000">
-        <i class="fas fa-filter"></i>
+        <i class="fas fa-filter fa-3x"></i>
         <span class="counter count-numbers"><?php echo $countSales; ?></span>
         <span class="count-name">Sales Progress</span>
       </div>
@@ -32,7 +32,7 @@
 
     <div class="col-md-3">
       <div class="card-counter danger"  data-aos="zoom-in" data-aos-duration="1000">
-        <i class="fas fa-user-tie"></i>
+        <i class="fas fa-user-tie fa-3x"></i>
         <span class="count-numbers"><?php echo $countEmployee; ?></span>
         <span class="count-name">Employee</span>
       </div>
@@ -40,7 +40,7 @@
 
     <div class="col-md-3">
       <div class="card-counter success"  data-aos="zoom-in" data-aos-duration="1000">
-        <i class="fas fa-box"></i>
+        <i class="fas fa-box fa-3x"></i>
         <span class="count-numbers"><?php echo $countProduct; ?></span>
         <span class="count-name">Product</span>
       </div>
@@ -48,7 +48,7 @@
 
     <div class="col-md-3">
       <div class="card-counter info"  data-aos="zoom-in" data-aos-duration="1000">
-        <i class="fa fa-users"></i>
+        <i class="fa fa-users fa-3x"></i>
         <span class="count-numbers"><?php echo $countClient; ?></span>
         <span class="count-name">Client</span>
       </div>
@@ -136,7 +136,7 @@
         },
 
         subtitle: {
-            text: 'Source: ide-group.com'
+            text: 'Source: ide-group.co.id, in <?php echo date('Y'); ?>'
         },
 
         yAxis: {
@@ -146,15 +146,14 @@
         },
 
         xAxis: {
-            categories: ['Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
-            //categories: [<?php if(!empty($countAttendance)) foreach ($countAttendance as $data) :?> <?php echo  date($data->bulan).", "?>  <?php endforeach;?>]
-
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des']
         },
 
 
         series: [{
             name: 'Count',
-            data: [<?php if(!empty($countAttendance)) foreach ($countAttendance as $data) echo $data->total.", "?>]
+            data: <?php echo json_encode($grafik); ?>
+            //data: [<?php //if(!empty($countAttendance)) foreach ($countAttendance as $data) echo $data->total.", "?>]
         }],
 
         responsive: {
@@ -181,11 +180,14 @@
                   type: 'column'
               },
               title: {
-                  text: 'Finance Total Income per Year'
+                  text: 'Finance Total Income Each Month'
+              },
+              subtitle: {
+                text: 'Source: ide-group.co.id, in <?php echo date('Y'); ?>'
               },
               
               xAxis: {
-                  categories: [<?php if(!empty($countFinance)) foreach ($countFinance as $data) echo $data->tahun.", "?>]
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des']
               },
               yAxis: {
                   title: {
@@ -201,8 +203,9 @@
                   }
               },
               series: [{
-                  name: 'Amount',
-                  data: [<?php if(!empty($countFinance)) foreach ($countFinance as $data) echo $data->jumlah.", "?>]
+                  name: 'Rp',
+                  data: <?php echo json_encode($fin); ?>
+
               }]
           });
                           

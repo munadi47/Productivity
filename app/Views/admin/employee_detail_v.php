@@ -174,7 +174,7 @@
                                                <p> 0</p>
                                             <?php }
                                             ?>
-                                            <?php }endforeach; } else ?> <p>0</p>
+                                            <?php }endforeach; } else {?> <p>0</p> <?php }?>
                                             </div>
                                         </div>
                                         <div class="row">

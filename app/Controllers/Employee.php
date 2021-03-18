@@ -375,7 +375,7 @@ class Employee extends BaseController{
     // Export ke excel
 public function export()
 {
-$dataEmployee = $this->employeeModel->getEmployee();
+$dataEmployee = $this->employeeModel->findAll();
 // Create new Spreadsheet object
 $spreadsheet = new Spreadsheet(); 
 

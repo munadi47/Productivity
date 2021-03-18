@@ -41,7 +41,7 @@ class financeModel extends Model
     }
    
    
-    public function countFinance(){
+    /*public function countFinance(){
      $query = $this->db->query("SELECT sum(invoice_amount) AS jumlah, YEAR(invoice_date) as tahun FROM finance GROUP BY(tahun) ");
      if($query){
          foreach($query->getResult() as $data){
@@ -51,13 +51,44 @@ class financeModel extends Model
             return $countFinance;
          } return false;
          
-    }
- }
+        }
+    }*/
 
     public function deadlineFinance()
     {
         $query = $this->db->query("SELECT id_fStatus,finance.invoice_duedate,finance.id_client FROM finance WHERE finance.invoice_duedate = CURDATE()");
         return $query->getResult();
+    }
+
+    public function countFinance(){        
+        $date = date('Y');
+        $grafik = $this->db->query("
+        select 
+        ifnull((SELECT sum(invoice_amount) FROM (finance)WHERE((Month(invoice_date)=1)AND (YEAR(invoice_date)=2021))),0) AS `January`,
+        ifnull((SELECT sum(invoice_amount) FROM (finance)WHERE((Month(invoice_date)=2)AND (YEAR(invoice_date)=2021))),0) AS `Februari`,
+        ifnull((SELECT sum(invoice_amount) FROM (finance)WHERE((Month(invoice_date)=3)AND (YEAR(invoice_date)=2021))),0) AS `Maret`,
+        ifnull((SELECT sum(invoice_amount) FROM (finance)WHERE((Month(invoice_date)=4)AND (YEAR(invoice_date)=2021))),0) AS `April`,
+        ifnull((SELECT sum(invoice_amount) FROM (finance)WHERE((Month(invoice_date)=5)AND (YEAR(invoice_date)=2021))),0) AS `Mei`,
+        ifnull((SELECT sum(invoice_amount) FROM (finance)WHERE((Month(invoice_date)=6)AND (YEAR(invoice_date)=2021))),0) AS `Juni`,
+        ifnull((SELECT sum(invoice_amount) FROM (finance)WHERE((Month(invoice_date)=7)AND (YEAR(invoice_date)=2021))),0) AS `Juli`,
+        ifnull((SELECT sum(invoice_amount) FROM (finance)WHERE((Month(invoice_date)=8)AND (YEAR(invoice_date)=2021))),0) AS `Agustus`,
+        ifnull((SELECT sum(invoice_amount) FROM (finance)WHERE((Month(invoice_date)=9)AND (YEAR(invoice_date)=2021))),0) AS `September`,
+        ifnull((SELECT sum(invoice_amount) FROM (finance)WHERE((Month(invoice_date)=10)AND (YEAR(invoice_date)=2021))),0) AS `Oktober`,
+        ifnull((SELECT sum(invoice_amount) FROM (finance)WHERE((Month(invoice_date)=11)AND (YEAR(invoice_date)=2021))),0) AS `November`,
+        ifnull((SELECT sum(invoice_amount) FROM (finance)WHERE((Month(invoice_date)=12)AND (YEAR(invoice_date)=2021))),0) AS `Desember`
+         
+        from finance GROUP BY year(invoice_amount)");
+        return $grafik;
+        //return $query->getResultArray();
+        /*if($query){
+            foreach($query->getResult() as $data){
+                $countAttendance[] = $data;
+            }
+           if(!empty($countAttendance)){
+               return $countAttendance;
+            } return false;
+            
+        }*/
     }
 
  

@@ -63,7 +63,10 @@
         
         <div class="col col-lg-6">
             <form action="<?php echo base_url("Attendance/clockout/".$dataRow->id_attendance); ?>" >
-                <button type="submit" class="btn btn-sq-lg btn-danger" id="checktime2" <?php if(empty($dataCheckOut)) echo "disabled" ?>><i class="fa fa-sign-out-alt fa-5x" aria-hidden="true"></i><br>Clock Out </button>
+            <button type="submit" class="btn btn-sq-lg btn-danger" id="checktime2" <?php if(empty($dataCheckOut)) echo "disabled" ?> onclick="return confirm('Clock Out Now ?')"> 
+                <i class="fa fa-sign-out-alt fa-5x" aria-hidden="true"></i>
+                <br>Clock Out 
+            </button>
             </form>
         </div>
     </div>
