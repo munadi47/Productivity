@@ -140,7 +140,7 @@
 
         series: [{
             name: 'Count',
-            data: <?php echo json_encode($grafik); ?>
+            data: <?php if(!empty($grafik)){ echo json_encode($grafik);} ?>
             //data: [<?php //if(!empty($countAttendance)) foreach ($countAttendance as $data) echo $data->total.", "?>]
         }],
 
@@ -192,7 +192,7 @@
               },
               series: [{
                   name: 'Rp',
-                  data: <?php echo json_encode($fin); ?>
+                  data: <?php if(!empty($fin)){ echo json_encode($fin);} ?>
 
               }]
           });

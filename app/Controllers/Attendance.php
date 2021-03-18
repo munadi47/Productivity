@@ -173,16 +173,17 @@ class Attendance extends BaseController{
         foreach($this->attendanceModel->getStatusAtttes()->getResultArray() as $row){
             $row['jumlah'];
         }
-        if ($row['jumlah'] > 2 ){
-            $data['dataEmployee'] = $this->employeeModel->where($where1)->findAll()[0];
-            $this->employeeModel->update($where1,$dataON);
-            //var_dump($tes);
-            //print_r($tes);
-        }else{
+        if ($row['jumlah'] < 2 ){
             $data['dataEmployee'] = $this->employeeModel->where($where1)->findAll()[0];
             $this->employeeModel->update($where1,$dataOFF);
             //var_dump($tes2);
             //print_r($tes2);
+        }else{
+            $data['dataEmployee'] = $this->employeeModel->where($where1)->findAll()[0];
+            $this->employeeModel->update($where1,$dataON);
+            
+            //var_dump($tes);
+            //print_r($tes);
         }
         $up =$this->attendanceModel->update($where,$dataout);
         //var_dump($up);
