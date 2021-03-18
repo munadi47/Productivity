@@ -91,6 +91,17 @@
                     </select>
             </div>
         </div>
+        <div class="form-group row" hidden>
+            <label class="col-sm-2 col-form-label">Status </label>
+            <div class="col-sm-10">
+                    <select required name="status" id="status" class="form-select" aria-label="Default select example">
+                            <option selected><?php if(!empty($dataEmployee)) echo $dataEmployee->status; ?> </option>
+                            <option selected value="Not Fulfilled"><span class="badge badge-primary"> Not Fulfilled </span></option>
+                            <option value="Fulfilled"><span class="badge badge-warning"> Fulfilled </span></option>
+                          
+                    </select>
+            </div>
+        </div>
 
         <br>
 

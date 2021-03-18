@@ -64,7 +64,7 @@ class attendanceModel extends Model
         }
     }
 
-    public function getStatusAtttes(){ //return data array di controller berupa 'jumlah' yg akan di condisikan
+    public function getStatusAtttes(){ //return data array di controller berupa 'jumlah'yg akan di condisikan
         $id = session()->get('nik');
         
         $query = $this->db->query("SELECT id_attendance, YEARWEEK(clock_in) AS tahun_minggu,SUM(nik=$id) AS jumlah FROM log_attendance WHERE YEARWEEK(clock_in)=YEARWEEK(NOW() ) GROUP BY YEARWEEK(clock_in) ");

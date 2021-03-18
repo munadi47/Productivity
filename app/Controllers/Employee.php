@@ -496,6 +496,7 @@ public function import_file($nf){
     }
     foreach($data as $row):{
         $this->employeeModel->insert($row);
+        //var_dump($row);
     }
     //$this->adminModel->set($data);
     //$this->adminModel->insert($data);

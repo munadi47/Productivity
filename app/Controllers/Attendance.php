@@ -142,8 +142,8 @@ class Attendance extends BaseController{
         //$id['dataOut'] = $this->attendanceModel->getInsertID();
 
         $where = ['id_attendance'=> $id];
-
         $where1 = ['nik'=> session()->get('nik')];
+        
         $dataout = [ 	 	
             'clock_out'=> date('Y-m-d H:i:s'),          
         ]; 
@@ -155,15 +155,18 @@ class Attendance extends BaseController{
         ]; 
 
         foreach($this->attendanceModel->getStatusAtttes()->getResultArray() as $row){
-            echo $row['jumlah'];
+            $row['jumlah'];
         }
         if ($row['jumlah'] > 2 ){
             $data['dataEmployee'] = $this->employeeModel->where($where1)->findAll()[0];
-            $tes = $this->employeeModel->update($where1,$dataON);
+            $this->employeeModel->update($where1,$dataON);
             //var_dump($tes);
+            //print_r($tes);
         }else{
             $data['dataEmployee'] = $this->employeeModel->where($where1)->findAll()[0];
-            $tes = $this->employeeModel->update($where1,$dataOFF);
+            $this->employeeModel->update($where1,$dataOFF);
+            //var_dump($tes2);
+            //print_r($tes2);
         }
         $up =$this->attendanceModel->update($where,$dataout);
         //var_dump($up);
