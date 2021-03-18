@@ -20,6 +20,9 @@ class Employee extends BaseController{
         $this->employeeModel = new \App\Models\employeeModel();
         $this->activityModel = new \App\Models\activityModel();
         $this->attendanceModel = new \App\Models\attendanceModel();
+        $this->videoModel = new \App\Models\videoModel();
+        $this->digitalModel = new \App\Models\digital_contentModel();
+        $this->financeModel = new \App\Models\FinanceModel();
         $this->form_validation = \Config\Services::validation();
         helper(['form', 'url']);
         helper('form');
@@ -35,12 +38,21 @@ class Employee extends BaseController{
         $data = [ 'validate' => \Config\Services::validation()];
         $data['dataEmployee'] = $this->employeeModel->findAll();
         
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digitalModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digitalModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digitalModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digitalModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
         //$id = $data['dataEmployee'] = $this->employeeModel->findAll();
         //$data['dataStatus'] = $this->employeeModel->getEmployee($id);
         //$id = $this->request->getPost('nik');
         //$data['dataEmployee'] = $this->attendanceModel->getStatusCount($id);
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
-        echo view ('users/header_v', $statusEmp);
+        
+        echo view ('admin/header_v_admin', $notif);
         echo view ('admin/employee_v',$data);
         echo view ('users/footer_v');
         
@@ -64,22 +76,41 @@ class Employee extends BaseController{
    
 
     public function add(){
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digitalModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digitalModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digitalModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digitalModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+       
         //$data['dataEmployee'] = $this->attendanceModel->findAll();
 
-        echo view('users/header_v',$statusEmp);
+        echo view('admin/header_v_admin',$notif);
         echo view('admin/employee_form_add');
         echo view('users/footer_v');
     }
 
     public function edit($id){
         $where = ['nik'=> $id];
+
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digitalModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digitalModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digitalModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digitalModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
         
         $data['dataEmployee'] = $this->employeeModel->where($where)->findAll()[0];
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        
 
 
-        echo view('users/header_v',$statusEmp);
+        echo view('admin/header_v_admin',$notif);
         echo view('admin/employee_form_v',$data);
         echo view ('users/footer_v');
 
@@ -94,10 +125,20 @@ class Employee extends BaseController{
         $where = ['nik'=> $id];
         
         $data['dataEmployee'] = $this->employeeModel->where($where)->findAll()[0];
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digitalModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digitalModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digitalModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digitalModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        
 
 
-        echo view('users/header_v',$statusEmp);
+        echo view('admin/header_v_admin',$notif);
         echo view('admin/profile_form',$data);
         echo view ('users/footer_v');
 
@@ -113,7 +154,17 @@ class Employee extends BaseController{
         $data['countClosing'] = $this->employeeModel->countClosing($id);
         $data['countPICClient'] = $this->employeeModel->countPICClient($id);
 
-        echo view('users/header_v',$data);
+        $data['deadlineStory'] = $this->videoModel->deadlineStory();
+        $data['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $data['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $data['deadlineStoryDigital'] = $this->digitalModel->deadlineStory();
+        $data['deadlineVoice'] = $this->digitalModel->deadlineVoice();
+        $data['deadlineAnimate'] = $this->digitalModel->deadlineAnimate();
+        $data['deadlineCompile'] = $this->digitalModel->deadlineCompile();
+        $data['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $data['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+
+        echo view('admin/header_v_admin',$data);
         echo view('admin/employee_detail_v',$data);
         echo view ('users/footer_v');
     }
@@ -443,9 +494,17 @@ exit;
 
 
 public function import(){
-    $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+    $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+    $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+    $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+    $notif['deadlineStoryDigital'] = $this->digitalModel->deadlineStory();
+    $notif['deadlineVoice'] = $this->digitalModel->deadlineVoice();
+    $notif['deadlineAnimate'] = $this->digitalModel->deadlineAnimate();
+    $notif['deadlineCompile'] = $this->digitalModel->deadlineCompile();
+    $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+    $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
-    echo view('users/header_v',$statusEmp);
+    echo view('admin/header_v_admin',$notif);
     echo view('admin/employee_excel_form_v');
     echo view('users/footer_v');
 }

@@ -20,6 +20,9 @@ class Activity extends BaseController{
         $this->activityModel = new \App\Models\activityModel();
         $this->pager = \Config\Services::pager();
         $this->attendanceModel = new \App\Models\attendanceModel();
+        $this->videoModel = new \App\Models\videoModel();
+        $this->digitalModel = new \App\Models\digital_contentModel();
+        $this->financeModel = new \App\Models\financeModel();
 
     }
 
@@ -32,11 +35,18 @@ class Activity extends BaseController{
         $data['dataAct']   = $activity->paginate($paginate,'dataAct');
         $data['pager']      = $activity->pager;
         $data['validation'] = $this->validator;
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
-
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digitalModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digitalModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digitalModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digitalModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
       
 
-        echo view ('users/header_v',$statusEmp);
+        echo view ('admin/header_v_admin',$notif);
         echo view ('admin/act_v',$data);
         echo view ('users/footer_v');
 

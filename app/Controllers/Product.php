@@ -23,6 +23,11 @@ class Product extends BaseController{
         $this->companyModel = new \App\Models\companyModel();
         $this->activityModel = new \App\Models\activityModel();
         $this->attendanceModel = new \App\Models\attendanceModel();
+        $this->videoModel = new \App\Models\videoModel();
+        $this->digitalModel = new \App\Models\digital_contentModel();
+        $this->financeModel = new \App\Models\FinanceModel();
+       
+
 
 
     }
@@ -31,9 +36,17 @@ class Product extends BaseController{
         $session = session();
     
         $data['dataProduct'] = $this->productModel->getCompany();
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digitalModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digitalModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digitalModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digitalModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
-        echo view ('users/header_v',$statusEmp);
+        echo view ('users/header_v',$notif);
         echo view ('users/product_v',$data);
         echo view ('users/footer_v');
         
@@ -57,9 +70,17 @@ class Product extends BaseController{
     public function add(){
      
         $data['dataCompany'] = $this->companyModel->findAll();
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digitalModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digitalModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digitalModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digitalModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
-        echo view('users/header_v',$statusEmp);
+        echo view('users/header_v',$notif);
         echo view('users/product_form_v',$data);
         echo view('users/footer_v');
     }
@@ -68,9 +89,16 @@ class Product extends BaseController{
         $where = ['id_product'=> $id];
         $data['dataProduct'] = $this->productModel->where($where)->findAll()[0];
         $data['dataCompany'] = $this->companyModel->findAll();
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
-
-        echo view('users/header_v',$statusEmp);
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digitalModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digitalModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digitalModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digitalModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        echo view('users/header_v',$notif);
         echo view('users/product_form_v',$data);
         echo view ('users/footer_v');
     }
@@ -209,9 +237,17 @@ exit;
 }
 
 public function import(){
-    $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digitalModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digitalModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digitalModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digitalModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
-    echo view('users/header_v',$statusEmp);
+    echo view('users/header_v',$notif);
     echo view('users/product_excel_form_v');
     echo view('users/footer_v');
 }

@@ -23,6 +23,8 @@ class Video extends BaseController{
         $this->sales_pipelineModel = new \App\Models\sales_pipelineModel();
         $this->activityModel = new \App\Models\activityModel();
         $this->attendanceModel = new \App\Models\attendanceModel();
+        $this->digital_contentModel = new \App\Models\digital_contentModel();
+        $this->financeModel = new \App\Models\FinanceModel();
 
     }
 
@@ -33,9 +35,18 @@ class Video extends BaseController{
         $data['storyboard'] = $this->videoModel->storyboard();
         $data['shooting'] = $this->videoModel->shooting();
         $data['editing'] = $this->videoModel->editing();
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digital_contentModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digital_contentModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digital_contentModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digital_contentModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+       
 
-        echo view ('users/header_v',$statusEmp);
+        echo view ('users/header_v',$notif);
         echo view ('users/video_v',$data);
         echo view ('users/footer_v');
         
@@ -60,9 +71,17 @@ class Video extends BaseController{
     public function add(){
      
         $data['dataPipeline'] = $this->videoModel->video();
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digital_contentModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digital_contentModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digital_contentModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digital_contentModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
-        echo view('users/header_v',$statusEmp);
+        echo view('users/header_v',$notif);
         echo view('users/video_form_v',$data);
         echo view('users/footer_v');
     }
@@ -73,9 +92,16 @@ class Video extends BaseController{
         $where = ['id_video'=> $id];
         $data['dataVideo'] = $this->videoModel->where($where)->findAll()[0];
         $data['dataPipeline'] = $this->videoModel->video();
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
-
-        echo view('users/header_v',$statusEmp);
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digital_contentModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digital_contentModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digital_contentModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digital_contentModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        echo view('users/header_v',$notif);
         echo view('users/video_form_v',$data);
         echo view ('users/footer_v');
     }

@@ -25,9 +25,10 @@ class Attendance extends BaseController{
         $this->attendanceModel = new \App\Models\attendanceModel();
         $this->clientModel = new \App\Models\clientModel();
         $this->employeeModel = new \App\Models\employeeModel();
-
         $this->activityModel = new \App\Models\activityModel();
-        $this->attendanceModel = new \App\Models\attendanceModel();
+        $this->videoModel = new \App\Models\videoModel();
+        $this->digitalModel = new \App\Models\digital_contentModel();
+        $this->financeModel = new \App\Models\financeModel();
 
         date_default_timezone_set("Asia/Jakarta");
     }
@@ -35,7 +36,15 @@ class Attendance extends BaseController{
     public function index(){
         $session = session();
         //$this->load->library('user_agent');
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digitalModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digitalModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digitalModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digitalModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
         $data['dataRow'] = $this->attendanceModel->getRowAtt();
         $data['dataCheckIn'] = $this->attendanceModel->checkin();
         $data['dataCheckOut'] = $this->attendanceModel->checkout();
@@ -43,7 +52,7 @@ class Attendance extends BaseController{
         $data['dataEmployee'] = $this->employeeModel->findAll();
         
 
-        echo view ('users/header_v',$statusEmp);
+        echo view ('admin/header_v_admin',$notif);
         echo view ('users/attendance_v',$data);
         echo view ('users/footer_v');
         
@@ -66,9 +75,17 @@ class Attendance extends BaseController{
 
     public function view(){
         $session = session();
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digitalModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digitalModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digitalModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digitalModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
         $data['dataAttendance'] = $this->attendanceModel->getATD();
-        echo view('users/header_v',$statusEmp);
+        echo view('admin/header_v_admin',$notif);
         echo view('users/log_attendance_v',$data);
         echo view('users/footer_v');
         

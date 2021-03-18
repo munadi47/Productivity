@@ -20,9 +20,11 @@ class Digital extends BaseController{
     {
         $this->session = \Config\Services::session();
         $this->digital_contentModel = new \App\Models\digital_contentModel();
+        $this->videoModel = new \App\Models\videoModel();
         $this->sales_pipelineModel = new \App\Models\sales_pipelineModel();
         $this->activityModel = new \App\Models\activityModel();
         $this->attendanceModel = new \App\Models\attendanceModel();
+        $this->financeModel = new \App\Models\FinanceModel();
 
 
     }
@@ -35,9 +37,18 @@ class Digital extends BaseController{
         $data['voiceover'] = $this->digital_contentModel->voiceover();
         $data['animate'] = $this->digital_contentModel->animate();
         $data['compile'] = $this->digital_contentModel->compile();
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digital_contentModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digital_contentModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digital_contentModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digital_contentModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+       
 
-        echo view ('users/header_v',$statusEmp);
+        echo view ('users/header_v',$notif);
         echo view ('users/digital_v',$data);
         echo view ('users/footer_v');
         
@@ -64,9 +75,17 @@ class Digital extends BaseController{
     public function add(){
      
         $data['dataPipeline'] = $this->digital_contentModel->digital();
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
-
-        echo view('users/header_v',$statusEmp);
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digital_contentModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digital_contentModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digital_contentModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digital_contentModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+       
+        echo view('users/header_v',$notif);
         echo view('users/digital_content_form_v',$data);
         echo view('users/footer_v');
     }
@@ -75,9 +94,18 @@ class Digital extends BaseController{
         $where = ['id_digital'=> $id];
         $data['dataDigital'] = $this->digital_contentModel->where($where)->findAll()[0];
         $data['dataPipeline'] = $this->digital_contentModel->digital();
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digital_contentModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digital_contentModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digital_contentModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digital_contentModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+       
 
-        echo view('users/header_v',$statusEmp);
+        echo view('users/header_v',$notif);
         echo view('users/digital_content_form_v',$data);
         echo view ('users/footer_v');
     }
