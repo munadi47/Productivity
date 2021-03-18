@@ -23,6 +23,9 @@ class Consulting extends BaseController{
         $this->sales_pipelineModel = new \App\Models\sales_pipelineModel();
         $this->activityModel = new \App\Models\activityModel();
         $this->attendanceModel = new \App\Models\attendanceModel();
+        $this->digital_contentModel = new \App\Models\digital_contentModel();
+        $this->videoModel = new \App\Models\videoModel();
+        $this->financeModel = new \App\Models\FinanceModel();
 
         helper(['form', 'url']);
        
@@ -32,9 +35,16 @@ class Consulting extends BaseController{
         $session = session();
         $data['validation'] = $this->validator;
         $data['dataConsul'] = $this->consultingModel->JoinConsul();
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
-
-        echo view ('users/header_v',$statusEmp);
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digital_contentModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digital_contentModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digital_contentModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digital_contentModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        echo view ('users/header_v',$notif);
         echo view ('users/consul_v',$data);
         echo view ('users/footer_v');
         
@@ -55,9 +65,17 @@ class Consulting extends BaseController{
      }
     public function add(){
         $data['dataPipeline'] = $this->consultingModel->consulting();
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digital_contentModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digital_contentModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digital_contentModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digital_contentModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
-        echo view('users/header_v',$statusEmp);
+        echo view('users/header_v',$notif);
         echo view('users/consul_form_v',$data);
         echo view('users/footer_v');
     }
@@ -66,10 +84,18 @@ class Consulting extends BaseController{
         $where = ['id_consulting'=> $id];
         $data['dataConsul'] = $this->consultingModel->where($where)->findAll()[0];
         $data['dataPipeline'] = $this->consultingModel->consulting();
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digital_contentModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digital_contentModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digital_contentModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digital_contentModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
 
-        echo view('users/header_v',$statusEmp);
+        echo view('users/header_v',$notif);
         echo view('users/consul_form_v',$data);
         echo view ('users/footer_v');
     }
@@ -77,9 +103,17 @@ class Consulting extends BaseController{
     public function view_pdf($id){
         $where = ['id_consulting'=> $id];
         $data['dataConsul'] = $this->consultingModel->where($where)->findAll()[0];
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digital_contentModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digital_contentModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digital_contentModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digital_contentModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
-        echo view('users/header_v',$statusEmp);
+        echo view('users/header_v',$notif);
         echo view('users/pdf_v',$data);
         echo view ('users/footer_v');
     }

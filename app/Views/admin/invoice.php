@@ -12,7 +12,7 @@
 	<table style="background-color: #fffff; color: #fff">
 		<tbody>
 			<tr>
-				<td><img src="../public/assets/img/ide.png" height="60px"/></td>
+				<td><img src="../public/assets/img/logo.jpg" height="60px"/></td>
 				<td align="right"><br/>
 					IDE GROUP<br/>
 						Jakarta Utara, Indonesia<br/>
@@ -63,7 +63,7 @@
 	<td colspan="4">
 	<div align="right">
 	<h2 align="right">Thank you for your business.</h2><br/>
-	<img src="../public/assets/img/ide.jpg" height="60px"/><br/><br/><br/>
+	<img src="../public/assets/img/munadi.png" height="60px"/><br/><br/><br/>
 	</div>
 	<p align="right">IDE GROUP.</p>
 	</td>

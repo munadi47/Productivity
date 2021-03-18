@@ -81,13 +81,13 @@
                         <td><?php echo $row->title; ?></td>
                         <td><?php echo $row->id_client; ?></td>
                         <td><?php echo $row->storyboard_pic; ?></td>
-                        <td><?php echo $row->storyboard_date; ?></td>
+                        <td><?php echo date("d M, Y", strtotime($row->storyboard_date));?></td>
                         <td><?php echo $row->voiceover_pic; ?></td>
-                        <td><?php echo $row->voiceover_date; ?></td>
+                        <td><?php echo date("d M, Y", strtotime($row->voiceover_date));?></td>
                         <td><?php echo $row->animate_pic; ?></td>
-                        <td><?php echo $row->animate_date; ?></td>
+                        <td><?php echo date("d M, Y", strtotime($row->animate_date));?></td>
                         <td><?php echo $row->compile_pic; ?></td>
-                        <td><?php echo $row->compile_date; ?></td>
+                        <td><?php echo date("d M, Y", strtotime($row->compile_date));?></td>
                         <td><?php echo $row->remark; ?></td>
                         <td >
                           
@@ -157,10 +157,10 @@
                     });
                     calendar.render();
                         calendar.changeView('dayGridMonth');
-                        calendar.addEvent({ title: '<?php if(!empty($storyboard)) foreach ($storyboard as $data) echo $data->pic; echo " : Storyboard "; echo $data->judul;?>', start: '<?php echo $data->duedate ?>' });
-                        calendar.addEvent({ title: '<?php if(!empty($voiceover)) foreach ($voiceover as $data) echo $data->pic;  echo " : Voiceover "; echo $data->judul;?>', start: '<?php echo $data->duedate ?>' });
-                        calendar.addEvent({ title: '<?php if(!empty($animate)) foreach ($animate as $data) echo $data->pic; echo " : Animate "; echo $data->judul;?>', start: '<?php echo $data->duedate ?>' });
-                        calendar.addEvent({ title: '<?php if(!empty($compile)) foreach ($compile as $data) echo $data->pic; echo " : Compile "; echo $data->judul;?>', start: '<?php echo $data->duedate ?>' });
+                        calendar.addEvent({ title: '<?php if(!empty($storyboard)) foreach ($storyboard as $data) : { echo $data->pic; echo " : Storyboard "; echo $data->judul;?>', start: '<?php echo $data->duedate; } endforeach; ?>' });
+                        calendar.addEvent({ title: '<?php if(!empty($voiceover)) foreach ($voiceover as $data) : { echo $data->pic;  echo " : Voiceover "; echo $data->judul;?>', start: '<?php echo $data->duedate; } endforeach; ?>' });
+                        calendar.addEvent({ title: '<?php if(!empty($animate)) foreach ($animate as $data) : { echo $data->pic; echo " : Animate "; echo $data->judul;?>', start: '<?php echo $data->duedate; } endforeach; ?>' });
+                        calendar.addEvent({ title: '<?php if(!empty($compile)) foreach ($compile as $data) : { echo $data->pic; echo " : Compile "; echo $data->judul;?>', start: '<?php echo $data->duedate; } endforeach; ?>' });
                     });
 
                 </script>

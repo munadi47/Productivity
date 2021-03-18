@@ -138,15 +138,15 @@
                                                 <?php if(!empty($dataAttendance)){ ?>
                                                 <?php foreach ($dataAttendance as $atd):{?>
                                                 <?php if($atd->jumlah < 3){?>
-                                                    <?php echo "<span class='badge badge-warning'>Peringatan</span>"?>
+                                                    <?php echo "<span class='badge badge-warning'>Not Fulfilled</span>"?>
 
 
                                                 <?php }else {
-                                                        echo "<span class='badge badge-success'>Clear</span>";
+                                                        echo "<span class='badge badge-success'>Fulfilled</span>";
                                                 }
                                                 ?>
                                                 
-                                                <?php }endforeach; }?>
+                                                <?php }endforeach; }else ?>
                                                 <br>
                                                 </p>
                                             </div>
@@ -170,12 +170,11 @@
                                             <?php foreach ($dataAttendance as $row):{?>
                                             <?php if(!empty($row)){?>
                                                 <p><?php echo $row->jumlah?></p>
-                                            <?php }else {
-                                            }
+                                            <?php }else {?>
+                                               <p> 0</p>
+                                            <?php }
                                             ?>
-                                            <?php }endforeach; }?>
-
-                                                <p><?  ?></p>
+                                            <?php }endforeach; } else {?> <p>0</p> <?php }?>
                                             </div>
                                         </div>
                                         <div class="row">

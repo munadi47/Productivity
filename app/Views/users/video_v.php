@@ -79,11 +79,11 @@
                         <td><?php echo $row->title; ?></td>
                         <td><?php echo $row->id_client; ?></td>
                         <td><?php echo $row->storyboard_pic; ?></td>
-                        <td><?php echo $row->storyboard_date; ?></td>
+                        <td><?php echo date("d M, Y", strtotime($row->storyboard_date));?></td>
                         <td><?php echo $row->shooting_pic; ?></td>
-                        <td><?php echo $row->shooting_date; ?></td>
+                        <td><?php echo date("d M, Y", strtotime($row->shooting_date));?></td>
                         <td><?php echo $row->editing_pic; ?></td>
-                        <td><?php echo $row->editing_date; ?></td>
+                        <td><?php echo date("d M, Y", strtotime($row->editing_date));?></td>
                         <td><?php echo $row->remark; ?></td>
                         <td>
                             <a title="Download Report"  href="<?php echo base_url("Video/exportSchedule/".$row->id_video); ?>" alt="Edit" class="btn btn-outline-info btn-sm">

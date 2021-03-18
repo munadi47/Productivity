@@ -1,3 +1,24 @@
+   
+<?php if(empty($dataClient)){ ?>
+    <div class="alert alert-warning" role="alert"  data-aos="zoom-in" data-aos-duration="1000">
+        Client data is empty, please input data first &nbsp; <a class="btn btn-info" href="<?php echo base_url('Client/add'); ?>"> <i class="fa fa-edit"></i> </a>
+    </div>
+<?php }?>
+   
+<?php if(empty($dataProduct)){ ?>
+    <div class="alert alert-warning" role="alert"  data-aos="zoom-in" data-aos-duration="1000">
+        Product data is empty, please input data first &nbsp; <a class="btn btn-info" href="<?php echo base_url('Product/add'); ?>"> <i class="fa fa-edit"></i> </a>
+    </div>
+<?php }?>
+
+   
+<?php if(empty($dataEmployee)){ ?>
+    <div class="alert alert-warning" role="alert"  data-aos="zoom-in" data-aos-duration="1000">
+        PIC data is empty, please input data first &nbsp; <a class="btn btn-info" href="<?php echo base_url('Employee/add'); ?>"> <i class="fa fa-edit"></i> </a>
+    </div>
+<?php }?>
+
+
 <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
 <section>
     <div class="container">

@@ -31,7 +31,7 @@
                 <br>
                 <form method="POST" action="<?php echo site_url('Product/do_upload'); ?>" enctype="multipart/form-data">
                 <input type="file" class="form-control" id="product_file" name="product_file" />
-                <label class="form-label" for="customFile" style="color: red; font-size: 12px;"> * Upload Data (Max : 1024, Format : xlsx)</label>
+                <label class="form-label" for="customFile" style="color: red; font-size: 12px;"> * Upload Data (Max : 1024, Format : xlsx, xls)</label>
                 <br>
                 <br>
                     

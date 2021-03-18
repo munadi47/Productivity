@@ -1,53 +1,3 @@
-<?php if(!empty($deadlineStory)){ ?>
-    <div class="alert alert-warning" role="alert"  data-aos="zoom-in" data-aos-duration="1000">
-    <?php foreach($deadlineStory as $row): echo '<i class="fas fa-bell"></i> '; echo $row->storyboard_date; echo ' '.$row->storyboard_pic; endforeach; ?>
-     The storyboard is due today, please check the video schedule
-    </div>
-<?php }?>
-
-<?php if(!empty($deadlineShoot)){ ?>
-    <div class="alert alert-warning" role="alert"  data-aos="zoom-in" data-aos-duration="1000">
-    <?php foreach($deadlineShoot as $row): echo '<i class="fas fa-bell"></i> '; echo $row->shooting_date; echo ' '.$row->shooting_pic; endforeach; ?>
-        The shooting is due today, please check the video schedule
-    </div>
-<?php }?>
-
-<?php if(!empty($deadlineEdit)){ ?>
-    <div class="alert alert-warning" role="alert"  data-aos="zoom-in" data-aos-duration="1000">
-    <?php foreach($deadlineEdit as $row): echo '<i class="fas fa-bell"></i> '; echo $row->editing_date; echo ' '.$row->editing_pic; endforeach; ?>
-        The editing is due today, please check the video schedule
-    </div>
-<?php }?>
-
-
-<?php if(!empty($deadlineStoryDigital)){ ?>
-    <div class="alert alert-warning" role="alert"  data-aos="zoom-in" data-aos-duration="1000">
-    <?php foreach($deadlineStoryDigital as $row): echo '<i class="fas fa-bell"></i> '; echo $row->storyboard_date; echo ' '.$row->storyboard_pic; endforeach; ?>
-        The storyboard is due today, please check the digital content schedule
-    </div>
-<?php }?>
-
-<?php if(!empty($deadlineVoice)){ ?>
-    <div class="alert alert-warning" role="alert"  data-aos="zoom-in" data-aos-duration="1000">
-    <?php foreach($deadlineVoice as $row):  echo '<i class="fas fa-bell"></i> '; echo $row->voiceover_date; echo ' '.$row->voiceover_pic; endforeach; ?>
-        The voiceover is due today, please check the digital content schedule
-    </div>
-<?php }?>
-
-
-<?php if(!empty($deadlineAnimate)){ ?>
-    <div class="alert alert-warning" role="alert"  data-aos="zoom-in" data-aos-duration="1000">
-    <?php foreach($deadlineAnimate as $row):  echo '<i class="fas fa-bell"></i> '; echo $row->animate_date; echo ' '.$row->animate_pic; endforeach; ?>
-        The animate is due today, please check the digital content schedule
-    </div>
-<?php }?>
-
-<?php if(!empty($deadlineCompile)){ ?>
-    <div class="alert alert-warning" role="alert"  data-aos="zoom-in" data-aos-duration="1000">
-    <?php foreach($deadlineCompile as $row):  echo '<i class="fas fa-bell"></i> ';  echo $row->compile_date; echo ' '.$row->compile_pic; endforeach; ?>
-        The animate is due today, please check the digital content schedule
-    </div>
-<?php }?>
 
 <nav aria-label="breadcrumb shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-out" data-aos-duration="1000">
     <ol class="breadcrumb">
@@ -62,7 +12,7 @@
     <div class="row" style="padding-bottom: 3vw;" >
     <div class="col-md-3">
       <div class="card-counter primary"  data-aos="zoom-in" data-aos-duration="1000">
-        <i class="fas fa-filter"></i>
+        <i class="fas fa-filter fa-3x"></i>
         <span class="counter count-numbers"><?php echo $countSales; ?></span>
         <span class="count-name">Sales Progress</span>
       </div>
@@ -70,7 +20,7 @@
 
     <div class="col-md-3">
       <div class="card-counter danger"  data-aos="zoom-in" data-aos-duration="1000">
-        <i class="fas fa-user-tie"></i>
+        <i class="fas fa-user-tie fa-3x"></i>
         <span class="count-numbers"><?php echo $countEmployee; ?></span>
         <span class="count-name">Employee</span>
       </div>
@@ -78,7 +28,7 @@
 
     <div class="col-md-3">
       <div class="card-counter success"  data-aos="zoom-in" data-aos-duration="1000">
-        <i class="fas fa-box"></i>
+        <i class="fas fa-box fa-3x"></i>
         <span class="count-numbers"><?php echo $countProduct; ?></span>
         <span class="count-name">Product</span>
       </div>
@@ -86,7 +36,7 @@
 
     <div class="col-md-3">
       <div class="card-counter info"  data-aos="zoom-in" data-aos-duration="1000">
-        <i class="fa fa-users"></i>
+        <i class="fa fa-users fa-3x"></i>
         <span class="count-numbers"><?php echo $countClient; ?></span>
         <span class="count-name">Client</span>
       </div>
@@ -94,15 +44,7 @@
     </div>
 
     <div class="row">
-        <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
-            <div id="attendanceChart">
-            </div>
-        </div>
-    </div>
-    
-      
-        <div class="row">
-        <div class="col col-lg-8">
+        <div class="col col-lg-7">
           <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info "  data-aos="zoom-in" data-aos-duration="1000">
             <div id="financeChart">
             </div>
@@ -110,7 +52,7 @@
         </div>
 
         
-        <div class="col col-lg-4">
+        <div class="col col-lg-5">
           <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info "  data-aos="zoom-in" data-aos-duration="1000">
             <div id="deliveryChart">
             </div>
@@ -120,12 +62,59 @@
       </div>
 
       <div class="row">
-      <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="fade-out" data-aos-duration="1000">
-        <div id="sp_chart">
+      <div class="col col-lg-12">
+          <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info " data-aos="zoom-in" data-aos-duration="1000">
+            <div id="attendanceChart">
+            </div>
+          </div>
+        </div>
+
+        <div class="col col-lg-7">
+            <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
+                <div id="sp_chart"> 
+                
+                </div>
+            </div>
+        </div>
+      
+     
+        <div class="col col-lg-5">
+        <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000">
+            <h4> Employee Attendance Today </h4>
+            <?php 
+                
+                if (!empty($AttToday)){ 
+            ?>
+            <br/>
+            <?php foreach($AttToday as $row) : {?>
+                
+            <div class="list list-row block">
+                    <div class="list-item" data-id="19">
+                    <div><a href="#" data-abc="true"><span class="<?php  if(empty($row->photo)) { echo base_url( 'https://ssl.gstatic.com/accounts/ui/avatar_2x.png'); } ?>"><img class="img-emp" src="<?php if(empty($row->photo)) { echo base_url( 'https://ssl.gstatic.com/accounts/ui/avatar_2x.png'); } else{ echo base_url('assets/uploads/profile/'.$row->photo);} ?>"></span></a></div>
+                        <div class="flex"> <a href="#" class="item-author text-color" data-abc="true"><?php echo $row->name; ?></a>
+                            <div class="item-except text-muted text-sm h-1x">Has been absent</div>
+                        </div>
+                        <div class="no-wrap">
+                            <div class="item-date text-muted text-sm d-none d-md-block"><?php echo $row->clock_in; ?></div>
+                        </div>
+                    </div>
+                    
+            </div>
+            <?php }endforeach; ?>
+            <?php } ?>
            
+            <div style="float: right;">
+                <?php  echo $pager->links('AttToday', 'bootstrap_pagination'); ?>
+            </div>
+         
+            </div>
         </div>
       </div>
-      </div>
+
+      
+    </div>
+
+    
 
     <script>
         Highcharts.chart('attendanceChart', {
@@ -135,7 +124,7 @@
         },
 
         subtitle: {
-            text: 'Source: ide-group.com'
+            text: 'Source: ide-group.co.id, in <?php echo date('Y'); ?>'
         },
 
         yAxis: {
@@ -145,14 +134,14 @@
         },
 
         xAxis: {
-            categories: ['Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
-            
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des']
         },
 
 
         series: [{
-            name: 'Other',
-            data: [<?php if(!empty($countAttendance)) foreach ($countAttendance as $data) echo $data->total.", "?>]
+            name: 'Count',
+            data: <?php echo json_encode($grafik); ?>
+            //data: [<?php //if(!empty($countAttendance)) foreach ($countAttendance as $data) echo $data->total.", "?>]
         }],
 
         responsive: {
@@ -176,14 +165,17 @@
         <script>
               Highcharts.chart('financeChart', {
               chart: {
-                  type: 'line'
+                  type: 'column'
               },
               title: {
-                  text: 'Finance Total Income per Year'
+                  text: 'Finance Total Income Each Month'
+              },
+              subtitle: {
+                text: 'Source: ide-group.co.id, in <?php echo date('Y'); ?>'
               },
               
               xAxis: {
-                  categories: [<?php if(!empty($countFinance)) foreach ($countFinance as $data) echo $data->tahun.", "?>]
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des']
               },
               yAxis: {
                   title: {
@@ -199,8 +191,9 @@
                   }
               },
               series: [{
-                  name: 'Amount',
-                  data: [<?php if(!empty($countFinance)) foreach ($countFinance as $data) echo $data->jumlah.", "?>]
+                  name: 'Rp',
+                  data: <?php echo json_encode($fin); ?>
+
               }]
           });
                           

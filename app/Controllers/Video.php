@@ -23,6 +23,8 @@ class Video extends BaseController{
         $this->sales_pipelineModel = new \App\Models\sales_pipelineModel();
         $this->activityModel = new \App\Models\activityModel();
         $this->attendanceModel = new \App\Models\attendanceModel();
+        $this->digital_contentModel = new \App\Models\digital_contentModel();
+        $this->financeModel = new \App\Models\FinanceModel();
 
     }
 
@@ -33,9 +35,18 @@ class Video extends BaseController{
         $data['storyboard'] = $this->videoModel->storyboard();
         $data['shooting'] = $this->videoModel->shooting();
         $data['editing'] = $this->videoModel->editing();
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digital_contentModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digital_contentModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digital_contentModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digital_contentModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+       
 
-        echo view ('users/header_v',$statusEmp);
+        echo view ('users/header_v',$notif);
         echo view ('users/video_v',$data);
         echo view ('users/footer_v');
         
@@ -60,9 +71,17 @@ class Video extends BaseController{
     public function add(){
      
         $data['dataPipeline'] = $this->videoModel->video();
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digital_contentModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digital_contentModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digital_contentModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digital_contentModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
-        echo view('users/header_v',$statusEmp);
+        echo view('users/header_v',$notif);
         echo view('users/video_form_v',$data);
         echo view('users/footer_v');
     }
@@ -73,9 +92,16 @@ class Video extends BaseController{
         $where = ['id_video'=> $id];
         $data['dataVideo'] = $this->videoModel->where($where)->findAll()[0];
         $data['dataPipeline'] = $this->videoModel->video();
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
-
-        echo view('users/header_v',$statusEmp);
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digital_contentModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digital_contentModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digital_contentModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digital_contentModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        echo view('users/header_v',$notif);
         echo view('users/video_form_v',$data);
         echo view ('users/footer_v');
     }
@@ -88,14 +114,11 @@ class Video extends BaseController{
            
             $data = [
                 'storyboard_pic'=>$this->request->getPost('storyboard_pic'),
-                'storyboard_start'=>$this->request->getPost('storyboard_start'),
-                'storyboard_end'=>$this->request->getPost('storyboard_end'),
+                'storyboard_date'=>$this->request->getPost('storyboard_date'),
                 'shooting_pic'=>$this->request->getPost('shooting_pic'),
-                'shooting_start'=>$this->request->getPost('shooting_start'),
-                'shooting_end'=>$this->request->getPost('shooting_end'),
+                'shooting_date'=>$this->request->getPost('shooting_date'),
                 'editing_pic'=>$this->request->getPost('editing_pic'),
-                'editing_start'=>$this->request->getPost('editing_start'),
-                'editing_end'=>$this->request->getPost('editing_end'),
+                'editing_date'=>$this->request->getPost('editing_date'),
                 'remark'=>$this->request->getPost('remark'),
                 'id_SalesPipeline'=>$this->request->getPost('id_SalesPipeline'),
                     
@@ -116,18 +139,16 @@ class Video extends BaseController{
             $where = ['id_video'=>$id];
             $data = [
                 'storyboard_pic'=>$this->request->getPost('storyboard_pic'),
-                'storyboard_start'=>$this->request->getPost('storyboard_start'),
-                'storyboard_end'=>$this->request->getPost('storyboard_end'),
+                'storyboard_date'=>$this->request->getPost('storyboard_date'),
                 'shooting_pic'=>$this->request->getPost('shooting_pic'),
-                'shooting_start'=>$this->request->getPost('shooting_start'),
-                'shooting_end'=>$this->request->getPost('shooting_end'),
+                'shooting_date'=>$this->request->getPost('shooting_date'),
                 'editing_pic'=>$this->request->getPost('editing_pic'),
-                'editing_start'=>$this->request->getPost('editing_start'),
-                'editing_end'=>$this->request->getPost('editing_end'),
+                'editing_date'=>$this->request->getPost('editing_date'),
                 'remark'=>$this->request->getPost('remark'),
                 'id_SalesPipeline'=>$this->request->getPost('id_SalesPipeline'),
                     
             ];
+            
          
            
             $response = $this->videoModel->update($where, $data);
@@ -204,11 +225,11 @@ $spreadsheet->setActiveSheetIndex(0)
 ->setCellValue('A'.$i, $row->id_video)
 ->setCellValue('B'.$i, $row->id_client)
 ->setCellValue('C'.$i, $row->storyboard_pic)
-->setCellValue('D'.$i, $row->storyboard_end)
+->setCellValue('D'.$i, $row->storyboard_date)
 ->setCellValue('E'.$i, $row->shooting_pic)
-->setCellValue('F'.$i, $row->shooting_end)
+->setCellValue('F'.$i, $row->shooting_date)
 ->setCellValue('G'.$i, $row->editing_pic)
-->setCellValue('H'.$i, $row->editing_end)
+->setCellValue('H'.$i, $row->editing_date)
 ->setCellValue('I'.$i, $row->remark)
 ;
 $i++;
@@ -278,11 +299,11 @@ exit;
     $spreadsheet->setActiveSheetIndex(0)
     ->setCellValue('A'.$i, $row->id_client)
     ->setCellValue('B'.$i, $row->storyboard_pic)
-    ->setCellValue('C'.$i, $row->storyboard_end)
+    ->setCellValue('C'.$i, $row->storyboard_date)
     ->setCellValue('D'.$i, $row->shooting_pic)
-    ->setCellValue('E'.$i, $row->shooting_end)
+    ->setCellValue('E'.$i, $row->shooting_date)
     ->setCellValue('F'.$i, $row->editing_pic)
-    ->setCellValue('G'.$i, $row->editing_end)
+    ->setCellValue('G'.$i, $row->editing_date)
     ->setCellValue('H'.$i, $row->remark)
     ;
     $i++;

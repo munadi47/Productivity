@@ -17,6 +17,7 @@
     }
     ?>
 
+ 
     <nav aria-label="breadcrumb shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-out" data-aos-duration="1000">
     <ol class="breadcrumb">
     
@@ -161,16 +162,14 @@
                         <td><?php echo $row->count; ?></td>
                         <td>Rp. <?php echo $row->potential_revenue=number_format($row->potential_revenue,0,",","."); ?></td>
                         <td>Rp. <?php echo $row->total_revenue=number_format($row->total_revenue,0,",","."); ?></td>
-                        <td><?php if($row->status=='closing'){
-                            ?> <span class="badge badge-danger"><?php
-                           
-                                } elseif($row->status=='proposal'){
-                                    ?><span class="badge badge-warning"><?php
-
-                                } else{
-                                    ?><span class="badge badge-success"><?php
-                                }
-                                echo $row->status; ?>
+                        <td><?php if($row->status == 'closing'){?>
+                            <span class="badge bg-danger">closing</span>
+                            
+                        <?php }elseif($row->status == 'proposal') {?>
+                            <span class="badge bg-warning">proposal</span>
+                        <?php }else{ ?>
+                            <span class="badge bg-success">meeting</span>
+                        <?php } ?>
                         </td>
                         <td>
                             <a title="Edit"  href="<?php echo base_url("SalesPipeline/edit/".$row->id_SalesPipeline); ?>" alt="Edit" class="btn btn-outline-info btn-sm">

@@ -26,6 +26,9 @@ class Finance extends BaseController{
         $this->clientModel = new \App\Models\clientModel();
         $this->activityModel = new \App\Models\activityModel();
         $this->attendanceModel = new \App\Models\attendanceModel();
+        $this->videoModel = new \App\Models\videoModel();
+        $this->digitalModel = new \App\Models\digital_contentModel();
+        
 
 
     }
@@ -33,9 +36,17 @@ class Finance extends BaseController{
     public function index(){
         $session = session();
         $data['dataFinance'] = $this->financeModel->getStatusFinance();
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
-
-        echo view ('users/header_v',$statusEmp);
+           
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digitalModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digitalModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digitalModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digitalModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        echo view ('admin/header_v_admin',$notif);
         echo view ('admin/finance_v',$data);
         echo view ('users/footer_v');
         
@@ -62,10 +73,19 @@ class Finance extends BaseController{
     public function add(){
         $data['dataClient'] = $this->clientModel->findAll();
         $data['datafinancestatus'] = $this->financestatusModel->findAll();
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+           
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digitalModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digitalModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digitalModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digitalModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
 
-        echo view('users/header_v',$statusEmp);
+        echo view('users/header_v_admin',$notif);
         echo view('admin/finance_form_v',$data);
         echo view('users/footer_v');
     }
@@ -75,10 +95,19 @@ class Finance extends BaseController{
         $data['datafinancestatus'] = $this->financestatusModel->findAll();
         $data['dataClient'] = $this->clientModel->findAll();
         $data['dataFinance'] = $this->financeModel->where($where)->findAll()[0];
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+          
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digitalModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digitalModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digitalModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digitalModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
 
-        echo view('users/header_v',$statusEmp);
+        echo view('users/header_v',$notif);
         echo view('admin/finance_form_v',$data);
         echo view ('users/footer_v');
     }
@@ -223,7 +252,7 @@ $spreadsheet->setActiveSheetIndex(0);
 
 // Redirect output to a client’s web browser (Xlsx)
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment;filename="Client Data.xlsx"');
+header('Content-Disposition: attachment;filename="Finance.xlsx"');
 header('Cache-Control: max-age=0');
 // If you're serving to IE 9, then the following may be needed
 header('Cache-Control: max-age=1');
@@ -242,19 +271,33 @@ exit;
 
 
 public function import(){
-    $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+      
+    $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+    $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+    $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+    $notif['deadlineStoryDigital'] = $this->digitalModel->deadlineStory();
+    $notif['deadlineVoice'] = $this->digitalModel->deadlineVoice();
+    $notif['deadlineAnimate'] = $this->digitalModel->deadlineAnimate();
+    $notif['deadlineCompile'] = $this->digitalModel->deadlineCompile();
+    $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+    $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
-    echo view('users/header_v',$statusEmp);
+    echo view('users/header_v',$notif);
     echo view('admin/finance_excel_form_v');
     echo view('users/footer_v');
 }
 
 public function do_upload(){
     $validated = $this->validate([
-        'finance_file' => 'uploaded[finance_file]|max_size[finance_file,1024]'
+        'finance_file' => [
+            'uploaded[finance_file]',
+            'mime_in[finance_file,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet]',
+            'max_size[finance_file,1024]',
+        ]
+        
     ]);
     if(!$validated){
-        return redirect()->to(site_url('Finance'))->with('Failed','<i class="fas fa-trash-alt"></i>Failed to import, please check again');
+        return redirect()->to(site_url('Finance'))->with('Failed','<i class="fas fa-times"></i> Failed to import, please check again');
     }
     else{
         $finance_file = $this->request->getFile('finance_file');

@@ -35,9 +35,17 @@
             <i class="fa fa-plus"></i> 
         </a>
         
-        <a class="btn btn-outline-info btn-sm" aria-expanded="false" href="Finance/export" role="button">
-            <i class="fa fa-file-excel"></i> 
+        <a class="btn btn-outline-info btn-sm" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-file-excel"></i>  <i class="fa fa-caret-down"></i>
         </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" >
+                    <a class="dropdown-item" href="Finance/export">Export Excel</a>
+                    <a class="dropdown-item" href="Finance/import">Import Excel</a>
+                    
+                </div>
+                
+        
 
                
         <br><br>
@@ -65,8 +73,8 @@
                 <tr>
                 <td><?php echo $i++; ?></td>
                 <td><?php echo $row->id_client; ?></td>
-                <td><?php echo $row->invoice_date; ?></td>
-                <td><?php echo $row->invoice_duedate; ?></td>
+                <td><?php echo date("F d, Y", strtotime($row->invoice_date)); ?></td>
+                <td><?php echo date("F d, Y", strtotime($row->invoice_duedate)); ?></td>
                 <td>Rp. <?php echo $row->invoice_amount=number_format($row->invoice_amount,0,",","."); ?></td>
 
 

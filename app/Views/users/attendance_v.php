@@ -28,7 +28,7 @@
     }
     ?>
 
-    <h2><i class="fas fa-briefcase"></i> Presensi </h2>
+    <h2><i class="fas fa-user-clock"></i> Attendance </h2>
 
     <figure class="highcharts-figure">
     <div id="watch"></div>
@@ -51,14 +51,39 @@
         </a>
 
 -->
-        <div class="text-center">
-            <form action="<?php echo base_url("Attendance/clockin"); ?>" >
-                <button type="submit" class="btn btn-sq-lg btn-primary" id="checktime1"><i class="fa fa-sign-in-alt fa-5x" aria-hidden="true"></i><br>Clock In</button>
-            </form>
 
-            <form action="<?php echo base_url("Attendance/clockout/".session()->get('id_attendance')); ?>" >
-                <button type="submit" class="btn btn-sq-lg btn-danger" id="checktime2"><i class="fa fa-sign-out-alt fa-5x" aria-hidden="true"></i><br>Clock Out</button>
+    <div class="row">
+        <div class="col col-lg-6">
+            <form action="<?php echo base_url("Attendance/clockin"); ?>" >
+                <button type="submit" class="btn btn-sq-lg btn-primary" id="checktime1" <?php if(!empty($dataCheckIn)) echo "disabled" ?> ><i class="fa fa-sign-in-alt fa-5x" aria-hidden="true"></i><br>Clock In</button>
+            
             </form>
+        </div>
+
+        
+        <div class="col col-lg-6">
+            <?php
+            if(!empty($dataRow)){
+                ?>
+                <form action="<?php echo base_url("Attendance/clockout/".$dataRow->id_attendance); ?>" >
+                <button type="submit" class="btn btn-sq-lg btn-danger" id="checktime2" <?php if(empty($dataCheckOut)) echo "disabled" ?> onclick="return confirm('Clock Out Now ?')"> 
+                <i class="fa fa-sign-out-alt fa-5x" aria-hidden="true"></i>
+                <br>Clock Out 
+            </button>
+            <?php }else {?>
+                <form action="<?php echo base_url("Attendance/clockout/"); ?>" >
+                <button type="submit" class="btn btn-sq-lg btn-danger" id="checktime2" <?php if(empty($dataCheckOut)) echo "disabled" ?> onclick="return confirm('Clock Out Now ?')"> 
+                <i class="fa fa-sign-out-alt fa-5x" aria-hidden="true"></i>
+                <br>Clock Out 
+            </button>
+            <?php }?>
+            
+            </form>
+        </div>
+    </div>
+
+        <div class="text-center">
+
         </div>
             
 
@@ -66,13 +91,13 @@
 </section>
 </div>
 
-<script type="text/javascript" defer="defer">
-//<!-- 
+<!--script type="text/javascript" defer="defer">
+// 
 var enableDisable = function(){
     
     var UTC_hours = new Date().getUTCHours() +7;
     
-    if (UTC_hours > 7 && UTC_hours < 24){
+    if (UTC_hours > 1 && UTC_hours < 24){
         if (){
             
         }
@@ -90,4 +115,4 @@ var enableDisable = function(){
 setInterval(enableDisable, 1000*60);
 enableDisable();
 // -->
-</script>
+</script-->

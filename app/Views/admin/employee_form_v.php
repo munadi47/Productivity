@@ -58,45 +58,15 @@
             </div>
         </div>
         <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Status </label>
-                <div class="col-sm-10">
-                    <select required name="id_eStatus" class="form-select" aria-label="Default select example" >
-                        
-                        <?php foreach($dataEmpstatus as $row) : ?>
-                            <option value="<?php echo $row->id_eStatus; ?>"<?php if(!empty($dataEmployee) && $dataEmployee->id_eStatus == $row->id_eStatus) echo 'selected'; ?> > <?php echo $row->status; ?> </option>
-                        <?php endforeach;?>
-                        
-                    </select>
-                </div>
-        </div>
-        <div class="form-group row">
             <label class="col-sm-2 col-form-label">Role </label>
             <div class="col-sm-10">
                     <select required name="level" id="level" class="form-select" aria-label="Default select example">
                             <option selected><?php if(!empty($dataEmployee)) echo $dataEmployee->level; ?> </option>
                             <option value="admin"><span class="badge badge-primary"> admin </span></option>
                             <option value="user"><span class="badge badge-warning"> user </span></option>
-                          
-                            
                     </select>
             </div>
         </div>
-        <div class="form-group row">
-            <label  class="col-sm-2 col-form-label">Photo </label>
-            <div class="col-sm-10">
-            <img src="<?php if(empty($dataEmployee)){
-                echo base_url('http://placehold.it/150x150');
-            }else{
-                echo base_url('assets/uploads/profile/'.$dataEmployee->photo);
-            } ?>" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
-            
-            <input  class="form-control" type="file" id="photo" name="photo" value="<?php if(!empty($dataEmployee)) echo base_url('assets/uploads/profile/'.$dataEmployee->photo); ?>">
-            <label class="form-label" for="customFile" style="color: red; font-size: 12px;"> * Upload Data (Max: 5MB, Format: PDF, JPG, PNG)</label>
-            </div>
-        </div>      
-        
-       
-        
         <br>
 
     

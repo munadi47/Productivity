@@ -42,9 +42,6 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     
-    <!--Daterangepicker -->
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-    
     <!--Get Active Sidebar-->
     <?php
         $current_url = basename($_SERVER['PHP_SELF']);
@@ -99,9 +96,6 @@
         }
     ?>
     <title> <?php echo $title ; ?></title>
-    <!--Daterangepicker -->
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-    
 </head>
 
 <body>
@@ -245,7 +239,7 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
-                            <?php if(allow('user') || allow('admin') ) : {?>
+                            <?php if(allow('admin')) : {?>
                             <li class="nav-item">
                             <a class="btn btn-light w3-wrapper sdp-glow"  id="sidebarCollapse" data-toggle="modal" data-target="#notifModal" style="margin-right: 5px;" href="#">
                                     <svg class="notify-icon" viewBox="6 4 30 30">           
@@ -253,20 +247,15 @@
                                         <path d="M20.9091,8.7273h.1818a.8182.8182,0,0,1,.8182.8182v2.8182a0,0,0,0,1,0,0H20.0909a0,0,0,0,1,0,0V9.5455A.8182.8182,0,0,1,20.9091,8.7273Z"></path>
                                         <path d="M21,12.5455q.2061,0,.4154.0134a6.3426,6.3426,0,0,1,5.7664,6.4486v2.9269a19.3045,19.3045,0,0,0,.8675,5.702H13.9507a19.3045,19.3045,0,0,0,.8675-5.702V18.7273A6.1887,6.1887,0,0,1,21,12.5455m0-2a8.1816,8.1816,0,0,0-8.1818,8.1818v3.2071A17.2221,17.2221,0,0,1,11,29.6364H31a17.2221,17.2221,0,0,1-1.8182-7.702V19.0075a8.368,8.368,0,0,0-7.6372-8.4444q-.274-.0177-.5446-.0176Z"></path>
                                     </svg>
-                                    <?php if (allow('user')){?>
-                                    <?php if(!empty($deadlineStory || $deadlineShoot || $deadlineEdit || $deadlineStoryDigital || $deadlineVoice || $deadlineAnimate || $deadlineCompile )){ ?> <span class="w3-count"><i class="fas fa-exclamation"></i></span> <?php } ?>
-                                    <?php }else{?>
                                     <?php if(!empty($deadlineStory || $deadlineShoot || $deadlineEdit || $deadlineStoryDigital || $deadlineVoice || $deadlineAnimate || $deadlineCompile || $deadlineFinance )){ ?> <span class="w3-count"><i class="fas fa-exclamation"></i></span> <?php } ?>
-                                   <?php  } ?>
-                                </a>
+                            </a>
                             </li>
                             <?php } endif; ?>
-
+                           
                             <li class="nav-item">
                                 <a class="nav-link" href="#"> 
                                     <button data-toggle="modal" data-target="#myModal" type="button" id="sidebarCollapse" class="btn btn-info">
                                         <i class="fas fa-user"></i> Profile
-                                  
                                     </button>
                                 </a>
                             </li>
@@ -281,7 +270,6 @@
                             
                         </ul>
                     </div>
-
                     <div class="modal fade" id="notifModal" role="dialog">
                         <div class="modal-dialog modal-sm">
                         <div class="modal-content">
@@ -356,17 +344,29 @@
                                 </div>
                             <?php } endforeach; ?>
                             <?php } ?>
-                           
-                            <?php if(!empty($deadlineFinance) && allow('admin')){ ?>
+                            <?php if(!empty($deadlineFinance)){ ?>
                                 <?php foreach($deadlineFinance as $row): {?>
-                           
+                                    <?php if ($row->id_fStatus == '5') {?>
+                                    
                                 <div class="feed-item">
                                 <div class="date"><?php echo date("d M, Y", strtotime($row->invoice_duedate)); ?></div>
-                                <div class="text"><a href="<?php echo base_url('Finance') ?>"> The Invoice payment due is today, for <?php echo $row->id_client; ?></a></div>
+                                <div class="text"><a href="<?php echo base_url('Finance') ?>"> The Invoice payment status, for <?php echo $row->id_client; ?> is Done</a></div>
                                 </div>
+                                <?php } else { ?>
+                                <div class="feed-item">
+                                <div class="date"><?php echo date("d M, Y", strtotime($row->invoice_duedate)); ?></div>
+                                <div class="text"><a href="<?php echo base_url('Finance') ?>"> The Invoice payment due is today, for <?php echo $row->id_client; ?>. <br/>Payment status : 
+                                <?php if($row->id_fStatus=='5'){ echo "Full";}
+                                elseif($row->id_fStatus=='1'){ echo "Term 1";} 
+                                elseif($row->id_fStatus=='2'){ echo "Term 2";}
+                                elseif($row->id_fStatus=='3'){ echo "Term 3";}
+                                elseif($row->id_fStatus=='4'){ echo "Term 4";}
+                                ?>
+                                </a></div>
+                                </div>
+                            <?php } ?>
                             <?php } endforeach; ?>
                             <?php } ?>
-                        
                             </div>
                             </div>
                             <div class="modal-footer">
@@ -374,12 +374,10 @@
                             </div>
                         </div>
                         </div>
-                        </div>
                     </div>
+                </div>
 
-  
-
-                    <div id="myModal" class="modal fade" role="dialog">
+                <div id="myModal" class="modal fade" role="dialog">
                     <div class="modal-dialog">
                         <!-- konten modal-->
                         <div class="modal-content">
@@ -553,6 +551,8 @@
                     </div>
 	                </div>
                 </div>
+  
+                
             </nav>
 
 

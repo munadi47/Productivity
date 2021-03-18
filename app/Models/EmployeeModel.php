@@ -10,7 +10,7 @@ class employeeModel extends Model
     protected $returnType     = 'object';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['nik','name','email','address','birthday','password','phone1','phone2','id_eStatus','level','photo'];
+    protected $allowedFields = ['nik','name','email','address','birthday','password','phone1','phone2','level','status','photo'];
 
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';
@@ -22,17 +22,19 @@ class employeeModel extends Model
     protected $skipValidation     = false;
 
    
-    public function getEmployee()
+    public function getEmployee($id)
     {
-         return $this->db->table('employee')
-         ->join('employee_status', 'employee_status.id_eStatus=employee.id_eStatus')
-         ->get()->getResultObject(); 
+         $builder = $this->table('employee');
+         $builder->select("YEARWEEK(clock_in), SUM(nik='$id')")
+         ->join('id_attendance','id_attendance.nik=employee.nik')
+
+         ->where('YEARWEEK(clock_in), YEARWEEK(NOW() )')
+         ->get()->getResultObject();
     }
 
     public function getDetail($id)
     {
          return $this->db->table('employee')
-         ->join('employee_status', 'employee_status.id_eStatus=employee.id_eStatus')
          ->where('employee.nik',$id)
          ->get()->getResultObject(); 
     }
