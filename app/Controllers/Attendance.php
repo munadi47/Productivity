@@ -56,7 +56,7 @@ class Attendance extends BaseController{
         $where = ['nik'=> $id];
         $data['dataEmployee'] = $this->employeeModel->where($where)->findAll()[0];
 
-        echo view ('admin/header_v_admin',$notif);
+        echo view ('users/header_v',$notif);
         echo view ('users/attendance_v',$data);
         echo view ('users/footer_v');
         
