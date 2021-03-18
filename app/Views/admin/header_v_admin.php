@@ -105,6 +105,7 @@
             <div class="sidebar-header">
                 <a class="navbar-brand" href="#">
                     <img src="<?php echo base_url('assets/img/logo.png'); ?>" width="114" height="66" class="d-inline-block align-top" alt="">
+                    
                   </a>
             </div>
 
@@ -246,7 +247,7 @@
                                         <path d="M20.9091,8.7273h.1818a.8182.8182,0,0,1,.8182.8182v2.8182a0,0,0,0,1,0,0H20.0909a0,0,0,0,1,0,0V9.5455A.8182.8182,0,0,1,20.9091,8.7273Z"></path>
                                         <path d="M21,12.5455q.2061,0,.4154.0134a6.3426,6.3426,0,0,1,5.7664,6.4486v2.9269a19.3045,19.3045,0,0,0,.8675,5.702H13.9507a19.3045,19.3045,0,0,0,.8675-5.702V18.7273A6.1887,6.1887,0,0,1,21,12.5455m0-2a8.1816,8.1816,0,0,0-8.1818,8.1818v3.2071A17.2221,17.2221,0,0,1,11,29.6364H31a17.2221,17.2221,0,0,1-1.8182-7.702V19.0075a8.368,8.368,0,0,0-7.6372-8.4444q-.274-.0177-.5446-.0176Z"></path>
                                     </svg>
-                                    <?php if(!empty($deadlineStory || $deadlineShoot || $deadlineEdit || $deadlineStoryDigital || $deadlineVoice || $deadlineAnimate || $deadlineCompile )){ ?> <span class="w3-count"><i class="fas fa-exclamation"></i></span> <?php } ?>
+                                    <?php if(!empty($deadlineStory || $deadlineShoot || $deadlineEdit || $deadlineStoryDigital || $deadlineVoice || $deadlineAnimate || $deadlineCompile || $deadlineFinance )){ ?> <span class="w3-count"><i class="fas fa-exclamation"></i></span> <?php } ?>
                             </a>
                             </li>
                             <?php } endif; ?>

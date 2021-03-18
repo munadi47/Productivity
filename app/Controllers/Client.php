@@ -22,6 +22,9 @@ class Client extends BaseController{
         $this->classModel = new \App\Models\classModel();
         $this->activityModel = new \App\Models\activityModel();
         $this->attendanceModel = new \App\Models\attendanceModel();
+        $this->videoModel = new \App\Models\videoModel();
+        $this->digitalModel = new \App\Models\digital_contentModel();
+        $this->financeModel = new \App\Models\FinanceModel();
 
         $this->pager = \Config\Services::pager();
         date_default_timezone_set("Asia/Jakarta");
@@ -32,9 +35,17 @@ class Client extends BaseController{
     public function index(){
         $session = session();
         $data['dataClient'] = $this->clientModel->getPIC();
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digitalModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digitalModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digitalModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digitalModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
-        echo view ('users/header_v',$statusEmp);
+        echo view ('users/header_v',$notif);
         echo view ('users/client_v',$data);
         echo view ('users/footer_v');
 
@@ -61,9 +72,17 @@ class Client extends BaseController{
     public function add(){
         $data['dataEmployee']  = $this->employeeModel->findAll();
         $data['dataClass']  = $this->classModel->findAll();
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digitalModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digitalModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digitalModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digitalModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
-        echo view('users/header_v',$statusEmp);
+        echo view('users/header_v',$notif);
         echo view('users/client_form_v',$data);
         echo view('users/footer_v');
     }
@@ -73,16 +92,32 @@ class Client extends BaseController{
         $data['dataClass']  = $this->classModel->findAll();
         $data['dataEmployee']  = $this->employeeModel->findAll();
         $data['dataClient'] = $this->clientModel->where($where)->findAll()[0];
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digitalModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digitalModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digitalModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digitalModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
-        echo view('users/header_v',$statusEmp);
+        echo view('users/header_v',$notif);
         echo view('users/client_edit_form_v',$data);
         echo view ('users/footer_v');
     }
     public function detail($id){
         $data['dataClient'] = $this->clientModel->joinclient($id);
         $detail = $this->clientModel->getDetail($id);
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digitalModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digitalModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digitalModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digitalModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
 
          // paginate
@@ -94,15 +129,23 @@ class Client extends BaseController{
        
 
 
-        echo view('users/header_v',$statusEmp);
+        echo view('users/header_v',$notif);
         echo view('users/detail_client_v',$data);
         echo view ('users/footer_v');
     }
     public function add_type(){
-        $statusEmp['dataAttendance'] = $this->attendanceModel->getStatusAtt();
+        $notif['deadlineStory'] = $this->videoModel->deadlineStory();
+        $notif['deadlineShoot'] = $this->videoModel->deadlineShoot();
+        $notif['deadlineEdit'] = $this->videoModel->deadlineEdit();
+        $notif['deadlineStoryDigital'] = $this->digitalModel->deadlineStory();
+        $notif['deadlineVoice'] = $this->digitalModel->deadlineVoice();
+        $notif['deadlineAnimate'] = $this->digitalModel->deadlineAnimate();
+        $notif['deadlineCompile'] = $this->digitalModel->deadlineCompile();
+        $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
+        $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
         
-        echo view('users/header_v',$statusEmp);
+        echo view('users/header_v',$notif);
         echo view('users/class_form_v');
         echo view ('users/footer_v');
     }

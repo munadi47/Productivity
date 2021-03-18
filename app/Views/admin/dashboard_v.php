@@ -1,15 +1,3 @@
-<?php
-/*if(!empty($deadlineFinance)){ ?>
-    <div class="alert alert-warning" role="alert"  data-aos="zoom-in" data-aos-duration="1000">
-    <?php foreach($deadlineFinance as $row):  ?>
-        <?php if ($row->id_fStatus == '5') {
-            echo '<i class="fas fa-bell"></i> '; echo ' The Invoice payment status for '.$row->id_client; echo ' is Done';?>
-        <?php } else { ?>
-        <?php echo '<i class="fas fa-bell"></i> '; echo ' The Invoice payment due is today ('.date("d M, Y", strtotime($row->invoice_duedate)).')'; echo ' for'; echo ' '.$row->id_client;  } ?>
-    <?php endforeach; ?>
-        
-    </div>
-<?php }*/?>
 
 <nav aria-label="breadcrumb shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-out" data-aos-duration="1000">
     <ol class="breadcrumb">
