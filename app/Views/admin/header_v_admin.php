@@ -346,11 +346,25 @@
                             <?php } ?>
                             <?php if(!empty($deadlineFinance)){ ?>
                                 <?php foreach($deadlineFinance as $row): {?>
-                           
+                                    <?php if ($row->id_fStatus == '5') {?>
+                                    
                                 <div class="feed-item">
                                 <div class="date"><?php echo date("d M, Y", strtotime($row->invoice_duedate)); ?></div>
-                                <div class="text"><a href="<?php echo base_url('Finance') ?>"> The Invoice payment due is today, for <?php echo $row->id_client; ?></a></div>
+                                <div class="text"><a href="<?php echo base_url('Finance') ?>"> The Invoice payment status, for <?php echo $row->id_client; ?> is Done</a></div>
                                 </div>
+                                <?php } else { ?>
+                                <div class="feed-item">
+                                <div class="date"><?php echo date("d M, Y", strtotime($row->invoice_duedate)); ?></div>
+                                <div class="text"><a href="<?php echo base_url('Finance') ?>"> The Invoice payment due is today, for <?php echo $row->id_client; ?>. <br/>Payment status : 
+                                <?php if($row->id_fStatus=='5'){ echo "Full";}
+                                elseif($row->id_fStatus=='1'){ echo "Term 1";} 
+                                elseif($row->id_fStatus=='2'){ echo "Term 2";}
+                                elseif($row->id_fStatus=='3'){ echo "Term 3";}
+                                elseif($row->id_fStatus=='4'){ echo "Term 4";}
+                                ?>
+                                </a></div>
+                                </div>
+                            <?php } ?>
                             <?php } endforeach; ?>
                             <?php } ?>
                             </div>
