@@ -182,8 +182,6 @@ class Video extends BaseController{
             return redirect()->to(site_url('Video'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to delete');
         }
         
-
-     
     }
 
 

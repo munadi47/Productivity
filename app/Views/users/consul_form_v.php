@@ -54,7 +54,7 @@
               
         </div>
         <div class="form-group row">
-            <label  class="col-sm-2 col-form-label">Project Name</label>
+            <label  class="col-sm-2 col-form-label">Project Detail</label>
             <div class="col-sm-10">
             <input required type="text" class="form-control" id="project_name" name="project_name" value="<?php if(!empty($dataConsul)) echo $dataConsul->project_name; ?>"> 
             </div>

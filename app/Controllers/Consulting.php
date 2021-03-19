@@ -144,13 +144,14 @@ class Consulting extends BaseController{
                 ];
                 $response = $this->consultingModel->insert($data);
                 if($response){
+                    $act = 'Insert new consulting data '.$data['project_name'];
+                    $this->record($act,session()->get('nik'));
                     return redirect()->to(site_url('Consulting'))->with('Success', '<i class="fas fa-save"></i> Data has been saved, but chart not uploaded, please check again');
                 }else{
                     return redirect()->to(site_url('Consulting'))->with('Failed', '<i class="fas fa-times"></i> Data failed to save');
                 }
                
-                $act = 'Insert new consulting data '.$data['project_name'];
-                $this->record($act,session()->get('nik'));
+                
                
             }else{
                 $gantt_chart = $this->request->getFile('gantt_chart');
@@ -164,12 +165,13 @@ class Consulting extends BaseController{
                 ];
                 $response = $this->consultingModel->insert($data);
                 if($response){
+                    $act = 'Insert new consulting data '.$data['project_name'];
+                    $this->record($act,session()->get('nik'));
                     return redirect()->to(site_url('Consulting'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
                 }else{
                     return redirect()->to(site_url('Consulting'))->with('Failed', '<i class="fas fa-times"></i> Data failed to save');
                 }
-                $act = 'Insert new consulting data '.$data['project_name'];
-                $this->record($act,session()->get('nik'));
+               
                 
                 
             }
@@ -199,12 +201,13 @@ class Consulting extends BaseController{
                 ];
                 $response = $this->consultingModel->update($where,$data);
                 if($response){
+                    $act = 'Update consulting data '.$data['project_name'];
+                    $this->record($act,session()->get('nik'));
                     return redirect()->to(site_url('Consulting'))->with('Success', '<i class="fas fa-save"></i> Data has been updated, but chart not uploaded, please check again');
                 }else{
                     return redirect()->to(site_url('Consulting'))->with('Failed', '<i class="fas fa-times"></i> Data failed to save');
                 }
-                $act = 'Update consulting data '.$data['project_name'];
-                $this->record($act,session()->get('nik'));
+               
             
             
             }else{
@@ -224,12 +227,13 @@ class Consulting extends BaseController{
                 ];
                 $response = $this->consultingModel->update($where,$data);
                 if($response){
+                    $act = 'Update consulting data '.$data['project_name'];
+                    $this->record($act,session()->get('nik')); 
                     return redirect()->to(site_url('Consulting'))->with('Success', '<i class="fas fa-save"></i> Data has been updated');
                 }else{
                     return redirect()->to(site_url('Consulting'))->with('Failed', '<i class="fas fa-times"></i> Data failed to save');
                 }
-                $act = 'Update consulting data '.$data['project_name'];
-                $this->record($act,session()->get('nik'));   
+                 
                
             }
             
@@ -253,9 +257,10 @@ class Consulting extends BaseController{
         @unlink($path.$gantt_chart);
         
         $response = $this->consultingModel->delete($where);
-        $act = 'Delete consulting data ';
-        $this->record($act,session()->get('nik'));
+        
         if($response){
+            $act = 'Delete consulting data ';
+            $this->record($act,session()->get('nik'));
             return redirect()->to(site_url('Consulting'))->with('Success', '<i class="fas fa-trash"></i> Data has been deleted');
         }else{
             return redirect()->to(site_url('Consulting'))->with('Failed', '<i class="fas fa-exclamination"></i> Data Failed to delete');

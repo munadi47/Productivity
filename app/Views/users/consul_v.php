@@ -47,7 +47,7 @@
                         <th > NO </th>
                         <th >PROJECT TITLE</th>
                         <th >CLIENT</th>
-                        <th >PROJECT NAME</th>
+                        <th >PROJECT DETAIL</th>
                         <th >PROJECT MANAGER</th>
                         <th >REMARK </th>
                         <th >ACTION</th>
