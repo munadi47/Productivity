@@ -145,7 +145,7 @@ class attendanceModel extends Model
         $builder = $this->table('log_attendance');
         $builder->select('employee.name,clock_in,employee.photo,id_attendance')
         ->join('employee','employee.nik=log_attendance.nik')
-        ->where("DATE('clock_in')",'CURDATE()')
+        ->where('date_format(clock_in,"%Y-%m-%d")', 'CURDATE()', FALSE)
         ->orderBy('id_attendance','DESC');
         return $builder;
     }
@@ -160,10 +160,10 @@ class attendanceModel extends Model
 
         if($query){
             foreach($query->getResult() as $data){
-                $dataClock[] = $data;
+                $AttToday[] = $data;
             }
-           if(!empty($dataClock)){
-               return $dataClock;
+           if(!empty($AttToday)){
+               return $AttToday;
             } return false;
             
         }
