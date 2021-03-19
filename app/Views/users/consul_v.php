@@ -44,7 +44,7 @@
                 <table id="myTable" class="table table-hover table-bordered text-center " >
                 <thead class="thead-dark ">
                     <tr>
-                        <th > # </th>
+                        <th > NO </th>
                         <th >TITLE</th>
                         <th >CLIENT</th>
                         <th >PROJECT NAME</th>

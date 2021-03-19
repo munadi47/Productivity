@@ -10,7 +10,7 @@ class learningModel extends Model
     protected $returnType     = 'object';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['id_learning','id_SalesPipeline','date_deliver','coach_name','method','certificate','remark'];
+    protected $allowedFields = ['id_learning','id_SalesPipeline','topic','date_deliver','coach_name','method','certificate','remark'];
 
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';

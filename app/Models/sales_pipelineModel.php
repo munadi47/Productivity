@@ -10,7 +10,7 @@ class sales_pipelineModel extends Model
     protected $returnType     = 'object';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['id_SalesPipeline','nik','id_client','id_product','category','title','count','potential_revenue','total_revenue','status'];
+    protected $allowedFields = ['id_SalesPipeline','nik','id_client','id_product','category','title','count','potential_revenue','total_revenue','status_p'];
 
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';
@@ -33,7 +33,7 @@ class sales_pipelineModel extends Model
     public function closing()
     {
          return $this->db->table('sales_pipeline')
-         ->where('sales_pipeline.status','closing')
+         ->where('sales_pipeline.status_p','closing')
          ->countAllResults();
          
          
@@ -41,7 +41,7 @@ class sales_pipelineModel extends Model
     public function proposal()
     {
          return $this->db->table('sales_pipeline')
-         ->where('sales_pipeline.status','proposal')
+         ->where('sales_pipeline.status_p','proposal')
          ->countAllResults();
          
          
@@ -49,7 +49,7 @@ class sales_pipelineModel extends Model
     public function meeting()
     {
          return $this->db->table('sales_pipeline')
-         ->where('sales_pipeline.status','meeting')
+         ->where('sales_pipeline.status_p','meeting')
          ->countAllResults();
          
          

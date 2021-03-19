@@ -21,6 +21,7 @@
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
             });
+          
 
         });
     </script>
@@ -28,6 +29,11 @@
     <script>
     $(document).ready( function () {
       $('#myTable').DataTable();
+    } );
+  </script>
+  <script>
+    $(document).ready( function () {
+      $('.selectpicker').selectpicker();
     } );
   </script>
 

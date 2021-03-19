@@ -31,7 +31,7 @@ class Activity extends BaseController{
         
         $activity = $this->activityModel->joinEmp();
          // paginate
-        $paginate = 10;
+        $paginate = 20;
         $data['dataAct']   = $activity->paginate($paginate,'dataAct');
         $data['pager']      = $activity->pager;
         $data['validation'] = $this->validator;

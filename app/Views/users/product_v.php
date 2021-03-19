@@ -49,7 +49,7 @@
                 <table id="myTable" class="table table-hover table-bordered text-center " >
                 <thead class="thead-dark ">
                     <tr>
-                        <th> # </th>
+                        <th> NO </th>
                         <th>PRODUCT NAME</th>
                         <th>STANDARD PRICE</th>
                         <th>COMPANY NAME</th>

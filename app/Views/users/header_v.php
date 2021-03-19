@@ -45,6 +45,7 @@
     <!--Daterangepicker -->
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     
+    
     <!--Get Active Sidebar-->
     <?php
         $current_url = basename($_SERVER['PHP_SELF']);
@@ -186,10 +187,10 @@
 
                 <li>
                     
-                    <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-file"></i>  Report</a>
+                    <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-sync"></i>  Audit Trail</a>
                     <ul class="collapse list-unstyled" id="reportSubmenu">
                         <li>
-                            <a href="<?php echo base_url('Attendance/view')?>"><i class="fas fa-user-clock"></i> Report Attendance</a>
+                            <a href="<?php echo base_url('Attendance/view')?>"><i class="fas fa-user-clock"></i> Attendance Log</a>
                         </li>
                         <li>
                             <a href="<?php echo base_url('Activity')?>"><i class="fas fa-file-alt"></i> Activity Log</a>
@@ -392,9 +393,7 @@
                         
                             </div>
                             </div>
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
+                           
                         </div>
                         </div>
                         </div>

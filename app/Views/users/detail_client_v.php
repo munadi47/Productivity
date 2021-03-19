@@ -67,6 +67,16 @@
                 <br>
                 <div class="row justify-content-start">
                     <div class="col col-lg-2">
+                    <i class="fas fa-envelope"></i> Email 
+                    </div>
+                    <div class="col col-lg-5">
+                        : <?php echo $row->email_client ?>
+                        
+                    </div>
+                </div>
+                <br>
+                <div class="row justify-content-start">
+                    <div class="col col-lg-2">
                     <i class="fas fa-phone"></i> Phone 
                     </div>
                     <div class="col col-lg-5">

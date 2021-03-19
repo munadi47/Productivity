@@ -44,7 +44,6 @@ class Learning extends BaseController{
         $notif['deadlineFinance'] = $this->financeModel->deadlineFinance();
         $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
        
-
         echo view ('users/header_v',$notif);
         echo view ('users/learning_v',$data);
         echo view ('users/footer_v');
@@ -64,9 +63,6 @@ class Learning extends BaseController{
          return $result;
   
      }
-
-
-   
 
     public function add(){
      
@@ -117,6 +113,7 @@ class Learning extends BaseController{
             $data = [
                
                 'id_SalesPipeline'=>$this->request->getPost('id_SalesPipeline'),
+                'topic'=>$this->request->getPost('topic'),
                 'date_deliver'=>$this->request->getPost('date_deliver'),    
                 'coach_name'=>$this->request->getPost('coach_name'),
                 'method'=>$this->request->getPost('method'),
@@ -141,6 +138,7 @@ class Learning extends BaseController{
             $data = [
                
                 'id_SalesPipeline'=>$this->request->getPost('id_SalesPipeline'),
+                'topic'=>$this->request->getPost('topic'),
                 'date_deliver'=>$this->request->getPost('date_deliver'),    
                 'coach_name'=>$this->request->getPost('coach_name'),
                 'method'=>$this->request->getPost('method'),
@@ -205,11 +203,12 @@ $spreadsheet->getProperties()->setTitle('Office 2007 XLSX Test Document')
 $spreadsheet->setActiveSheetIndex(0)
 ->setCellValue('A1', 'ID LEARNING')
 ->setCellValue('B1', 'CLIENT')
-->setCellValue('C1', 'DATE DELIVER')
-->setCellValue('D1', 'COACH NAME')
-->setCellValue('E1', 'METHOD')
-->setCellValue('F1', 'CERTIFICATE')
-->setCellValue('G1', 'REMARK')
+->setCellValue('C1', 'TOPIC')
+->setCellValue('D1', 'DATE DELIVER')
+->setCellValue('E1', 'COACH NAME')
+->setCellValue('F1', 'METHOD')
+->setCellValue('G1', 'CERTIFICATE')
+->setCellValue('H1', 'REMARK')
 
 
 ;
@@ -220,11 +219,12 @@ $i=2; foreach($dataLearning as $row) {
 $spreadsheet->setActiveSheetIndex(0)
 ->setCellValue('A'.$i, $row->id_learning)
 ->setCellValue('B'.$i, $row->id_client)
-->setCellValue('C'.$i, $row->date_deliver)
-->setCellValue('D'.$i, $row->coach_name)
-->setCellValue('E'.$i, $row->method)
-->setCellValue('F'.$i, $row->certificate)
-->setCellValue('G'.$i, $row->remark)
+->setCellValue('C'.$i, $row->topic)
+->setCellValue('D'.$i, $row->date_deliver)
+->setCellValue('E'.$i, $row->coach_name)
+->setCellValue('F'.$i, $row->method)
+->setCellValue('G'.$i, $row->certificate)
+->setCellValue('H'.$i, $row->remark)
 ;
 $i++;
 }
@@ -276,11 +276,12 @@ exit;
     // Add some data
     $spreadsheet->setActiveSheetIndex(0)
     ->setCellValue('A1', 'CLIENT')
-    ->setCellValue('B1', 'DATE DELIVER')
-    ->setCellValue('C1', 'COACH NAME')
-    ->setCellValue('D1', 'METHOD')
-    ->setCellValue('E1', 'CERTIFICATE')
-    ->setCellValue('F1', 'REMARK')
+    ->setCellValue('B1', 'TOPIC')
+    ->setCellValue('C1', 'DATE DELIVER')
+    ->setCellValue('D1', 'COACH NAME')
+    ->setCellValue('E1', 'METHOD')
+    ->setCellValue('F1', 'CERTIFICATE')
+    ->setCellValue('G1', 'REMARK')
     
     
     ;
@@ -290,11 +291,12 @@ exit;
     
     $spreadsheet->setActiveSheetIndex(0)
     ->setCellValue('A'.$i, $row->id_client)
-    ->setCellValue('B'.$i, $row->date_deliver)
-    ->setCellValue('C'.$i, $row->coach_name)
-    ->setCellValue('D'.$i, $row->method)
-    ->setCellValue('E'.$i, $row->certificate)
-    ->setCellValue('F'.$i, $row->remark)
+    ->setCellValue('B'.$i, $row->topic)
+    ->setCellValue('C'.$i, $row->date_deliver)
+    ->setCellValue('D'.$i, $row->coach_name)
+    ->setCellValue('E'.$i, $row->method)
+    ->setCellValue('F'.$i, $row->certificate)
+    ->setCellValue('G'.$i, $row->remark)
     ;
     $i++;
     }

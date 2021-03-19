@@ -139,13 +139,13 @@ class SalesPipeline extends BaseController{
                 'count'=>$this->request->getPost('count'),
                 'potential_revenue'=>$this->request->getPost('potential_revenue'),
                 'total_revenue'=>$this->request->getPost('total_revenue'),
-                'status'=>$this->request->getPost('status'), 
+                'status_p'=>$this->request->getPost('status_p'), 
             ];
             $this->sales_pipelineModel->insert($data);
             $act = 'Insert new pipeline data '.$data['id_client'];
             $this->record($act,session()->get('nik'));
             $category = $this->request->getPost('category');
-            $status = $this->request->getPost('status');
+            $status = $this->request->getPost('status_p');
 
           
             if($status=='closing' && $category=='video' ){
@@ -184,16 +184,16 @@ class SalesPipeline extends BaseController{
                 'count'=>$this->request->getPost('count'),
                 'potential_revenue'=>$this->request->getPost('potential_revenue'),
                 'total_revenue'=>$this->request->getPost('total_revenue'),
-                'status'=>$this->request->getPost('status'), 
+                'status_p'=>$this->request->getPost('status_p'), 
             ];
 
            
 
             $this->sales_pipelineModel->update($where,$data);
-            $act = 'Update pipeline data '.$data['id_client'].' to '.$data['status'];
+            $act = 'Update pipeline data '.$data['id_client'].' to '.$data['status_p'];
             $this->record($act,session()->get('nik'));
             $category = $this->request->getPost('category');
-            $status = $this->request->getPost('status');
+            $status = $this->request->getPost('status_p');
             $video = $this->sales_pipelineModel->statVideo($id);
             $digital = $this->sales_pipelineModel->statDigital($id);
             $learning = $this->sales_pipelineModel->statLearning($id);
@@ -288,14 +288,14 @@ $i=2; foreach($dataPipeline as $row) {
 $spreadsheet->setActiveSheetIndex(0)
 ->setCellValue('A'.$i, $row->id_SalesPipeline)
 ->setCellValue('B'.$i, $row->name)
-->setCellValue('C'.$i, $row->client_name)
+->setCellValue('C'.$i, $row->id_client)
 ->setCellValue('D'.$i, $row->product_name)
 ->setCellValue('E'.$i, $row->category)
 ->setCellValue('F'.$i, $row->title)
 ->setCellValue('G'.$i, $row->count)
 ->setCellValue('H'.$i, $row->potential_revenue)
 ->setCellValue('I'.$i, $row->total_revenue)
-->setCellValue('J'.$i, $row->status)
+->setCellValue('J'.$i, $row->status_p)
 ;
 $i++;
 }

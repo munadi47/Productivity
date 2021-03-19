@@ -36,7 +36,7 @@
         <div class="form-group row">
                 <label class="col-sm-2 col-form-label">PIC</label>
                 <div class="col-sm-10">
-                    <select required name="nik" class="form-select" aria-label="Default select example" >
+                    <select id="dropdown" required name="nik" class="form-select" aria-label="Default select example" >
                         
                         <?php foreach($dataEmployee as $row) : ?>
                             <option value="<?php echo $row->nik; ?>"<?php if(!empty($dataPipeline) && $dataPipeline->nik == $row->nik) echo 'selected'; ?> > <?php echo $row->name; ?> </option>
@@ -49,7 +49,7 @@
         <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Client</label>
                 <div class="col-sm-10">
-                    <select required name="id_client" class="form-select" aria-label="Default select example" >
+                    <select id="dropdown" required name="id_client" class="form-select" aria-label="Default select example" >
                         
                         <?php foreach($dataClient as $row) : ?>
                             <option value="<?php echo $row->id_client; ?>"<?php if(!empty($dataPipeline) && $dataPipeline->id_client == $row->id_client) echo 'selected'; ?> > <?php echo $row->id_client; ?> </option>
@@ -62,7 +62,7 @@
         <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Product</label>
                 <div class="col-sm-10">
-                    <select required name="id_product" class="form-select" aria-label="Default select example" >
+                    <select id="dropdown" required name="id_product" class="form-select" aria-label="Default select example" >
                         
                         <?php foreach($dataProduct as $row) : ?>
                             <option value="<?php echo $row->id_product; ?>"<?php if(!empty($dataPipeline) && $dataPipeline->id_product == $row->id_product) echo 'selected'; ?> > <?php echo $row->product_name; ?> </option>
@@ -76,6 +76,7 @@
             <label class="col-sm-2 col-form-label">Category</label>
             <div class="col-sm-10">
             <select required name="category" id="category" class="form-select" aria-label="Default select example">
+                
                     <option selected><?php if(!empty($dataPipeline)) echo $dataPipeline->category; ?> </option>
                     <option value="video"><span class="badge badge-info"> <i class="fas fa-video"></i> Video </span></option>
                     <option value="digital content"><span class="badge badge-info"><i class="fas fa-desktop"></i> Digital Content</span></option>
@@ -136,13 +137,15 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Status </label>
             <div class="col-sm-10">
-                    <select required name="status" id="status" class="form-select" aria-label="Default select example">
-                            <option selected><?php if(!empty($dataPipeline)) echo $dataPipeline->status; ?> </option>
+                    <select required name="status_p" id="dropdown" class="form-select" data-live-search="true" aria-label="Default select example">
+                            <option selected><?php if(!empty($dataPipeline)) echo $dataPipeline->status_p; ?> </option>
                             <option value="meeting"> meeting </option>
                             <option value="proposal">proposal</option>
                             <option value="closing">closing </option>
                             
                     </select>
+                   
+                 
             </div>
         </div>
        
@@ -155,6 +158,7 @@
             <button type="button" onclick="window.history.back();" class="btn btn-outline-secondary">Back</button>
             <br>
         </form>
+        
     </div>
 </section>
 </div>

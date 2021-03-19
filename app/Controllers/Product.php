@@ -190,10 +190,9 @@ $spreadsheet->getProperties()->setTitle('Office 2007 XLSX Test Document')
 
 // Add some data
 $spreadsheet->setActiveSheetIndex(0)
-->setCellValue('A1', 'ID PRODUCT')
-->setCellValue('B1', 'PRODUCT NAME')
-->setCellValue('C1', 'STANDARD PRICE')
-->setCellValue('D1', 'COMPANY')
+->setCellValue('A1', 'PRODUCT NAME')
+->setCellValue('B1', 'STANDARD PRICE')
+->setCellValue('C1', 'COMPANY')
 
 ;
 
@@ -201,10 +200,9 @@ $spreadsheet->setActiveSheetIndex(0)
 $i=2; foreach($dataProduct as $row) {
 
 $spreadsheet->setActiveSheetIndex(0)
-->setCellValue('A'.$i, $row->id_product)
-->setCellValue('B'.$i, $row->product_name)
-->setCellValue('C'.$i, $row->std_price)
-->setCellValue('D'.$i, $row->company_name)
+->setCellValue('A'.$i, $row->product_name)
+->setCellValue('B'.$i, $row->std_price)
+->setCellValue('C'.$i, $row->company_name)
 ;
 $i++;
 }

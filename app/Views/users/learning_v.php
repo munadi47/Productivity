@@ -43,9 +43,10 @@
                 <table id="myTable" class="table table-hover table-bordered text-center " >
                 <thead class="thead-dark ">
                     <tr>
-                        <th > # </th>
+                        <th > NO </th>
                         <th >TITLE</th>
                         <th >CLIENT NAME</th>
+                        <th >TOPIC</th>
                         <th >DELIVER DATE</th>
                         <th >COACH NAME</th>
                         <th >METHOD</th>
@@ -67,6 +68,7 @@
                         <td><?php echo $nomor++; ?></td>
                         <td><?php echo $row->title; ?></td>
                         <td><?php echo $row->id_client; ?></td>
+                        <td><?php echo $row->topic; ?></td>
                         <td><?php echo date("d M, Y", strtotime($row->date_deliver));?></td>
                         <td><?php echo $row->coach_name; ?></td>
                         <td> <?php if($row->method=='online'){

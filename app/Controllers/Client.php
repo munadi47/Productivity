@@ -158,6 +158,7 @@ class Client extends BaseController{
             $data = [
                 'id_client'=>$this->request->getPost('id_client'),
                 'address'=>$this->request->getPost('address'),
+                'email_client'=>$this->request->getPost('email_client'),
                 'phone'=>$this->request->getPost('phone'),
                 'nik'=>$this->request->getPost('nik'),
                 'id_class'=>$this->request->getPost('id_class'),
@@ -178,10 +179,11 @@ class Client extends BaseController{
             $where = ['id_client'=>$id];
             $data = [
                 'address'=>$this->request->getPost('address'),
+                'email_client'=>$this->request->getPost('email_client'),
                 'phone'=>$this->request->getPost('phone'),
                 'nik'=>$this->request->getPost('nik'),
                 'id_class'=>$this->request->getPost('id_class'),
-                    
+              
             ];
          
            
@@ -245,11 +247,12 @@ $spreadsheet->getProperties()->setTitle('Office 2007 XLSX Test Document')
 
 // Add some data
 $spreadsheet->setActiveSheetIndex(0)
-->setCellValue('A1', 'ID CLIENT')
-->setCellValue('B1', 'CLIENT NAME')
+->setCellValue('A1', 'CLIENT')
+->setCellValue('B1', 'SECTOR')
 ->setCellValue('C1', 'ADDRESS')
-->setCellValue('D1', 'PHONE')
-->setCellValue('E1', 'PIC')
+->setCellValue('D1', 'EMAIL')
+->setCellValue('E1', 'PHONE')
+->setCellValue('F1', 'PIC')
 
 
 ;
@@ -259,10 +262,11 @@ $i=2; foreach($dataClient as $row) {
 
 $spreadsheet->setActiveSheetIndex(0)
 ->setCellValue('A'.$i, $row->id_client)
-->setCellValue('B'.$i, $row->address)
-->setCellValue('C'.$i, $row->phone)
-->setCellValue('D'.$i, $row->name)
-
+->setCellValue('B'.$i, $row->sector)
+->setCellValue('C'.$i, $row->address)
+->setCellValue('D'.$i, $row->email_client)
+->setCellValue('E'.$i, $row->phone)
+->setCellValue('F'.$i, $row->name)
 ;
 $i++;
 $act = 'Export all client data to excel ';

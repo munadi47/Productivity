@@ -117,7 +117,7 @@
     'status'=>$this->request->getPost('status'), 
 ];-->
                     <tr>
-                        <th> # </th>
+                        <th> NO </th>
                         <th>PIC</th>
                         <th>CLIENT</th>
                         <th>PRODUCT</th>
@@ -162,10 +162,10 @@
                         <td><?php echo $row->count; ?></td>
                         <td>Rp. <?php echo $row->potential_revenue=number_format($row->potential_revenue,0,",","."); ?></td>
                         <td>Rp. <?php echo $row->total_revenue=number_format($row->total_revenue,0,",","."); ?></td>
-                        <td><?php if($row->status == 'closing'){?>
+                        <td><?php if($row->status_p == 'closing'){?>
                             <span class="badge bg-danger">closing</span>
                             
-                        <?php }elseif($row->status == 'proposal') {?>
+                        <?php }elseif($row->status_p == 'proposal') {?>
                             <span class="badge bg-warning">proposal</span>
                         <?php }else{ ?>
                             <span class="badge bg-success">meeting</span>

@@ -34,6 +34,14 @@
         </div>
         <br>
         <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Email </label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="email_client" name="email_client" required
+                value="<?php if(!empty($dataClient)) echo $dataClient->email_client; ?>">
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
             <label class="col-sm-2 col-form-label">Phone </label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="phone" name="phone" required

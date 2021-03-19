@@ -42,9 +42,10 @@
                 <table id="myTable" class="table table-hover table-bordered text-center " >
                 <thead class="thead-dark ">
                     <tr>
-                        <th>#</th>
+                        <th>NO</th>
                         <th>CLIENT</th>
                         <th>PHONE</th>
+                        <th>EMAIL</th>
                         <th>PIC</th>
                         <th>ACTION</th>
                     
@@ -64,6 +65,7 @@
                         <td><?php echo $row->id_client ?></td>
                         
                         <td><a class="btn btn-primary" href="tel:<?php echo $row->phone; ?>"><?php echo $row->phone; ?>&nbsp;<i class="fas fa-phone" style="padding-right: 1px;"></i></a></td>
+                        <td><?php echo $row->email_client ?></td>
                         <td><?php echo $row->name; ?></td>
                         <td>
                             <a title="View Detail" href="<?php echo base_url("Client/detail/".$row->id_client); ?>" class="btn btn-outline-info btn-sm">
@@ -90,7 +92,7 @@
                 ?>
 
                     <tr>
-                        <td class="text-center" colspan="9">No Data</td>
+                        <td class="text-center" colspan="10">No Data</td>
                     </tr>
 
                 <?php

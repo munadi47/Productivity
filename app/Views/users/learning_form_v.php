@@ -49,7 +49,12 @@
                     </select>
                 </div>
         </div>
-
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Topic</label>
+            <div class="col-sm-10">
+            <input type="text" id="topic" name="topic" class="form-control" id="exampleFormControlTextarea1" value="<?php if(!empty($dataLearning)) echo $dataLearning->topic; ?>">
+            </div>
+        </div>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Date Of Deliver</label>
             <div class="col-sm-10">
