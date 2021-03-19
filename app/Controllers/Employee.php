@@ -205,7 +205,12 @@ class Employee extends BaseController{
                   
                 ]; 
                     $this->employeeModel->insert($data);
+                    
+                    $act = 'Insert new Employee data '.$data['name'];
+                    $this->record($act,session()->get('nik'));
+                    
                     return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');    
+                   
                 }
                 else{
                     //tidak valid
@@ -215,8 +220,7 @@ class Employee extends BaseController{
                 }            
             
             
-            $act = 'Insert new Employee data '.$data['name'];
-            $this->record($act,session()->get('nik'));
+            
             
             
         }
@@ -267,14 +271,16 @@ class Employee extends BaseController{
                 ]; 
         
                 $response = $this->employeeModel->update($where,$data);
+
+                $act = 'Update employee data '.$data['name'];
+                $this->record($act,session()->get('nik'));
+            
                 if($response){
-                    return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-save"></i> Data has been updated, but chart not uploaded, please check again');
+                    return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-save"></i> Data has been updated');
                 }else{
                     return redirect()->to(site_url('Employee'))->with('Failed', '<i class="fas fa-times"></i> Data failed to save');
                 }
-                $act = 'Update employee data '.$data['project_name'];
-                $this->record($act,session()->get('nik'));
-            
+               
             
             }else{
                 $dt = $this->employeeModel->getWhere(['nik'=>$id])->getRow();
@@ -298,13 +304,16 @@ class Employee extends BaseController{
                     ]; 
                     
                 $response =  $this->employeeModel->update($where, $data);
+
+                $act = 'Update Employee data '.$data['name'];
+                $this->record($act,session()->get('nik'));   
+
                 if($response){
                     return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-save"></i> Data has been updated');
                 }else{
                     return redirect()->to(site_url('Employee'))->with('Failed', '<i class="fas fa-times"></i> Data failed to save');
                 }
-                $act = 'Update Employee data '.$data['project_name'];
-                $this->record($act,session()->get('nik'));   
+                
             }
 
             ///////////////////
@@ -357,13 +366,14 @@ class Employee extends BaseController{
                     );
                     $session->set($data); 
                     $response = $this->employeeModel->update($where,$data);
+                    $act = 'Update Profile data '.$data['name'];
+                    $this->record($act,session()->get('nik'));
                     if($response){
                         return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-save"></i> Data has been updated, but photo not uploaded, please check again');
                     }else{
                         return redirect()->to(site_url('Employee'))->with('Failed', '<i class="fas fa-times"></i> Data failed to save');
                     }
-                    $act = 'Update Employee data '.$data['project_name'];
-                    $this->record($act,session()->get('nik'));
+                    
                 
                 
                 }else{
@@ -388,13 +398,14 @@ class Employee extends BaseController{
                     );
                     $session->set($data); 
                     $response = $this->employeeModel->update($where,$data);
+                    $act = 'Update Profile data '.$data['name'];
+                    $this->record($act,session()->get('nik'));   
                     if($response){
                         return redirect()->to(site_url('Employee'))->with('Success', '<i class="fas fa-save"></i> Data has been updated');
                     }else{
                         return redirect()->to(site_url('Employee'))->with('Failed', '<i class="fas fa-times"></i> Data failed to save');
                     }
-                    $act = 'Update Employee data '.$data['project_name'];
-                    $this->record($act,session()->get('nik'));   
+                    
                    
                 }
               
