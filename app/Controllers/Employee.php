@@ -536,7 +536,7 @@ public function do_upload(){
 public function import_file($nf){
     $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
     $spreadsheet = $reader->load('assets/uploads/file_excel/'.$nf);
-    $sheetData = $spreadsheet->getActiveSheet()->toArray(null,true,true,true);
+    $sheetData = $spreadsheet->getActiveSheet()->toArray();
     
     for($i = 1;$i < count($sheetData);$i++)
     {
