@@ -200,14 +200,6 @@
                     </ul>
                 </li><?php endif; ?>
 
-               
-
-              
-               
-                
-
-
-                
             </ul>
 
             
@@ -217,7 +209,7 @@
               
                 
                 <li>
-                    <a href="#" class="article"><i class="fas fa-exclamation-circle"></i> About Application</a>
+                    <a href="#" class="article" data-toggle="modal" data-target="#aboutModal" id="about"><i class="fas fa-exclamation-circle"></i> About Application</a>
                 </li>
                 
                 <li>
@@ -282,6 +274,25 @@
                             
                         </ul>
                     </div>
+                    <div class="modal fade" id="aboutModal" role="dialog">
+                        <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h4 class="modal-title"> <i class="fa fa-exclamation-circle"></i> About Application</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            
+                            </div>
+                            <div class="modal-body">    
+                            <div class="class">
+                                
+                            <p style="text-align: justify;">                            
+                            The application built in web-based called "Productivity". Productivity has 4 main features, attendance, sales pipeline, delivery, and finance.
+                            </p>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
 
                     <div class="modal fade" id="notifModal" role="dialog">
                         <div class="modal-dialog modal-sm">
@@ -516,14 +527,13 @@
                                                             </div>
                                                             <?php } ?>
                                                             <hr />
+                                                            <?php if(allow('user')) :?>
                                                             <div class="row">
                                                                 <div class="col-lg-5 col-md-6 col-8">
                                                                     <label style="font-weight:bold; ">Status Attendance</label>
                                                                 </div>
                                                                 <!--Di update jika ada perubahan -->
                                                                 <div class="col-lg-3 col-3">
-                                                                
-                                                                
                                                                 <?php if(!empty($dataAttendance)){ ?>
                                                                     <?php foreach ($dataAttendance as $row):{?>
                                                                     <?php if($row->jumlah < 3 ){?>
@@ -536,12 +546,9 @@
                                                                 ?>
                                                                 
                                                                 <?php } else {?> <span class='badge badge-warning'>Not Fulfilled</span><?php }?>
-
-                                                                
-
                                                                 </div>
                                                             </div>
-                                                            <hr />
+                                                            <?php endif; ?>
                                                             
                                                             
                                                             
