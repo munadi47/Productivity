@@ -45,7 +45,7 @@
                 <thead class="thead-dark ">
                     <tr>
                         <th > NO </th>
-                        <th >TITLE</th>
+                        <th >PROJECT TITLE</th>
                         <th >CLIENT</th>
                         <th >PROJECT NAME</th>
                         <th >PROJECT MANAGER</th>

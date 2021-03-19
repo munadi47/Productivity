@@ -85,7 +85,7 @@ class Finance extends BaseController{
         $notif['dataAttendance'] = $this->attendanceModel->getStatusAtt();
 
 
-        echo view('users/header_v_admin',$notif);
+        echo view('admin/header_v_admin',$notif);
         echo view('admin/finance_form_v',$data);
         echo view('users/footer_v');
     }
@@ -313,9 +313,10 @@ public function do_upload(){
 public function import_file($nf){
     $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
     $spreadsheet = $reader->load('assets/uploads/file_excel/'.$nf);
-    $sheetData = $spreadsheet->getActiveSheet()->toArray();
-    
-    for($i = 1;$i < count($sheetData);$i++)
+    $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
+    //var_dump($sheetData);
+
+    /*for($i = 1;$i < count($sheetData);$i++)
     {
         //perhatikan indeks harus sama dengan field atau column di database
         $data[$i]['id_client']  = $sheetData[$i][0];
@@ -323,12 +324,22 @@ public function import_file($nf){
         $data[$i]['invoice_date']  = $sheetData[$i][2];
         $data[$i]['invoice_amount'] = $sheetData[$i][3];
         $data[$i]['invoice_duedate']  = $sheetData[$i][4];
-        
-        
-       
-    }
-    foreach($data as $row):{
-        $this->financeModel->insert($row);
+  
+    }*/
+    foreach($sheetData as $key => $data):{
+        if ($key == 1 ){
+            continue;
+        }
+        $data = array (
+            'id_client' => $data['A'], 	 	 	 	 
+            'id_fStatus' => $data['B'],
+            'invoice_date' => $data['C'],
+            'invoice_amount' => $data['D'],
+            'invoice_duedate' => $data['E'],
+        );
+        $this->financeModel->insert($data);
+        var_dump($data);
+
     }
     endforeach;
     $act = 'Import new finance data';

@@ -45,7 +45,7 @@
                 <thead class="thead-dark ">
                     <tr>
                         <th rowspan="2"> NO </th>
-                        <th rowspan="2" >TITLE</th>
+                        <th rowspan="2" >PROJECT TITLE</th>
                         <th rowspan="2" >CLIENT</th>
                         <th colspan="2"><i class="fa fa-clipboard"></i> Storyboard</th>
                         <th colspan="2"><i class="fa fa-video"></i> Shooting</th>
