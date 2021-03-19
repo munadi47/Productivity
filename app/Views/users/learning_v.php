@@ -44,7 +44,7 @@
                 <thead class="thead-dark ">
                     <tr>
                         <th > # </th>
-                        <th >TITLE</th>
+                        <th >PROJECT TITLE</th>
                         <th >CLIENT NAME</th>
                         <th >DELIVER DATE</th>
                         <th >COACH NAME</th>

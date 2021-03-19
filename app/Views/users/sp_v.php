@@ -122,7 +122,7 @@
                         <th>CLIENT</th>
                         <th>PRODUCT</th>
                         <th>CATEGORY</th>
-                        <th>TITLE</th>
+                        <th>PROJECT TITLE</th>
                         <th>COUNT</th>
                         <th>POTENTIAL REVENUE</th>
                         <th style="width: 50%">TOTAL REVENUE</th>
