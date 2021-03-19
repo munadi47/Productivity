@@ -528,7 +528,7 @@ public function do_upload(){
         $employee_file->move('assets/uploads/file_excel/');
         $M = $employee_file->getName();
         $this->import_file($M);
-        return redirect()->to(site_url('Employee'))->with('Success','<i class="fas fa-check"></i> Success to import file');
+        //return redirect()->to(site_url('Employee'))->with('Success','<i class="fas fa-check"></i> Success to import file');
         
     }
 }
@@ -536,7 +536,7 @@ public function do_upload(){
 public function import_file($nf){
     $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
     $spreadsheet = $reader->load('assets/uploads/file_excel/'.$nf);
-    $sheetData = $spreadsheet->getActiveSheet()->toArray();
+    $sheetData = $spreadsheet->getActiveSheet()->toArray(null,true,true,true);
     
     for($i = 1;$i < count($sheetData);$i++)
     {
@@ -555,7 +555,7 @@ public function import_file($nf){
     }
     foreach($data as $row):{
         $this->employeeModel->insert($row);
-        //var_dump($row);
+        var_dump($row);
     }
     //$this->adminModel->set($data);
     //$this->adminModel->insert($data);
