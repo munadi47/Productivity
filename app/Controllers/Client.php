@@ -348,7 +348,7 @@ exit;
   ->setCellValue('C'.$i, $row->count)
   ->setCellValue('D'.$i, $row->potential_revenue)
   ->setCellValue('E'.$i, $row->total_revenue)
-  ->setCellValue('F'.$i, $row->status)
+  ->setCellValue('F'.$i, $row->status_p)
   
   ;
   $i++;

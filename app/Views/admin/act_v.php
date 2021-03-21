@@ -58,12 +58,9 @@
 										<div class="asker-meta">
 											<span class="qa-message-what"></span>
 											<span class="qa-message-when">
-												<span class="qa-message-when-data"><?php echo $row->datetime; ?></span>
+												<span class="qa-message-when-data"><?php echo date("d M, Y : H:i:s", strtotime($row->datetime));  ?></span>
 											</span>
-											<span class="qa-message-who">
-												<span class="qa-message-who-pad">by </span>
-												<span class="qa-message-who-data"><a href="./index.php?qa=user&qa_1=Oleg+Kolesnichenko"><?php echo $row->name; ?></a></span>
-											</span>
+											
 										</div>
 									</div>
 								</div>
