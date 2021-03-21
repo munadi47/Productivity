@@ -46,10 +46,8 @@ class consultingModel extends Model
     }
     public function consulting()
     {
-         return $this->db->table('sales_pipeline')
-         ->select('*')
-         ->where("sales_pipeline.category = 'consulting'")
-         ->get()->getResult();
+     $query = $this->db->query("SELECT * FROM `sales_pipeline` JOIN product ON product.id_product = sales_pipeline.id_product WHERE product.category = 'consulting' ");
+     return $query->getResult();
  
     }
 

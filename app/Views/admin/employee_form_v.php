@@ -4,12 +4,12 @@
     <h2> <i class="fas fa-user-tie"></i> Employee Form Update</h2>
     <hr>
         <form enctype="multipart/form-data" method="POST" action="<?php echo site_url('Employee/saveUpdate'); ?>">
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">NIK</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="nik" name="nik" required
+        <div hidden class="form-group row">
+            <label hidden class="col-sm-2 col-form-label">NIK</label>
+            <div hidden class="col-sm-10">
+                <input hidden type="text" class="form-control" id="nik" name="nik" required
                 value="<?php if(!empty($dataEmployee)) echo $dataEmployee->nik; ?>">
-                <input type="hidden" id="id" name="id" value="<?php if(!empty($dataEmployee)) echo $dataEmployee->nik; ?>"> 
+                <input hidden type="hidden" id="id" name="id" value="<?php if(!empty($dataEmployee)) echo $dataEmployee->nik; ?>"> 
 
             </div>
         </div>

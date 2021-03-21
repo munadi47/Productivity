@@ -1,5 +1,6 @@
 <?php
 namespace App\Controllers;
+use CodeIgniter\I18n\Time;
 use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 require('../excel/vendor/autoload.php');
@@ -134,7 +135,7 @@ class SalesPipeline extends BaseController{
                 'nik'=>$this->request->getPost('nik'),
                 'id_client'=>$this->request->getPost('id_client'),
                 'id_product'=>$this->request->getPost('id_product'),
-                'category'=>$this->request->getPost('category'),
+                'date_created'=> Time::createFromDate(),
                 'title'=>$this->request->getPost('title'),
                 'count'=>$this->request->getPost('count'),
                 'potential_revenue'=>$this->request->getPost('potential_revenue'),
@@ -144,22 +145,26 @@ class SalesPipeline extends BaseController{
             $this->sales_pipelineModel->insert($data);
             $act = 'Insert new pipeline data '.$data['id_client'];
             $this->record($act,session()->get('nik'));
-            $category = $this->request->getPost('category');
+            $id_p = $this->request->getPost('id_product');
+            $category_v = $this->sales_pipelineModel->categoryVideo($id_p);
+            $category_l = $this->sales_pipelineModel->categoryLearning($id_p);
+            $category_d = $this->sales_pipelineModel->categoryDigital($id_p);
+            $category_c = $this->sales_pipelineModel->categoryConsulting($id_p);
             $status = $this->request->getPost('status_p');
 
           
-            if($status=='closing' && $category=='video' ){
+            if($status=='closing' && $category_v){
                
                 return redirect()->to(site_url('Video/add'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
      
-            }elseif($status=='closing' && $category=='digital content'){
+            }elseif($status=='closing' && $category_d){
                
                 return redirect()->to(site_url('Digital/add'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
 
-            }elseif($status=='closing' && $category=='learning'){
+            }elseif($status=='closing' && $category_l){
                 
                 return redirect()->to(site_url('Learning/add'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
-            }elseif($status=='closing' && $category=='consulting'){
+            }elseif($status=='closing' && $category_c){
                 
                 return redirect()->to(site_url('Consulting/add'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
             }else{
@@ -179,7 +184,7 @@ class SalesPipeline extends BaseController{
                 'nik'=>$this->request->getPost('nik'),
                 'id_client'=>$this->request->getPost('id_client'),
                 'id_product'=>$this->request->getPost('id_product'),
-                'category'=>$this->request->getPost('category'),
+                'date_created'=> Time::createFromDate(),
                 'title'=>$this->request->getPost('title'),
                 'count'=>$this->request->getPost('count'),
                 'potential_revenue'=>$this->request->getPost('potential_revenue'),
@@ -192,20 +197,24 @@ class SalesPipeline extends BaseController{
             $this->sales_pipelineModel->update($where,$data);
             $act = 'Update pipeline data '.$data['id_client'].' to '.$data['status_p'];
             $this->record($act,session()->get('nik'));
-            $category = $this->request->getPost('category');
+            $id_p = $this->request->getPost('id_product');
+            $category_v = $this->sales_pipelineModel->categoryVideo($id_p);
+            $category_l = $this->sales_pipelineModel->categoryLearning($id_p);
+            $category_d = $this->sales_pipelineModel->categoryDigital($id_p);
+            $category_c = $this->sales_pipelineModel->categoryConsulting($id_p);
             $status = $this->request->getPost('status_p');
             $video = $this->sales_pipelineModel->statVideo($id);
             $digital = $this->sales_pipelineModel->statDigital($id);
             $learning = $this->sales_pipelineModel->statLearning($id);
             $consulting = $this->sales_pipelineModel->statConsulting($id);
 
-            if($status=='closing' && $category=='video' && empty($video)){
+            if($status=='closing' && $category_v && empty($video)){
                 return redirect()->to(site_url('Video/add'))->with('Success', '<i class="fas fa-check"></i>  your pipeline has successfully saved and entered the closing stage, please input this delivery data ');
-            }elseif($status=='closing' && $category=='digital content' && empty($digital)){
+            }elseif($status=='closing' && $category_d && empty($digital)){
                 return redirect()->to(site_url('Digital/add'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
-            }elseif($status=='closing' && $category=='learning' && empty($learning)){
+            }elseif($status=='closing' && $category_l && empty($learning)){
                 return redirect()->to(site_url('Learning/add'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
-            }elseif($status=='closing' && $category=='consulting' && empty($consulting)){
+            }elseif($status=='closing' && $category_c && empty($consulting)){
                     return redirect()->to(site_url('Consulting/add'))->with('Success', '<i class="fas fa-check"></i> your pipeline has successfully saved and entered the closing stage, please input this delivery data');
             }else{
                 return redirect()->to(site_url('SalesPipeline'))->with('Success', '<i class="fas fa-save"></i> Data has been updated');

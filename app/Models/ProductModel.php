@@ -10,7 +10,7 @@ class productModel extends Model
     protected $returnType     = 'object';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['id_product','product_name','std_price','id_company'];
+    protected $allowedFields = ['id_product','product_name','category','std_price','id_company'];
 
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';

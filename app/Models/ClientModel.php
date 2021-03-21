@@ -10,7 +10,7 @@ class clientModel extends Model
     protected $returnType     = 'object';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['id_client','id_class','address','email_client','phone','nik'];
+    protected $allowedFields = ['id_client','id_class','address_client','email_client','phone','nik'];
 
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';
@@ -31,6 +31,7 @@ class clientModel extends Model
     }
     public function getDetail($id)
     {
+        
         $builder = $this->table('client');
         $builder->join('sales_pipeline','sales_pipeline.id_client=client.id_client')
         ->where('sales_pipeline.id_client',$id);

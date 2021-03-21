@@ -111,6 +111,7 @@ class Product extends BaseController{
            
             $data = [
                 'product_name'=>$this->request->getPost('product_name'),
+                'category'=>$this->request->getPost('category'),
                 'std_price'=>$this->request->getPost('std_price'),
                 'id_company'=>$this->request->getPost('id_company'),
                     
@@ -129,6 +130,7 @@ class Product extends BaseController{
             $where = ['id_product'=>$id];
             $data = [
                 'product_name'=>$this->request->getPost('product_name'),
+                'category'=>$this->request->getPost('category'),
                 'std_price'=>$this->request->getPost('std_price'),
                 'id_company'=>$this->request->getPost('id_company'),
                     
@@ -153,8 +155,6 @@ class Product extends BaseController{
     //delete
     public function delete($id){
         $where = ['id_product'=>$id];   
-        $where = ['id_product'=>$id]; 
-
     
         
         $response = $this->productModel->delete($where);
@@ -191,8 +191,9 @@ $spreadsheet->getProperties()->setTitle('Office 2007 XLSX Test Document')
 // Add some data
 $spreadsheet->setActiveSheetIndex(0)
 ->setCellValue('A1', 'PRODUCT NAME')
-->setCellValue('B1', 'STANDARD PRICE')
-->setCellValue('C1', 'COMPANY')
+->setCellValue('B1', 'CATEGORY')
+->setCellValue('C1', 'STANDARD PRICE')
+->setCellValue('D1', 'COMPANY')
 
 ;
 
@@ -201,8 +202,9 @@ $i=2; foreach($dataProduct as $row) {
 
 $spreadsheet->setActiveSheetIndex(0)
 ->setCellValue('A'.$i, $row->product_name)
-->setCellValue('B'.$i, $row->std_price)
-->setCellValue('C'.$i, $row->company_name)
+->setCellValue('B'.$i, $row->category)
+->setCellValue('C'.$i, $row->std_price)
+->setCellValue('D'.$i, $row->company_name)
 ;
 $i++;
 }
@@ -283,8 +285,9 @@ public function import_file($nf){
     {
         //perhatikan indeks harus sama dengan field atau column di database
         $data[$i]['product_name']  = $sheetData[$i][0];
-        $data[$i]['std_price']  = $sheetData[$i][1];
-        $data[$i]['id_company']  = $sheetData[$i][2];
+        $data[$i]['category']  = $sheetData[$i][1];
+        $data[$i]['std_price']  = $sheetData[$i][2];
+        $data[$i]['id_company']  = $sheetData[$i][3];
         
 
        

@@ -60,7 +60,7 @@
                     <i class="fas fa-map"></i> Address 
                     </div>
                     <div class="col col-lg-5">
-                        : <?php echo $row->address ?>
+                        : <?php echo $row->address_client ?>
                         
                     </div>
                 </div>
@@ -105,19 +105,19 @@
                         <div class="timeline-arrow"></div>
                         <h2 class="h5 mb-0"><?php echo $row->title; ?></h2><br>
                         <pre>
-        Category     :&nbsp;   <?php echo $row->category; ?> <br>
-        Count        :&nbsp;   <?php echo $row->count; ?> <br>
-        Total Price  :&nbsp;   Rp. <?php echo $row->potential_revenue=number_format($row->potential_revenue,0,",","."); ?> <br>
-        Status       :&nbsp;  <?php if($row->status=='closing'){
+        Count            :&nbsp;   <?php echo $row->count; ?> <br>
+        Potential Revenue:&nbsp;   Rp. <?php echo $row->potential_revenue=number_format($row->potential_revenue,0,",","."); ?> <br>
+        Total Revenue    :&nbsp;   Rp. <?php echo $row->total_revenue=number_format($row->total_revenue,0,",","."); ?> <br>
+        Status           :&nbsp;  <?php if($row->status_p=='closing'){
                                 ?> <span class="badge badge-danger"><?php
                            
-                                }  elseif($row->status=='proposal'){
+                                }  elseif($row->status_p=='proposal'){
                                     ?><span class="badge badge-warning"><?php
 
                                 } else{
                                     ?><span class="badge badge-success"><?php
                                 }
-                                echo $row->status; ?>
+                                echo $row->status_p; ?>
                         </pre>
                         
                     </li>

@@ -172,7 +172,8 @@ class Employee extends BaseController{
     
     public function save() {
 
-        $id = $this->request->getPost('id');
+        $id = $this->request->getPost('nik');
+        $find = $this->employeeModel->find($id);
         $val = $this->validate([
             'email' => [
                 'label'  => 'email',
@@ -189,7 +190,7 @@ class Employee extends BaseController{
                 ]
             ],
             ]);
-        if (empty($id)) { //Insert
+        if (empty($id) && empty($find)) { //Insert
            if($val) {
                 $data = [
                     'nik'=>$this->request->getPost('nik'),
@@ -223,6 +224,8 @@ class Employee extends BaseController{
             
             
             
+        }else{
+            return redirect()->to(site_url('Employee'))->with('Failed', '<i class="fas fa-exclamation"></i> Data Failed to save, duplicate entry');
         }
        
     }

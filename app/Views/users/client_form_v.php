@@ -54,15 +54,15 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Address </label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="address" name="address" required
-                value="<?php if(!empty($dataClient)) echo $dataClient->address; ?>">
+                <input type="text" class="form-control" id="address_client" name="address_client" required
+                value="<?php if(!empty($dataClient)) echo $dataClient->address_client; ?>">
             </div>
         </div>
         <br>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Email </label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="email" name="email" required
+                <input type="text" class="form-control" id="email_client" name="email_client" required
                 value="<?php if(!empty($dataClient)) echo $dataClient->email_client; ?>">
             </div>
         </div>

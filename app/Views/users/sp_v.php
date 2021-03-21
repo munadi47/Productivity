@@ -26,66 +26,6 @@
     </ol>
     </nav>
 
-    <!-- GRAFIK -->
-    <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="fade-out" data-aos-duration="1000" >
-        <div id="myChart">
-            <script> 
-                    Highcharts.chart('myChart', {
-                        chart: {
-                            type: 'funnel'
-                        },
-                        title: {
-                            text: 'Sales funnel'
-                        },
-                        plotOptions: {
-                            series: {
-                                dataLabels: {
-                                    enabled: true,
-                                    format: '<b>{point.name}</b> ({point.y:,.0f})',
-                                    softConnector: true
-                                },
-                                center: ['50%', '50%'],
-                                neckWidth: '20%',
-                                neckHeight: '40%',
-                                width: '50%'
-                            }
-                        },
-                        legend: {
-                            enabled: false
-                        },
-                        series: [{
-                            name: 'Client',
-                            data: [
-                                ['Meeting', <?php echo $countMeeting; ?> ],
-                                ['Proposal', <?php echo $countProposal; ?>],
-                                ['Closing',  <?php echo $countClosing; ?>]
-                            ]
-                        }],
-
-                        responsive: {
-                            rules: [{
-                                condition: {
-                                    maxWidth: 300
-                                },
-                                chartOptions: {
-                                    plotOptions: {
-                                        series: {
-                                            dataLabels: {
-                                                inside: true
-                                            },
-                                            center: ['50%', '50%'],
-                                            width: '100%'
-                                        }
-                                    }
-                                }
-                            }]
-                        }
-                    });
-          
-            </script>
-        </div>
-    </div>
-
     <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="fade-out" data-aos-duration="1000" >
            
                 <div class="card-body">
@@ -125,7 +65,7 @@
                         <th>PROJECT TITLE</th>
                         <th>COUNT</th>
                         <th>POTENTIAL REVENUE</th>
-                        <th style="width: 50%">TOTAL REVENUE</th>
+                        <th>TOTAL REVENUE</th>
                         <th>STATUS</th>
                         <th>ACTION</th>
                     

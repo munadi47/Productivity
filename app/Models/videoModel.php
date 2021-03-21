@@ -53,13 +53,9 @@ class videoModel extends Model
          ->countAllResults();
  
     }
-    public function video()
-    {
-         return $this->db->table('sales_pipeline')
-         ->select('*')
-         ->where("sales_pipeline.category = 'video'")
-         ->get()->getResult();
- 
+    public function video(){
+        $query = $this->db->query("SELECT * FROM `sales_pipeline` JOIN product ON product.id_product = sales_pipeline.id_product WHERE product.category = 'video' ");
+        return $query->getResult();
     }
     public function storyboard()
     {

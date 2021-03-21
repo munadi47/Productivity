@@ -46,8 +46,10 @@
     <div class="row">
         <div class="col col-lg-7">
           <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info "  data-aos="zoom-in" data-aos-duration="1000">
-            <div id="financeChart">
+            <div id="sp_chart"> 
+                
             </div>
+            
           </div>
         </div>
 
@@ -62,22 +64,12 @@
       </div>
 
       <div class="row">
-      <div class="col col-lg-12">
+        <div class="col col-lg-7">
           <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info " data-aos="zoom-in" data-aos-duration="1000">
             <div id="attendanceChart">
             </div>
           </div>
         </div>
-
-        <div class="col col-lg-7">
-            <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
-                <div id="sp_chart"> 
-                
-                </div>
-            </div>
-        </div>
-      
-     
         <div class="col col-lg-5">
         <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000">
             <h4> Employee Attendance Today </h4>
@@ -101,6 +93,20 @@
                     
             </div>
             <?php }endforeach; ?>
+            <?php }else{ ?>
+                <div class="list list-row block" style="padding-bottom: 65%;">
+                    <div class="list-item" data-id="19">
+                    <div><a href="#" data-abc="true"><span class="https://ssl.gstatic.com/accounts/ui/avatar_2x.png')"></span></a></div>
+                        <div class="flex"> <a href="#" class="item-author text-color" data-abc="true"></a>
+                            <div class="item-except text-muted text-sm h-1x">No one has absent today.</div>
+                        </div>
+                        <div class="no-wrap">
+                            <div class="item-date text-muted text-sm d-none d-md-block"></div>
+                        </div>
+                    </div>
+                    
+                </div>
+
             <?php } ?>
            
             <div style="float: right;">
@@ -113,7 +119,14 @@
 
       
     </div>
-
+    <div class="row">
+        <div class="col col-lg-12">
+            <div class="card shadow-sm p-3 mb-5 bg-white rounded notice notice-info" data-aos="zoom-in" data-aos-duration="1000" >
+            <div id="financeChart">
+            </div>
+            </div>
+        </div>
+    </div>
     
 
     <script>
@@ -140,7 +153,7 @@
 
         series: [{
             name: 'Count',
-            data: <?php if(!empty($grafik)){ echo json_encode($grafik);} ?>
+            data: <?php if(!empty($grafik)){ echo json_encode($grafik);}else{ echo 0;} ?>
             //data: [<?php //if(!empty($countAttendance)) foreach ($countAttendance as $data) echo $data->total.", "?>]
         }],
 
@@ -192,7 +205,7 @@
               },
               series: [{
                   name: 'Rp',
-                  data: <?php if(!empty($fin)){ echo json_encode($fin);} ?>
+                  data: <?php if(!empty($fin)){ echo json_encode($fin);}else{ echo 0;} ?>
 
               }]
           });
@@ -224,76 +237,78 @@
                   colorByPoint: true,
                   data: [{
                       name: 'Video',
-                      y: <?php echo $countVideo;?>,
+                      y: <?php if(!empty($countVideo)){ echo $countVideo;}else{ echo 0;}?>,
                       sliced: true,
                       selected: true
                   }, {
                       name: 'Digital Content',
-                      y: <?php echo $countDigital; ?>
+                      y: <?php if(!empty($countDigital)){ echo $countDigital;}else{ echo 0;} ?>
                   }, {
                       name: 'Learning',
-                      y: <?php echo $countLearning; ?>
+                      y: <?php if(!empty($countLearning)){ echo $countLearning; }else{ echo 0;} ?>
                   }, {
                       name: 'Consulting',
-                      y: <?php echo $countConsulting; ?>
+                      y: <?php if(!empty($countConsulting)){ echo $countConsulting;}else{ echo 0;} ?>
                   }]
               }]
           });
         </script>
 
-        <script> 
-                    Highcharts.chart('sp_chart', {
-                        chart: {
-                            type: 'funnel'
+       
+            <script> 
+                Highcharts.chart('sp_chart', {
+                chart: {
+                    type: 'funnel'
+                },
+                title: {
+                    text: 'Sales funnel in <?php echo date('Y'); ?>'
+                },
+                plotOptions: {
+                    series: {
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b> ({point.y:,.0f})',
+                            softConnector: true
                         },
-                        title: {
-                            text: 'Sales funnel'
-                        },
-                        plotOptions: {
-                            series: {
-                                dataLabels: {
-                                    enabled: true,
-                                    format: '<b>{point.name}</b> ({point.y:,.0f})',
-                                    softConnector: true
-                                },
-                                center: ['50%', '50%'],
-                                neckWidth: '20%',
-                                neckHeight: '40%',
-                                width: '50%'
-                            }
-                        },
-                        legend: {
-                            enabled: false
-                        },
-                        series: [{
-                            name: 'Client',
-                            data: [
-                                ['Meeting', <?php echo $countMeeting; ?> ],
-                                ['Proposal', <?php echo $countProposal; ?>],
-                                ['Closing',  <?php echo $countClosing; ?>]
-                            ]
-                        }],
+                        center: ['40%', '50%'],
+                        neckWidth: '30%',
+                        neckHeight: '25%',
+                        width: '80%'
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'Total Revenue',
+                    data: [
+                        ['Meeting', <?php foreach($countMeeting as $data) : if($data->total_meeting!=NULL){ echo $data->total_meeting;}else{echo 0; } endforeach  ?>],
+                        ['Proposal', <?php foreach($countProposal as $data): if($data->total_proposal!=NULL){ echo $data->total_proposal;}else{echo 0; } endforeach ?>],
+                        ['Closing',  <?php foreach($countClosing as $data) : if($data->total_closing!=NULL){ echo $data->total_closing;}else{echo 0; } endforeach ?>]
+                       
+                    ]
+                }],
 
-                        responsive: {
-                            rules: [{
-                                condition: {
-                                    maxWidth: 300
-                                },
-                                chartOptions: {
-                                    plotOptions: {
-                                        series: {
-                                            dataLabels: {
-                                                inside: true
-                                            },
-                                            center: ['50%', '50%'],
-                                            width: '100%'
-                                        }
-                                    }
+                responsive: {
+                    rules: [{
+                        condition: {
+                            maxWidth: 500
+                        },
+                        chartOptions: {
+                            plotOptions: {
+                                series: {
+                                    dataLabels: {
+                                        inside: true
+                                    },
+                                    center: ['50%', '50%'],
+                                    width: '100%'
                                 }
-                            }]
+                            }
                         }
-                    });
-          
+                    }]
+                }
+            });
+                        
             </script>
 
 

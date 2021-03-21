@@ -44,10 +44,8 @@ class digital_contentModel extends Model
     }
     public function digital()
     {
-         return $this->db->table('sales_pipeline')
-         ->select('*')
-         ->where("sales_pipeline.category = 'digital content'")
-         ->get()->getResult();
+        $query = $this->db->query("SELECT * FROM `sales_pipeline` JOIN product ON product.id_product = sales_pipeline.id_product WHERE product.category = 'digital content' ");
+        return $query->getResult();
  
     }
     public function storyboard()

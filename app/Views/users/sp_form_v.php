@@ -71,21 +71,7 @@
                     </select>
                 </div>
         </div>
-    
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Category</label>
-            <div class="col-sm-10">
-            <select required name="category" id="category" class="form-select" aria-label="Default select example">
-                
-                    <option selected><?php if(!empty($dataPipeline)) echo $dataPipeline->category; ?> </option>
-                    <option value="video"><span class="badge badge-info"> <i class="fas fa-video"></i> Video </span></option>
-                    <option value="digital content"><span class="badge badge-info"><i class="fas fa-desktop"></i> Digital Content</span></option>
-                    <option value="learning"><span class="badge badge-info"><i class="fas fa-graduation-cap"></i> Learning</span></option>
-                    <option value="consulting"><span class="badge badge-info"><i class="fas fa-chalkboard-teacher"></i> Consulting </span></option>
-            </select>
-            </div>
-        </div>
-      
+  
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Project Title </label>
             <div class="col-sm-10">

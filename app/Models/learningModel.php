@@ -45,10 +45,8 @@ class learningModel extends Model
     }
     public function learning()
     {
-         return $this->db->table('sales_pipeline')
-         ->select('*')
-         ->where("sales_pipeline.category = 'learning'")
-         ->get()->getResult();
+     $query = $this->db->query("SELECT * FROM `sales_pipeline` JOIN product ON product.id_product = sales_pipeline.id_product WHERE product.category = 'learning' ");
+     return $query->getResult();
  
     }
 }

@@ -25,7 +25,7 @@ class Client extends BaseController{
         $this->videoModel = new \App\Models\videoModel();
         $this->digitalModel = new \App\Models\digital_contentModel();
         $this->financeModel = new \App\Models\FinanceModel();
-
+        
         $this->pager = \Config\Services::pager();
         date_default_timezone_set("Asia/Jakarta");
 
@@ -154,10 +154,12 @@ class Client extends BaseController{
 
 
     public function save() {
- 
+            $id = $this->request->getPost('id_client');
+            $find = $this->clientModel->find($id);
+            if(empty($find)){
             $data = [
                 'id_client'=>$this->request->getPost('id_client'),
-                'address'=>$this->request->getPost('address'),
+                'address_client'=>$this->request->getPost('address_client'),
                 'email_client'=>$this->request->getPost('email_client'),
                 'phone'=>$this->request->getPost('phone'),
                 'nik'=>$this->request->getPost('nik'),
@@ -168,7 +170,11 @@ class Client extends BaseController{
                 $act = 'Insert new client data '.$data['id_client'];
                 $this->record($act,session()->get('nik'));
                 return redirect()->to(site_url('Client'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
-                
+            }   
+            else {
+                    return redirect()->to(site_url('Client'))->with('Failed', '<i class="fas fa-exclamation"></i> Data Failed to save, please check again');
+            }
+            
             
             
         }      
@@ -178,7 +184,8 @@ class Client extends BaseController{
             $id =  $this->request->getPost('id_client');
             $where = ['id_client'=>$id];
             $data = [
-                'address'=>$this->request->getPost('address'),
+                'id_client'=>$this->request->getPost('id_client'),
+                'address_client'=>$this->request->getPost('address_client'),
                 'email_client'=>$this->request->getPost('email_client'),
                 'phone'=>$this->request->getPost('phone'),
                 'nik'=>$this->request->getPost('nik'),
@@ -187,13 +194,19 @@ class Client extends BaseController{
             ];
          
            
-           $this->clientModel->update($where,$data);
-           $act = 'Update client data '.$id;
+           $response = $this->clientModel->update($where,$data);
+           if($response){
+            $act = 'Update client data '.$id;
            $this->record($act,session()->get('nik'));
-           return redirect()->to(site_url('Client'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
+            return redirect()->to(site_url('Client'))->with('Success', '<i class="fas fa-save"></i> Data has been saved');
+            }else {
+            return redirect()->to(site_url('Client'))->with('Failed', '<i class="fas fa-exclamation"></i> Data Failed to save, please check again');
+            }
+
+    
             
             
-        }
+    }
 
        
         public function save_class() {
@@ -263,7 +276,7 @@ $i=2; foreach($dataClient as $row) {
 $spreadsheet->setActiveSheetIndex(0)
 ->setCellValue('A'.$i, $row->id_client)
 ->setCellValue('B'.$i, $row->sector)
-->setCellValue('C'.$i, $row->address)
+->setCellValue('C'.$i, $row->address_client)
 ->setCellValue('D'.$i, $row->email_client)
 ->setCellValue('E'.$i, $row->phone)
 ->setCellValue('F'.$i, $row->name)
@@ -318,11 +331,10 @@ exit;
   $spreadsheet->setActiveSheetIndex(0)
   ->setCellValue('A1', 'CLIENT')
   ->setCellValue('B1', 'TITLE')
-  ->setCellValue('C1', 'CATEGORY PRODUCT')
-  ->setCellValue('D1', 'COUNT')
-  ->setCellValue('E1', 'POTENTIAL REVENUE')
-  ->setCellValue('F1', 'TOTAL REVENUE')
-  ->setCellValue('G1', 'STATUS')
+  ->setCellValue('C1', 'COUNT')
+  ->setCellValue('D1', 'POTENTIAL REVENUE')
+  ->setCellValue('E1', 'TOTAL REVENUE')
+  ->setCellValue('F1', 'STATUS')
   
   
   ;
@@ -333,11 +345,10 @@ exit;
   $spreadsheet->setActiveSheetIndex(0)
   ->setCellValue('A'.$i, $row->id_client)
   ->setCellValue('B'.$i, $row->title)
-  ->setCellValue('C'.$i, $row->category)
-  ->setCellValue('D'.$i, $row->count)
-  ->setCellValue('E'.$i, $row->potential_revenue)
-  ->setCellValue('F'.$i, $row->total_revenue)
-  ->setCellValue('G'.$i, $row->status)
+  ->setCellValue('C'.$i, $row->count)
+  ->setCellValue('D'.$i, $row->potential_revenue)
+  ->setCellValue('E'.$i, $row->total_revenue)
+  ->setCellValue('F'.$i, $row->status)
   
   ;
   $i++;

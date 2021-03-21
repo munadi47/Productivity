@@ -51,6 +51,7 @@
                     <tr>
                         <th> NO </th>
                         <th>PRODUCT NAME</th>
+                        <th>CATEGORY</th>
                         <th>STANDARD PRICE</th>
                         <th>COMPANY NAME</th>
                         <th>ACTION</th>
@@ -69,6 +70,19 @@
                     <tr>
                         <td><?php echo $nomor++; ?></td>
                         <td><?php echo $row->product_name; ?></td>
+                        <td><?php if($row->category=='video'){
+                            ?> <span class="badge badge-primary"><i class="fas fa-video">&nbsp;</i><?php
+                           
+                                }  elseif($row->category=='digital content'){
+                                    ?><span class="badge badge-primary"><i class="fas fa-desktop"></i><?php
+
+                                } elseif($row->category=='learning'){
+                                    ?><span class="badge badge-primary"><i class="fas fa-graduation-cap">&nbsp;</i><?php
+                                }else{
+                                    ?><span class="badge badge-primary"><i class="fas fa-chalkboard-teacher">&nbsp;</i><?php
+                                }
+                                echo '&nbsp;'.$row->category; ?>
+                        </td>
                         <td>Rp. <?php echo $row->std_price=number_format($row->std_price,0,",","."); ?></td>
                         <td><?php echo $row->company_name; ?></td>
                         <td>
