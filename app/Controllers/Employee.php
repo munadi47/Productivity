@@ -171,9 +171,8 @@ class Employee extends BaseController{
 
     
     public function save() {
+        $id = $this->request->getPost('id');
 
-        $id = $this->request->getPost('nik');
-        $find = $this->employeeModel->find($id);
         $val = $this->validate([
             'email' => [
                 'label'  => 'email',
@@ -189,8 +188,13 @@ class Employee extends BaseController{
                     'min_length' => 'Your Password is too short, min : 6'
                 ]
             ],
+            'nik'=>[
+                'label'=>'nik',
+                'rules'=>'required|is_unique[employee.nik]',
+                'errors'=>[]
+            ],
             ]);
-        if (empty($id) && empty($find)) { //Insert
+        if (empty($id)) { //Insert
            if($val) {
                 $data = [
                     'nik'=>$this->request->getPost('nik'),
@@ -224,8 +228,6 @@ class Employee extends BaseController{
             
             
             
-        }else{
-            return redirect()->to(site_url('Employee'))->with('Failed', '<i class="fas fa-exclamation"></i> Data Failed to save, duplicate entry');
         }
        
     }
@@ -256,6 +258,11 @@ class Employee extends BaseController{
                     'uploaded[photo]',
                     'mime_in[photo,image/jpg,image/jpeg,image/png,image/svg]',
                     'max_size[photo,5000]',
+                ],
+                'nik'=>[
+                    'label'=>'nik',
+                    'rules'=>'required|is_unique[employee.nik]',
+                    'errors'=>[]
                 ]
             ]);
           
