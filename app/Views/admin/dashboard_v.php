@@ -222,7 +222,7 @@
                   type: 'pie'
               },
               title: {
-                  text: 'Delivery data count'
+                  text: 'Delivery data total'
               },
              
               plotOptions: {
@@ -237,7 +237,7 @@
                   colorByPoint: true,
                   data: [{
                       name: 'Video',
-                      y: <?php if(!empty($countVideo)){ echo $countVideo;}else{ echo 0;}?>,
+                      y: <?php if(!empty($countVideo)){ echo $countVideo;}else{ echo 0;}  ?>,
                       sliced: true,
                       selected: true
                   }, {
@@ -261,7 +261,7 @@
                     type: 'funnel'
                 },
                 title: {
-                    text: 'Sales funnel in <?php echo date('Y'); ?>'
+                    text: 'Sales pipeline in <?php echo date('Y'); ?>'
                 },
                 plotOptions: {
                     series: {

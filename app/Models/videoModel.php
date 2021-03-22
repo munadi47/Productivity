@@ -48,6 +48,7 @@ class videoModel extends Model
     }
     public function countVideo()
     {
+        
          return $this->db->table('video')
          ->select('*')
          ->countAllResults();
